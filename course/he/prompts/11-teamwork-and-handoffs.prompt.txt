@@ -1,0 +1,1 @@
+Create a concise handoff for another developer working with Cursor. Include: 1) goal, 2) current status, 3) relevant files or artifacts, 4) what was already tried, 5) open risks or unknowns, and 6) the smallest recommended next step. Separate confirmed facts from assumptions.

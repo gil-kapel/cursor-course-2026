@@ -1,0 +1,1 @@
+I’m choosing a Cursor plan. Ask me 3 quick questions (usage frequency, team size, budget), then recommend the best plan and explain tradeoffs vs other plans in plain language. End with a decision summary and next action.

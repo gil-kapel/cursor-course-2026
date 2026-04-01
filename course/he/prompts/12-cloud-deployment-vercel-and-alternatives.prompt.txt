@@ -1,0 +1,1 @@
+Prepare a deployment checklist for this project. Identify the likely platform fit first (Vercel, Render, Netlify, Railway, or Fly.io), then list build/start requirements, required env vars, preview validation steps, common failure points, and the safest order for a first deployment.

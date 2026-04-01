@@ -1,0 +1,22 @@
+term,language,keep_in_english,preferred_spoken_form,notes
+Cursor,he,yes,Cursor,Always keep in English on screen and in captions
+Agent,he,yes,Agent,Do not translate in prompt overlays
+Ask mode,he,yes,Ask mode,Can be explained in Hebrew but term stays English
+Plan mode,he,yes,Plan mode,Use consistent wording across episodes
+Debug mode,he,yes,Debug mode,Keep exact product term
+Worktree,he,yes,worktree,Say softly and consistently
+GitHub,he,yes,GitHub,Never localize
+Vercel,he,yes,Vercel,Never localize
+Netlify,he,yes,Netlify,Never localize
+Render,he,yes,Render,Never localize
+Railway,he,yes,Railway,Never localize
+Fly.io,he,yes,Fly io,Choose one spoken form and keep it stable
+MCP,he,yes,M C P,Spell out the letters for clarity
+Skills,he,yes,skills,Can explain in Hebrew but keep term
+Rules,he,yes,rules,Can explain in Hebrew but keep term
+Prompt,he,yes,prompt,Use singular/plural consistently
+Context,he,yes,context,Keep in English when referring to project setup
+Subscription,he,no,manuy,In Hebrew body text can be מנוי
+Deploy,he,yes,deploy,Verb can be להסביר deploy or לפרוס
+Preview,he,yes,preview,Keep in English
+Production,he,yes,production,Keep in English

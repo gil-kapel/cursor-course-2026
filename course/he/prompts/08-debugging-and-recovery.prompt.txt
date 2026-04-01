@@ -1,0 +1,1 @@
+I have a failing change. First, summarize probable root causes from current errors/logs. Then propose the smallest safe fix, with verification steps and rollback options. Keep changes minimal and explain risk before editing.

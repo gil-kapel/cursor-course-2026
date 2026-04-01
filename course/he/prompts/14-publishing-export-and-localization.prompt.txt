@@ -1,0 +1,1 @@
+Help me prepare this lesson for publishing and localization. Treat the script master as the source of truth, identify which assets should be derived from it, preserve a consistent glossary for key Cursor terms, and produce a checklist for captions, prompts, export structure, and multilingual adaptation.

@@ -1,0 +1,11 @@
+term,source_language,target_language,keep_in_english,approved_translation,spoken_form,notes
+Cursor,he,en,yes,Cursor,Cursor,Keep product name unchanged
+Agent,he,en,yes,Agent,Agent,Keep product term unchanged
+Plan mode,he,en,yes,Plan mode,Plan mode,Keep exact UI term
+Debug mode,he,en,yes,Debug mode,Debug mode,Keep exact UI term
+MCP,he,en,yes,MCP,M C P,Prefer letter-by-letter pronunciation where needed
+Prompt,he,en,yes,Prompt,Prompt,Usually keep in English
+Rules,he,en,yes,Rules,Rules,Keep if teaching product/project concept
+Skills,he,en,yes,Skills,Skills,Keep if referring to tool concept
+Deploy,he,en,yes,Deploy,Deploy,Can localize only if target market prefers it
+Subscription,he,en,no,Subscription,Subscription,May be translated per market
