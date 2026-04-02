@@ -1,0 +1,1 @@
+Look at this practice project folder. Propose (1) a minimal set of Cursor project rules and (2) a short AGENTS.md or project memory file. Use bullet points. Ask me one clarifying question before you suggest final text. Do not enable MCPs or list extensions yet.

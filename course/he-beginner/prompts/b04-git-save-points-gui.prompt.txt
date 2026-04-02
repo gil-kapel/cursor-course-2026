@@ -1,0 +1,1 @@
+I initialized a git repo in Cursor for my practice folder. Explain in simple steps (for a non-developer) how to stage changed files, write a good commit message in one line, and commit using only the Source Control UI. Also remind me when to commit before asking the Agent for big changes.

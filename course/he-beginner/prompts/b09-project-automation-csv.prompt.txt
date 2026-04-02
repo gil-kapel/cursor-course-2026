@@ -1,0 +1,1 @@
+Using my PRD for a local CSV summarizer (I will paste it), create a minimal script in [Python or Node—pick one] that reads sample.csv, prints a short summary to the console, and writes summary.txt. Use only the project folder. After coding, give me the exact terminal command to run it and what output I should see if it works.

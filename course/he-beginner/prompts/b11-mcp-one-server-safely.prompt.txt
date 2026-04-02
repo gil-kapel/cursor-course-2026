@@ -1,0 +1,1 @@
+I want to enable exactly ONE MCP server in Cursor for a beginner demo. Recommend the lowest-risk option for my OS, list what permissions it has, what I should NOT paste into chat, and one safe first task to try after it is enabled. Do not suggest enabling multiple servers.

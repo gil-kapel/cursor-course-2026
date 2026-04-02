@@ -1,89 +1,83 @@
-# Script Master: 07 Build Loop From Scratch
+# Script Master: 07 Validation Before the Next Step
 
 ## Metadata
 
 - Lesson ID: 07
-- Title: לופ עבודה לבניית פיצ'ר מאפס
-- Target duration: 09:30
+- Title: ולידציה: tests, lint ו-checklists לפני שממשיכים
+- Target duration: 09:00
 - Language: Hebrew
 - Format: avatar narration + screen recording
 
 ## Lesson Goal
 
-ללמד תהליך קבוע לבניית פיצ'ר: מטרה ברורה, תכנון, מימוש קטן, ולידציה, דיבוג וחזרה על הסבב.
+לבנות הרגל של validation מיידי אחרי כל slice: לבחור את הבדיקות הנכונות, להבין מה הן מוכיחות ומה לא, ולעצור לפני שממשיכים לעוד שינויים.
 
 ## Scene List
 
 ### S01 | 00:00-00:25 | Hook
 
-- Visual: פיצ'ר חדש נשבר כשהוא נבנה בבת אחת.
+- Visual: שינוי שעבר build אבל עדיין שבר behavior.
 - Narration:
-  "הדרך הכי מהירה להתעייף מ-Cursor היא לבקש ממנו לבנות פיצ'ר גדול בבת אחת. הדרך הנכונה היא לעבוד בלופ: plan, implement, validate, debug, ואז עוד סיבוב קטן."
+  "אחת הטעויות הכי נפוצות היא לחשוב ש-validation הוא רק 'להריץ משהו ולראות שאין אדום'. בפועל, בדיקה טובה צריכה לענות על השאלה: מה בדיוק אימתנו עכשיו."
 
-### S02 | 00:25-01:10 | Start With Acceptance Criteria
+### S02 | 00:25-01:20 | Pick Checks That Match the Slice
 
-- Visual: רשימת acceptance criteria קצרה.
+- Visual: טבלה קצרה של slice type מול check type.
 - Narration:
-  "לפני כל קוד, מגדירים מה הפיצ'ר צריך לעשות. לא במילים כלליות, אלא בתנאי קבלה. אם תנאי הקבלה לא ברורים, גם ה-Agent לא יהיה ברור."
+  "לא כל slice דורש את אותו סט בדיקות. שינוי UI קטן לא בהכרח צריך אותן בדיקות כמו שינוי בשכבת data. הרעיון הוא לא להריץ הכול תמיד, אלא לבחור checks שמכסים את הסיכון האמיתי של השינוי."
 
-### S03 | 01:10-02:05 | Plan the Smallest Slice
+### S03 | 01:20-02:15 | Types of Validation
 
-- Visual: פירוק feature לשלבים קטנים.
+- Visual: lint, typecheck, unit test, integration test, manual smoke check.
 - Narration:
-  "אחרי שיש יעד, לא מתכננים את כל העולם. בוחרים את הפרוסה הכי קטנה שאפשר לבנות ולבדוק. לדוגמה: קודם UI, אחר כך שירות, אחר כך persistence. כל שלב צריך להיות קטן מספיק כדי שתוכלו לוודא שהוא באמת עובד."
+  "יש כמה שכבות validation: lint לסגנון ולפעמים ללוגיקה, typecheck לחוזים, tests להתנהגות, ו-smoke check ידני למסך או ל-flow. יחד הן בונות confidence, אבל כל אחת בודקת משהו אחר."
 
-### S04 | 02:05-03:10 | Implement One Slice
+### S04 | 02:15-03:20 | What Passed Does Not Prove
 
-- Visual: Cursor agent מממש שלב אחד בלבד.
+- Visual: checklist של blind spots.
 - Narration:
-  "עכשיו נותנים ל-Agent לבצע רק את הפרוסה הראשונה. לא feature שלם, אלא יחידה קטנה וברורה. זה המקום לדרוש שינויים מינימליים, קוד קריא, והסבר קצר מה בדיוק השתנה."
+  "חשוב לא פחות להבין מה validation לא הוכיח. build ירוק לא אומר שאין regression. test אחד שעבר לא אומר שה-flow המלא בטוח. confidence אמיתי מגיע כשאתם יודעים גם את גבולות ההוכחה."
 
-### S05 | 03:10-04:10 | Validate Immediately
+### S05 | 03:20-04:20 | Ask Cursor to Propose the Right Validation
 
-- Visual: בדיקה ידנית, lint, test, או הרצה מקומית.
+- Visual: prompt שמבקש validation plan קטן.
 - Narration:
-  "אחרי כל שינוי קטן, עוצרים ובודקים. אפשר בדיקה ידנית, אפשר test, אפשר lint, תלוי בפרויקט. המטרה היא לא לצבור שינויים לפני validation, אלא לזהות בעיה מיד כשהיא נוצרה."
+  "במקום לנחש, אפשר לבקש מ-Cursor להציע validation מותאם ל-slice: אילו checks להריץ, איזה risk כל check מכסה, ואיפה עדיין יש blind spot. זה עוזר להפוך את הבדיקה לחלק מהעבודה, לא לנספח."
 
-### S06 | 04:10-05:20 | Debug the Smallest Failure
+### S06 | 04:20-05:20 | Read the Output Critically
 
-- Visual: כישלון בדיקה קטן ותיקון ממוקד.
+- Visual: log או test output עם חלק חשוב מודגש.
 - Narration:
-  "אם משהו נשבר, לא מרחיבים scope. עוברים למצב debug, שואלים מה הסיבה הכי סבירה, מה התיקון הכי קטן, ואיך מאמתים אותו. חוזרים ללופ רק אחרי שהבעיה נפתרה."
+  "גם אחרי הרצה לא מדלגים ישר להמשך. קוראים את התוצאה: מה באמת עבר, מה דולג, ומה אזהרה שכדאי לא להתעלם ממנה. validation טוב כולל קריאה, לא רק לחיצה על enter."
 
-### S07 | 05:20-06:35 | Repeat the Loop
+### S07 | 05:20-06:20 | Decide If Confidence Is Enough
 
-- Visual: loop diagram.
+- Visual: שלוש תשובות על המסך: continue, add one more check, stop and debug.
 - Narration:
-  "הלופ הזה חוזר על עצמו לכל פרוסת פיצ'ר. acceptance criteria, plan, implement, validate, debug אם צריך. החזרתיות הזאת אולי נשמעת איטית, אבל בפועל היא חוסכת המון תיקוני עומק אחר כך."
+  "אחרי הבדיקות שואלים: האם יש מספיק confidence כדי להמשיך? לפעמים כן. לפעמים צריך עוד check קטן. ולפעמים הבדיקה לא נתנה תשובה מספקת, ואז לא מתקדמים ל-slice הבא."
 
-### S08 | 06:35-07:45 | Prompts That Enforce the Loop
+### S08 | 06:20-07:30 | Common Validation Anti-Patterns
 
-- Visual: prompt של build loop.
+- Visual: anti-patterns כמו 'רץ build וזהו' או 'נבדוק בסוף'.
 - Narration:
-  "כדי לשמור על המשמעת הזאת, אפשר לבקש מ-Cursor לעבוד בדיוק לפי השלבים, עם pause בין שלבים גדולים. זה חשוב במיוחד כשיש נטייה לדלג ישר לביצוע."
+  "הכשלים הנפוצים הם לדחות בדיקות לסוף, להריץ pipeline ארוך שלא קשור ל-slice, או להסתפק ב-'אין שגיאה'. כל אחד מהם מייצר תחושת ביטחון שקרית."
 
-### S09 | 07:45-08:40 | Common Failure Pattern
+### S09 | 07:30-09:00 | Close
 
-- Visual: prompt רחב מדי מול prompt ממוקד.
+- Visual: build ירוק ואז regression שמתגלה.
 - Narration:
-  "כשל נפוץ הוא לבקש 'בנה לי מערכת שלמה'. בקשה כזאת יוצרת קפיצות בין שכבות, פוגעת בבקרה, ומקשה על דיבוג. תמיד מחזירים את ה-feature לפרוסה הכי קטנה שאפשר להבין."
-
-### S10 | 08:40-09:30 | Close
-
-- Visual: preview לשיעור הבא.
-- Narration:
-  "בשיעור הבא נלמד מה עושים כשדברים משתבשים: איך לדבג נכון, איך לצמצם scope, ואיך לחזור לשליטה בלי לדרדר את הקוד עוד יותר."
+  "בשיעור הבא נראה מה קורה כשגם עם כל הזהירות משהו נשבר: איך מדבגים regression אמיתי, אוספים ראיות, ובוחרים את התיקון הקטן ביותר במקום להיכנס לפאניקה."
 
 ## Prompt Asset
 
-`Help me build [feature_name] using an iterative loop: 1) define acceptance criteria, 2) create implementation plan, 3) implement in small steps, 4) run validation checks, 5) debug and refine. Pause for approval between major steps.`
+`I just implemented one safe slice in this repository. Propose the smallest useful validation plan before I continue. Match the checks to the actual risk of the change, explain what each check proves and what it does not prove, then tell me whether the result is enough confidence to continue, or whether I should run one more targeted check first.`
 
 ## Recording Notes
 
-- להשתמש בדוגמת feature פשוטה עם 2 או 3 slices.
-- להראות במפורש pause אחרי כל שלב.
-- לא להעמיס בלופ עם יותר מדי terminology.
+- להראות validation אמיתי של ה-capstone, לא דוגמאות מלאכותיות.
+- להדגיש את ההבדל בין green output לבין real confidence.
+- לא להפוך את השיעור לדיון כללי על testing philosophy.
 
 ## Action Item
 
-לבחור feature קטן אחד, לכתוב לו `acceptance criteria`, ואז לפרק אותו לפרוסה ראשונה שאפשר לממש ולאמת באותו יום.
+לקחת slice אחד שלכם, לבחור לו שני checks רלוונטיים בלבד, ולכתוב ליד כל אחד מה הוא מוכיח ומה הוא עדיין לא מוכיח.

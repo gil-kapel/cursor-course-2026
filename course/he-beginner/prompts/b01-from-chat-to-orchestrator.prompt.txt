@@ -1,0 +1,1 @@
+I'm new to development tools. Explain in simple Hebrew (short paragraphs) the difference between using ChatGPT in a browser versus using Cursor on my project folder. Include: context limits, editing files, running terminal commands, and why I need a safety mindset.

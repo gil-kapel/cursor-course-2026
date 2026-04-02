@@ -1,89 +1,89 @@
-# Script Master: 08 Debugging and Recovery
+# Script Master: 08 Debugging Regressions and Regaining Control
 
 ## Metadata
 
 - Lesson ID: 08
-- Title: דיבוג והתאוששות מתקלות
+- Title: דיבוג רגרסיות והתאוששות מבלאגן
 - Target duration: 08:30
 - Language: Hebrew
 - Format: avatar narration + screen recording
 
 ## Lesson Goal
 
-ללמד איך לעבור ממצב של תקלה וחוסר ודאות לתהליך דיבוג מסודר: סימפטום, היפותזה, תיקון קטן, אימות וחזרה למסלול.
+ללמד איך לעבור מרגרסיה שנוצרה במהלך delivery לתהליך דיבוג מסודר: סימפטום, ראיות, היפותזות, תיקון קטן, אימות וחזרה ללופ בלי להעמיק את הבלגן.
 
 ## Scene List
 
 ### S01 | 00:00-00:25 | Hook
 
-- Visual: build נכשל או UI שבור.
+- Visual: בדיקה שעברה קודם ועכשיו נכשלת, או מסך שנשבר אחרי שינוי.
 - Narration:
-  "הרגע שבו Cursor נהיה הכי מסוכן הוא גם הרגע שבו הכי קל לאבד שליטה: כשהקוד נשבר. בשיעור הזה נלמד לא לרוץ לתיקון אקראי, אלא להפעיל תהליך דיבוג שמחזיר ודאות."
+  "הרגע שבו הכי קל לאבד שליטה הוא לא בתחילת המשימה, אלא דווקא אחרי שכבר התקדמנו. משהו עבד, עשינו שינוי, ועכשיו יש regression. בשיעור הזה נלמד איך לעצור את הסחף ולחזור ל-debug מסודר."
 
-### S02 | 00:25-01:15 | Start From the Symptom
+### S02 | 00:25-01:15 | Start From the Broken Behavior
 
-- Visual: הודעת שגיאה אחת על המסך.
+- Visual: behavior שבור, test failure או error log.
 - Narration:
-  "הצעד הראשון הוא לא פתרון, אלא ניסוח הסימפטום. מה בדיוק נשבר, איפה זה קורה, ומה רואים. ככל שהתיאור חד יותר, כך ה-agent פחות ימציא הסברים לא רלוונטיים."
+  "הצעד הראשון הוא לא פתרון, אלא הגדרה מדויקת של מה נשבר עכשיו לעומת מה עבד קודם. מה השתנה בהתנהגות, איפה זה מופיע, ואיך אפשר לשחזר את זה שוב."
 
-### S03 | 01:15-02:10 | Gather Evidence
+### S03 | 01:15-02:15 | Gather Only the Evidence That Matters
 
-- Visual: error logs, test output, relevant diff.
+- Visual: diff אחרון, test output, log ממוקד.
 - Narration:
-  "אוספים רק את הראיות שקשורות לבעיה: stack trace, diff אחרון, בדיקה שנכשלה, או צילום מסך. לא זורקים את כל הפרויקט. דיבוג טוב מתחיל במידע ממוקד, לא ברעש."
+  "אוספים רק את מה שמקדם את החקירה: ה-diff האחרון, בדיקה שנכשלה, log רלוונטי, או צילום מסך. לא זורקים חצי repo לתוך השיחה. regression טוב מדבגים מהעדויות הקרובות ביותר לשינוי."
 
-### S04 | 02:10-03:05 | Ask for Probable Root Causes
+### S04 | 02:15-03:15 | Ask for Ranked Hypotheses
 
-- Visual: prompt לדיבוג.
+- Visual: prompt שמבקש היפותזות לפי סבירות.
 - Narration:
-  "בשלב הזה לא מבקשים 'תתקן'. קודם מבקשים מ-Cursor להציע root causes אפשריים, מדורגים לפי סבירות. זה מעביר אותנו מחיפוש עיוור לחשיבה מסודרת."
+  "בשלב הזה לא מבקשים תיקון מיידי. קודם מבקשים היפותזות מדורגות: מה ההסבר הסביר ביותר, איזו ראיה תומכת בו, ואיך נבדוק אותו. כך עוברים מחיפוש עיוור לחקירה מסודרת."
 
-### S05 | 03:05-04:05 | Choose the Smallest Safe Fix
+### S05 | 03:15-04:20 | Choose the Smallest Safe Fix
 
 - Visual: תיקון קטן אחד בלבד.
 - Narration:
-  "אחרי שיש היפותזה סבירה, בוחרים את התיקון הכי קטן שיכול לאמת אותה. לא משנים חמישה קבצים אם אפשר לשנות אחד. ככל שהתיקון קטן יותר, כך קל יותר להבין אם הוא באמת פתר את הבעיה."
+  "אחרי שיש היפותזה סבירה, בוחרים את התיקון הכי קטן שיכול לאמת אותה. לא פותחים refactor חדש בזמן debug. ככל שהתיקון קטן יותר, כך קל יותר לדעת אם הוא באמת פתר את ה-regression."
 
-### S06 | 04:05-05:05 | Verify the Fix
+### S06 | 04:20-05:20 | Verify the Fix Against the Original Symptom
 
-- Visual: rerun test או בדיקה ידנית חוזרת.
+- Visual: אותה בדיקה שנכשלה קודם, מורצת שוב.
 - Narration:
-  "כל תיקון חייב אימות. מריצים שוב את אותה בדיקה, או משחזרים את אותו סימפטום. אם לא בדקתם, לא דיבגתם. רק ניחשתם."
+  "כל תיקון חייב להיבדק מול אותו סימפטום שפתח את הדיבוג. אם לא חזרתם בדיוק לנקודת הכשל, עדיין לא הוכחתם שהבעיה נפתרה."
 
-### S07 | 05:05-06:05 | Recovery Options
+### S07 | 05:20-06:20 | Recovery Options
 
-- Visual: checklist של rollback, isolate, compare.
+- Visual: checklist של isolate, compare, revert slice thinking.
 - Narration:
-  "אם התיקון לא עבד, יש שלוש פעולות בטוחות: לחזור צעד אחד אחורה, לצמצם עוד יותר את ה-scope, או להשוות מול ה-state האחרון שעבד. העיקר הוא לא להעמיק את השינוי בלי שליטה."
+  "אם התיקון לא עבד, לא מתפרקים. אפשר לבודד עוד יותר, להשוות מול ה-state האחרון שעבד, או לחזור ל-slice הקטן ביותר שאפשר לחשוב עליו. המטרה היא לחזור לשליטה, לא לנצח מהר."
 
-### S08 | 06:05-07:10 | Common Anti-Patterns
+### S08 | 06:20-07:20 | Common Anti-Patterns
 
 - Visual: רשימת anti-patterns.
 - Narration:
-  "מה לא עושים? לא מבקשים 'תתקן הכול'. לא משנים כמה משתנים בבת אחת. לא עוברים בין modes בלי סיבה. ולא מוסיפים לוגיקה חדשה תוך כדי דיבוג של בעיה קיימת."
+  "מה לא עושים? לא מבקשים 'תתקן הכול'. לא משנים כמה דברים בבת אחת. לא מוסיפים clean up תוך כדי. ולא נותנים ל-debug להפוך שוב למשימת build חדשה בתחפושת."
 
-### S09 | 07:10-08:00 | Prompt That Enforces Safe Debugging
+### S09 | 07:20-08:20 | Prompt That Enforces Safe Debugging
 
-- Visual: debug prompt on screen.
+- Visual: prompt שמבקש היפותזה, fix קטן, verification.
 - Narration:
-  "כדי לשמור על התהליך, משתמשים ב-prompt שמכריח את Cursor להסביר סיבה אפשרית, להציע תיקון קטן, ולהגדיר צעדי אימות ו-roll back. זה הופך דיבוג מפעולה אינטואיטיבית לתהליך."
+  "כדי לשמור על התהליך, משתמשים ב-prompt שמכריח את Cursor לדרג היפותזות, לבחור fix קטן אחד, ולהגדיר verification לפני edit נוסף. כך הדיבוג נשאר משמעת, לא תחושת בטן."
 
-### S10 | 08:00-08:30 | Close
+### S10 | 08:20-08:30 | Close
 
-- Visual: preview לשיעור הבא.
+- Visual: מעבר ל-worktrees ו-Git.
 - Narration:
-  "בשיעור הבא ניקח את כל המשמעת הזאת ונחבר אותה לעבודה עם Git ו-worktrees, כדי לפתח פיצ'רים ולתקן באגים במקביל בלי ללכלך את העבודה הראשית."
+  "בשיעור הבא נשתמש בכל המשמעת הזאת בתוך workflow מקביל: branches ו-worktrees, כדי שפיצ'ר חדש ו-bugfix דחוף לא ידרכו אחד על השני."
 
 ## Prompt Asset
 
-`I have a failing change. First, summarize probable root causes from current errors/logs. Then propose the smallest safe fix, with verification steps and rollback options. Keep changes minimal and explain risk before editing.`
+`I introduced a regression while working on this feature. First describe the exact broken behavior and the likely cause based on the latest diff and current evidence. Then rank the most probable hypotheses, propose the smallest safe fix to test first, and define how we will verify it against the original symptom before making any larger changes.`
 
 ## Recording Notes
 
-- להשתמש בתקלה פשוטה וברורה.
-- להראות את ההבדל בין תיקון אקראי לתהליך מסודר.
-- להדגיש rollback options בלי להיכנס לפקודות מסוכנות.
+- להשתמש ברגרסיה שבאמת נולדה מה-capstone, לא בתקלה מנותקת.
+- להראות שה-debug מתחיל מה-diff האחרון ולא מהיסטוריה אינסופית.
+- להדגיש התאוששות מבלאגן, לא רק "פתרון שגיאה".
 
 ## Action Item
 
-לקחת תקלה אחת אמיתית, לכתוב את הסימפטום שלה במשפט אחד, לצרף שתי ראיות רלוונטיות בלבד, ולהגדיר מהו התיקון הקטן ביותר שכדאי לבדוק קודם.
+לקחת regression אמיתי אחד, לנסח מה נשבר עכשיו לעומת מה עבד קודם, לצרף שתי ראיות בלבד, ולכתוב היפותזה אחת שאתם בודקים לפני כל שינוי רחב יותר.

@@ -1,0 +1,18 @@
+Install all of the course’s recommended Cursor/VS Code extensions on this machine (full list from lesson 06). Use the CLI if available (`cursor --install-extension <id>` or `code --install-extension <id>`). If neither CLI works, give exact Marketplace names and UI steps to install each one.
+
+Install every extension ID below:
+
+- eamodio.gitlens
+- dbaeumer.vscode-eslint
+- esbenp.prettier-vscode
+- usernamehw.errorlens
+- christian-kohler.path-intellisense
+- aaron-bond.better-comments
+- yzhang.markdown-all-in-one
+- redhat.vscode-yaml
+- ms-azuretools.vscode-docker
+- ms-python.python
+- bradlc.vscode-tailwindcss
+
+After each install attempt, note success or failure. When done, remind me to reload the Cursor window. Do not install other AI/chat extensions that duplicate Cursor. If any ID fails (e.g. marketplace unavailable), say which one and the manual fallback.
+If you think i need more extension accoriding to my project type, add only official vs-code ones as you want

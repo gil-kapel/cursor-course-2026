@@ -1,0 +1,1 @@
+My static or simple web project is already on GitHub at [REPO URL]. I want a first deploy on Vercel only. Give me a short checklist: connect GitHub to Vercel, import the repo, run deploy, find the live URL, and explain preview vs production in two sentences. Mention where to set env vars in Vercel if needed, and warn not to paste secrets into chat or commit them.

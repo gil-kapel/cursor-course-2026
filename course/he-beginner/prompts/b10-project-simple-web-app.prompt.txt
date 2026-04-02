@@ -1,0 +1,1 @@
+My ASCII wireframe and PRD are below. Propose a minimal static site structure (files only). Then implement step 1: layout + one interactive element. Stop after step 1 and tell me how to open it in a browser. I will send a screenshot for the next iteration.

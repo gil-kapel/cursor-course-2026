@@ -1,77 +1,77 @@
-# Script Master: 01 Intro and Outcomes
+# Script Master: 01 Advanced Kickoff Through a Real Capstone
 
 ## Metadata
 
 - Lesson ID: 01
-- Title: מבוא לקורס והתוצאה הסופית
-- Target duration: 05:30
+- Title: פתיחת הקורס דרך capstone אמיתי
+- Target duration: 06:30
 - Language: Hebrew
 - Format: avatar narration + screen recording
 
 ## Lesson Goal
 
-להראות לסטודנט מה הוא הולך ללמוד, איך הקורס בנוי, ומה תהיה היכולת שלו בסיום.
+לפתוח את המסלול המתקדם דרך מצב עבודה אמיתי: repo קיים, feature request ברור, וסטנדרט delivery שילווה את כל הקורס.
 
 ## Scene List
 
-### S01 | 00:00-00:20 | Hook
+### S01 | 00:00-00:25 | Hook
 
-- Visual: פתיחה עם Cursor פתוח ופרויקט דמו על המסך.
+- Visual: ticket פתוח, repo קיים, ו-Cursor על המסך.
 - Narration:
-  "אם ניסית לעבוד עם Cursor ויצאת עם תחושה שהוא חכם אבל לא תמיד צפוי, הקורס הזה בשבילך. כאן לא נלמד רק לכתוב פרומפטים. נלמד שיטת עבודה ברורה."
+  "המסלול הזה לא מתחיל מהתקנה ולא מ'מה זה Agent'. הוא מתחיל ממה שבאמת קורה בעבודה: יש repo, יש בקשה לפיצ'ר, ויש צורך לספק שינוי שאפשר לסמוך עליו."
 
-### S02 | 00:20-00:55 | Final Outcome Preview
+### S02 | 00:25-01:00 | End-State Preview
 
-- Visual: מעבר מהיר בין plan, implementation, debug, worktree ו-deploy.
+- Visual: מעבר מהיר בין קריאת codebase, plan, diff, tests, review, deploy ו-handoff.
 - Narration:
-  "בסוף הקורס תדע להתקין נכון את Cursor, לבחור mode ומודל לפי משימה, להגדיר context לפרויקט, לבנות פיצ'ר בצעדים קטנים, לדבג תקלות, לעבוד עם worktrees, ואפילו לפרוס לענן."
+  "בסוף הקורס לא רק תדע לבקש קוד. תדע להבין codebase קיים, לפרק feature לפרוסות בטוחות, לממש עם guardrails, לבדוק, לדבג, להכין handoff, ולשחרר גרסה בלי לקוות לטוב."
 
-### S03 | 00:55-01:35 | Who This Course Is For
+### S03 | 01:00-01:55 | The Capstone Repo
 
-- Visual: שקופית קצרה עם שלושה סוגי משתמשים.
+- Visual: מבט על מבנה הפרויקט, issue או PRD קצר, וקבצים מרכזיים.
 - Narration:
-  "הקורס מתאים גם למתחילים, גם למפתחים חדשים ל-Cursor, וגם לצוותים קטנים שרוצים תהליך עקבי. אם אתה כבר כותב קוד, תתקדם מהר יותר. אם אתה רק מתחיל, עדיין תוכל לעקוב כי כל שיעור בנוי שלב אחר שלב."
+  "רוב הקורס יישב על capstone אחד. לא פרויקט צעצוע, אלא repo מספיק אמיתי כדי לדרוש קריאה, שיקול דעת, validation ותקשורת. בכל שיעור ניקח עוד צעד באותו workflow."
 
-### S04 | 01:35-02:20 | Course Structure
+### S04 | 01:55-02:50 | Delivery Standard
 
-- Visual: רשימת שלוש קשתות הלמידה.
+- Visual: חמישה checkpoints על המסך: scope, implementation, validation, review, release.
 - Narration:
-  "הקורס מחולק לשלושה חלקים. קודם כול setup: התקנה, חשבון, מודלים ו-context. אחר כך workflow: modes, בניית פיצ'ר, דיבוג ואיכות קוד. ולבסוף advanced: עבודה בצוות, worktrees, deployment ולוקליזציה."
+  "הסטנדרט שלנו פשוט: לא מזניקים Agent בלי להבין scope, לא סומכים על diff בלי review, לא ממשיכים בלי validation, ולא משחררים בלי sanity check ודרך חזרה."
 
-### S05 | 02:20-03:20 | What Makes This Course Different
+### S05 | 02:50-03:50 | What Makes This Advanced
 
-- Visual: side-by-side של prompt אקראי מול workflow מסודר.
+- Visual: השוואה side-by-side של beginner מול advanced.
 - Narration:
-  "ההבדל המרכזי כאן הוא שאנחנו לא עובדים באקראי. לכל שלב יהיה prompt מוכן, תוצאה צפויה, ואימות. כלומר לא רק מה לכתוב ל-Cursor, אלא איך לבדוק שהוא באמת עשה את הדבר הנכון."
+  "ההבדל מהמסלול הבסיסי הוא לא רק הקצב. בבסיסי לומדים לעבוד עם Cursor בלי פחד. כאן לומדים לספק שינוי מקצועי בעזרת Cursor: עם סיכון, עם אילוצים, עם איכות, ועם אחריות."
 
-### S06 | 03:20-04:20 | Practical Learning Method
+### S06 | 03:50-04:45 | Course Arcs
 
-- Visual: תבנית קבועה: demo -> steps -> mistakes -> action item.
+- Visual: שלוש קשתות למידה: readiness and scope, controlled execution, team and release.
 - Narration:
-  "בכל שיעור נראה קודם את התוצאה, אחר כך נבצע את השלבים, נזהה טעויות נפוצות, ונסיים בפעולה אחת שאתה עושה מיד. המטרה היא לא לצפות, אלא לעבוד תוך כדי."
+  "הקורס בנוי משלוש קשתות. קודם נבין את ה-repo, נפרק את המשימה, ונחליט איך לגשת אליה. אחר כך נממש ונאמת. ולבסוף נהפוך את השינוי הזה למשהו שאפשר להעביר הלאה, לסקור ולשחרר."
 
-### S07 | 04:20-05:00 | Prompt Pack Preview
+### S07 | 04:45-05:45 | How Each Lesson Works
 
-- Visual: הצגה קצרה של prompt מוכן מתוך הקורס.
+- Visual: תבנית קבועה: מצב אמת -> החלטה -> פעולה -> אימות.
 - Narration:
-  "בנוסף, בכל שלב תקבל prompt שאפשר להעתיק ולהריץ ישירות ב-Cursor Agent. זה אומר שכל שיעור הופך גם למדריך וגם לכלי עבודה."
+  "בכל שיעור נתחיל ממצב אמת, נזהה את ההחלטה שצריך לקבל, נבצע צעד אחד או שניים בלבד, ואז נאמת. המטרה היא לא להרשים בכמות קוד, אלא לבנות workflow שאפשר לשחזר גם מחר."
 
-### S08 | 05:00-05:30 | Close
+### S08 | 05:45-06:30 | Close
 
-- Visual: כותרת לשיעור הבא.
+- Visual: checklist קצר של readiness לשיעור הבא.
 - Narration:
-  "בשיעור הבא נתחיל מהבסיס: התקנה על macOS ועל Windows, כולל בדיקות sanity וטיפול בתקלות נפוצות. בוא נתחיל."
+  "בשיעור הבא נעשה bridge מהיר: נוודא שהכלי, החשבון, ה-modes, ה-Git וההקשר הפרויקטלי מוכנים לעבודה. לא סיור בסיסי, אלא readiness check כדי שנוכל להתחיל לעבוד באמת."
 
 ## Prompt Asset
 
-`Teach me what I will be able to do after completing a practical Cursor course. Summarize the learning path from setup to project delivery in simple steps.`
+`I’m starting an advanced Cursor capstone in an existing repository. Before writing code, help me understand the assignment like a senior teammate: summarize the goal of the feature, list the likely files or layers involved, point out key risks, and explain what "done" should mean in terms of implementation, validation, review, and release. Keep it practical and concise.`
 
 ## Recording Notes
 
-- לשמור על קצב מהיר יחסית.
-- לא להעמיס בצילום מסך ארוך אחד.
-- להשתמש בכותרות קצרות על המסך לכל Arc.
+- לפתוח מהר עם ticket או feature request, לא עם שקופית תיאורטית.
+- להראות את כל ציר ה-delivery כבר בשתי הדקות הראשונות.
+- להדגיש שזהו מסלול המשך, לא היכרות ראשונה עם Cursor.
 
 ## Action Item
 
-לכתוב במשפט אחד מה אתם רוצים לדעת לעשות עם Cursor עד סוף הקורס, ולשמור את המשפט הזה בקובץ `readme` או בהערה זמנית לפרויקט התרגול.
+לכתוב במשפט אחד מהו השינוי המקצועי שאתם רוצים לדעת לספק עם Cursor עד סוף הקורס: למשל "להוציא פיצ'ר קטן ל-production עם בדיקות ו-review".

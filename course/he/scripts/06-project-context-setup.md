@@ -1,89 +1,83 @@
-# Script Master: 06 Project Context Setup
+# Script Master: 06 Implementing the First Slice With Guardrails
 
 ## Metadata
 
 - Lesson ID: 06
-- Title: הקשר פרויקט: rules, skills, memory, MCPs ותוספים
+- Title: מימוש slice ראשון עם guardrails
 - Target duration: 09:00
 - Language: Hebrew
 - Format: avatar narration + screen recording
 
 ## Lesson Goal
 
-להראות איך מגדירים ל-Cursor הקשר פרויקט יציב: כללים, skills, זיכרון, MCPs ותוספים, כדי לצמצם בלבול ולשפר דיוק.
+להראות איך עוברים מ-plan למימוש בפועל בלי לתת ל-Agent להתרחב מעבר למה שהתכוונו: slice אחד, גבולות ברורים, ו-stop conditions שמחזירים שליטה.
 
 ## Scene List
 
 ### S01 | 00:00-00:25 | Hook
 
-- Visual: repo בלי הקשר מול repo עם הקשר מסודר.
+- Visual: Plan טוב על המסך ואז Agent שמנסה לגעת ביותר מדי קבצים.
 - Narration:
-  "Cursor יכול להיות מרשים גם בלי הקשר, אבל הוא הופך לכלי עבודה אמיתי רק כשמגדירים לו את הפרויקט נכון. בשיעור הזה נבנה את שכבת ההכוונה שהופכת תשובות טובות לעבודה עקבית."
+  "גם אחרי שסידרנו את ה-scope, הסכנה לא נעלמת. ברגע שעוברים לביצוע, קל מאוד לתת ל-Agent לעשות קצת יותר ממה שביקשנו. השיעור הזה עוסק בלהישאר בשליטה בזמן המימוש."
 
-### S02 | 00:25-01:10 | What Project Context Means
+### S02 | 00:25-01:20 | Restate the Slice Before Editing
 
-- Visual: תרשים של rules, skills, memory, MCPs, add-ons.
+- Visual: summary קצר של slice ראשון: goal, files, constraints.
 - Narration:
-  "Project context הוא כל מה שעוזר ל-Cursor להבין איך לעבוד בפרויקט שלכם: מה חשוב לכם, אילו תבניות אתם מעדיפים, איזה כלים חיצוניים יש לו, ואיך הוא צריך להתנהג."
+  "לפני פעולה אחת, מנסחים מחדש את ה-slice: מה בדיוק נכנס, אילו קבצים כנראה ייגעו, ומה אסור לשנות. זה נשמע כפול, אבל זו הנקודה שבה מונעים את רוב הזליגות."
 
-### S03 | 01:10-02:05 | Rules
+### S03 | 01:20-02:15 | Define Explicit Guardrails
 
-- Visual: קובץ rules או דוגמה לעקרונות עבודה.
+- Visual: prompt עם constraints ברורים.
 - Narration:
-  "Rules הם כללי ברירת המחדל. הם מגדירים סגנון עבודה, שכבות, naming, בטיחות, ואיך נותנים תשובה. אם אתם חוזרים שוב ושוב על אותם תיקונים, כנראה שחסר לכם rule."
+  "עכשיו מגדירים guardrails מפורשים: אל תיגע ב-public API, אל תוסיף dependency, עצור אחרי יצירת המבנה, עבוד בשכבה אחת בלבד, והסבר מה שינית לפני שממשיכים. Agent טוב מגיב טוב יותר לגבולות ברורים."
 
-### S04 | 02:05-03:00 | Skills
+### S04 | 02:15-03:10 | Start With the Smallest Useful Edit
 
-- Visual: skill relevant to a task.
+- Visual: שינוי קטן ראשון, לא feature מלא.
 - Narration:
-  "Skills הם ידע פרוצדורלי ארוז היטב. במקום להסביר כל פעם מחדש איך לעשות migration, לפרוס, או ליצור תוסף, skill טוב מכניס תהליך עבודה מוכן. זה חוסך prompt ארוך ומשפר עקביות."
+  "הביצוע הראשון לא צריך 'לסיים את המשימה'. הוא צריך לפתוח את הנתיב הנכון. לפעמים זה רק skeleton, לפעמים חיבור לוגיקה, ולפעמים placeholder שאפשר לבדוק סביבו."
 
-### S05 | 03:00-03:55 | Project Memory
+### S05 | 03:10-04:10 | Stop and Read the Diff
 
-- Visual: תבנית קצרה של memory file.
+- Visual: diff ראשון על המסך.
 - Narration:
-  "Memory הוא המקום לשמור החלטות יציבות על הפרויקט: ארכיטקטורה, conventions, ספריות מועדפות, ודברים שאסור לשבור. זה לא מקום לתיעוד כל פרט קטן, אלא לזיכרון שחייב לעבור בין משימות."
+  "אחרי כל מעבר משמעותי, עוצרים וקוראים את ה-diff. לא רק אם זה עובד, אלא האם זה נשאר בתוך הגבולות שביקשנו. אם נוספו קבצים מיותרים או קפיצה בין שכבות, לא ממשיכים אוטומטית."
 
-### S06 | 03:55-05:05 | MCPs
+### S06 | 04:10-05:15 | Ask for a Change Summary, Not a Victory Speech
 
-- Visual: רשימת קטגוריות MCPs והדגשה של security.
+- Visual: בקשה לסיכום שינויים קצר.
 - Narration:
-  "MCPs מחברים את Cursor לכלים חיצוניים כמו browser, cloud, docs או GitHub. היתרון עצום, אבל גם האחריות. לא מפעילים הכול. בוחרים רק מה שרלוונטי, עם הרשאות מינימליות, ועם הבנה ברורה מה הכלי יודע לקרוא או לבצע."
+  "בשלב הזה לא מבקשים מה-Agent 'לשכנע' אתכם. מבקשים summary קצר: מה השתנה, למה, ומה עדיין לא נעשה. זה עוזר לבדוק שהביצוע באמת תואם את ה-slice ולא הפך לפרויקט צד."
 
-### S07 | 05:05-06:00 | Add-ons and Extensions
+### S07 | 05:15-06:20 | Decide: Continue, Adjust, or Roll Back the Slice
 
-- Visual: רשימת add-ons מומלצים לפי workflow.
+- Visual: שלוש אפשרויות על המסך.
 - Narration:
-  "תוספים והרחבות משלימים את החוויה. כאן חשוב לא להתפזר. בוחרים רק add-ons שמחזקים את התהליך: Git, linting, deployment, docs או browser tools. יותר מדי תוספים יוצרים רעש במקום יעילות."
+  "אחרי ה-diff הראשון יש שלוש תשובות טובות: להמשיך לאותו slice, לצמצם או לתקן לפני המשך, או לעצור ולחזור אחורה. ההרגל החשוב הוא להבין שגם עצירה היא התקדמות אם היא מונעת טעות עמוקה יותר."
 
-### S08 | 06:00-07:10 | Minimal Safe Setup
+### S08 | 06:20-07:30 | Common Overreach Patterns
 
-- Visual: structure מוצע לתיקיית פרויקט.
+- Visual: anti-patterns כמו file explosion, hidden refactor, dependency drift.
 - Narration:
-  "בשלב ראשון מספיק להקים setup מינימלי: rules בסיסיים, skill או שניים שאתם באמת משתמשים בהם, memory קצר, MCPים רלוונטיים בלבד, ותוסף אחד או שניים משלימים. עדיף מעט וברור מאשר הרבה ולא עקבי."
+  "זליגות נפוצות הן refactor שלא ביקשתם, rename רוחבי, הוספת dependency כי 'זה יותר נקי', או נגיעה בשכבות שלא היו חלק מה-slice. כל אלה אולי נשמעים הגיוניים, אבל הם שוברים את יכולת הבקרה."
 
-### S09 | 07:10-08:10 | Let Cursor Propose the Setup
+### S09 | 07:30-09:00 | Close
 
-- Visual: prompt של setup context.
+- Visual: מעבר לשלב validation.
 - Narration:
-  "במקום להתחיל מאפס, אפשר לבקש מ-Cursor להציע context setup לפי סוג הפרויקט. הוא יכול להציע structure, rules, MCPs ותוספים, ואז אתם מאשרים רק מה שמתאים. זה בדיוק המקום שבו Plan ו-Agent עובדים יחד טוב."
-
-### S10 | 08:10-09:00 | Close
-
-- Visual: preview לשיעור הבא.
-- Narration:
-  "בשיעור הבא נעבור מלבנות הקשר ללופ העבודה עצמו: איך לוקחים פיצ'ר חדש, מתכננים אותו, מממשים, בודקים, ומבצעים דיבוג בסבבים קטנים."
+  "בשיעור הבא לא נמשיך מיד ל-slice הבא. קודם נלמד לעצור ולאמת: אילו checks מריצים, מה באמת מוכיח שהשינוי בטוח, ואיך לא לבלבל בין 'עבר build' לבין 'יש confidence'."
 
 ## Prompt Asset
 
-`Set up a clean project context for Cursor in this repo. Propose rules, reusable prompts, minimal project memory, MCP servers to enable, and recommended add-ons/extensions. Show suggested file structure and security notes (least privilege, secrets handling), then ask for approval before creating anything.`
+`Implement only the first safe slice of this feature. Before editing, restate the scope, expected files, and constraints. Keep the diff minimal, do not refactor unrelated code, and stop after the first meaningful checkpoint. Then summarize what changed, what remains, and any risks or surprises before doing anything else.`
 
 ## Recording Notes
 
-- להציג גם רשימת "לא להפעיל הכול בבת אחת".
-- להדגיש least privilege בעת אזכור MCPs.
-- להראות structure קטן וברור, לא עץ קבצים עמוס מדי.
+- להראות דוגמה שבה Agent באמת מנסה לגלוש מעט מעבר למה שביקשנו.
+- להדגיש diff reading כחלק מהמימוש עצמו, לא רק כשלב review מאוחר.
+- לא לסיים את השיעור עם "הכול גמור", אלא עם checkpoint ברור.
 
 ## Action Item
 
-לנסח setup מינימלי לפרויקט אחד שלכם: `rules` בסיסיים, זיכרון קצר של החלטות חשובות, ו-MCP אחד או שניים שבאמת נחוצים.
+לבחור slice קטן אחד, להגדיר לו שלושה guardrails מפורשים, לממש checkpoint ראשון בלבד, ואז לעצור ולבדוק אם ה-diff באמת נשאר בגבולות.

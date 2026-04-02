@@ -1,0 +1,1 @@
+Teach me a simple decision tree for Cursor modes (Ask / Plan / Agent / Debug) using one concrete mini-task: add a visible page title to my project. For each mode, say what I should type as a first message and what outcome I should expect.

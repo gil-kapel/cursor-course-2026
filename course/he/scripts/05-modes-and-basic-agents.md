@@ -1,83 +1,83 @@
-# Script Master: 05 Modes and Basic Agents
+# Script Master: 05 Context and Model Strategy for a Real Repository
 
 ## Metadata
 
 - Lesson ID: 05
-- Title: מודים ואייג'נטים בסיסיים
-- Target duration: 08:00
+- Title: אסטרטגיית context ומודלים ל-repo אמיתי
+- Target duration: 09:00
 - Language: Hebrew
 - Format: avatar narration + screen recording
 
 ## Lesson Goal
 
-להסביר מתי להשתמש ב-Ask, Plan, Agent ו-Debug, ואיך אותו צורך מקבל טיפול שונה בכל mode.
+ללמד איך לבחור context, model ו-output shape עבור slice אמיתי ב-repo קיים, כך שמקבלים דיוק טוב יותר, פחות רעש, ועלות שמתאימה למשימה.
 
 ## Scene List
 
 ### S01 | 00:00-00:25 | Hook
 
-- Visual: אותה משימה מוצגת ארבע פעמים בארבעה modes.
+- Visual: אותה משימה מקבלת תשובה עמוסה אחת ותשובה ממוקדת אחת.
 - Narration:
-  "הרבה משתמשים עובדים עם Cursor כאילו יש רק כפתור אחד. בפועל, הבחירה ב-mode משנה את איכות התוצאה, את רמת הסיכון, ואת כמות הסיבובים שתעשו אחר כך."
+  "לפעמים הבעיה היא לא המודל. לפעמים הבעיה היא שנתתם לו יותר מדי context, ביקשתם תשובה רחבה מדי, או הפעלתם את אותו workflow על משימה שלא דומה לקודמת."
 
-### S02 | 00:25-01:15 | The Core Decision
+### S02 | 00:25-01:15 | Separate Stable Context From Task Context
 
-- Visual: decision tree קצר על המסך.
+- Visual: שני טורים: project rules מול task evidence.
 - Narration:
-  "השאלה הראשונה היא לא מה לכתוב ב-prompt, אלא באיזה mode לעבוד. אם אתם רק חוקרים, תשאלו. אם צריך לתכנן, תעברו ל-Plan. אם הגיע הזמן לבצע, תעברו ל-Agent. ואם יש תקלה שצריך לחקור, Debug הוא המצב הנכון."
+  "השלב הראשון הוא להפריד בין context יציב של הפרויקט לבין context משתנה של המשימה. rules, conventions ו-memory שייכים לשכבה אחת. diff אחרון, log, ticket וקובץ ספציפי שייכים לשכבה אחרת."
 
-### S03 | 01:15-02:10 | Ask Mode
+### S03 | 01:15-02:20 | Start With the Smallest Useful Scope
 
-- Visual: chat עם שאלה על קוד או על מבנה הפרויקט.
+- Visual: בחירה של שניים או שלושה קבצים במקום חצי repo.
 - Narration:
-  "Ask mode מתאים להבנת מצב, חיפוש תשובות, השוואת אפשרויות, והסבר על הקוד בלי לבצע שינוי. זה המצב הנכון כשאתם עדיין לא בטוחים מה צריך לעשות."
+  "גם ב-repo גדול, לא חייבים לשלוח הכול. שואלים: מה המינימום שצריך כדי להבין את ה-slice הזה? אם בוחרים נכון, מקבלים פחות ניחושים, פחות עלות, ופחות output שצריך לקרוא."
 
-### S04 | 02:10-03:10 | Plan Mode
+### S04 | 02:20-03:20 | When Auto Is Enough
 
-- Visual: דוגמת תוכנית מסודרת לפני ביצוע.
+- Visual: task קטן וברור על המסך.
 - Narration:
-  "Plan mode מתאים כשיש כמה דרכי מימוש, כשצריך החלטה ארכיטקטונית, או כשאתם רוצים לראות מסלול עבודה לפני שמבצעים שינוי בפועל. זה מוריד טעויות ומכריח אתכם לחשוב לפני עריכה."
+  "לשינויים ממוקדים, לקריאה קצרה, או ליישום slice שכבר הוגדר טוב, לרוב אפשר להישאר על Auto. אם הבעיה ברורה וה-scope קטן, אין צורך לנהל כל קריאה כמו ניתוח מוח."
 
-### S05 | 03:10-04:10 | Agent Mode
+### S05 | 03:20-04:20 | When to Pick a Stronger Model
 
-- Visual: agent מבצע שינוי קוד מדורג.
+- Visual: task עם tradeoffs, refactor או debug רחב יותר.
 - Narration:
-  "Agent mode הוא המצב של ביצוע. כאן Cursor יכול לקרוא, לערוך, להריץ בדיקות ולעבוד על המשימה בפועל. זה לא מצב למחקר פתוח, אלא לביצוע עם יעד ברור ועם הגבלות ברורות."
+  "כשיש ארכיטקטורה, tradeoffs, review מסוכן, או debug מערכתִי, שווה לעבור למודל חזק יותר. כאן המחיר של reasoning טוב הוא לעיתים קטן לעומת המחיר של כיוון שגוי."
 
-### S06 | 04:10-05:05 | Debug Mode
+### S06 | 04:20-05:10 | When a Faster or Cheaper Model Is Enough
 
-- Visual: stack trace, root cause, fix plan.
+- Visual: משימות חזרתיות או mechanical changes.
 - Narration:
-  "Debug mode מתאים כשמשהו נשבר ואתם רוצים חקירה מסודרת. במקום לבקש 'תתקן', מבקשים קודם להבין מה קרה, מה ההיפותזות, ואיך מאמתים את התיקון הכי קטן והכי בטוח."
+  "יש גם מקרים הפוכים: rename, formatting guidance, changes רפטטיביים או שאלות קצרות. כאן אפשר לעתים לבחור מודל מהיר וזול יותר, כל עוד הבעיה ברורה וה-risk נמוך."
 
-### S07 | 05:05-06:10 | Same Task, Different Modes
+### S07 | 05:10-06:15 | Control the Output Shape
 
-- Visual: אותה משימה, למשל 'להוסיף פיצ'ר login', מוצגת בכל mode.
+- Visual: prompt פתוח מול prompt שמבקש bullets, plan קצר או diff מינימלי.
 - Narration:
-  "אותה משימה יכולה להתחיל ב-Ask כדי להבין דרישות, לעבור ל-Plan כדי לפרק לשלבים, להמשיך ל-Agent כדי לממש, ואז להגיע ל-Debug אם בדיקה נשברת. כלומר modes הם לא תחרות, הם רצף עבודה."
+  "לא מספיק לבחור model טוב. צריך גם לבחור output shape טוב. אם תבקשו 'תסביר הכול', תקבלו תשובה ארוכה. אם תבקשו 'שלוש היפותזות', 'plan בחמישה צעדים', או 'diff מינימלי בלבד', תקבלו משהו שמקדם עבודה."
 
-### S08 | 06:10-07:20 | Practical Rules of Thumb
+### S08 | 06:15-07:30 | Create a Routing Policy for This Repo
 
-- Visual: רשימת 4 חוקים קצרים.
+- Visual: טבלה קטנה: planning, slice implementation, review, debug.
 - Narration:
-  "אם אתם לא בטוחים, תתחילו ב-Ask. אם יש tradeoffs, תעברו ל-Plan. אם הדרישות ברורות, תעברו ל-Agent. ואם יש בעיה לא צפויה, תעצרו ותעברו ל-Debug. החוק הזה לבד משפר משמעותית את העבודה."
+  "במקום להחליט כל פעם מחדש, מגדירים policy קטן לפרויקט. למשל: Auto כברירת מחדל, מודל חזק יותר לתכנון או review מסוכן, מודל מהיר למשימות mechanical. לא תורה מסיני, אלא ברירת מחדל חכמה."
 
-### S09 | 07:20-08:00 | Close
+### S09 | 07:30-09:00 | Close
 
-- Visual: preview לשיעור הבא.
+- Visual: המעבר לשיעור המימוש.
 - Narration:
-  "בשיעור הבא ניקח את modes האלו ונחבר אותם להגדרת הקשר לפרויקט: rules, skills, memory, MCPs ותוספים, כדי ש-Cursor יעבוד טוב כבר מהצעד הראשון."
+  "עכשיו יש לנו גם map, גם slices, וגם אסטרטגיית context ומודלים. בשיעור הבא אפשר סוף סוף לבצע: לממש slice ראשון עם guardrails, לעצור בזמן, ולבדוק מה באמת השתנה."
 
 ## Prompt Asset
 
-`Teach me when to use each Cursor mode for this project. Give me a simple decision tree (ask vs plan vs agent vs debug), then provide one concrete example task per mode.`
+`Create a practical context and model strategy for implementing one safe slice in this repository. First separate stable project context from task-specific context. Then tell me the minimum files, logs, and requirements needed for this slice. Recommend when to stay on Auto and when to explicitly choose a stronger or cheaper model for planning, implementation, review, and debugging. Keep the output concise and action-oriented.`
 
 ## Recording Notes
 
-- להראות את אותו use case בכל ארבעת המצבים.
-- לשמור את הדוגמאות קצרות ולא תיאורטיות.
-- להשתמש ב-overlay של decision tree בתחילת השיעור ובסופו.
+- לא להפוך את השיעור לשיעור תמחור תיאורטי.
+- להראות context אמיתי מתוך ה-capstone, לא דוגמאות מנותקות.
+- להדגיש שהמטרה היא precision per task, לא "המודל הכי טוב".
 
 ## Action Item
 
-לבחור ארבע משימות אמיתיות שאתם עושים ב-Cursor ולשייך כל אחת ל-`Ask`, `Plan`, `Agent` או `Debug`.
+לבנות policy קצר לפרויקט שלכם: מהו ה-stable context, מהו ה-task context, מתי נשארים על `Auto`, ומתי בוחרים מודל אחר לתכנון, review או debug.

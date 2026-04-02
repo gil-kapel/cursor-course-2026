@@ -1,83 +1,77 @@
-# Script Master: 02 Installation on macOS and Windows
+# Script Master: 02 Quick Bridge Readiness Check
 
 ## Metadata
 
 - Lesson ID: 02
-- Title: התקנת Cursor על macOS ו-Windows
-- Target duration: 07:30
+- Title: Bridge מהיר: sanity על setup, modes ו-context
+- Target duration: 07:00
 - Language: Hebrew
 - Format: avatar narration + screen recording
 
 ## Lesson Goal
 
-להוביל התקנה ראשונה של Cursor בצורה נקייה ולוודא שהמשתמש מוכן לשיעורים הבאים.
+לסגור במהירות פערי מוכנות לפני העבודה על ה-capstone: לא ללמד את Cursor מחדש, אלא לוודא שהחשבון, ה-modes, ה-Git, הטרמינל והקשר הפרויקטלי מוכנים.
 
 ## Scene List
 
 ### S01 | 00:00-00:25 | Hook
 
-- Visual: Cursor לא מותקן, ואז פתיחה מוצלחת של האפליקציה.
+- Visual: checklist קצר במקום סיור ממשק מלא.
 - Narration:
-  "התקנה נכונה חוסכת המון בלבול בהמשך. בשיעור הזה נתקין את Cursor, נפתח פרויקט ראשון, ונבדוק שהכול עובד לפני שממשיכים."
+  "זה לא שיעור התקנה. זה שיעור readiness. אם כבר עבדתם עם Cursor, כנראה רוב הדברים כאן תקינים. אנחנו רק רוצים לוודא שאין פער קטן שיפיל אותנו דווקא בזמן מימוש."
 
-### S02 | 00:25-01:10 | Download
+### S02 | 00:25-01:15 | Readiness Checklist
 
-- Visual: אתר ההורדה הרשמי והבחירה בין macOS ל-Windows.
+- Visual: חמישה סעיפים על המסך: account, modes, repo, terminal, git baseline.
 - Narration:
-  "נכנסים לאתר הרשמי של Cursor ומורידים את הגרסה המתאימה למערכת ההפעלה שלכם. אם אתם על Mac, שימו לב אם המחשב שלכם מבוסס Apple Silicon או Intel. ב-Windows פשוט בוחרים את קובץ ההתקנה הרגיל."
+  "לפני שנוגעים ב-feature, בודקים חמישה דברים: שאתם מחוברים, שה-repo נפתח כמו שצריך, שה-modes ברורים לכם, שהטרמינל עובד, ושיש baseline ברור ב-Git."
 
-### S03 | 01:10-02:10 | Install on macOS
+### S03 | 01:15-02:05 | Account and Model Access
 
-- Visual: גרירת האפליקציה ל-Applications, פתיחה ראשונה, אישור הרשאות.
+- Visual: מסך הגדרות רלוונטי או בחירת מודל.
 - Narration:
-  "ב-macOS פותחים את קובץ ההתקנה, גוררים את Cursor ל-Applications, ואז פותחים את האפליקציה. אם macOS מציג אזהרת אבטחה, מאשרים פתיחה דרך ההגדרות או דרך חלון האישור הרגיל."
+  "לא נכנסים כאן שוב לתיאור מלא של תוכניות. רק בודקים שיש לכם גישה מעשית למה שצריך: Cursor מגיב, אפשר לבחור mode, ויש לכם גישת מודל שמתאימה לעבודה על repo אמיתי."
 
-### S04 | 02:10-03:10 | Install on Windows
+### S04 | 02:05-03:00 | Modes Are a Working Tool, Not Theory
 
-- Visual: הרצת installer, next-next-finish, פתיחה ראשונה.
+- Visual: אותה משימה קצרה ב-Ask, Plan ו-Agent.
 - Narration:
-  "ב-Windows מריצים את קובץ ההתקנה, ממשיכים עם ההגדרות ברירת המחדל, ומפעילים את Cursor. אם Windows Defender מבקש אישור, מאשרים רק לאחר שווידאתם שהקובץ הגיע מהאתר הרשמי."
+  "בשלב הזה לא מסבירים מחדש כל mode. רק מוודאים שאתם זוכרים את העיקרון: Ask להבנה, Plan להחלטות, Agent לביצוע, Debug לתקלה. אם זה לא טבעי לכם עדיין, זה הזמן לרענן."
 
-### S05 | 03:10-04:00 | First Launch Setup
+### S05 | 03:00-04:00 | Project Context Sanity
 
-- Visual: מסכי setup ראשונים.
+- Visual: rules, memory או קובץ הקשר פתוח.
 - Narration:
-  "בפתיחה הראשונה Cursor עשוי לשאול על import של הגדרות, theme או קיצורי מקלדת. אפשר לבחור מה שנוח לכם. בשלב הזה המטרה היא רק להיכנס במהירות למסך העבודה."
+  "עכשיו בודקים אם הפרויקט נותן ל-Cursor הקשר סביר: rules, conventions, פקודות בדיקה, ודברים שאסור לשבור. אם אין כלום, לא עוצרים את הקורס, אבל מסמנים שזה gap שנסגור בהמשך."
 
-### S06 | 04:00-05:05 | Open First Folder
+### S06 | 04:00-05:00 | Terminal and Git Baseline
 
-- Visual: פתיחת תיקייה ריקה או repo קיים.
+- Visual: טרמינל משולב, `git status`, וקבצים פתוחים ב-repo.
 - Narration:
-  "עכשיו פותחים תיקייה ראשונה. לא משנה אם זו תיקייה ריקה או פרויקט קיים. אנחנו רק רוצים לוודא ש-Cursor יכול לטעון workspace, להציג קבצים, ולעבוד עליהם."
+  "השלב הבא הוא sanity תפעולי: הטרמינל עובד, ה-repo נפתח, ו-Git מראה baseline ברור. לא חייבים עדיין worktrees, אבל חייבים לדעת מה מצב העץ לפני כל שינוי."
 
-### S07 | 05:05-06:00 | Sanity Check
+### S07 | 05:00-06:10 | If Something Is Missing
 
-- Visual: פתיחת chat / agent, הרצת prompt בדיקה.
+- Visual: שלוש קופסאות: missing account, missing context, missing Git habit.
 - Narration:
-  "כדי לוודא שהכול עובד, נריץ prompt פשוט שמבקש מ-Cursor לזהות את מערכת ההפעלה, להסביר מה יש בתיקייה, ולהציע next steps. אם הוא מגיב בצורה תקינה, אנחנו מוכנים."
+  "אם משהו לא מוכן, לא צריך לעצור לשעה של setup. פותרים את החור הספציפי. חסר חשבון? מחברים. לא ברור mode? רענון קצר. אין context? מתחילים ממינימום. המטרה היא להיות ready, לא perfect."
 
-### S08 | 06:00-06:50 | Common Errors
+### S08 | 06:10-07:00 | Close
 
-- Visual: רשימת תקלות נפוצות.
+- Visual: כותרת לשיעור הבא + מבט על repo קיים.
 - Narration:
-  "אם האפליקציה לא נפתחת, בודקים הרשאות מערכת. אם התיקייה לא נטענת, מנסים workspace אחר. אם אין תגובה מה-agent, בודקים חיבור לחשבון וחיבור אינטרנט. חשוב לפתור את זה עכשיו, לפני שמתקדמים למודים ולמודלים."
-
-### S09 | 06:50-07:30 | Close
-
-- Visual: טקסט קצר של next lesson.
-- Narration:
-  "מעולה. Cursor מותקן ועובד. בשיעור הבא נעבור על פתיחת חשבון, בחירת מנוי, והבנה מתי באמת צריך לשלם."
+  "מעולה. עכשיו אפשר להיכנס לשלב האמיתי הראשון: איך קוראים codebase לא מוכר בלי לבקש מה-agent לרוץ ולעשות נזק לפני שהבנו את המערכת."
 
 ## Prompt Asset
 
-`I’m setting up Cursor for the first time. Detect my OS and give me a step-by-step install checklist with verification after each step. Include common errors and fixes. Keep it beginner-friendly and concise.`
+`Run a practical readiness check for working with Cursor in this repository. Verify that I am ready across five areas: account/model access, mode selection, repo visibility, terminal/Git baseline, and project context. For each area, say "ready", "good enough for now", or "gap to fix", and keep the output short and actionable.`
 
 ## Recording Notes
 
-- לצלם גם מסך macOS וגם מסך Windows, או להשתמש ב-B-roll משלים.
-- להציג את prompt הבדיקה על המסך כ-overlay.
-- אם יש שינוי UI קטן בגרסאות עתידיות, לשמור את הניסוח כללי ולא תלוי בכפתור בודד.
+- לא לצלם התקנה מלאה של macOS ו-Windows.
+- להציג את השיעור כ-bridge לבוגרי beginner וכ-on-ramp מהיר למפתחים ותיקים.
+- להדגיש שהמטרה היא להוריד friction, לא לחזור על יסודות.
 
 ## Action Item
 
-להתקין את Cursor, לפתוח תיקיית פרויקט אחת, ולהריץ בדיקת sanity קצרה שמוודאת שה-editor, הטרמינל וה-agent זמינים.
+להריץ readiness check על ה-repo שלכם ולרשום רק את הפערים שבאמת צריך לסגור לפני שמתחילים לגעת בקוד.

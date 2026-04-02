@@ -1,100 +1,83 @@
-# Script Master: 04 Model Strategy and Pricing
+# Script Master: 04 Safe Feature Slicing
 
 ## Metadata
 
 - Lesson ID: 04
-- Title: מודלים ותמחור: איך לבחור נכון
+- Title: פירוק feature לפרוסות בטוחות
 - Target duration: 09:00
 - Language: Hebrew
 - Format: avatar narration + screen recording
 
 ## Lesson Goal
 
-ללמד איך בוחרים מודל לפי סוג משימה, איכות נדרשת, מהירות ועלות, כולל הבנה בסיסית של tokens, עלות input מול output, ואיך לקרוא דפי תמחור בלי להיבהל.
+להפוך feature רחב לתוכנית delivery שאפשר לבצע בצעדים קטנים: עם acceptance criteria, סדר תלות ברור, ו-stop conditions שמונעים מה-Agent "לברוח".
 
 ## Scene List
 
 ### S01 | 00:00-00:25 | Hook
 
-- Visual: prompt אחד מול כמה מודלים אפשריים.
+- Visual: בקשה עמומה כמו "תוסיף dashboard חדש" מול repo עם כמה שכבות.
 - Narration:
-  "אחת הטעויות הכי נפוצות היא להשתמש תמיד באותו מודל. בשיעור הזה נבנה אסטרטגיית בחירה פשוטה: איזה מודל לתכנון, איזה למימוש, איזה לדיבוג, ומתי זה משפיע על העלות."
+  "הרבה בעיות עם AI לא מתחילות בקוד גרוע. הן מתחילות ב-scope גרוע. אם ביקשתם feature רחב מדי, גם Agent מצוין ינסה לגעת ביותר מדי מקומות בבת אחת."
 
-### S02 | 00:25-01:20 | Core Idea
+### S02 | 00:25-01:20 | Define Acceptance Criteria First
 
-- Visual: טבלה עם task type, quality, speed, cost.
+- Visual: רשימת acceptance criteria ו-non-goals.
 - Narration:
-  "לא שואלים 'מה המודל הכי טוב', אלא 'מה המודל הכי מתאים למשימה הזאת'. יש משימות שדורשות עומק reasoning, יש משימות קצרות שחייבות מהירות, ויש משימות שבהן מספיק דיוק טוב במחיר נמוך יותר."
+  "לפני שמפרקים עבודה, צריך לדעת מה נחשב הצלחה. מנסחים acceptance criteria ברורים, וגם מה לא נכנס לסיבוב הזה. בלי גבולות כאלה, כל שינוי קטן מתנפח."
 
-### S03 | 01:20-02:15 | Planning Tasks
+### S03 | 01:20-02:15 | Find the Dependency Order
 
-- Visual: דוגמת task של ארכיטקטורה.
+- Visual: flow של data, service, UI או שכבות דומות.
 - Narration:
-  "למשימות תכנון, פירוק בעיה, חשיבה על tradeoffs או ניסוח תוכנית, בדרך כלל כדאי מודל חזק יותר. כאן האיכות של reasoning חוסכת סיבובים מיותרים בהמשך."
+  "עכשיו שואלים: מה תלוי במה. האם צריך קודם API? קודם schema? קודם UI? סדר התלות קובע את סדר העבודה. אם מדלגים עליו, הסוכן יתחיל לאלתר."
 
-### S04 | 02:15-03:05 | Implementation Tasks
+### S04 | 02:15-03:20 | Choose the Smallest Safe Slice
 
-- Visual: דוגמת שינוי קטן בקוד.
+- Visual: feature מפורק לשלושה או ארבעה slices.
 - Narration:
-  "לשינויים קטנים, תיקונים ממוקדים, או פעולות רפטטיביות, לעיתים מספיק מודל מהיר יותר וזול יותר. אם המשימה ברורה וההקשר קטן, אין סיבה לשלם על עומק שלא צריך."
+  "הסוד הוא לא לבחור את החלק הכי חשוב, אלא את החלק הכי קטן שאפשר לממש ולאמת. קטן מספיק כדי להבין מה השתנה, וגדול מספיק כדי לקדם את ה-feature באמת."
 
-### S05 | 03:05-03:55 | Debugging Tasks
+### S05 | 03:20-04:20 | Define Stop Conditions
 
-- Visual: הודעת שגיאה, stack trace, והצעת root cause.
+- Visual: prompt עם ניסוח כמו "implement slice 1 only and stop".
 - Narration:
-  "בדיבוג, הבחירה תלויה במורכבות. אם יש stack trace ברור ושינוי קטן, אפשר מודל מהיר. אם הבעיה מערכתית, יש הרבה קבצים מעורבים, או שהסימפטום לא ברור, עדיף מודל עם reasoning חזק יותר."
+  "בשלב הזה מגדירים ל-Agent מתי לעצור. למשל: לגעת רק בשכבה אחת, ליצור רק את המבנה הבסיסי, או לעצור אחרי diff ראשון. stop condition טוב מונע תיקון יתר והרפתקאות מיותרות."
 
-### S06 | 03:55-04:45 | Review and Risky Changes
+### S06 | 04:20-05:35 | Build a Delivery Plan
 
-- Visual: diff ארוך או PR review.
+- Visual: תוכנית קצרה: slice, files, validation, risk.
 - Narration:
-  "בריוויו, ברפקטור או בשינויים עם סיכון גבוה, שווה לבחור מודל שיכול לזהות רגרסיות וסיכונים, אפילו אם הוא מעט יקר יותר. כאן טעות יקרה יותר מהחיסכון."
+  "עכשיו אפשר לבקש Plan אמיתי: slice ראשון, קבצים צפויים, איך נאמת, ומה עלול להישבר. זו כבר לא חקירה מופשטת, אלא תוכנית עבודה שאפשר לצאת ממנה לביצוע."
 
-### S07 | 04:45-05:40 | What Is a Token
+### S07 | 05:35-06:45 | Common Failure Pattern
 
-- Visual: משפט שמתפצל ליחידות token קטנות עם ספירה על המסך.
+- Visual: prompt רחב מדי מול prompt ממוקד.
 - Narration:
-  "כדי להבין עלות, צריך להבין קודם מה זה token. טוקן הוא לא בדיוק מילה ולא בדיוק תו. אפשר לחשוב עליו כיחידת טקסט קטנה שהמודל סופר. לפעמים זו מילה שלמה, לפעמים חלק ממילה, ולפעמים סימן פיסוק. כלל אצבע נפוץ הוא בערך ארבעה תווים באנגלית לטוקן אחד, אבל בשפות אחרות זה משתנה. חשוב גם לזכור שמודלים שונים משתמשים ב-tokenizer מעט שונה, ולכן אותה פסקה יכולה להיספר קצת אחרת בין ספקים. וגם הפרומפט שלכם, גם היסטוריית הצ'אט, גם קבצים שהמודל קורא, וגם התשובה שלו, כולם נספרים בטוקנים."
+  "הכשל הקלאסי נראה תמים: 'תוסיף את כל הפיצ'ר ותוודא שהכול עובד'. זה נשמע יעיל, אבל בפועל זו הזמנה לשינוי רחב מדי, בדיקה שטחית מדי, ו-debug ארוך מדי."
 
-### S08 | 05:40-06:35 | Input vs Output Cost
+### S08 | 06:45-08:00 | Good Slice, Good Review
 
-- Visual: תרשים דו-צדדי: what you send vs what the model returns.
+- Visual: diff קטן ונוח לסקירה.
 - Narration:
-  "עכשיו ההבחנה החשובה: input tokens הם כל מה שאתם שולחים למודל, כולל הפרומפט, היסטוריה, rules, וקבצים או קטעי קוד שנכנסים להקשר. output tokens הם כל מה שהמודל מחזיר. בהרבה ספקים, output יקר יותר מ-input. לכן תשובה ארוכה מאוד, reasoning ארוך, או כמה סיבובי תיקון, יכולים לעלות יותר מפרומפט קצר וברור. במילים פשוטות: לא רק מה ששלחתם עולה כסף, אלא גם כמה המודל מדבר בחזרה."
+  "כש-slice בנוי טוב, גם ה-review נהיה פשוט יותר. אפשר להבין מה השתנה, לבדוק רק את מה שצריך, ולדעת אם להתקדם לשלב הבא או לעצור. slicing טוב הוא לא רק כלי מימוש, אלא גם כלי איכות."
 
-### S09 | 06:35-07:50 | Real Cost Examples
+### S09 | 08:00-09:00 | Close
 
-- Visual: טבלת pricing קצרה עם 3-4 שורות מודגשות.
+- Visual: המעבר מ-plan לביצוע של slice אחד.
 - Narration:
-  "אם מסתכלים על דף המודלים של Cursor, רואים שתי שכבות תמחור. ב-Auto, נכון לזמן ההקלטה, המחיר הוא בערך 1.25 דולר למיליון input tokens ו-6 דולר ל-output. אם בוחרים מודל ספציפי, משלמים לפי מחיר ה-API שלו. לדוגמה, GPT-5.4 הוא בערך 2.5 דולר ל-input ו-15 דולר ל-output, Claude 4.6 Sonnet הוא 3 ו-15, ו-Gemini 2.5 Flash הוא בערך 0.3 ו-2.5. חשוב להבין: מיליון טוקנים הוא רק יחידת השוואה. אין לפנייה שלכם מספר טוקנים קבוע, כי כל מודל יכול לספור קצת אחרת וכל קריאה יכולה לכלול היסטוריה שונה, קבצים אחרים, logs אחרים ותשובה באורך אחר. לכן context management טוב, כלומר לשלוח רק מה שרלוונטי ולבקש תשובות ממוקדות, יכול להוריד גם input וגם output. מה שמשנה בפועל הוא כמה קונטקסט שלחתם, כמה תשובה ביקשתם, והאם באמת הייתם צריכים מודל יקר למשימה הזאת."
-
-### S10 | 07:50-08:35 | Ask Cursor for a Routing Strategy
-
-- Visual: prompt model strategy.
-- Narration:
-  "במקום להחליט כל פעם מחדש, אפשר לבקש מ-Cursor לבנות אסטרטגיית model routing לפרויקט, ואפילו לשמור אותה ב-AGENTS.md או ב-Cursor rule. כלל פשוט שעובד טוב הוא: Auto כברירת מחדל למשימות יומיומיות, מעבר למודל חזק יותר לתכנון, refactor ודיבוג מורכב, ומודל זול יותר למשימות קצרות וברורות. חשוב להבין: Auto לא מבטיח מודל קבוע, אלא נותן ל-Cursor לבחור בשבילכם דינמית."
-
-### S11 | 08:35-09:00 | Close
-
-- Visual: מעבר ל-next lesson.
-- Narration:
-  "מעולה. עכשיו כשיש לכם בסיס למודלים ולעלות, נעבור לשיעור הבא ונראה איך לנהל context נכון, כדי לשלוח פחות רעש, לקבל תשובות מדויקות יותר, ולשלם רק על מה שבאמת צריך."
+  "בשיעור הבא ניקח את ה-slice הראשון ונבנה עבורו אסטרטגיית context ומודלים: כמה context באמת צריך, מתי Auto מספיק, ומתי כדאי להיות יותר מכוונים."
 
 ## Prompt Asset
 
-`Create a Cursor model-routing strategy for this project using real currently supported Cursor models and current Cursor pricing. Recommend when to stay on Auto versus explicitly choose GPT-5.4, GPT-5.4 mini, Claude 4.6 Sonnet, and Gemini 2.5 Flash for planning, implementation, refactors, and debugging. Explain the tradeoff between input tokens, output tokens, context size, response length, and quality. Show how better context management can reduce both token usage and total cost. Note that Auto cannot be pinned to one exact model. Give a practical cost-aware workflow.`
+`Help me turn this feature request into a safe delivery plan for an existing repository. Do not implement anything yet. First define acceptance criteria and non-goals, then identify the dependency order, then break the work into the smallest safe slices. For each slice, list likely files, key risks, and a stop condition so the agent does not overreach.`
 
 ## Recording Notes
 
-- להציג את המספרים בתור דוגמאות ציבוריות "נכון לזמן ההקלטה", לא כהבטחה קבועה.
-- להבדיל במפורש בין `Auto + Composer` לבין בחירת מודל ספציפי לפי `API pricing`.
-- לציין שתמחור ב-Cursor או בספקים אחרים יכול להיות שונה מתמחור API ישיר.
-- להסביר ש-token הוא יחידת ספירה של טקסט, לא "מילה".
-- לציין שלאותה משימה יכולים להיות מספרי tokens שונים בין מודלים ובין קריאות שונות.
-- לדבר על קטגוריות שימוש: planning, implementation, debugging, review.
-- לחבר במפורש בין context management טוב לבין ירידה בעלות input ו-output.
-- להוסיף דיסקליימר קצר: "בדקו את הממשק הנוכחי והתמחור העדכני".
+- להראות feature שבאמת יכול להתפרק לכמה שכבות.
+- לא להסתפק בפירוק "UI ואז backend" אם זה לא משקף את ה-repo המצולם.
+- להדגיש שהמטרה היא reviewable slices, לא רק "ניהול זמן".
 
 ## Action Item
 
-ליצור טבלת החלטה קטנה לעצמכם: איזה מודל תבחרו ל-`planning`, איזה ל-`implementation`, איזה ל-`debugging`, ואיפה תעדיפו `Auto` כברירת מחדל.
+לקחת feature אמיתי אחד, לנסח לו acceptance criteria ו-non-goals, ואז לפרק אותו לפחות לשני slices שאפשר לבצע ולאמת בנפרד.
