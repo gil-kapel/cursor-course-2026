@@ -1,8 +1,8 @@
 # Cursor Course · Hebrew-first package
 
-Scripts, prompts, captions, and production docs for **two Hebrew Cursor tracks**: a **beginner** path for learners with little or no dev background, and an **advanced** path for professional end-to-end workflows. Content overlaps by design so people can move from basics to advanced without gaps.
+Scripts, prompts, captions, and production docs for **two Hebrew tracks**: a **beginner** path (**Cursor** + **Claude Code for VS Code**) for learners with little or no dev background, and an **advanced** **Cursor** path for professional end-to-end workflows. Content overlaps by design so people can move from basics to advanced without gaps.
 
-[![Beginner](https://img.shields.io/badge/beginner-B01--B12-5a7d6a?style=flat-square)](course/he-beginner/docs/course-outline.md)
+[![Beginner](https://img.shields.io/badge/beginner-B01--B13-5a7d6a?style=flat-square)](course/he-beginner/docs/course-outline.md)
 [![Advanced](https://img.shields.io/badge/advanced-14_lessons-2d5a4a?style=flat-square)](course/he-advanced/docs/course-outline.md)
 [![Language](https://img.shields.io/badge/content-Hebrew-5a7d6a?style=flat-square)](course/he-advanced/scripts/)
 [![Repo](https://img.shields.io/badge/repo-cursor__course-8b9dc9?style=flat-square)](#repository-layout)
@@ -13,7 +13,7 @@ Scripts, prompts, captions, and production docs for **two Hebrew Cursor tracks**
 
 | Track | Outline | Audience | Lesson assets |
 | --- | --- | --- | --- |
-| **Beginner** | [`course/he-beginner/docs/course-outline.md`](course/he-beginner/docs/course-outline.md) | Non-developers; terminal/Git anxiety; first agent projects | [`course/he-beginner/README.md`](course/he-beginner/README.md) — Script Masters, prompts, captions for **B01–B12** |
+| **Beginner** | [`course/he-beginner/docs/course-outline.md`](course/he-beginner/docs/course-outline.md) | Non-developers; terminal/Git anxiety; first agent projects with **Claude Code** in **Cursor** | [`course/he-beginner/README.md`](course/he-beginner/README.md) — Script Masters, prompts, captions for **B01–B13** |
 | **Advanced** | [`course/he-advanced/docs/course-outline.md`](course/he-advanced/docs/course-outline.md) | Devs / power users; worktrees, MCP matrix, deploy, team | [`course/he-advanced/scripts/`](course/he-advanced/scripts/), [`course/he-advanced/prompts/`](course/he-advanced/prompts/), [`course/he-advanced/captions/`](course/he-advanced/captions/) |
 
 **Overlap map (beginner ↔ advanced):** [`course/he-beginner/docs/cross-track-overlap.md`](course/he-beginner/docs/cross-track-overlap.md)
@@ -24,7 +24,7 @@ Scripts, prompts, captions, and production docs for **two Hebrew Cursor tracks**
 
 | Area | Path | What you get |
 | --- | --- | --- |
-| **Beginner course map** | [`course/he-beginner/docs/course-outline.md`](course/he-beginner/docs/course-outline.md) | 12 lessons (B01–B12), arcs, outcomes |
+| **Beginner course map** | [`course/he-beginner/docs/course-outline.md`](course/he-beginner/docs/course-outline.md) | 13 lessons (B01–B13), arcs, outcomes |
 | **Beginner lesson assets** | [`course/he-beginner/scripts/`](course/he-beginner/scripts/), [`course/he-beginner/prompts/`](course/he-beginner/prompts/), [`course/he-beginner/captions/`](course/he-beginner/captions/) | Same pattern as advanced: script + `.prompt.txt` + `.he.srt` |
 | **Advanced course map** | [`course/he-advanced/docs/course-outline.md`](course/he-advanced/docs/course-outline.md) | 14 lessons, arcs, outcomes |
 | **Recording & TTS** | [`course/he-advanced/docs/recording-and-elevenlabs-guide.md`](course/he-advanced/docs/recording-and-elevenlabs-guide.md) | Screen capture, ElevenLabs, action items (shared) |
@@ -50,7 +50,7 @@ cursor_course/
     │   ├── prompts/           # one prompt file per lesson (+ extras)
     │   └── scripts/           # Script Master per lesson
     ├── he-beginner/           # Beginner track (Hebrew)
-    │   ├── captions/          # B01–B12 *.he.srt
+    │   ├── captions/          # B01–B13 *.he.srt
     │   ├── docs/              # course-outline, cross-track overlap
     │   ├── prompts/
     │   └── scripts/
@@ -62,7 +62,7 @@ cursor_course/
 
 ---
 
-## Lesson index — beginner track (B01–B12)
+## Lesson index — beginner track (B01–B13)
 
 Full table with Hebrew titles: [`course/he-beginner/README.md`](course/he-beginner/README.md).
 
@@ -94,7 +94,7 @@ Full table with Hebrew titles: [`course/he-beginner/README.md`](course/he-beginn
 
 ### Beginner track
 
-1. Follow [`course/he-beginner/docs/course-outline.md`](course/he-beginner/docs/course-outline.md) (B01–B12) and the index in [`course/he-beginner/README.md`](course/he-beginner/README.md).
+1. Follow [`course/he-beginner/docs/course-outline.md`](course/he-beginner/docs/course-outline.md) (B01–B13) and the index in [`course/he-beginner/README.md`](course/he-beginner/README.md).
 2. Record from [`course/he-beginner/scripts/`](course/he-beginner/scripts/) **Script Masters**; use matching [`prompts/*.prompt.txt`](course/he-beginner/prompts/) in demos.
 3. Align [`course/he-beginner/captions/*.he.srt`](course/he-beginner/captions/) after picture lock; reuse recording/TTS guide and glossary from `course/he-advanced/docs/`.
 

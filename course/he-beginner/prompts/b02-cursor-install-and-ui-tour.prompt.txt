@@ -1,1 +1,0 @@
-I just installed Cursor and opened an empty folder. Walk me through a 5-step UI tour in simple terms: Explorer, editor, AI chat panel, integrated terminal, and how to save a new text file. Assume I'm a non-developer.
