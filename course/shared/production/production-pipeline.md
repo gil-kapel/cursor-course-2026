@@ -15,8 +15,8 @@
 
 ## Folder Conventions
 
-- `course/he/docs/`: מסמכי קורס בעברית
-- `course/he/scripts/`: תסריטי מקור בעברית
+- `course/he-advanced/docs/`: מסמכי קורס מתקדם בעברית
+- `course/he-advanced/scripts/`: תסריטי מקור בעברית למסלול המתקדם
 - `course/shared/templates/`: תבניות שיעור ועזרי הפקה
 - `course/shared/production/`: pipeline, גלוסריום, צ'קליסטים
 - `course/shared/localization/`: assets לשפות נוספות

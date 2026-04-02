@@ -5,14 +5,14 @@
 ## מה כאן
 
 | נושא | נתיב |
-|------|------|
+| ---- | ---- |
 | **מפת קורס (outline)** | [`docs/course-outline.md`](docs/course-outline.md) |
 | **חפיפה מול המסלול המתקדם** | [`docs/cross-track-overlap.md`](docs/cross-track-overlap.md) |
 
 ## אינדקס שיעורים (B01–B13)
 
 | # | נושא | Script | כתוביות | Prompt |
-|---|------|--------|---------|--------|
+| --- | ---- | ------ | ------- | ------ |
 | B01 | ממצרכן צ'אט למנצח תהליך | [`scripts/b01-from-chat-to-orchestrator.md`](scripts/b01-from-chat-to-orchestrator.md) | [`captions/b01-from-chat-to-orchestrator.he.srt`](captions/b01-from-chat-to-orchestrator.he.srt) | [`prompts/b01-from-chat-to-orchestrator.prompt.txt`](prompts/b01-from-chat-to-orchestrator.prompt.txt) |
 | B02 | התקנה וסיור בממשק | [`scripts/b02-cursor-install-and-ui-tour.md`](scripts/b02-cursor-install-and-ui-tour.md) | [`captions/b02-cursor-install-and-ui-tour.he.srt`](captions/b02-cursor-install-and-ui-tour.he.srt) | [`prompts/b02-cursor-install-and-ui-tour.prompt.txt`](prompts/b02-cursor-install-and-ui-tour.prompt.txt) |
 | B03 | המסוף בלי פחד | [`scripts/b03-terminal-explain-before-run.md`](scripts/b03-terminal-explain-before-run.md) | [`captions/b03-terminal-explain-before-run.he.srt`](captions/b03-terminal-explain-before-run.he.srt) | [`prompts/b03-terminal-explain-before-run.prompt.txt`](prompts/b03-terminal-explain-before-run.prompt.txt) |
@@ -29,10 +29,10 @@
 
 ## נכסים משותפים עם שאר החבילה
 
-- מדריך הקלטה ו-TTS: [`../he/docs/recording-and-elevenlabs-guide.md`](../he/docs/recording-and-elevenlabs-guide.md)
-- גלוסריום עברית/אנגלית: [`../he/docs/hebrew-tts-glossary.md`](../he/docs/hebrew-tts-glossary.md)
+- מדריך הקלטה ו-TTS: [`../he-advanced/docs/recording-and-elevenlabs-guide.md`](../he-advanced/docs/recording-and-elevenlabs-guide.md)
+- גלוסריום עברית/אנגלית: [`../he-advanced/docs/hebrew-tts-glossary.md`](../he-advanced/docs/hebrew-tts-glossary.md)
 - תבניות ופקה: [`../shared/`](../shared/)
 
 ## המשך למידה
 
-→ [קורס Cursor מתקדם](../he/docs/course-outline.md)
+→ [קורס Cursor מתקדם](../he-advanced/docs/course-outline.md)

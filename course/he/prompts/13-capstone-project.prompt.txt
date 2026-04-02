@@ -1,1 +1,0 @@
-Help me complete a small project end to end using the Cursor workflow from this course. Start by defining acceptance criteria, then identify the minimum context, choose the right mode for each stage, implement in small slices, suggest review/validation checks, and finish with a deployment checklist. Pause between major stages.

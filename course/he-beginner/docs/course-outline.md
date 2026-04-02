@@ -2,7 +2,7 @@
 
 ## מיקום במסלול הלמידה
 
-זהו **מסלול הבסיס** של חבילת הקורס. הוא מיועד ללומדים **ללא רקע טכנולוגי פורמלי** שרוצים לעבוד עם סוכני AI בתוך **Cursor** (לא כתוסף נפרד ל-VS Code). לאחריו מומלץ להמשיך ל-[קורס Cursor מתקדם](../../he/docs/course-outline.md), שמרחיב את אותם נושאים לעומק מקצועי.
+זהו **מסלול הבסיס** של חבילת הקורס. הוא מיועד ללומדים **ללא רקע טכנולוגי פורמלי** שרוצים לעבוד עם סוכני AI בתוך **Cursor** (לא כתוסף נפרד ל-VS Code). לאחריו מומלץ להמשיך ל-[קורס Cursor מתקדם](../../he-advanced/docs/course-outline.md), שמרחיב את אותם נושאים לעומק מקצועי.
 
 חפיפה מכוונת בין המסלולים מתועדת ב-[`cross-track-overlap.md`](cross-track-overlap.md).
 
@@ -38,8 +38,8 @@
 ## סטנדרט שיעור
 
 - לכל שיעור (B01–B13): `Script Master`, `Prompt Asset`, `Recording Notes`, `Action Item` תחת [`scripts/`](../scripts/), [`prompts/`](../prompts/), [`captions/`](../captions/).
-- הנחיות הפקה: [`../../he/docs/recording-and-elevenlabs-guide.md`](../../he/docs/recording-and-elevenlabs-guide.md).
-- גלוסריום מונחים: [`../../he/docs/hebrew-tts-glossary.md`](../../he/docs/hebrew-tts-glossary.md).
+- הנחיות הפקה: [`../../he-advanced/docs/recording-and-elevenlabs-guide.md`](../../he-advanced/docs/recording-and-elevenlabs-guide.md).
+- גלוסריום מונחים: [`../../he-advanced/docs/hebrew-tts-glossary.md`](../../he-advanced/docs/hebrew-tts-glossary.md).
 
 ## סדר השיעורים
 
@@ -163,4 +163,4 @@
 
 ## המשך מומלץ
 
-לאחר סיום: [קורס Cursor מתקדם](../../he/docs/course-outline.md) — הרחבה על ניהול הקשר בעומק, worktrees, איכות וסיכונים, צוות, והפקת תוכן.
+לאחר סיום: [קורס Cursor מתקדם](../../he-advanced/docs/course-outline.md) — הרחבה על ניהול הקשר בעומק, worktrees, איכות וסיכונים, צוות, והפקת תוכן.

@@ -55,8 +55,8 @@
 
 - לכל שיעור יש `Script Master`, `Prompt Asset`, `Recording Notes`, ו-`Action Item`.
 - ה-`Scene List` משמש גם כבסיס לחלוקת קריינות ל-TTS.
-- הנחיות הפקה וקריינות משותפות נמצאות ב-`course/he/docs/recording-and-elevenlabs-guide.md`.
-- עקביות מונחים נשמרת לפי `course/he/docs/hebrew-tts-glossary.md`.
+- הנחיות הפקה וקריינות משותפות נמצאות ב-`course/he-advanced/docs/recording-and-elevenlabs-guide.md`.
+- עקביות מונחים נשמרת לפי `course/he-advanced/docs/hebrew-tts-glossary.md`.
 
 ## עקרון פדגוגי
 
@@ -148,7 +148,7 @@
 - תוצאה לומדת: הסטודנט מבין Region, אחסון מול CDN, סודות מחוץ ל-repo, smoke checks אחרי פריסה, ומתי לא לדחוף ל-production.
 - דמו מרכזי: נתיב אחד מצומצם S3 → CloudFront → URL חי, בדיקה קצרה, ודיון קצר על החזרת גרסה יציבה.
 - הקשר: במסלול הבסיסי נלמדה פריסה מהירה עם **Vercel** (B13); כאן שכבת ענן "אמיתית" יותר לצורך שליטה וסיכון.
-- סקריפט: [`../scripts/12-aws-deployment-s3-cloudfront.md`](../scripts/12-aws-deployment-s3-cloudfront.md).
+- סקריפט: [`../scripts/13-aws-deployment-s3-cloudfront.md`](../scripts/13-aws-deployment-s3-cloudfront.md).
 
 ### 14. הרחבה: publishing, export ולוקליזציה של workflow
 
