@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-heebo), var(--font-nunito), system-ui, sans-serif;
+}
+
+/* ============================================
+   DESIGN TOKENS
+   ============================================ */
+:root {
+  --color-primary: #69ADFF;
+  --color-accent: #0DBACC;
+  --text-primary: #303150;
+  --text-secondary: #7E7F90;
+  --text-light: #BDBDCB;
+  --border: #F7F7F8;
+  --progress-track: #E8E8ED;
+  --video-dark: #1C1C2E;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+body {
+  background: #F7F7F8;
+  color: var(--text-primary);
+  font-family: var(--font-nunito), var(--font-heebo), system-ui, sans-serif;
+  font-feature-settings: "rlig" 1, "calt" 1, "tnum" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* ============================================
+   BUTTON STYLES
+   ============================================ */
+@layer components {
+  .btn-primary {
+    @apply text-white px-5 py-2.5 rounded-xl font-medium transition-all duration-200 shadow-sm hover:shadow-md flex items-center justify-center gap-2 cursor-pointer;
+    background-color: #69ADFF;
+    font-family: var(--font-nunito), system-ui, sans-serif;
+  }
+
+  .btn-primary:hover {
+    background-color: #5A9EE6;
+  }
+
+  .btn-primary:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+}
+
+/* ============================================
+   GHOST SCROLLBAR
+   4px thumb, 10% opacity at rest, 60% on hover
+   ============================================ */
+.scrollbar-ghost {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(189, 189, 203, 0.1) transparent;
+}
+
+.scrollbar-ghost::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.scrollbar-ghost::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-ghost::-webkit-scrollbar-thumb {
+  background: rgba(189, 189, 203, 0.1);
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.scrollbar-ghost:hover::-webkit-scrollbar-thumb {
+  background: rgba(189, 189, 203, 0.6);
+}
+
+.scrollbar-ghost::-webkit-scrollbar-thumb:hover {
+  background: rgba(189, 189, 203, 0.6);
+}

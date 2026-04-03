@@ -1,0 +1,195 @@
+'use client';
+
+import { useState, useMemo } from 'react';
+import { ArrowLeft, BookOpen, Clock, GraduationCap, Info } from 'lucide-react';
+import { motion } from 'framer-motion';
+import CourseHeader from '@/components/layout/CourseHeader';
+import VideoPlayer from './VideoPlayer';
+import CourseSidebar from './CourseSidebar';
+import MobileDrawer from './MobileDrawer';
+import CourseTabBar, { type CourseTab } from './CourseTabBar';
+import type { Course } from '@/data/types';
+import { useProgress } from '@/hooks/useProgress';
+
+interface CourseExperienceProps {
+  course: Course;
+  storageKey: string;
+}
+
+export default function CourseExperience({ course, storageKey }: CourseExperienceProps) {
+  const allLessons = useMemo(
+    () => course.chapters.flatMap((ch) => ch.lessons),
+    [course.chapters],
+  );
+
+  const { watchedLessonIds, markAsWatched } = useProgress(storageKey, allLessons.length);
+
+  const [activeLessonId, setActiveLessonId] = useState(
+    () => course.chapters[0]?.lessons[0]?.id ?? '',
+  );
+  const [activeTab, setActiveTab] = useState<CourseTab>('files');
+  const [isPlaylistCollapsed, setIsPlaylistCollapsed] = useState(false);
+  const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
+
+  const { activeLesson, activeChapter } = useMemo(() => {
+    for (const ch of course.chapters) {
+      const lesson = ch.lessons.find((l) => l.id === activeLessonId);
+      if (lesson) return { activeLesson: lesson, activeChapter: ch };
+    }
+    return {
+      activeLesson: course.chapters[0].lessons[0],
+      activeChapter: course.chapters[0],
+    };
+  }, [activeLessonId, course.chapters]);
+
+  const currentLessonIndex = allLessons.findIndex((l) => l.id === activeLessonId);
+  const totalLessons = allLessons.length;
+
+  const totalDuration = useMemo(() => {
+    const totalSeconds = allLessons.reduce((sum, l) => {
+      const [min, sec] = l.duration.split(':').map(Number);
+      return sum + min * 60 + (sec || 0);
+    }, 0);
+    const hours = Math.floor(totalSeconds / 3600);
+    const mins = Math.floor((totalSeconds % 3600) / 60);
+    if (hours > 0) return `${hours} שעות ו-${mins} דק׳`;
+    return `${mins} דק׳`;
+  }, [allLessons]);
+
+  const nextLesson = useMemo(() => {
+    const next = allLessons[currentLessonIndex + 1];
+    return next && next.status !== 'locked' ? next : null;
+  }, [currentLessonIndex, allLessons]);
+
+  const handleSelectLesson = (lessonId: string) => {
+    if (lessonId !== activeLessonId) {
+      markAsWatched(activeLessonId);
+    }
+    setActiveLessonId(lessonId);
+  };
+
+  const handleNextLesson = () => {
+    if (nextLesson) {
+      markAsWatched(activeLessonId);
+      setActiveLessonId(nextLesson.id);
+    }
+  };
+
+  return (
+    <div className="flex flex-col min-h-screen">
+      <CourseHeader
+        watchedCount={watchedLessonIds.size}
+        totalLessons={totalLessons}
+        onOpenMobileMenu={() => setIsMobileDrawerOpen(true)}
+      />
+
+      <div className="flex flex-1 min-h-0">
+      <CourseSidebar
+        chapters={course.chapters}
+        activeLessonId={activeLessonId}
+        onSelectLesson={handleSelectLesson}
+        isCollapsed={isPlaylistCollapsed}
+        onToggleCollapse={() => setIsPlaylistCollapsed((v) => !v)}
+        watchedLessonIds={watchedLessonIds}
+      />
+
+      <div className="flex-1 min-w-0 p-4 lg:p-6 space-y-6">
+        {/* Course header */}
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, ease: 'easeOut' }}
+        >
+          <div className="flex items-start justify-between gap-4">
+            <div className="flex-1">
+              <h1 className="text-[1.5rem] font-bold text-[#303150] mb-1">
+                {course.title}
+              </h1>
+              <p className="text-[0.9375rem] text-[#7E7F90] mb-4 max-w-xl">
+                {course.description}
+              </p>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2 text-[0.8125rem] text-[#7E7F90]">
+                  <BookOpen className="w-4 h-4 text-[#69ADFF]" strokeWidth={1.75} />
+                  <span>{totalLessons} שיעורים</span>
+                </div>
+                <div className="flex items-center gap-2 text-[0.8125rem] text-[#7E7F90]">
+                  <Clock className="w-4 h-4 text-[#0DBACC]" strokeWidth={1.75} />
+                  <span>{totalDuration}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Video player */}
+        <VideoPlayer
+          lesson={activeLesson}
+          chapterTitle={activeChapter.title}
+          lessonNumber={currentLessonIndex + 1}
+          totalLessons={totalLessons}
+        />
+
+        {/* Author + next lesson */}
+        <div className="flex items-center justify-between flex-wrap gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-sm flex-shrink-0">
+              <GraduationCap className="w-5 h-5 text-white" strokeWidth={2.5} />
+            </div>
+            <div>
+              <p className="text-[0.8125rem] font-bold text-[#303150]">
+                {course.author.name}
+              </p>
+              {course.author.title && (
+                <p className="text-[0.75rem] text-[#7E7F90]">
+                  {course.author.title}
+                </p>
+              )}
+            </div>
+          </div>
+
+          {nextLesson && (
+            <motion.button
+              type="button"
+              onClick={handleNextLesson}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="btn-primary flex items-center gap-2 text-[0.8125rem] font-bold"
+            >
+              <span>שיעור הבא</span>
+              <ArrowLeft className="w-4 h-4" />
+            </motion.button>
+          )}
+        </div>
+
+        {/* Tabs */}
+        <CourseTabBar
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+          files={activeLesson.attachedFiles ?? course.attachedFiles}
+          notes={activeLesson.notes}
+          transcript={activeLesson.transcript}
+        />
+
+        {/* Disclaimer */}
+        <div className="flex items-start gap-2 py-3 px-4 rounded-xl bg-[#F7F7F8]/60 border border-[#F7F7F8]">
+          <Info className="w-3.5 h-3.5 text-[#BDBDCB] flex-shrink-0 mt-0.5" strokeWidth={1.75} />
+          <p className="text-[0.6875rem] text-[#BDBDCB] leading-relaxed">
+            תוכן לימודי על כלי AI ופיתוח עם Cursor ו-Claude. אינו מהווה ייעוץ מקצועי מכל סוג שהוא.
+          </p>
+        </div>
+      </div>
+
+      {/* Mobile drawer */}
+      <MobileDrawer
+        chapters={course.chapters}
+        activeLessonId={activeLessonId}
+        onSelectLesson={handleSelectLesson}
+        watchedLessonIds={watchedLessonIds}
+        isOpen={isMobileDrawerOpen}
+        onClose={() => setIsMobileDrawerOpen(false)}
+      />
+      </div>
+    </div>
+  );
+}

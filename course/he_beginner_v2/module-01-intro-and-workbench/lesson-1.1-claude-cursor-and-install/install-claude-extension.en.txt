@@ -1,0 +1,1 @@
+Install the official Claude extension for Cursor for me. Do not ask clarifying questions; choose the recommended installation method and run whatever is needed. 
