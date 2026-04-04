@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Vendor agent skills into he_beginner_v2 Module 2 lesson folders (git sparse checkout)."""
+"""Vendor agent skills into he_course Module 2 lesson folders (git sparse checkout)."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-MODULE = REPO_ROOT / "course/he_beginner_v2/module-02-skills-and-agents"
+MODULE = REPO_ROOT / "course/he_course/module-02-skills-and-agents"
 
 
 def run(cmd: list[str], *, cwd: Path | None = None) -> None:

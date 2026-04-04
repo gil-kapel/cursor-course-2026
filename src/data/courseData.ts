@@ -3,10 +3,10 @@ import { getPublicCourseSkillsRepoBase, agentSkillsMarkdownUrl } from './student
 
 /** Raw download for lesson 2.1 AGENT_SKILLS.md (same tree as חומרי השיעור). */
 const lesson21AgentSkillsPath =
-  'course/he_beginner_v2/module-02-skills-and-agents/lesson-2.1-skills-intro/AGENT_SKILLS.md';
+  'course/he_course/module-02-skills-and-agents/lesson-2.1-skills-intro/AGENT_SKILLS.md';
 
 const lesson27DevComposerSkillPath =
-  'course/he_beginner_v2/module-02-skills-and-agents/lesson-2.7-dev-agent-composer/dev-composer-agent/SKILL.md';
+  'course/he_course/module-02-skills-and-agents/lesson-2.7-dev-agent-composer/dev-composer-agent/SKILL.md';
 
 function lesson21AgentSkillsRawUrl(): string {
   const base = getPublicCourseSkillsRepoBase().replace(/\/$/, '');

@@ -1,1 +1,0 @@
-Teach me when to use each Cursor mode for this project. Give me a simple decision tree (ask vs plan vs agent vs debug), then provide one concrete example task per mode.

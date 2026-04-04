@@ -1,1 +1,0 @@
-Here is a terminal command I'm about to run inside my project folder on [macOS/Windows]: [PASTE COMMAND]. Explain in simple Hebrew: (1) what each part does, (2) whether it can delete or change files outside this folder, (3) expected output if it works, (4) whether I should run it now or ask for a safer alternative.

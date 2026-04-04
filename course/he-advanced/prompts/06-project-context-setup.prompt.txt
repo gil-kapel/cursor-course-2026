@@ -1,1 +1,0 @@
-Set up a clean project context for Cursor in this repo. Propose rules, reusable prompts, minimal project memory, MCP servers to enable, and recommended add-ons/extensions. Show suggested file structure and security notes (least privilege, secrets handling), then ask for approval before creating anything.

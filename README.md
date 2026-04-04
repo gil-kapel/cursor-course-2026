@@ -1,39 +1,22 @@
-# Cursor Course · Hebrew-first package
+# Cursor Course
 
-Scripts, prompts, captions, and production docs for **two Hebrew tracks**: a **beginner** path (**Cursor** + **Claude Code for VS Code**) for learners with little or no dev background, and an **advanced** **Cursor** path for professional end-to-end workflows. Content overlaps by design so people can move from basics to advanced without gaps.
+Hebrew-first Cursor curriculum, lesson production files, and a small **Next.js** learner UI: **`/`** התחלה מהירה (setup + downloads), **`/course`** נגן שיעורים עם פרומפטים ורשימות משימות.
 
-[![Beginner](https://img.shields.io/badge/beginner-B01--B13-5a7d6a?style=flat-square)](course/he-beginner/docs/course-outline.md)
-[![Advanced](https://img.shields.io/badge/advanced-14_lessons-2d5a4a?style=flat-square)](course/he-advanced/docs/course-outline.md)
-[![Language](https://img.shields.io/badge/content-Hebrew-5a7d6a?style=flat-square)](course/he-advanced/scripts/)
+[![Course tree](https://img.shields.io/badge/course-he__course-5a7d6a?style=flat-square)](course/he_course/README.md)
+[![Language](https://img.shields.io/badge/content-Hebrew-5a7d6a?style=flat-square)](course/he_course/)
 [![Repo](https://img.shields.io/badge/repo-cursor__course-8b9dc9?style=flat-square)](#repository-layout)
 
 ---
 
-## Learning paths
-
-| Track | Outline | Audience | Lesson assets |
-| --- | --- | --- | --- |
-| **Beginner** | [`course/he-beginner/docs/course-outline.md`](course/he-beginner/docs/course-outline.md) | Non-developers; terminal/Git anxiety; first agent projects with **Claude Code** in **Cursor** | [`course/he-beginner/README.md`](course/he-beginner/README.md) — Script Masters, prompts, captions for **B01–B13** |
-| **Advanced** | [`course/he-advanced/docs/course-outline.md`](course/he-advanced/docs/course-outline.md) | Devs / power users; worktrees, MCP matrix, deploy, team | [`course/he-advanced/scripts/`](course/he-advanced/scripts/), [`course/he-advanced/prompts/`](course/he-advanced/prompts/), [`course/he-advanced/captions/`](course/he-advanced/captions/) |
-
-**Overlap map (beginner ↔ advanced):** [`course/he-beginner/docs/cross-track-overlap.md`](course/he-beginner/docs/cross-track-overlap.md)
-
----
-
-## What’s inside
+## What’s in the repo
 
 | Area | Path | What you get |
 | --- | --- | --- |
-| **Beginner course map** | [`course/he-beginner/docs/course-outline.md`](course/he-beginner/docs/course-outline.md) | 13 lessons (B01–B13), arcs, outcomes |
-| **Beginner lesson assets** | [`course/he-beginner/scripts/`](course/he-beginner/scripts/), [`course/he-beginner/prompts/`](course/he-beginner/prompts/), [`course/he-beginner/captions/`](course/he-beginner/captions/) | Same pattern as advanced: script + `.prompt.txt` + `.he.srt` |
-| **Advanced course map** | [`course/he-advanced/docs/course-outline.md`](course/he-advanced/docs/course-outline.md) | 14 lessons, arcs, outcomes |
-| **Recording & TTS** | [`course/he-advanced/docs/recording-and-elevenlabs-guide.md`](course/he-advanced/docs/recording-and-elevenlabs-guide.md) | Screen capture, ElevenLabs, action items (shared) |
-| **Terminology** | [`course/he-advanced/docs/hebrew-tts-glossary.md`](course/he-advanced/docs/hebrew-tts-glossary.md) | Consistent Hebrew / English terms (shared) |
-| **Advanced lesson scripts** | [`course/he-advanced/scripts/`](course/he-advanced/scripts/) | Scene lists, prompts, recording notes |
-| **Advanced prompts** | [`course/he-advanced/prompts/`](course/he-advanced/prompts/) | Copy-paste assets per lesson |
-| **Advanced captions** | [`course/he-advanced/captions/`](course/he-advanced/captions/) | Hebrew `.srt` per lesson |
-| **Model routing** | [`AGENTS.md`](AGENTS.md) | Cursor model hints for this repo |
-| **Shared templates** | [`course/shared/`](course/shared/) | Briefs, production pipeline, localization |
+| **Hebrew curriculum** | [`course/he_course/README.md`](course/he_course/README.md) | Module/lesson index, Module 2 agent skills, `on-screen.md` / `narration.md` per lesson |
+| **Web app** | [`src/`](src/) | Static-export Next app; playlist and setup UI driven by [`src/data/courseData.ts`](src/data/courseData.ts) |
+| **Module 2 skills in the project** | [`scripts/sync_module02_project_skills.py`](scripts/sync_module02_project_skills.py) | Symlinks lesson skills into `.cursor/skills` |
+| **Vendor upstream skills** | [`scripts/bundle_module02_skills.py`](scripts/bundle_module02_skills.py) | Refreshes `bundled-skills/` under each Module 2 lesson |
+| **Shared production** | [`course/shared/`](course/shared/) | Templates, localization notes, publish QA |
 
 ---
 
@@ -41,85 +24,42 @@ Scripts, prompts, captions, and production docs for **two Hebrew tracks**: a **b
 
 ```text
 cursor_course/
-├── .github/workflows/         # `deploy-github-pages.yml` → static site to GitHub Pages
-├── AGENTS.md
+├── .github/workflows/         # e.g. deploy to GitHub Pages
 ├── README.md
-├── src/                       # Next.js UI (`npm run dev`): `/` התחלה מהירה, `/course` נגן השיעורים
-├── .env.example               # Optional env (Pages base path, module-2 repo URL)
+├── src/                       # Next.js UI
+├── scripts/                   # Module 2 skill sync + bundle
+├── .env.example               # Optional: base path, public repo URLs
 └── course/
-    ├── he-advanced/           # Advanced track (Hebrew)
-    │   ├── captions/          # *.he.srt (15 lessons)
-    │   ├── docs/              # outline + production guides
-    │   ├── prompts/           # one prompt file per lesson (+ extras)
-    │   └── scripts/           # Script Master per lesson
-    ├── he-beginner/           # Beginner track (Hebrew)
-    │   ├── captions/          # B01–B13 *.he.srt
-    │   ├── docs/              # course-outline, cross-track overlap
-    │   ├── prompts/
-    │   └── scripts/
-    └── shared/
-        ├── localization/
-        ├── production/
-        └── templates/
+    ├── he_course/             # Canonical Hebrew course (modules, lessons, skills)
+    └── shared/                # Cross-course templates and production docs
 ```
 
 ---
 
-## GitHub Pages (frontend)
+## Local development
 
-The app is built with **`next build` → static `out/`** (see [`next.config.ts`](next.config.ts): `output: 'export'`, optional `NEXT_PUBLIC_BASE_PATH`).
+```bash
+npm install
+npm run dev
+```
 
-1. In the repo on GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-2. Push to **`main`** (or run **Actions → Deploy GitHub Pages → Run workflow**) to build and deploy.
-3. The published URL is **`https://<owner>.github.io/<repository>/`**. CI sets `NEXT_PUBLIC_BASE_PATH` to the repository name so `_next` assets and internal links work under that path.
-
-Local static preview (same as Pages): `NEXT_PUBLIC_BASE_PATH=<repo-name> npm run build`, then serve `out/` (for example `npx serve out`).
-
----
-
-## Lesson index — beginner track (B01–B13)
-
-Full table with Hebrew titles: [`course/he-beginner/README.md`](course/he-beginner/README.md).
+Open [http://localhost:3000](http://localhost:3000) for fast start, [http://localhost:3000/course](http://localhost:3000/course) for the playlist.
 
 ---
 
-## Lesson index — advanced track (quick jump)
+## GitHub Pages (static export)
 
-| # | Script | Captions | Prompt |
-| --- | --- | --- | --- |
-| 01 | [`01-intro-and-outcomes.md`](course/he-advanced/scripts/01-intro-and-outcomes.md) | [`01-intro-and-outcomes.he.srt`](course/he-advanced/captions/01-intro-and-outcomes.he.srt) | [`01-intro-and-outcomes.prompt.txt`](course/he-advanced/prompts/01-intro-and-outcomes.prompt.txt) |
-| 02 | [`02-installation-mac-windows.md`](course/he-advanced/scripts/02-installation-mac-windows.md) | [`02-installation-mac-windows.he.srt`](course/he-advanced/captions/02-installation-mac-windows.he.srt) | [`02-installation-mac-windows.prompt.txt`](course/he-advanced/prompts/02-installation-mac-windows.prompt.txt) |
-| 03 | [`03-signup-and-subscription.md`](course/he-advanced/scripts/03-signup-and-subscription.md) | [`03-signup-and-subscription.he.srt`](course/he-advanced/captions/03-signup-and-subscription.he.srt) | [`03-signup-and-subscription.prompt.txt`](course/he-advanced/prompts/03-signup-and-subscription.prompt.txt) |
-| 04 | [`04-model-strategy-and-pricing.md`](course/he-advanced/scripts/04-model-strategy-and-pricing.md) | [`04-model-strategy-and-pricing.he.srt`](course/he-advanced/captions/04-model-strategy-and-pricing.he.srt) | [`04-model-strategy-and-pricing.prompt.txt`](course/he-advanced/prompts/04-model-strategy-and-pricing.prompt.txt) |
-| 04b | [`04b-context-management.md`](course/he-advanced/scripts/04b-context-management.md) | [`04b-context-management.he.srt`](course/he-advanced/captions/04b-context-management.he.srt) | [`04b-context-management.prompt.txt`](course/he-advanced/prompts/04b-context-management.prompt.txt) |
-| 06 (extras) | — | — | [`06-install-recommended-extensions.prompt.txt`](course/he-advanced/prompts/06-install-recommended-extensions.prompt.txt) — bulk-install all extensions from lesson 06 |
-| 05–14 | [`course/he-advanced/scripts/`](course/he-advanced/scripts/) | [`course/he-advanced/captions/`](course/he-advanced/captions/) | [`course/he-advanced/prompts/`](course/he-advanced/prompts/) |
+The app uses **`next build`** with static `out/` (see [`next.config.ts`](next.config.ts): `output: 'export'`, optional `NEXT_PUBLIC_BASE_PATH`).
 
----
+1. On GitHub: **Settings → Pages → Source: GitHub Actions**.
+2. Push to **`main`** (or run the deploy workflow manually).
+3. Published URL: **`https://<owner>.github.io/<repository>/`**. CI can set `NEXT_PUBLIC_BASE_PATH` to the repo name so `_next` and internal routes work under a project URL.
 
-## Suggested workflow
-
-### Advanced track
-
-1. Open [`course/he-advanced/docs/course-outline.md`](course/he-advanced/docs/course-outline.md) and pick a lesson.
-2. Record from the matching [`course/he-advanced/scripts/`](course/he-advanced/scripts/) **Script Master** (scenes + narration).
-3. Export TTS using [`course/he-advanced/docs/recording-and-elevenlabs-guide.md`](course/he-advanced/docs/recording-and-elevenlabs-guide.md).
-4. Align or tweak [`course/he-advanced/captions/*.he.srt`](course/he-advanced/captions/) to the final edit (timings follow scene blocks; extend the last cue to ~2s before lesson end).
-5. Before publish, run through [`course/shared/production/publish-qa-checklist.md`](course/shared/production/publish-qa-checklist.md).
-
-### Beginner track
-
-1. Follow [`course/he-beginner/docs/course-outline.md`](course/he-beginner/docs/course-outline.md) (B01–B13) and the index in [`course/he-beginner/README.md`](course/he-beginner/README.md).
-2. Record from [`course/he-beginner/scripts/`](course/he-beginner/scripts/) **Script Masters**; use matching [`prompts/*.prompt.txt`](course/he-beginner/prompts/) in demos.
-3. Align [`course/he-beginner/captions/*.he.srt`](course/he-beginner/captions/) after picture lock; reuse recording/TTS guide and glossary from `course/he-advanced/docs/`.
+Local preview matching Pages: `NEXT_PUBLIC_BASE_PATH=<repo-name> npm run build`, then serve `out/` (for example `npx serve out`).
 
 ---
 
 ## Notes
 
-- Captions are **summary subtitles** (not full verbatim transcripts), timed to approximate scene blocks; adjust after picture lock.
-- Pricing and UI change—scripts include “as of recording” disclaimers; verify before teaching.
-
-### Closing
-
-Hebrew-first delivery, structured for localization when you add more languages.
+- Lesson copy, beatsheets, and skill paths under **`course/he_course/`** are the source of truth referenced by app data and scripts.
+- Pricing and Cursor UI change—verify before teaching.

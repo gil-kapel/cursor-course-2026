@@ -1,1 +1,0 @@
-Review this change as a skeptical senior engineer. Do not summarize the diff first. Look for regressions, risky assumptions, missing validation, edge cases, API or schema impact, and places where the change is larger than necessary. Then give me the smallest next actions to make it safer before commit.

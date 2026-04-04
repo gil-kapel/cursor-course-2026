@@ -1,1 +1,0 @@
-Help me turn this repository's current working assumptions into a small operating contract for Cursor and the team. Propose four sections only: architecture boundaries, stable project decisions, validation expectations, and allowed MCP/tool usage with least privilege. Keep it short, explicit, and focused on preventing risky drift rather than describing everything in the repo.

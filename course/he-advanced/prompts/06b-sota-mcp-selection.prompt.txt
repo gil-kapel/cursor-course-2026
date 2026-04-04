@@ -1,1 +1,0 @@
-Based on this project type ([project_type]), recommend a SOTA MCP stack by category: core productivity, engineering, and collaboration. For each MCP, explain why it is useful, required permissions, security risks, and setup priority (now/later). End with a minimal first-week MCP setup plan.

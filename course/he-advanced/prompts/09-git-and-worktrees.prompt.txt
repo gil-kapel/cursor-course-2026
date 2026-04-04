@@ -1,1 +1,0 @@
-Help me set up a safe Git workflow for this task. Recommend whether I should create a new branch and a separate worktree, suggest clear branch/worktree names, explain the order of steps, and list the main mistakes to avoid so this work stays isolated from my current changes.

@@ -1,1 +1,0 @@
-I have a one-page PRD in Hebrew for a small automation (paste below). Act as a product analyst: ask me exactly 4 clarifying questions, list 3 risks, then suggest an improved PRD outline. Do not write implementation code yet.

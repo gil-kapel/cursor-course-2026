@@ -1,1 +1,0 @@
-I’m setting up Cursor for the first time. Detect my OS and give me a step-by-step install checklist with verification after each step. Include common errors and fixes. Keep it beginner-friendly and concise.

@@ -35,7 +35,7 @@ export default function CourseHeader({
           <div className="flex items-center gap-3">
             {/* Mobile: Logo only */}
             <div className="lg:hidden flex items-center gap-2">
-              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
+              <div className="w-7 h-7 rounded-lg bg-linear-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
                 <GraduationCap className="w-3.5 h-3.5 text-white" strokeWidth={2.5} />
               </div>
               <span
@@ -48,7 +48,7 @@ export default function CourseHeader({
 
             {/* Desktop: Logo + Title */}
             <div className="hidden lg:flex items-center gap-3">
-              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
+              <div className="w-7 h-7 rounded-lg bg-linear-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
                 <GraduationCap className="w-3.5 h-3.5 text-white" strokeWidth={2.5} />
               </div>
 

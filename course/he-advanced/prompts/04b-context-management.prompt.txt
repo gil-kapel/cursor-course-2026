@@ -1,1 +1,0 @@
-Before solving this task, tell me the minimum context you actually need. Use only the most relevant files, logs, or code snippets, summarize what is already known in 3 to 5 bullets, ask for any missing inputs, and keep your response concise. If the task has changed from earlier messages, suggest starting a fresh thread with a short handoff summary.

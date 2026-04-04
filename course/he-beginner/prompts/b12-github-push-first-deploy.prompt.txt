@@ -1,1 +1,0 @@
-I have a local project in Cursor with git initialized. I created a GitHub repository at [URL]. Give me a beginner-safe checklist to connect the local repo to GitHub and push main (or the default branch), using GUI steps when possible. Do NOT include Vercel or other deploy platforms yet — only GitHub. Warn me in one line about not committing secrets.

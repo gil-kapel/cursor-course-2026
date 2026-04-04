@@ -1,1 +1,0 @@
-Create a concise team handoff and PR preparation package for this repository change. Include: goal, current status, relevant files or artifacts, what was already tried, confirmed facts vs assumptions, open risks, test evidence, and the smallest recommended next step. Then draft a short PR summary focused on why this change exists and how to review it safely.

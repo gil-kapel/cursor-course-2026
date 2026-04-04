@@ -21,7 +21,7 @@ export default function LessonSetupStrip({ content }: LessonSetupStripProps) {
 
   return (
     <div
-      className="rounded-2xl border-2 border-[#69ADFF]/25 bg-gradient-to-br from-[#69ADFF]/[0.07] to-[#0DBACC]/[0.06] p-4 sm:p-5 shadow-sm"
+      className="rounded-2xl border-2 border-[#69ADFF]/25 bg-linear-to-br from-[#69ADFF]/[0.07] to-[#0DBACC]/6 p-4 sm:p-5 shadow-sm"
       dir="rtl"
     >
       <div className="flex items-start gap-3 justify-end mb-3">

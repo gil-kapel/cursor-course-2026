@@ -6,7 +6,7 @@
 import type { LessonSetupContent } from './types';
 import type { ClientPlatform, DesktopCpuArch } from '@/lib/platformTypes';
 
-const MODULE2 = 'course/he_beginner_v2/module-02-skills-and-agents';
+const MODULE2 = 'course/he_course/module-02-skills-and-agents';
 
 /** Canonical GitHub root for module-2 skill trees and AGENT_SKILLS.md (no trailing slash). */
 export const DEFAULT_MODULE2_SKILLS_REPO_URL = 'https://github.com/gil-kapel/cursor-course-2026';

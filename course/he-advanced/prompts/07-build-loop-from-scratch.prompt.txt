@@ -1,1 +1,0 @@
-Help me build [feature_name] using an iterative loop: 1) define acceptance criteria, 2) create implementation plan, 3) implement in small steps, 4) run validation checks, 5) debug and refine. Pause for approval between major steps.

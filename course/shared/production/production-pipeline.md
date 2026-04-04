@@ -15,8 +15,7 @@
 
 ## Folder Conventions
 
-- `course/he-advanced/docs/`: מסמכי קורס מתקדם בעברית
-- `course/he-advanced/scripts/`: תסריטי מקור בעברית למסלול המתקדם
+- `course/he_course/`: תוכן הקורס בעברית (מודולים, שיעורים, סקילים) — מקור עבור אפליקציית הנגן
 - `course/shared/templates/`: תבניות שיעור ועזרי הפקה
 - `course/shared/production/`: pipeline, גלוסריום, צ'קליסטים
 - `course/shared/localization/`: assets לשפות נוספות

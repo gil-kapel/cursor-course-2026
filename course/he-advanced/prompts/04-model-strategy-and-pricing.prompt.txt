@@ -1,1 +1,0 @@
-Create a model-routing strategy for this project: which model to use for planning, implementation, refactors, and debugging. Optimize for quality/cost balance, explain how input tokens, output tokens, context size, and response length affect cost, and show how better context management can reduce both token usage and total cost in practice.

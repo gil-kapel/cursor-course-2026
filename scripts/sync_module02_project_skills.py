@@ -2,7 +2,7 @@
 """Link Module 2 lesson skills into Cursor discovery paths (single source of truth).
 
 There is **one** copy of each skill on disk: the lesson folder under
-`course/he_beginner_v2/module-02-skills-and-agents/...`.
+`course/he_course/module-02-skills-and-agents/...`.
 
 This script creates **symlinks** so Cursor (and optional compatible tools) can find skills:
 
@@ -26,7 +26,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-MODULE2 = REPO_ROOT / "course" / "he_beginner_v2" / "module-02-skills-and-agents"
+MODULE2 = REPO_ROOT / "course" / "he_course" / "module-02-skills-and-agents"
 
 SKILL_SOURCES = [
     MODULE2 / "lesson-2.1-skills-intro" / "cursor-skill-foundation",
