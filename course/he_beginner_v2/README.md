@@ -31,6 +31,8 @@ Lesson links below are **scaffold only**—teaching content will be added over t
 
 **Vendored copies in-repo:** Each lesson also has a **`bundled-skills/`** folder: upstream skill trees copied in for offline use (strictly **> 80** / score **≥ 81** at top level; **72–80** under `_to-improve/` with notes in `TO_IMPROVE.md`). See [module-02-skills-and-agents/bundled-skills/README.md](module-02-skills-and-agents/bundled-skills/README.md); refresh via `python3 scripts/bundle_module02_skills.py` from the repo root.
 
+**Official project-level skills:** Each merged agent skill lives **only** in its lesson folder under `module-02-skills-and-agents/`. **`uv run scripts/sync_module02_project_skills.py`** creates symlinks so **`.cursor/skills/<name>`** points at that lesson folder and **`.claude/skills`** points at **`.cursor/skills`**—one source of truth, no duplicated trees.
+
 #### Planning phase
 
 | Lesson | Topic | Links |
