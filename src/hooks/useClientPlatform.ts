@@ -43,10 +43,28 @@ function detectPlatform(): ClientPlatform {
 function detectMacCpu(): DesktopCpuArch | null {
   if (typeof window === 'undefined') return null;
   const ua = navigator.userAgent || '';
-  if (/Intel Mac OS X/i.test(ua)) return 'x86';
-  if (/Mac OS X/.test(ua) && (/ARM64|aarch64|Apple M/i.test(ua) || !/Intel/.test(ua))) {
-    return 'arm';
+  // Explicit ARM markers
+  if (/ARM64|aarch64|Apple M/i.test(ua)) return 'arm';
+
+  // If we're on a Mac and we see Intel, check if it might be Safari lying about Apple Silicon.
+  if (/Intel Mac OS X/i.test(ua)) {
+    try {
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl');
+      if (gl) {
+        const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+        if (debugInfo) {
+          const renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+          if (/Apple M/i.test(renderer)) return 'arm';
+        }
+      }
+    } catch {
+      /* ignore */
+    }
+    return 'x86';
   }
+
+  if (/Mac OS X/i.test(ua)) return 'arm';
   return null;
 }
 
@@ -97,7 +115,7 @@ export function useClientPlatform(): ClientPlatformState {
     setDetected(p);
     setCpuArch(detectCpuArch(p));
 
-    if (p === 'windows' || p === 'linux') {
+    if (p === 'mac' || p === 'windows' || p === 'linux') {
       const uaData = (navigator as NavUaData).userAgentData;
       void uaData
         ?.getHighEntropyValues?.(['architecture'])

@@ -5,8 +5,8 @@ import { getPublicCourseSkillsRepoBase, agentSkillsMarkdownUrl } from './student
 const lesson21AgentSkillsPath =
   'course/he_course/module-02-skills-and-agents/lesson-2.1-skills-intro/AGENT_SKILLS.md';
 
-const lesson27DevComposerSkillPath =
-  'course/he_course/module-02-skills-and-agents/lesson-2.7-dev-agent-composer/dev-composer-agent/SKILL.md';
+const lesson29DevComposerSkillPath =
+  'course/he_course/module-02-skills-and-agents/lesson-2.9-dev-agent-composer/dev-composer-agent/SKILL.md';
 
 function lesson21AgentSkillsRawUrl(): string {
   const base = getPublicCourseSkillsRepoBase().replace(/\/$/, '');
@@ -20,7 +20,7 @@ function lesson21AgentSkillsRawUrl(): string {
 
 const publicAgentSkills21Raw = lesson21AgentSkillsRawUrl();
 const publicAgentSkills21Blob = agentSkillsMarkdownUrl(lesson21AgentSkillsPath) ?? '';
-const publicDevComposerSkillBlob = agentSkillsMarkdownUrl(lesson27DevComposerSkillPath) ?? '';
+const publicDevComposerSkillBlob = agentSkillsMarkdownUrl(lesson29DevComposerSkillPath) ?? '';
 
 export const courseData: Course = {
   id: 'cursor-course-he-v2',
@@ -270,9 +270,9 @@ Cmd+I: Composer. הכלי החזק ביותר. הסוכן יכול לעבוד ע
 
 סקיל גרוע: תיאור של שורה אחת בלי מילות מפתח למשימה, גוף שמסביר היסטוריה במקום להורות מה לעשות, ובלי תבנית לפלט או בדיקות בסוף.
 
-בתרגיל: אותו קובץ SKILL.md תחת lesson-2.7-dev-agent-composer — סריקה אחת: טריגר ב־YAML, שלב 1 ב־Workflow, כותרות Output, נקודה מ־Common mistakes על הפרויקט שלכם.`,
+בתרגיל: אותו קובץ SKILL.md תחת lesson-2.9-dev-agent-composer — סריקה אחת: טריגר ב־YAML, שלב 1 ב־Workflow, כותרות Output, נקודה מ־Common mistakes על הפרויקט שלכם.`,
           checklist: [
-            `[SKILL.md — GitHub](${publicDevComposerSkillBlob}) · מקומי: ${lesson27DevComposerSkillPath}`,
+            `[SKILL.md — GitHub](${publicDevComposerSkillBlob}) · מקומי: ${lesson29DevComposerSkillPath}`,
             'במעבר אחד: משפט מ־description (למה זה טריגר ל«לממש פיצ׳ר») · שלב Workflow מס׳ 1 וארבע הנקודות שלו · ארבע כותרות Output · נקודה אחת מ־Common mistakes שרלוונטית לאפליקציית הקורס',
             'המשך: שיעור 2.3 (ASM)',
           ],
