@@ -46,22 +46,27 @@ function detectMacCpu(): DesktopCpuArch | null {
   // Explicit ARM markers
   if (/ARM64|aarch64|Apple M/i.test(ua)) return 'arm';
 
-  // If we're on a Mac and we see Intel, check if it might be Safari lying about Apple Silicon.
+  // If we're on a Mac and we see Intel, it's often Safari or Chrome lying about Apple Silicon.
   if (/Intel Mac OS X/i.test(ua)) {
     try {
       const canvas = document.createElement('canvas');
-      const gl = canvas.getContext('webgl');
-      if (gl) {
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      if (gl instanceof WebGLRenderingContext) {
         const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
         if (debugInfo) {
           const renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
-          if (/Apple M/i.test(renderer)) return 'arm';
+          // If the renderer is explicitly Apple, it's definitely ARM.
+          if (/Apple/i.test(renderer)) return 'arm';
+          // If it's definitely an old Intel/AMD Mac, it's x86.
+          if (/Intel|AMD|NVIDIA/i.test(renderer)) return 'x86';
         }
       }
     } catch {
       /* ignore */
     }
-    return 'x86';
+    // In 2026, most Macs are ARM. If WebGL is inconclusive, we assume ARM
+    // to avoid forcing Rosetta on Apple Silicon users.
+    return 'arm';
   }
 
   if (/Mac OS X/i.test(ua)) return 'arm';
@@ -123,7 +128,10 @@ export function useClientPlatform(): ClientPlatformState {
           const raw = (hints.architecture || '').toLowerCase();
           let next: DesktopCpuArch | null = null;
           if (raw === 'arm' || raw.includes('aarch')) next = 'arm';
-          else if (raw.includes('86') || raw === 'x64') next = 'x86';
+          // On Mac, x86 architecture is only accepted if we didn't already have a strong reason
+          // to believe it's ARM, as Intel browsers might run on ARM Macs via Rosetta.
+          else if (p !== 'mac' && (raw.includes('86') || raw === 'x64')) next = 'x86';
+          
           if (next !== null) setCpuArch(next);
         })
         .catch(() => {
