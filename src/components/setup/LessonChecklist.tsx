@@ -3,10 +3,14 @@
 import { useState, useCallback, useEffect, type ReactNode } from 'react';
 import { ListChecks, ChevronDown, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import type { ClientPlatformState } from '@/hooks/useClientPlatform';
+import Lesson11DownloadInline from '@/components/setup/Lesson11DownloadInline';
 
 interface LessonChecklistProps {
   lessonId: string;
   checklist: string[];
+  /** זיהוי מערכת לשיעור 1.1 — כפתורי הורדה בשורה הראשונה */
+  platform: ClientPlatformState;
 }
 
 const STORAGE_PREFIX = 'lesson-checklist-';
@@ -82,7 +86,7 @@ function renderStepText(text: string): ReactNode {
   return <>{filtered}</>;
 }
 
-export default function LessonChecklist({ lessonId, checklist }: LessonChecklistProps) {
+export default function LessonChecklist({ lessonId, checklist, platform }: LessonChecklistProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [completed, setCompleted] = useState<Set<number>>(() => {
     if (typeof window === 'undefined') return new Set<number>();
@@ -185,6 +189,60 @@ export default function LessonChecklist({ lessonId, checklist }: LessonChecklist
               <ol className="space-y-1">
                 {checklist.map((step, idx) => {
                   const isDone = completed.has(idx);
+                  const isLesson11Downloads = lessonId === '1.1' && idx === 0;
+
+                  if (isLesson11Downloads) {
+                    return (
+                      <li key={idx}>
+                        <div
+                          className={`w-full flex items-start gap-3 p-2.5 rounded-xl text-right transition-colors duration-150 group ${
+                            isDone
+                              ? 'bg-[#0DBACC]/4 hover:bg-[#0DBACC]/8'
+                              : 'hover:bg-[#F7F7F8]'
+                          }`}
+                        >
+                          <button
+                            type="button"
+                            onClick={() => toggle(idx)}
+                            aria-pressed={isDone}
+                            className={`w-6 h-6 rounded-full border-2 flex items-center justify-center shrink-0 mt-0.5 transition-all duration-300 cursor-pointer ${
+                              isDone
+                                ? 'border-[#0DBACC] bg-[#0DBACC]'
+                                : 'border-[#D8D8E0] group-hover:border-[#69ADFF]'
+                            }`}
+                          >
+                            <AnimatePresence>
+                              {isDone && (
+                                <motion.div
+                                  initial={{ scale: 0 }}
+                                  animate={{ scale: 1 }}
+                                  exit={{ scale: 0 }}
+                                  transition={{ type: 'spring', stiffness: 500, damping: 25 }}
+                                >
+                                  <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </button>
+                          <div className="flex-1 min-w-0 space-y-0">
+                            <p
+                              className={`text-[0.8125rem] leading-relaxed transition-colors duration-200 ${
+                                isDone ? 'text-[#7E7F90]' : 'text-[#303150]'
+                              }`}
+                            >
+                              <span className="font-semibold text-[#69ADFF] ml-1.5">{idx + 1}.</span>
+                              {renderStepText(step)}
+                            </p>
+                            <Lesson11DownloadInline
+                              effectivePlatform={platform.effective}
+                              downloadCpuArch={platform.downloadCpuArch}
+                            />
+                          </div>
+                        </div>
+                      </li>
+                    );
+                  }
+
                   return (
                     <li key={idx}>
                       <button

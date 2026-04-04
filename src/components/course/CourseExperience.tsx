@@ -187,7 +187,11 @@ export default function CourseExperience({ course, storageKey }: CourseExperienc
         />
 
         {activeLesson.checklist && activeLesson.checklist.length > 0 && (
-          <LessonChecklist lessonId={activeLesson.id} checklist={activeLesson.checklist} />
+          <LessonChecklist
+            lessonId={activeLesson.id}
+            checklist={activeLesson.checklist}
+            platform={platform}
+          />
         )}
 
         {setupContent && !(activeLesson.checklist && activeLesson.checklist.length > 0) && (

@@ -4,6 +4,7 @@
  */
 
 import type { LessonSetupContent } from './types';
+import type { ClientPlatform, DesktopCpuArch } from '@/lib/platformTypes';
 
 const MODULE2 = 'course/he_beginner_v2/module-02-skills-and-agents';
 
@@ -200,4 +201,19 @@ export function platformLabel(platform: string): string {
     unknown: 'לא זוהה',
   };
   return map[platform] ?? platform;
+}
+
+/** מזהה טכני לתצוגה (מק / Win / Linux) כשהדפדפן דיווח על ARM מול x64. */
+export function cpuArchShortLabel(
+  arch: DesktopCpuArch | null,
+  platform: ClientPlatform,
+): string | null {
+  if (arch === null) return null;
+  if (platform === 'mac') {
+    return arch === 'arm' ? 'Apple Silicon (ARM64)' : 'Intel (x64)';
+  }
+  if (platform === 'windows' || platform === 'linux') {
+    return arch === 'arm' ? 'ARM64' : 'x64';
+  }
+  return null;
 }

@@ -4,9 +4,9 @@
  * @see https://cursor.com/docs/downloads
  */
 
-import type { ClientPlatform, MacCpuKind } from '@/lib/platformTypes';
+import type { ClientPlatform, DesktopCpuArch } from '@/lib/platformTypes';
 
-export type { MacCpuKind };
+export type { DesktopCpuArch };
 
 export const CURSOR_DOWNLOAD_FALLBACK = 'https://cursor.com/download';
 
@@ -17,20 +17,26 @@ function cursorVersion(): string {
 
 export function getCursorDirectDownloadUrl(
   platform: ClientPlatform,
-  macCpu: MacCpuKind,
+  cpuArch: DesktopCpuArch | null,
 ): string {
   const v = cursorVersion();
 
   switch (platform) {
     case 'mac':
-      if (macCpu === 'x86') {
+      if (cpuArch === 'x86') {
         return `https://api2.cursor.sh/updates/download/golden/darwin-x64/cursor/${v}`;
       }
       /* Default Apple Silicon when unknown (majority of new Macs). */
       return `https://api2.cursor.sh/updates/download/golden/darwin-arm64/cursor/${v}`;
     case 'windows':
+      if (cpuArch === 'arm') {
+        return `https://api2.cursor.sh/updates/download/golden/win32-arm64-user/cursor/${v}`;
+      }
       return `https://api2.cursor.sh/updates/download/golden/win32-x64-user/cursor/${v}`;
     case 'linux':
+      if (cpuArch === 'arm') {
+        return `https://api2.cursor.sh/updates/download/golden/linux-arm64/cursor/${v}`;
+      }
       return `https://api2.cursor.sh/updates/download/golden/linux-x64/cursor/${v}`;
     case 'ios':
     case 'android':

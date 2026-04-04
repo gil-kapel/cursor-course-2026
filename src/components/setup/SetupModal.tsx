@@ -69,7 +69,8 @@ export default function SetupModal({ open, onClose, platform, onJumpToLesson }: 
             effectivePlatform={platform.effective}
             detectedPlatform={platform.detected}
             override={platform.override}
-            macCpu={platform.macCpu}
+            cpuArch={platform.cpuArch}
+            downloadCpuArch={platform.downloadCpuArch}
             onPlatformOverride={platform.setOverride}
             compact={false}
           />

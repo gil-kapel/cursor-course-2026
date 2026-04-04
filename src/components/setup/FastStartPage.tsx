@@ -24,7 +24,7 @@ export default function FastStartPage() {
       <header className="sticky top-0 z-10 border-b border-[#E8E8ED] bg-white/90 backdrop-blur-sm">
         <div className="mx-auto max-w-2xl px-4 py-3 flex items-center justify-between gap-3">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
+            <div className="w-8 h-8 rounded-lg bg-linear-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
               <GraduationCap className="w-4 h-4 text-white" strokeWidth={2.5} />
             </div>
             <span className="text-sm font-bold text-[#303150]">התחלה מהירה</span>
@@ -53,7 +53,8 @@ export default function FastStartPage() {
             effectivePlatform={platform.effective}
             detectedPlatform={platform.detected}
             override={platform.override}
-            macCpu={platform.macCpu}
+            cpuArch={platform.cpuArch}
+            downloadCpuArch={platform.downloadCpuArch}
             onPlatformOverride={platform.setOverride}
             compact={false}
           />

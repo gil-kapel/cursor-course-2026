@@ -3,9 +3,9 @@
 import { useId, useState } from 'react';
 import { ExternalLink, Monitor } from 'lucide-react';
 import type { ClientPlatform } from '@/hooks/useClientPlatform';
-import type { MacCpuKind } from '@/lib/platformTypes';
+import type { DesktopCpuArch } from '@/lib/platformTypes';
 import type { LessonSetupContent } from '@/data/types';
-import { agentSkillsMarkdownUrl, platformLabel } from '@/data/studentSetup';
+import { agentSkillsMarkdownUrl, cpuArchShortLabel, platformLabel } from '@/data/studentSetup';
 import { getCursorDirectDownloadUrl, CURSOR_DOWNLOAD_FALLBACK } from '@/data/cursorDownloads';
 import { ASM_AGENT_SETUP_PROMPT, ASM_INSTALL_SHELL } from '@/data/asmGilKapel';
 import CopyBlock from './CopyBlock';
@@ -98,7 +98,8 @@ interface StudentSetupPanelProps {
   effectivePlatform: ClientPlatform;
   detectedPlatform: ClientPlatform;
   override: ClientPlatform | null;
-  macCpu: MacCpuKind;
+  cpuArch: DesktopCpuArch | null;
+  downloadCpuArch: DesktopCpuArch | null;
   onPlatformOverride: (p: ClientPlatform | null) => void;
   /** When false, hide lesson-specific asm blocks (e.g. global modal summary). */
   compact?: boolean;
@@ -118,7 +119,8 @@ export default function StudentSetupPanel({
   effectivePlatform,
   detectedPlatform,
   override,
-  macCpu,
+  cpuArch,
+  downloadCpuArch,
   onPlatformOverride,
   compact = false,
 }: StudentSetupPanelProps) {
@@ -136,7 +138,8 @@ export default function StudentSetupPanel({
     projectOk: false,
   });
   const docUrl = agentSkillsMarkdownUrl(content.agentSkillsDocPath);
-  const cursorHref = getCursorDirectDownloadUrl(effectivePlatform, macCpu);
+  const cursorHref = getCursorDirectDownloadUrl(effectivePlatform, downloadCpuArch);
+  const detectedArchLabel = cpuArchShortLabel(cpuArch, detectedPlatform);
   const cursorIsDirect =
     effectivePlatform === 'mac' || effectivePlatform === 'windows' || effectivePlatform === 'linux';
 
@@ -148,7 +151,18 @@ export default function StudentSetupPanel({
           המחשב שלכם
         </h3>
         <p className="text-[0.75rem] text-[#7E7F90] leading-relaxed">
-          מזוהה: <strong className="text-[#303150]">{platformLabel(detectedPlatform)}</strong>
+          מזוהה:{' '}
+          <strong className="text-[#303150]">
+            {platformLabel(detectedPlatform)}
+            {detectedArchLabel && (
+              <>
+                {' · '}
+                <span dir="ltr" lang="en">
+                  {detectedArchLabel}
+                </span>
+              </>
+            )}
+          </strong>
           {override !== null && (
             <span className="text-[#69ADFF]"> — מוצג לפי בחירתכם: {platformLabel(effectivePlatform)}</span>
           )}
@@ -172,13 +186,17 @@ export default function StudentSetupPanel({
             ))}
           </select>
         </label>
-        {effectivePlatform === 'mac' && (
+        {(effectivePlatform === 'mac' ||
+          effectivePlatform === 'windows' ||
+          effectivePlatform === 'linux') && (
           <p className="text-[0.6875rem] text-[#BDBDCB]">
-            מק: אם ההורדה לא מתאימה, נסו את{' '}
+            אם ההורדה הישירה לא מתאימה —{' '}
             <a href={CURSOR_DOWNLOAD_FALLBACK} className="text-[#69ADFF] underline" target="_blank" rel="noreferrer">
               דף ההורדות הרשמי
-            </a>{' '}
-            ובחרו Intel / Apple Silicon.
+            </a>
+            {effectivePlatform === 'mac'
+              ? ' (Intel מול Apple Silicon).'
+              : ' ובחרו ‎ARM64‎ מול ‎x64‎ לפי המחשב.'}
           </p>
         )}
       </section>

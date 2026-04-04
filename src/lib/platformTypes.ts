@@ -6,5 +6,8 @@ export type ClientPlatform =
   | 'android'
   | 'unknown';
 
-/** For macOS Cursor builds: Apple Silicon vs Intel. */
-export type MacCpuKind = 'arm' | 'x86' | null;
+/** Apple Silicon vs Intel; ARM64 vs x64 on Windows / Linux. */
+export type DesktopCpuArch = 'arm' | 'x86';
+
+/** @deprecated Prefer DesktopCpuArch | null */
+export type MacCpuKind = DesktopCpuArch | null;
