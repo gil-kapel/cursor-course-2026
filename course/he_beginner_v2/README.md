@@ -27,31 +27,37 @@ Lesson links below are **scaffold only**—teaching content will be added over t
 
 **Module goal:** Run Claude as a team of specialists, using a structured prompt/Skills pack across the development lifecycle.
 
+**Downloadable skills (ASM):** Every lesson in this module includes **`AGENT_SKILLS.md`** (next to `README.md`) with ranked skills, scores, copy-paste `asm add skill` sources for the good ones, and a suggested `asm create expertise` bundle so students can install the same agent packs into their own project.
+
+**Vendored copies in-repo:** Each lesson also has a **`bundled-skills/`** folder: upstream skill trees copied in for offline use (strictly **> 80** / score **≥ 81** at top level; **72–80** under `_to-improve/` with notes in `TO_IMPROVE.md`). See [module-02-skills-and-agents/bundled-skills/README.md](module-02-skills-and-agents/bundled-skills/README.md); refresh via `python3 scripts/bundle_module02_skills.py` from the repo root.
+
+**Official project-level skills:** Each merged agent skill lives **only** in its lesson folder under `module-02-skills-and-agents/`. **`uv run scripts/sync_module02_project_skills.py`** creates symlinks so **`.cursor/skills/<name>`** points at that lesson folder and **`.claude/skills`** points at **`.cursor/skills`**—one source of truth, no duplicated trees.
+
 #### Planning phase
 
-| Lesson | Topic | Folder |
+| Lesson | Topic | Links |
 |--------|--------|--------|
-| 2.1 | Introduction to Skills—downloading the course “agents folder” and enabling rules (e.g. `.cursorrules`) for a specific role | [module-02-skills-and-agents/lesson-2.1-skills-intro](module-02-skills-and-agents/lesson-2.1-skills-intro/README.md) |
-| 2.2 | Product / research agent—turning an idea into a detailed PRD | [module-02-skills-and-agents/lesson-2.2-product-agent-prd](module-02-skills-and-agents/lesson-2.2-product-agent-prd/README.md) |
-| 2.3 | Tech lead agent—translating the spec into tech choices and folder structure | [module-02-skills-and-agents/lesson-2.3-tech-lead-architecture](module-02-skills-and-agents/lesson-2.3-tech-lead-architecture/README.md) |
-| 2.4 | UX agent—user flows and screen-level logic | [module-02-skills-and-agents/lesson-2.4-ux-user-flow](module-02-skills-and-agents/lesson-2.4-ux-user-flow/README.md) |
-| 2.5 | UI agent—applying design systems / UI libraries | [module-02-skills-and-agents/lesson-2.5-ui-design-systems](module-02-skills-and-agents/lesson-2.5-ui-design-systems/README.md) |
-| 2.6 | Security agent—sanity checks and risks (data handling, permissions) | [module-02-skills-and-agents/lesson-2.6-security-agent](module-02-skills-and-agents/lesson-2.6-security-agent/README.md) |
+| 2.1 | Introduction to Skills—downloading the course “agents folder” and enabling rules (e.g. `.cursorrules`) for a specific role | [README](module-02-skills-and-agents/lesson-2.1-skills-intro/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.1-skills-intro/AGENT_SKILLS.md) |
+| 2.2 | Product / research agent—turning an idea into a detailed PRD | [README](module-02-skills-and-agents/lesson-2.2-product-agent-prd/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.2-product-agent-prd/AGENT_SKILLS.md) |
+| 2.3 | Tech lead agent—translating the spec into tech choices and folder structure | [README](module-02-skills-and-agents/lesson-2.3-tech-lead-architecture/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.3-tech-lead-architecture/AGENT_SKILLS.md) |
+| 2.4 | UX agent—user flows and screen-level logic | [README](module-02-skills-and-agents/lesson-2.4-ux-user-flow/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.4-ux-user-flow/AGENT_SKILLS.md) |
+| 2.5 | UI agent—applying design systems / UI libraries | [README](module-02-skills-and-agents/lesson-2.5-ui-design-systems/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.5-ui-design-systems/AGENT_SKILLS.md) |
+| 2.6 | Security agent—sanity checks and risks (data handling, permissions) | [README](module-02-skills-and-agents/lesson-2.6-security-agent/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.6-security-agent/AGENT_SKILLS.md) |
 
 #### Implementation and production
 
-| Lesson | Topic | Folder |
+| Lesson | Topic | Links |
 |--------|--------|--------|
-| 2.7 | Dev agent—using Composer to write code | [module-02-skills-and-agents/lesson-2.7-dev-agent-composer](module-02-skills-and-agents/lesson-2.7-dev-agent-composer/README.md) |
-| 2.8 | Code review agent—refactoring and cleanup | [module-02-skills-and-agents/lesson-2.8-code-review-agent](module-02-skills-and-agents/lesson-2.8-code-review-agent/README.md) |
-| 2.9 | QA agent—tests for edge cases | [module-02-skills-and-agents/lesson-2.9-qa-tests-agent](module-02-skills-and-agents/lesson-2.9-qa-tests-agent/README.md) |
-| 2.10 | Debug agent—from terminal errors to targeted fixes | [module-02-skills-and-agents/lesson-2.10-debug-agent](module-02-skills-and-agents/lesson-2.10-debug-agent/README.md) |
+| 2.7 | Dev agent—using Composer to write code | [README](module-02-skills-and-agents/lesson-2.7-dev-agent-composer/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.7-dev-agent-composer/AGENT_SKILLS.md) |
+| 2.8 | Code review agent—refactoring and cleanup | [README](module-02-skills-and-agents/lesson-2.8-code-review-agent/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.8-code-review-agent/AGENT_SKILLS.md) |
+| 2.9 | QA agent—tests for edge cases | [README](module-02-skills-and-agents/lesson-2.9-qa-tests-agent/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.9-qa-tests-agent/AGENT_SKILLS.md) |
+| 2.10 | Debug agent—from terminal errors to targeted fixes | [README](module-02-skills-and-agents/lesson-2.10-debug-agent/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.10-debug-agent/AGENT_SKILLS.md) |
 
 #### Basic data handling
 
-| Lesson | Topic | Folder |
+| Lesson | Topic | Links |
 |--------|--------|--------|
-| 2.11 | Local DB—SQLite / JSON for temporary data during development | [module-02-skills-and-agents/lesson-2.11-local-db](module-02-skills-and-agents/lesson-2.11-local-db/README.md) |
+| 2.11 | Local DB—SQLite / JSON for temporary data during development | [README](module-02-skills-and-agents/lesson-2.11-local-db/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.11-local-db/AGENT_SKILLS.md) |
 
 ### Module 3: Superpowers with MCP servers (Model Context Protocol)
 

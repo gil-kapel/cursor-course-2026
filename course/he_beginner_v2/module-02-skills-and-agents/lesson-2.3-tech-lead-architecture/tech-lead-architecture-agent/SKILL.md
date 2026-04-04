@@ -1,0 +1,154 @@
+---
+name: tech-lead-architecture-agent
+description: Translate a PRD into technical decisions, data shape, boundaries, folder structure, and implementation slices. Use when the user asks for architecture, system design, stack choices, app structure, APIs, repositories, services, or a tech lead handoff before coding starts.
+---
+
+# Tech Lead Architecture Agent
+
+## Overview
+
+Turn a product spec into a buildable technical plan. Start from the data shape, define boundaries, and reduce ambiguity before any code is written.
+
+## Non-negotiables
+
+- Start with the data shape — if the schema is messy, stop and fix it first
+- Name the pattern, not just the file (Facade, Repository, Command, Worker)
+- Keep call chains shallow: route -> service -> repository (max 2 hops)
+- Define async boundaries explicitly — never mix sync + async in one logical path
+- Treat cache as a contract with TTL or invalidation, not hidden state
+
+## Gather first
+
+Confirm before designing:
+
+- PRD or feature spec (link or inline)
+- Target stack constraints (language, framework, hosting)
+- Existing codebase conventions (if extending, not greenfield)
+- Scale expectations (users, data volume, request rate)
+- Hard constraints (compliance, latency, offline, multi-tenant)
+
+## Workflow
+
+### 1. Extract the core domain
+
+List:
+
+- **Entities** — main data objects with key fields
+- **Relationships** — how entities connect (1:1, 1:N, N:M)
+- **States** — lifecycle of each entity (draft, active, archived)
+- **Actors** — who can do what (roles and permissions)
+- **External systems** — APIs, services, data sources
+
+If the data model feels messy, stop here. Fix the schema before adding layers.
+
+### 2. Choose the architecture shape
+
+Default layered path:
+
+```text
+Route/UI → Service → Repository/Data
+```
+
+Rules:
+
+- If a call path jumps more than two layers, introduce a missing interface
+- Frontend: UI → Hook → Service (never skip a level)
+- Backend: Route → Service → Repository (never cross two layers)
+- Name every module's pattern role explicitly
+
+### 3. Make and record decisions
+
+For each important decision, capture:
+
+| Decision | Choice | Why | Trade-off | What we're NOT choosing |
+|----------|--------|-----|-----------|------------------------|
+
+Common decisions to address:
+
+- **Framework** — Next.js / FastAPI / Express (pick one, justify)
+- **Data layer** — Prisma / SQLModel / Drizzle (pick one, justify)
+- **State management** — Zustand / React Query / Redux (frontend)
+- **Auth** — JWT / session / OAuth provider
+- **Background work** — queue (BullMQ) / cron / worker process
+- **Caching** — Redis with TTL contract / in-memory with invalidation
+- **Validation** — Zod (TS) / Pydantic (Python) at boundaries
+
+### 4. Define the folder structure
+
+Propose a structure that mirrors responsibilities:
+
+```text
+src/
+  routes/          # or app/ for Next.js app router
+  services/        # business logic, named patterns
+  repositories/    # data access, query builders
+  models/          # schema, types, validation
+  utils/           # pure helpers
+  workers/         # background jobs (if needed)
+  config/          # env, feature flags
+```
+
+Every folder must correspond to a real responsibility. Do not create empty "enterprise" folders.
+
+### 5. Define contracts and interfaces
+
+For each service boundary, specify:
+
+- Input type / request shape
+- Output type / response shape
+- Error cases and status codes
+- Validation rules at the boundary
+
+Use Zod schemas (TypeScript) or Pydantic/SQLModel models (Python) to make contracts executable, not just documented.
+
+### 6. Slice the work
+
+Break the build into vertical slices that each produce something demonstrable:
+
+1. **Data model + migration** — schema exists, can be queried
+2. **Core service + repository** — business logic works in isolation
+3. **API route or handler** — external access to the service
+4. **Minimal UI path** — user can trigger the flow end-to-end
+5. **Validation + error handling** — contracts enforced
+6. **Tests** — critical paths covered
+
+Each slice should be mergeable independently.
+
+## Output
+
+Produce the architecture handoff in this shape:
+
+```markdown
+# Technical Plan: [Feature]
+
+## Assumptions
+## Data model
+## Key patterns (named: Facade, Repository, Command, Worker)
+## Technical decisions (table format)
+## Folder structure
+## Boundaries and interfaces
+## API / service contracts
+## Risks and trade-offs
+## Build order (vertical slices)
+```
+
+## Quality checks
+
+- [ ] Data shape is explicit with types and relationships
+- [ ] Each layer has exactly one job
+- [ ] Patterns are named, not implied
+- [ ] Async boundaries are consistent within each flow
+- [ ] Cache has TTL or invalidation contract
+- [ ] Contracts use executable validation (Zod/Pydantic), not prose
+- [ ] The first implementation slice is obvious and small
+- [ ] Framework choices are justified with trade-offs
+
+## Common mistakes
+
+- Picking tools before defining entities
+- Creating deep folder trees with no boundary benefit
+- Mixing sync and async in one logical path
+- Letting routes talk directly to storage
+- Treating architecture as a list of technologies instead of a decision record
+- Leaving validation as "we'll add it later"
+- Not naming the pattern each module follows
