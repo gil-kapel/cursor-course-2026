@@ -11,6 +11,8 @@ export interface Lesson {
   videoUrl?: string;
   attachedFiles?: AttachedFile[];
   notes?: string[];
+  /** Copy-paste agent prompts for the "פרומפטים" tab; if omitted, tab uses setup strip prompt when available. */
+  prompts?: string[];
   transcript?: string;
 }
 
@@ -42,4 +44,19 @@ export interface Course {
   author: CourseAuthor;
   chapters: Chapter[];
   attachedFiles: AttachedFile[];
+}
+
+/** Curated copy-paste helpers; course skill path matches lesson folders + sync script. */
+export interface LessonSetupContent {
+  lessonId: string;
+  lessonTitle: string;
+  /** Repo-relative path to AGENT_SKILLS.md (for deep links). */
+  agentSkillsDocPath: string;
+  /** Repo-relative path to the course SKILL folder (single skill per lesson, module 2). */
+  courseSkillRepoPath?: string;
+  showCursorInstall: boolean;
+  showAsmInstall: boolean;
+  agentPromptBlock?: string;
+  /** Optional: symlink all module-2 skills into .cursor/skills (cloned repo). */
+  courseRepoSyncScript?: string;
 }

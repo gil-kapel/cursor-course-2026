@@ -31,6 +31,13 @@ body {
   min-height: 100vh;
 }
 
+/* Isolate embedded LTR/RTL so parent direction does not scramble punctuation or code */
+[dir="ltr"],
+[dir="rtl"],
+[dir="auto"] {
+  unicode-bidi: isolate;
+}
+
 /* ============================================
    BUTTON STYLES
    ============================================ */

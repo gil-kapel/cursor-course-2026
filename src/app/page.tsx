@@ -1,5 +1,5 @@
-import { redirect } from 'next/navigation';
+import FastStartPage from '@/components/setup/FastStartPage';
 
 export default function Home() {
-  redirect('/course');
+  return <FastStartPage />;
 }

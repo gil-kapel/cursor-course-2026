@@ -43,6 +43,8 @@ Scripts, prompts, captions, and production docs for **two Hebrew tracks**: a **b
 cursor_course/
 ├── AGENTS.md
 ├── README.md
+├── src/                       # Next.js UI (`npm run dev`): `/` התחלה מהירה, `/course` נגן השיעורים
+├── .env.example               # Optional `NEXT_PUBLIC_MODULE2_SKILLS_REPO_URL` (default: gil-kapel/cursor-course-2026)
 └── course/
     ├── he-advanced/           # Advanced track (Hebrew)
     │   ├── captions/          # *.he.srt (15 lessons)

@@ -158,6 +158,8 @@ export default function CourseSidebar({
       animate={{ width: isCollapsed ? 56 : 340 }}
       transition={{ duration: 0.2, ease: 'easeInOut' }}
       className="hidden lg:flex flex-col bg-white border-e border-[#F7F7F8] overflow-hidden flex-shrink-0"
+      dir="rtl"
+      lang="he"
     >
       {/* Header */}
       <div className={`flex items-center border-b border-[#F7F7F8] ${isCollapsed ? 'justify-center py-3.5 px-2' : 'justify-between px-4 py-3.5'}`}>

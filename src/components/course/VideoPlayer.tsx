@@ -107,6 +107,8 @@ export default function VideoPlayer({ lesson, chapterTitle, lessonNumber, totalL
           <div className="absolute top-4 left-4 z-10">
             <div
               className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-bold text-white/80"
+              dir="ltr"
+              lang="en"
               style={{ background: 'rgba(0,0,0,0.3)', backdropFilter: 'blur(8px)' }}
             >
               <span>{lessonNumber}</span>
@@ -145,7 +147,7 @@ export default function VideoPlayer({ lesson, chapterTitle, lessonNumber, totalL
                 <button type="button" onClick={(e) => e.stopPropagation()} className="w-7 h-7 rounded-lg flex items-center justify-center text-white/50 hover:text-white/70 transition-colors cursor-pointer">
                   <SkipForward className="w-3.5 h-3.5" />
                 </button>
-                <span className="text-white/40 text-[11px] font-medium ps-1">{lesson.duration}</span>
+                <span className="text-white/40 text-[11px] font-medium ps-1" dir="ltr" lang="en">{lesson.duration}</span>
               </div>
               <div className="flex items-center gap-1">
                 <button type="button" onClick={(e) => e.stopPropagation()} className="w-7 h-7 rounded-lg flex items-center justify-center text-white/50 hover:text-white/70 transition-colors cursor-pointer">
@@ -161,7 +163,7 @@ export default function VideoPlayer({ lesson, chapterTitle, lessonNumber, totalL
       )}
 
       {/* Lesson info */}
-      <div className="p-6">
+      <div className="p-6" dir="rtl" lang="he">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <p className="text-[0.8125rem] font-medium text-[#7E7F90] mb-1">{chapterTitle}</p>
@@ -171,6 +173,8 @@ export default function VideoPlayer({ lesson, chapterTitle, lessonNumber, totalL
             {lesson.badge && <LessonBadge type={lesson.badge} />}
             <div
               className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-bold text-[#7E7F90]"
+              dir="ltr"
+              lang="en"
               style={{ background: '#F7F7F8' }}
             >
               <span>{lessonNumber}</span>

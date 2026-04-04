@@ -1,27 +1,34 @@
 'use client';
 
+import Link from 'next/link';
 import {
   GraduationCap,
   HelpCircle,
   Menu,
   BookOpen,
+  Home,
 } from 'lucide-react';
 
 interface CourseHeaderProps {
   watchedCount: number;
   totalLessons: number;
   onOpenMobileMenu: () => void;
+  onOpenHelp?: () => void;
+  /** Link to fast-start homepage (e.g. "/"). */
+  quickStartHref?: string;
 }
 
 export default function CourseHeader({
   watchedCount,
   totalLessons,
   onOpenMobileMenu,
+  onOpenHelp,
+  quickStartHref,
 }: CourseHeaderProps) {
   const progressPercent = totalLessons > 0 ? Math.round((watchedCount / totalLessons) * 100) : 0;
 
   return (
-    <header className="sticky top-0 z-40 bg-white border-b border-slate-100">
+    <header className="sticky top-0 z-40 bg-white border-b border-slate-100" dir="rtl" lang="he">
       <div className="px-4 lg:px-6">
         <div className="flex items-center justify-between h-14">
           {/* Right side (RTL): Logo + Title */}
@@ -35,7 +42,7 @@ export default function CourseHeader({
                 className="text-sm font-bold text-slate-800"
                 style={{ fontFamily: 'var(--font-heebo)' }}
               >
-                קורס Claude Code
+                קורס Cursor
               </span>
             </div>
 
@@ -54,25 +61,37 @@ export default function CourseHeader({
             {/* Progress pill */}
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-100">
               <BookOpen className="w-3.5 h-3.5 text-[#69ADFF]" strokeWidth={1.75} />
-              <span className="text-[0.75rem] font-semibold text-slate-600">
+              <span className="text-[0.75rem] font-semibold text-slate-600" dir="ltr" lang="en">
                 {watchedCount}/{totalLessons}
               </span>
               {progressPercent > 0 && (
                 <>
                   <div className="w-px h-3 bg-slate-200" />
-                  <span className="text-[0.6875rem] font-semibold text-[#69ADFF]">
+                  <span className="text-[0.6875rem] font-semibold text-[#69ADFF]" dir="ltr" lang="en">
                     {progressPercent}%
                   </span>
                 </>
               )}
             </div>
 
+            {quickStartHref && (
+              <Link
+                href={quickStartHref}
+                className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[0.75rem] font-semibold text-[#69ADFF] hover:bg-[#69ADFF]/10 transition-colors"
+              >
+                <Home className="w-3.5 h-3.5" strokeWidth={2} />
+                התחלה מהירה
+              </Link>
+            )}
+
             {/* Help */}
             <button
               type="button"
-              className="relative p-2 text-slate-400 hover:text-slate-600 transition-colors rounded-lg hover:bg-slate-50 cursor-pointer"
-              aria-label="עזרה"
-              title="עזרה"
+              onClick={onOpenHelp}
+              className="relative p-2 text-slate-400 hover:text-slate-600 transition-colors rounded-lg hover:bg-slate-50 cursor-pointer disabled:opacity-40 disabled:pointer-events-none"
+              aria-label="עזרה והתקנה מהירה"
+              title="עזרה והתקנה מהירה"
+              disabled={!onOpenHelp}
             >
               <HelpCircle className="w-[18px] h-[18px]" strokeWidth={1.75} />
             </button>

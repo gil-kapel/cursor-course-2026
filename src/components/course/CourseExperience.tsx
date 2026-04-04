@@ -8,7 +8,11 @@ import VideoPlayer from './VideoPlayer';
 import CourseSidebar from './CourseSidebar';
 import MobileDrawer from './MobileDrawer';
 import CourseTabBar, { type CourseTab } from './CourseTabBar';
+import SetupModal from '@/components/setup/SetupModal';
+import LessonSetupStrip from '@/components/setup/LessonSetupStrip';
 import type { Course } from '@/data/types';
+import { getLessonSetup } from '@/data/studentSetup';
+import { useClientPlatform } from '@/hooks/useClientPlatform';
 import { useProgress } from '@/hooks/useProgress';
 
 interface CourseExperienceProps {
@@ -23,6 +27,7 @@ export default function CourseExperience({ course, storageKey }: CourseExperienc
   );
 
   const { watchedLessonIds, markAsWatched } = useProgress(storageKey, allLessons.length);
+  const platform = useClientPlatform();
 
   const [activeLessonId, setActiveLessonId] = useState(
     () => course.chapters[0]?.lessons[0]?.id ?? '',
@@ -30,6 +35,9 @@ export default function CourseExperience({ course, storageKey }: CourseExperienc
   const [activeTab, setActiveTab] = useState<CourseTab>('files');
   const [isPlaylistCollapsed, setIsPlaylistCollapsed] = useState(false);
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
+  const [setupModalOpen, setSetupModalOpen] = useState(false);
+
+  const setupContent = useMemo(() => getLessonSetup(activeLessonId), [activeLessonId]);
 
   const { activeLesson, activeChapter } = useMemo(() => {
     for (const ch of course.chapters) {
@@ -41,6 +49,13 @@ export default function CourseExperience({ course, storageKey }: CourseExperienc
       activeChapter: course.chapters[0],
     };
   }, [activeLessonId, course.chapters]);
+
+  const resolvedPrompts = useMemo(() => {
+    const fromLesson = activeLesson.prompts;
+    if (fromLesson && fromLesson.length > 0) return fromLesson;
+    const block = setupContent?.agentPromptBlock?.trim();
+    return block ? [block] : [];
+  }, [activeLesson.prompts, setupContent?.agentPromptBlock]);
 
   const currentLessonIndex = allLessons.findIndex((l) => l.id === activeLessonId);
   const totalLessons = allLessons.length;
@@ -75,12 +90,27 @@ export default function CourseExperience({ course, storageKey }: CourseExperienc
     }
   };
 
+  const handleJumpToLesson = (lessonId: string) => {
+    setActiveLessonId(lessonId);
+    setSetupModalOpen(false);
+    setIsMobileDrawerOpen(false);
+  };
+
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen" dir="rtl" lang="he">
+      <SetupModal
+        open={setupModalOpen}
+        onClose={() => setSetupModalOpen(false)}
+        platform={platform}
+        onJumpToLesson={handleJumpToLesson}
+      />
+
       <CourseHeader
         watchedCount={watchedLessonIds.size}
         totalLessons={totalLessons}
         onOpenMobileMenu={() => setIsMobileDrawerOpen(true)}
+        onOpenHelp={() => setSetupModalOpen(true)}
+        quickStartHref="/"
       />
 
       <div className="flex flex-1 min-h-0">
@@ -130,6 +160,8 @@ export default function CourseExperience({ course, storageKey }: CourseExperienc
           totalLessons={totalLessons}
         />
 
+        {setupContent && <LessonSetupStrip content={setupContent} />}
+
         {/* Author + next lesson */}
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div className="flex items-center gap-3">
@@ -168,6 +200,7 @@ export default function CourseExperience({ course, storageKey }: CourseExperienc
           onTabChange={setActiveTab}
           files={activeLesson.attachedFiles ?? course.attachedFiles}
           notes={activeLesson.notes}
+          prompts={resolvedPrompts}
           transcript={activeLesson.transcript}
         />
 

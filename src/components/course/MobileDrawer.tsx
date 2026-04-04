@@ -58,6 +58,8 @@ export default function MobileDrawer({ chapters, activeLessonId, onSelectLesson,
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
               className="lg:hidden fixed inset-y-0 end-0 z-50 w-[85vw] max-w-sm bg-white shadow-xl flex flex-col"
+              dir="rtl"
+              lang="he"
             >
               {/* Header */}
               <div className="flex items-center justify-between px-4 py-3.5 border-b border-[#F7F7F8]">
