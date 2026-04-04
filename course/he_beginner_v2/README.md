@@ -17,21 +17,21 @@ Lesson links below are **scaffold only**—teaching content will be added over t
 
 | Lesson | Topic | Folder |
 |--------|--------|--------|
-| 1.1 | What Claude and Cursor are (and how to install)—chat vs code editor, installing Cursor, adding the official extension; opening a workspace folder | [module-01-intro-and-workbench/lesson-1.1-claude-cursor-and-install](module-01-intro-and-workbench/lesson-1.1-claude-cursor-and-install/README.md) |
-| 1.2 | Subscriptions and models (tiers & limits)—connecting a plan (API or Cursor Pro), free vs paid, managing quotas on strong models (e.g. Claude 3.5 Sonnet) | [module-01-intro-and-workbench/lesson-1.2-subscriptions-and-models](module-01-intro-and-workbench/lesson-1.2-subscriptions-and-models/README.md) |
+| 1.1 | What Cursor is (and how to install)—chat vs code editor, installing Cursor, signing in and models inside Cursor, opening a workspace folder | [module-01-intro-and-workbench/lesson-1.1-cursor-and-install](module-01-intro-and-workbench/lesson-1.1-cursor-and-install/README.md) |
+| 1.2 | Subscriptions and models (tiers & limits)—Cursor account & billing, free vs paid, choosing models in Cursor, managing usage wisely | [module-01-intro-and-workbench/lesson-1.2-subscriptions-and-models](module-01-intro-and-workbench/lesson-1.2-subscriptions-and-models/README.md) |
 | 1.3 | Terminal, Git, and safety nets—easing “black screen” anxiety; why to ask for an explanation before pressing Enter; Git as “save game” so the AI does not rely on stale code | [module-01-intro-and-workbench/lesson-1.3-terminal-git-and-safety](module-01-intro-and-workbench/lesson-1.3-terminal-git-and-safety/README.md) |
 | 1.4 | Guided UI tour—inline edit (Cmd+K), side chat (Cmd+L), Composer / multi-file work (Cmd+I) | [module-01-intro-and-workbench/lesson-1.4-guided-ui-tour](module-01-intro-and-workbench/lesson-1.4-guided-ui-tour/README.md) |
 | 1.5 | Context—how the “brain” works; the context window; conversation memory; noise in context; clearing clutter and starting fresh chats to avoid confusion or hallucination | [module-01-intro-and-workbench/lesson-1.5-context-window](module-01-intro-and-workbench/lesson-1.5-context-window/README.md) |
 
 ### Module 2: Your AI agency — Skills-based development
 
-**Module goal:** Run Claude as a team of specialists, using a structured prompt/Skills pack across the development lifecycle.
+**Module goal:** Run Cursor’s AI as a team of specialists, using a structured Skills/rules pack across the development lifecycle.
 
 **Downloadable skills (ASM):** Every lesson in this module includes **`AGENT_SKILLS.md`** (next to `README.md`) with ranked skills, scores, copy-paste `asm add skill` sources for the good ones, and a suggested `asm create expertise` bundle so students can install the same agent packs into their own project.
 
 **Vendored copies in-repo:** Each lesson also has a **`bundled-skills/`** folder: upstream skill trees copied in for offline use (strictly **> 80** / score **≥ 81** at top level; **72–80** under `_to-improve/` with notes in `TO_IMPROVE.md`). See [module-02-skills-and-agents/bundled-skills/README.md](module-02-skills-and-agents/bundled-skills/README.md); refresh via `python3 scripts/bundle_module02_skills.py` from the repo root.
 
-**Official project-level skills:** Each merged agent skill lives **only** in its lesson folder under `module-02-skills-and-agents/`. **`uv run scripts/sync_module02_project_skills.py`** creates symlinks so **`.cursor/skills/<name>`** points at that lesson folder and **`.claude/skills`** points at **`.cursor/skills`**—one source of truth, no duplicated trees.
+**Official project-level skills:** Each merged agent skill lives **only** in its lesson folder under `module-02-skills-and-agents/`. **`uv run scripts/sync_module02_project_skills.py`** symlinks each skill into **`.cursor/skills/<name>`** (the path this course uses). The script may also link **`.claude/skills`** → **`.cursor/skills`** for compatibility with other tools—you can ignore that if you work only in Cursor.
 
 #### Planning phase
 
@@ -61,7 +61,7 @@ Lesson links below are **scaffold only**—teaching content will be added over t
 
 ### Module 3: Superpowers with MCP servers (Model Context Protocol)
 
-**Module goal:** Extend the editor so Claude can pull live information from external tools.
+**Module goal:** Extend Cursor so the built-in AI can pull live information from external tools via MCP.
 
 | Lesson | Topic | Folder |
 |--------|--------|--------|
@@ -94,6 +94,8 @@ Lesson links below are **scaffold only**—teaching content will be added over t
 
 ## Work-in-progress note
 
-Right now this track is **scaffold only**: folder layout, links, and table of contents. Scripts, prompts, recordings, and deep-dive materials will be added lesson by lesson.
+**Module 2** includes full **lesson production scaffolds** per lesson: English `README.md` index, Hebrew **`on-screen.md`** (recording beat sheet), and Hebrew **`narration.md`** (ElevenLabs voiceover, timestamp-aligned to the same beats). Other modules remain scaffold-first until their lesson packs are authored the same way.
+
+Screen recordings, audio exports, and deep-dive add-ons are still added lesson by lesson.
 
 The earlier beginner track in this repo: [he-beginner](../he-beginner). `he_beginner_v2` does not need to mirror that file layout.

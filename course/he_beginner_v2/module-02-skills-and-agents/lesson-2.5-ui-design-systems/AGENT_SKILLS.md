@@ -16,7 +16,7 @@ Lesson fit (30) · Authority (30) · Ecosystem signal (20) · Cursor fit (10) ·
 |------------|-------|--------|
 | `shadcn-ui` (stitch-skills, curated) | **96** | shadcn/ui + Tailwind composition; aligns with common React stacks. |
 | `wshobson/tailwind-design-system` | **90** | Very visible Tailwind + design-token patterns. |
-| `davila7/ui-design-system` | **88** | UI system thinking from Claude Code Templates. |
+| `davila7/ui-design-system` | **88** | UI system thinking from Davila7 open-source agent template pack. |
 | `mastra-ai/tailwind-best-practices` | **77** | Tailwind quality bar; overlap with `tailwind-design-system` (−5). |
 | `sickn33/tailwind-design-system` | **78** | Fork-style duplicate of wshobson pack; prefer wshobson unless you standardize on sickn33. |
 | `hopeoverture/tailwind-shadcn-ui-setup` | **62** | Niche app context; **not recommended** as default. |

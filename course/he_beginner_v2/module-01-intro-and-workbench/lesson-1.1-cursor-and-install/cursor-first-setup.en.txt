@@ -1,0 +1,1 @@
+I'm setting up Cursor for the first time. Walk me through: signing in to Cursor, where to choose my default chat model in Cursor settings, and how to know I'm ready to work inside a project folder. Keep it brief. If you need a terminal command, explain it first and wait for me to approve Run.

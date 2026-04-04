@@ -2,15 +2,15 @@
 
 Hebrew-first lesson assets; this index is in English to match the course README.
 
-**Scope:** Official **Claude** subscription (see [claude.com/pricing](https://claude.com/pricing)) to use **Claude Code** inside Cursor via the official extension — no API keys, no BYOK. Narration distinguishes the **product** (Claude Code: agent in the editor) from **billing** (Claude plans). Third-party IDE providers exist per Anthropic docs; this course does not teach those paths.
+**Scope:** **Cursor** billing and plans (see [cursor.com/pricing](https://cursor.com/pricing) or in-app account UI), signing in inside Cursor, choosing chat/agent models from the **Cursor** UI, and using quotas wisely. This course does **not** center Claude Code or third-party VS Code extensions for AI.
 
 ## Files in this folder
 
 | File | Purpose |
 |------|---------|
-| [on-screen.md](on-screen.md) | Screen recording beat sheet (Hebrew); Claude Code extension UI, `claude.com/pricing`, Command Palette — do not show API-key flows |
-| [narration.md](narration.md) | Hebrew voiceover for ElevenLabs; same timestamps as `on-screen.md`; appendix for “as of recording” / official pages |
+| [on-screen.md](on-screen.md) | Screen recording beat sheet (Hebrew); Cursor settings, pricing page, model picker — avoid API-key / BYOK tutorials as the default path |
+| [narration.md](narration.md) | Hebrew voiceover for ElevenLabs; same timestamps as `on-screen.md`; verify labels against your Cursor version before recording |
 
 ## Syllabus topic
 
-What Claude Code is (per official overview), free vs paid **Claude** tiers (principles), signing in to **Claude Code** in Cursor, choosing models, and using quotas wisely — verify live UI and pricing before teaching.
+How Cursor accounts and models work at a high level, free vs paid (principles), where to pick models in Cursor, and how to avoid burning premium usage on tiny prompts — verify live UI before teaching.

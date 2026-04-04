@@ -14,7 +14,7 @@ Lesson fit (30) · Authority (30) · Ecosystem signal (20) · Cursor fit (10) ·
 
 | Skill (id) | Score | Notes |
 |------------|-------|--------|
-| `davila7/qa-test-planner` | **92** | Test planning, cases, and edge thinking from Claude Code Templates. |
+| `davila7/qa-test-planner` | **92** | Test planning, cases, and edge thinking from Davila7 open-source agent template pack. |
 | `sickn33/unit-testing-test-generate` | **88** | Strong for generating unit tests once behavior is known. |
 | `cexll/test-cases` | **80** | Structured test-case authoring (from earlier course search). |
 | `jamesrochabrun/qa-test-planner` | **68** | Duplicate role name; prefer davila7 unless you prefer this repo. |

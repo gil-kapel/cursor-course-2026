@@ -27,12 +27,12 @@ export const CURSOR_DOWNLOAD_URL = 'https://cursor.com/download';
 const SETUP: Record<string, LessonSetupContent> = {
   '1.1': {
     lessonId: '1.1',
-    lessonTitle: 'מה זה Claude ו-Cursor (והתקנה)',
+    lessonTitle: 'מה זה Cursor (והתקנה)',
     agentSkillsDocPath: '',
     showCursorInstall: true,
     showAsmInstall: false,
     agentPromptBlock:
-      'פתחו צ\'אט (⌘L / Ctrl+L). כתבו: "עזרו לי להתקין Cursor ולהוסיף את הרחבת Claude לפי הקורס — אני בשלב ההתקנה הראשון."',
+      'פתחו צ\'אט (⌘L / Ctrl+L). הדביקו את הטקסט מקובץ cursor-first-setup.en.txt (או בקשו: התחברות ל-Cursor, בחירת מודל בברירת המחדל, והכנה לעבודה בתיקיית פרויקט).',
   },
   '2.1': {
     lessonId: '2.1',

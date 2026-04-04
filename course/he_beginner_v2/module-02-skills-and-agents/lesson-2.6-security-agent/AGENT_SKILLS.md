@@ -15,7 +15,7 @@ Lesson fit (30) · Authority (30) · Ecosystem signal (20) · Cursor fit (10) ·
 | Skill (id) | Score | Notes |
 |------------|-------|--------|
 | `openai/security-threat-model` | **96** | OpenAI curated `.curated/` skill; strong baseline for threat modeling. |
-| `davila7/security-threat-model` | **90** | Same topic from Claude Code Templates; excellent companion checklist. |
+| `davila7/security-threat-model` | **90** | Same topic from Davila7 open-source agent template pack; excellent companion checklist. |
 | `davila7/vulnerability-scanner` | **85** | Practical “find issues in this codebase” angle; complements threat model. |
 | `tech-leads-club/security-threat-model` | **80** | Good catalog copy; redundant if you already use OpenAI + davila7. |
 | `sickn33/threat-modeling-expert` | **76** | Broad threat content; slightly generic vs curated rows above. |

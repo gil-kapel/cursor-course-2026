@@ -2,7 +2,7 @@
 
 Hebrew-first lesson assets; this index is in English to match the course README.
 
-**Scope:** How Claude's context window works (the "whiteboard" metaphor), signs of a full or noisy context, and three practical habits for managing it — including fresh chats, `@` file references, and concise context priming.
+**Scope:** How the **Cursor agent’s** context window works (the "whiteboard" metaphor), signs of a full or noisy context, and three practical habits for managing it — including fresh chats, `@` file references, and concise context priming.
 
 ## Files in this folder
 

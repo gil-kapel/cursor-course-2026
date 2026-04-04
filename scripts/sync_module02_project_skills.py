@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Link Module 2 lesson skills into Cursor/Claude discovery paths (single source of truth).
+"""Link Module 2 lesson skills into Cursor discovery paths (single source of truth).
 
 There is **one** copy of each skill on disk: the lesson folder under
 `course/he_beginner_v2/module-02-skills-and-agents/...`.
 
-This script creates **symlinks** so tools can still find skills in their default locations:
+This script creates **symlinks** so Cursor (and optional compatible tools) can find skills:
 
-- `.cursor/skills/<skill-name>` → relative path into the matching lesson folder
-- `.claude/skills` → `../.cursor/skills` (so Claude Code sees the same tree; no duplicate links)
+- `.cursor/skills/<skill-name>` → relative path into the matching lesson folder (primary path for this course)
+- `.claude/skills` → `../.cursor/skills` (optional compatibility symlink only; ignore if you use Cursor alone)
 
 Re-run after adding a lesson skill or changing folder names:
 

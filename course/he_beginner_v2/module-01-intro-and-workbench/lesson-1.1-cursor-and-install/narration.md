@@ -18,11 +18,9 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 ## 01:30 – 02:30
 
-כדי לבנות מוצר אמיתי אנחנו צריכים שני דברים.
+כדי לבנות מוצר אמיתי אנחנו צריכים סביבת עבודה אחת שמחברת בין הקוד לבין בינה מלאכותית.
 
-הדבר הראשון הוא קורסור, Cursor. קורסור היא תוכנה שמותקנת על המחשב. היא נבנתה מהיסוד כדי לארח בינה מלאכותית. תחשבו על קורסור כמו על המשרד החדש שלכם… עם שולחן, מחשב, ומקום לאחסן קבצים.
-
-הדבר השני הוא קלוד, Claude. קלוד הוא המוח. הוא המתכנת הבכיר שגייסתם עכשיו, והוא הולך לשבת איתכם בתוך המשרד הזה, לראות את כל מה שאתם רואים על המסך, ולבנות עבורכם את המוצר.
+קורסור, Cursor, היא עורך קוד שמותקן על המחשב — אבל היא נבנתה מהיסוד כדי לעבוד עם סוכן AI בתוך אותו חלון: צ'אט, עריכה בשורה, וקומפוזר לעבודה על כמה קבצים. תחשבו על זה כמו משרד שבו גם השולחן וגם העוזר החכם יושבים באותו חדר.
 
 אז בואו נכין את המשרד.
 
@@ -42,7 +40,7 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 ## 04:00 – 06:00
 
-יש לנו משרד, עכשיו בואו נכניס את קלוד פנימה ונתקין את ההרחבה שלו.
+יש לנו משרד, עכשיו בואו נוודא ש־Cursor מוכן לעבודה: התחברות, מודל, והבנת דפוס האישור כשמוצגת פקודה.
 
 בתוכנות רגילות הייתי שולח אתכם עכשיו לחפש בתפריטים, אבל אנחנו פה כדי לנהל בינה מלאכותית — אז בואו ניתן לה לעבוד בשבילנו.
 
@@ -50,13 +48,9 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 עכשיו בתוך קורסור, תלחצו על קומנד־אל במק, או קונטרול־אל בווינדוס. זה יפתח לכם את חלון השיחה.
 
-פשוט תדביקו לשם את המשפט, שמבקש מהתוכנה להתקין לעצמה את ההרחבה הרשמית בלי לשאול שאלות, ותלחצו אנטר.
+תדביקו את המשפט — הוא מבקש מהסוכן להדריך אתכם בהתחברות ל־Cursor, איפה לבחור מודל בברירת המחדל, ואיך לדעת שאתם מוכנים לעבוד בתוך תיקיית פרויקט.
 
-תראו איזה יופי. קורסור מכין את פקודת ההתקנה מיד, אבל שימו לב למשהו מעניין: הוא עוצר ומחכה שתלחצו על כפתור ה־Run.
-
-למה? כי קורסור בנוי ככה שה־AI עובד בשבילכם, אבל אתם אלה שחותמים על הצ'ק בסוף. הוא לעולם לא יריץ פעולות על המחשב שלכם מאחורי הגב. זה הביטחון שלכם.
-
-נלחץ על Run, וזהו. ההרחבה הרשמית הותקנה, והמתכנת שלכם מוכן לעבודה.
+אם מוצעת פקודת טרמינל, שימו לב: קורסור מציג אותה עם כפתור Run, ומחכה שתאשרו. זה דפוס העבודה של הקורס — ה־AI מציע, אתם מאשרים. אפשר גם לפתוח את הגדרות Cursor ולראות שם חשבון ומודלים, בלי להסתמך על הרחבות חיצוניות.
 
 ---
 
@@ -64,7 +58,7 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 הדבר האחרון לשיעור הזה הוא חוק ברזל שילווה אתכם לתמיד.
 
-טעות נפוצה היא לנסות לפתוח קובץ אחד בודד ולהתחיל לעבוד. אבל אם תעשו את זה — קלוד לא יראה את כל התמונה של הפרויקט.
+טעות נפוצה היא לנסות לפתוח קובץ אחד בודד ולהתחיל לעבוד. אבל אם תעשו את זה — הסוכן ב־Cursor לא יראה את כל התמונה של הפרויקט.
 
 לכן, אנחנו תמיד עובדים בתוך מרחב עבודה, Workspace.
 
@@ -72,7 +66,7 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 עכשיו אני חוזר לקורסור, לוחץ למעלה על File, ובוחר ב־Open Folder. אני אבחר את התיקייה הריקה שיצרתי.
 
-ברגע שעשינו את זה, אמרנו לקורסור: אלו הגבולות של הפרויקט שלנו. כל מה שנייצר מעכשיו יחיה כאן, וקלוד יכיר אותו בצורה מושלמת.
+ברגע שעשינו את זה, אמרנו לקורסור: אלו הגבולות של הפרויקט שלנו. כל מה שנייצר מעכשיו יחיה כאן, והסוכן יכיר את הקבצים בהקשר הנכון.
 
 ---
 
@@ -80,9 +74,9 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 זה הכל לשיעור הראשון.
 
-יש לנו תוכנה מותקנת, הגדרנו את ההרחבה של קלוד, ואנחנו יודעים שחייבים לעבוד בתוך תיקיית פרויקט מסודרת.
+יש לנו תוכנה מותקנת, התחלנו להגדיר חשבון ומודלים **בתוך Cursor**, ואנחנו יודעים שחייבים לעבוד בתוך תיקיית פרויקט מסודרת.
 
-בשיעור הבא, שיעור 1.2, נדבר על "הדלק" של המערכת. נבין איך מחברים את המנוי שלכם כדי לקבל גישה למודלים הכי חזקים, ומה ההבדלים בין המסלולים השונים.
+בשיעור הבא, שיעור 1.2, נדבר על "הדלק" של המערכת: מנוי Cursor, מודלים, ומכסות — איך לבחור מודל חכם ולא לשרוף את התקציב על כל שאלה.
 
 תתקינו את קורסור, ונתראה בשיעור הבא.
 
@@ -90,8 +84,8 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 ## Appendix — English prompt (paste into Cursor chat)
 
-Use the line below (or the same text in [`install-claude-extension.en.txt`](install-claude-extension.en.txt)) under the video / in show notes.
+Use the text in [`cursor-first-setup.en.txt`](cursor-first-setup.en.txt) under the video / in show notes (same wording as below).
 
 ```text
-Install the official Claude extension for Cursor for me. Do not ask clarifying questions; choose the recommended installation method and run whatever is needed. I will approve the Run button when you propose terminal commands.
+I'm setting up Cursor for the first time. Walk me through: signing in to Cursor, where to choose my default chat model in Cursor settings, and how to know I'm ready to work inside a project folder. Keep it brief. If you need a terminal command, explain it first and wait for me to approve Run.
 ```

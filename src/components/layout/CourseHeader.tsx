@@ -52,7 +52,7 @@ export default function CourseHeader({
                 <GraduationCap className="w-3.5 h-3.5 text-white" strokeWidth={2.5} />
               </div>
 
-              <h1 className="text-xl font-semibold text-slate-800">קורס Claude Code</h1>
+              <h1 className="text-xl font-semibold text-slate-800">קורס Cursor</h1>
             </div>
           </div>
 

@@ -14,7 +14,7 @@ Lesson fit (30) · Authority (30) · Ecosystem signal (20) · Cursor fit (10) ·
 
 | Skill (id) | Score | Notes |
 |------------|-------|--------|
-| `weaverse/code-review` | **88** | Weaverse `.claude` skill; **verified** URL—best general default in this list. |
+| `weaverse/code-review` | **88** | Weaverse code-review skill; **verified** URL—best general default (upstream repo uses `.claude/` layout). |
 | `jackyst0/code-review` | **81** | `awesome-agent-skills` example; **verified** URL; good second checklist. |
 | `thebushidocollective/han@code-review` | **80** | skills.sh / `npx` path; good if you already use Han marketplace. |
 | `basedhardware/agent-review` | **—** | Was `.cursor/skills`-hosted; upstream path **404** at time of writing—**do not use** until restored. |

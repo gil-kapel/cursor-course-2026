@@ -17,8 +17,8 @@ Lesson fit (30) · Authority (30) · Ecosystem signal (20) · Cursor fit (10) ·
 | `shubhamsaboo/debugger` | **88** | General debugging workflow; high visibility. |
 | `sickn33/error-detective` | **86** | Error-log interpretation and narrowing. |
 | `latestaiagents/agent-skills@stack-trace-decoder` | **84** | Stack-trace focus; often installed via `npx skills add …`. |
-| `mrgoonie/root-cause-tracing` | **82** | RCA-style tracing (ClaudeKit skills tree). |
-| `parcadei/debug` | **78** | Continuous-claude style debug helper. |
+| `mrgoonie/root-cause-tracing` | **82** | RCA-style tracing (community agent-skills tree). |
+| `parcadei/debug` | **78** | Agent-style debug helper (narrower / evaluated only). |
 | `kynoptic/debugging-runtime-errors` | **58** | Repo-specific example; **not recommended** as default. |
 | `udecode/trace` | **55** | Narrow “trace” skill; **not recommended** unless you use that stack. |
 

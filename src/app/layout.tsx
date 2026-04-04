@@ -17,7 +17,7 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  title: "קורס Cursor & Claude | ממנהלי מוצר למפתחי AI",
+  title: "קורס Cursor | ממנהלי מוצר למפתחי AI",
   description:
     "קורס מעשי בעברית למנהלי מוצר ומתחילים שרוצים לעבור מצ׳אט גנרי לעבודה מובנית ב-Cursor — מהקמת סביבת עבודה ועד פרויקטים מקצה לקצה.",
 };

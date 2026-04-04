@@ -14,7 +14,7 @@ Lesson fit (30) · Authority (30) · Ecosystem signal (20) · Cursor fit (10) ·
 
 | Skill (id) | Score | Notes |
 |------------|-------|--------|
-| `davila7/software-architecture` | **93** | Claude Code Templates; repo-boundaries, structure, tradeoffs. |
+| `davila7/software-architecture` | **93** | Davila7 open-source agent template pack; repo boundaries, structure, tradeoffs. |
 | `sql` (playbooks / asm-index curated) | **88** | Strong data-model and SQL literacy—supports architecture decisions. |
 | `qodex-ai/ai-agent-skills@system-design` | **82** | System-design patterns; install often via skills.sh / `npx`. |
 | `NeoLabHQ/software-architecture` | **74** | DDD-flavored; good if you adopt DDD language. |

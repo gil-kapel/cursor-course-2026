@@ -208,7 +208,7 @@ export default function CourseExperience({ course, storageKey }: CourseExperienc
         <div className="flex items-start gap-2 py-3 px-4 rounded-xl bg-[#F7F7F8]/60 border border-[#F7F7F8]">
           <Info className="w-3.5 h-3.5 text-[#BDBDCB] flex-shrink-0 mt-0.5" strokeWidth={1.75} />
           <p className="text-[0.6875rem] text-[#BDBDCB] leading-relaxed">
-            תוכן לימודי על כלי AI ופיתוח עם Cursor ו-Claude. אינו מהווה ייעוץ מקצועי מכל סוג שהוא.
+            תוכן לימודי על פיתוח עם Cursor וסוכני AI מובנים. אינו מהווה ייעוץ מקצועי מכל סוג שהוא.
           </p>
         </div>
       </div>
