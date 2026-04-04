@@ -41,10 +41,11 @@ Scripts, prompts, captions, and production docs for **two Hebrew tracks**: a **b
 
 ```text
 cursor_course/
+├── .github/workflows/         # `deploy-github-pages.yml` → static site to GitHub Pages
 ├── AGENTS.md
 ├── README.md
 ├── src/                       # Next.js UI (`npm run dev`): `/` התחלה מהירה, `/course` נגן השיעורים
-├── .env.example               # Optional `NEXT_PUBLIC_MODULE2_SKILLS_REPO_URL` (default: gil-kapel/cursor-course-2026)
+├── .env.example               # Optional env (Pages base path, module-2 repo URL)
 └── course/
     ├── he-advanced/           # Advanced track (Hebrew)
     │   ├── captions/          # *.he.srt (15 lessons)
@@ -61,6 +62,18 @@ cursor_course/
         ├── production/
         └── templates/
 ```
+
+---
+
+## GitHub Pages (frontend)
+
+The app is built with **`next build` → static `out/`** (see [`next.config.ts`](next.config.ts): `output: 'export'`, optional `NEXT_PUBLIC_BASE_PATH`).
+
+1. In the repo on GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+2. Push to **`main`** (or run **Actions → Deploy GitHub Pages → Run workflow**) to build and deploy.
+3. The published URL is **`https://<owner>.github.io/<repository>/`**. CI sets `NEXT_PUBLIC_BASE_PATH` to the repository name so `_next` assets and internal links work under that path.
+
+Local static preview (same as Pages): `NEXT_PUBLIC_BASE_PATH=<repo-name> npm run build`, then serve `out/` (for example `npx serve out`).
 
 ---
 
