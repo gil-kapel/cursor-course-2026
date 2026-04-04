@@ -29,37 +29,39 @@ Lesson links below are **scaffold only**—teaching content will be added over t
 
 **Module goal:** Run Cursor’s AI as a team of specialists, using a structured Skills/rules pack across the development lifecycle.
 
+**How the arc fits together:** Lessons **2.2 → 2.6** are a *planning and design gate* (idea → PRD → architecture → UX → UI → security review before you over-invest in code). Lessons **2.7 → 2.10** are a *delivery loop* you can repeat (build in Composer → review the diff → add tests → debug with evidence). Lesson **2.11** adds *local persistence* that stays disposable until **Module 4** moves data to the cloud (e.g. Supabase). You can skim a single agent lesson out of order, but the numbering mirrors how PM-led teams hand work off.
+
 **Downloadable skills (ASM):** Every lesson in this module includes **`AGENT_SKILLS.md`** (next to `README.md`) with ranked skills, scores, copy-paste `asm add skill` sources for the good ones, and a suggested `asm create expertise` bundle so students can install the same agent packs into their own project.
 
-**Vendored copies in-repo:** Each lesson also has a **`bundled-skills/`** folder: upstream skill trees copied in for offline use (strictly **> 80** / score **≥ 81** at top level; **72–80** under `_to-improve/` with notes in `TO_IMPROVE.md`). See [module-02-skills-and-agents/bundled-skills/README.md](module-02-skills-and-agents/bundled-skills/README.md); refresh via `python3 scripts/bundle_module02_skills.py` from the repo root.
+**Vendored copies in-repo:** Each lesson also has a **`bundled-skills/`** folder: upstream skill trees copied in for offline use (strictly **> 80** / score **≥ 81** at top level; **72–80** under `_to-improve/` with notes in `TO_IMPROVE.md`). See [module-02-skills-and-agents/bundled-skills/README.md](module-02-skills-and-agents/bundled-skills/README.md); refresh via **`uv run scripts/bundle_module02_skills.py`** from the repo root.
 
-**Official project-level skills:** Each merged agent skill lives **only** in its lesson folder under `module-02-skills-and-agents/`. **`uv run scripts/sync_module02_project_skills.py`** symlinks each skill into **`.cursor/skills/<name>`** (the path this course uses). The script may also link **`.claude/skills`** → **`.cursor/skills`** for compatibility with other tools—you can ignore that if you work only in Cursor.
+**Official project-level skills:** Each merged agent skill lives **only** in its lesson folder under `module-02-skills-and-agents/`. **`uv run scripts/sync_module02_project_skills.py`** symlinks each skill into **`.cursor/skills/<name>`** (the path this course uses). Project rules often live under **`.cursor/rules`** (or a legacy **`.cursorrules`** file at the repo root). The script may also link **`.claude/skills`** → **`.cursor/skills`** for compatibility with other tools—you can ignore that if you work only in Cursor.
 
 #### Planning phase
 
 | Lesson | Topic | Links |
 |--------|--------|--------|
-| 2.1 | Introduction to Skills—downloading the course “agents folder” and enabling rules (e.g. `.cursorrules`) for a specific role | [README](module-02-skills-and-agents/lesson-2.1-skills-intro/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.1-skills-intro/AGENT_SKILLS.md) |
-| 2.2 | Product / research agent—turning an idea into a detailed PRD | [README](module-02-skills-and-agents/lesson-2.2-product-agent-prd/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.2-product-agent-prd/AGENT_SKILLS.md) |
-| 2.3 | Tech lead agent—translating the spec into tech choices and folder structure | [README](module-02-skills-and-agents/lesson-2.3-tech-lead-architecture/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.3-tech-lead-architecture/AGENT_SKILLS.md) |
-| 2.4 | UX agent—user flows and screen-level logic | [README](module-02-skills-and-agents/lesson-2.4-ux-user-flow/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.4-ux-user-flow/AGENT_SKILLS.md) |
-| 2.5 | UI agent—applying design systems / UI libraries | [README](module-02-skills-and-agents/lesson-2.5-ui-design-systems/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.5-ui-design-systems/AGENT_SKILLS.md) |
-| 2.6 | Security agent—sanity checks and risks (data handling, permissions) | [README](module-02-skills-and-agents/lesson-2.6-security-agent/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.6-security-agent/AGENT_SKILLS.md) |
+| 2.1 | Introduction to Skills—course skill layout, **Skills vs one-off prompts**, ASM sync, and wiring **`.cursor/skills`** / **`.cursor/rules`** so the model keeps a specialist role | [README](module-02-skills-and-agents/lesson-2.1-skills-intro/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.1-skills-intro/AGENT_SKILLS.md) |
+| 2.2 | Product agent—turning an idea into a PRD (problem, users, scope, flows, metrics, acceptance criteria, risks) | [README](module-02-skills-and-agents/lesson-2.2-product-agent-prd/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.2-product-agent-prd/AGENT_SKILLS.md) |
+| 2.3 | Tech lead agent—PRD → stack, boundaries, folder layout, APIs, implementation slices | [README](module-02-skills-and-agents/lesson-2.3-tech-lead-architecture/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.3-tech-lead-architecture/AGENT_SKILLS.md) |
+| 2.4 | UX agent—journeys, screen logic, empty/error states, handoff before pixels | [README](module-02-skills-and-agents/lesson-2.4-ux-user-flow/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.4-ux-user-flow/AGENT_SKILLS.md) |
+| 2.5 | UI agent—components, tokens, states, a11y, responsive behavior (e.g. shadcn-style patterns) | [README](module-02-skills-and-agents/lesson-2.5-ui-design-systems/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.5-ui-design-systems/AGENT_SKILLS.md) |
+| 2.6 | Security agent—auth, permissions, secrets, data exposure, abuse cases *before* implementation hardens the wrong path | [README](module-02-skills-and-agents/lesson-2.6-security-agent/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.6-security-agent/AGENT_SKILLS.md) |
 
 #### Implementation and production
 
 | Lesson | Topic | Links |
 |--------|--------|--------|
-| 2.7 | Dev agent—using Composer to write code | [README](module-02-skills-and-agents/lesson-2.7-dev-agent-composer/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.7-dev-agent-composer/AGENT_SKILLS.md) |
-| 2.8 | Code review agent—refactoring and cleanup | [README](module-02-skills-and-agents/lesson-2.8-code-review-agent/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.8-code-review-agent/AGENT_SKILLS.md) |
-| 2.9 | QA agent—tests for edge cases | [README](module-02-skills-and-agents/lesson-2.9-qa-tests-agent/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.9-qa-tests-agent/AGENT_SKILLS.md) |
-| 2.10 | Debug agent—from terminal errors to targeted fixes | [README](module-02-skills-and-agents/lesson-2.10-debug-agent/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.10-debug-agent/AGENT_SKILLS.md) |
+| 2.7 | Dev agent—vertical slice in **Composer** (data + services + UI + validation) with reviewable diffs | [README](module-02-skills-and-agents/lesson-2.7-dev-agent-composer/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.7-dev-agent-composer/AGENT_SKILLS.md) |
+| 2.8 | Code review agent—bugs, regressions, security footguns, maintainability, merge readiness (not just “LGTM”) | [README](module-02-skills-and-agents/lesson-2.8-code-review-agent/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.8-code-review-agent/AGENT_SKILLS.md) |
+| 2.9 | QA agent—test plans and automated tests: happy paths, edge cases, failures, state vs acceptance criteria | [README](module-02-skills-and-agents/lesson-2.9-qa-tests-agent/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.9-qa-tests-agent/AGENT_SKILLS.md) |
+| 2.10 | Debug agent—stack traces / logs → minimal repro → smallest safe fix (no whole-repo guessing) | [README](module-02-skills-and-agents/lesson-2.10-debug-agent/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.10-debug-agent/AGENT_SKILLS.md) |
 
 #### Basic data handling
 
 | Lesson | Topic | Links |
 |--------|--------|--------|
-| 2.11 | Local DB—SQLite / JSON for temporary data during development | [README](module-02-skills-and-agents/lesson-2.11-local-db/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.11-local-db/AGENT_SKILLS.md) |
+| 2.11 | Local DB—when SQLite vs JSON fits, schema-first thinking, disposable dev data (bridge to cloud DB later) | [README](module-02-skills-and-agents/lesson-2.11-local-db/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.11-local-db/AGENT_SKILLS.md) |
 
 ### Module 3: Superpowers with MCP servers (Model Context Protocol)
 
@@ -94,10 +96,14 @@ Lesson links below are **scaffold only**—teaching content will be added over t
 
 ---
 
+## Lesson length (playlist)
+
+**Target:** each **playlist entry** is about **3–6 minutes** of teaching time. Longer topics are split into **(א) / (ב)** parts (and **(ג)** when needed), each with its own id in the app (e.g. `2.7`, `2.7b`, `2.7c`). The **repo folder** for a skill may still be one per topic (e.g. `lesson-2.7-dev-agent-composer`); production splits `on-screen.md` / `narration.md` to match the parts.
+
 ## Work-in-progress note
 
 **Module 2** includes full **lesson production scaffolds** per lesson: English `README.md` index, Hebrew **`on-screen.md`** (recording beat sheet), and Hebrew **`narration.md`** (ElevenLabs voiceover, timestamp-aligned to the same beats). Other modules remain scaffold-first until their lesson packs are authored the same way.
 
-Screen recordings, audio exports, and deep-dive add-ons are still added lesson by lesson.
+Screen recordings, audio exports, and deep-dive add-ons are still added lesson by lesson. When a lesson is split in the app playlist, **duplicate or trim** beat sheets so each part stays within the 3–6 minute target.
 
 The earlier beginner track in this repo: [he-beginner](../he-beginner). `he_beginner_v2` does not need to mirror that file layout.

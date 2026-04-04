@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useLayoutEffect, useCallback } from 'react';
 import { ArrowLeft, BookOpen, Clock, GraduationCap, Info } from 'lucide-react';
 import { motion } from 'framer-motion';
 import CourseHeader from '@/components/layout/CourseHeader';
@@ -30,9 +30,36 @@ export default function CourseExperience({ course, storageKey }: CourseExperienc
   const { watchedLessonIds, markAsWatched } = useProgress(storageKey, allLessons.length);
   const platform = useClientPlatform();
 
+  const activeLessonStorageKey = `${storageKey}-active-lesson`;
+
+  const persistActiveLesson = useCallback(
+    (lessonId: string) => {
+      try {
+        localStorage.setItem(activeLessonStorageKey, lessonId);
+      } catch {
+        /* noop */
+      }
+    },
+    [activeLessonStorageKey],
+  );
+
   const [activeLessonId, setActiveLessonId] = useState(
     () => course.chapters[0]?.lessons[0]?.id ?? '',
   );
+
+  useLayoutEffect(() => {
+    try {
+      const raw = localStorage.getItem(activeLessonStorageKey);
+      if (!raw) return;
+      const id = raw.trim();
+      if (!id) return;
+      const lesson = allLessons.find((l) => l.id === id);
+      if (!lesson || lesson.status === 'locked') return;
+      setActiveLessonId(id);
+    } catch {
+      /* noop */
+    }
+  }, [activeLessonStorageKey, allLessons]);
   const [activeTab, setActiveTab] = useState<CourseTab>('prompts');
   const [isPlaylistCollapsed, setIsPlaylistCollapsed] = useState(false);
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
@@ -75,17 +102,20 @@ export default function CourseExperience({ course, storageKey }: CourseExperienc
       markAsWatched(activeLessonId);
     }
     setActiveLessonId(lessonId);
+    persistActiveLesson(lessonId);
   };
 
   const handleNextLesson = () => {
     if (nextLesson) {
       markAsWatched(activeLessonId);
       setActiveLessonId(nextLesson.id);
+      persistActiveLesson(nextLesson.id);
     }
   };
 
   const handleJumpToLesson = (lessonId: string) => {
     setActiveLessonId(lessonId);
+    persistActiveLesson(lessonId);
     setSetupModalOpen(false);
     setIsMobileDrawerOpen(false);
   };

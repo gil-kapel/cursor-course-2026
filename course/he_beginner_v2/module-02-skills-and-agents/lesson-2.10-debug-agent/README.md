@@ -13,3 +13,14 @@ Hebrew-first lesson assets; this index is in English to match the course README.
 ## Syllabus topic
 
 From stack traces and logs to a minimal repro and targeted patch—without guessing across the whole codebase.
+
+## Learning outcomes
+
+- Move from **evidence** (logs, stack traces, failing command) to a **minimal repro** and a **small, safe fix**.
+- Avoid “debugging by rewriting” large unrelated areas.
+
+## Where this sits
+
+- **Phase:** Implementation — feedback loop whenever CI, terminal, or runtime errors appear.
+- **Prerequisite:** A runnable project or test command; paste errors into chat or attach log files (`@`).
+- **Next:** [Lesson 2.11 — Local DB](../lesson-2.11-local-db/README.md) when features need persistence beyond in-memory state.

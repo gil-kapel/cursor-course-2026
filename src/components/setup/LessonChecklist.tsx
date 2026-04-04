@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, type ReactNode } from 'react';
 import { ListChecks, ChevronDown, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -11,22 +11,31 @@ interface LessonChecklistProps {
 
 const STORAGE_PREFIX = 'lesson-checklist-';
 
-const URL_REGEX = /\b(https?:\/\/\S+|[\w-]+\.[\w]{2,}(?:\/\S*)?)\b/g;
+const URL_SPLIT = /\b(https?:\/\/\S+|[\w-]+\.[\w]{2,}(?:\/\S*)?)\b/g;
+const MD_LINK = /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g;
+const linkClass =
+  'text-[#69ADFF] underline underline-offset-2 hover:text-[#4A90D9] transition-colors';
 
-function renderStepText(text: string) {
-  const parts = text.split(URL_REGEX);
-  if (parts.length === 1) return text;
+function isBareUrlToken(part: string): boolean {
+  return (
+    /^https?:\/\/\S+$/.test(part) ||
+    /^[\w-]+\.[\w]{2,}(\/\S*)?$/.test(part)
+  );
+}
 
+function renderPlainWithUrls(text: string, keyOffset: number): ReactNode[] {
+  const parts = text.split(URL_SPLIT);
   return parts.map((part, i) => {
-    if (URL_REGEX.test(part)) {
+    if (!part) return null;
+    if (isBareUrlToken(part)) {
       const href = part.startsWith('http') ? part : `https://${part}`;
       return (
         <a
-          key={i}
+          key={`${keyOffset}-${i}`}
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[#69ADFF] underline underline-offset-2 hover:text-[#4A90D9] transition-colors"
+          className={linkClass}
         >
           {part}
         </a>
@@ -34,6 +43,42 @@ function renderStepText(text: string) {
     }
     return part;
   });
+}
+
+function renderStepText(text: string): ReactNode {
+  const nodes: ReactNode[] = [];
+  let remaining = text;
+  let key = 0;
+
+  while (remaining.length > 0) {
+    MD_LINK.lastIndex = 0;
+    const m = MD_LINK.exec(remaining);
+    if (!m) {
+      nodes.push(...renderPlainWithUrls(remaining, key));
+      break;
+    }
+    const before = remaining.slice(0, m.index);
+    if (before) nodes.push(...renderPlainWithUrls(before, key));
+    key += 100;
+    nodes.push(
+      <a
+        key={`md-${key}`}
+        href={m[2]}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={linkClass}
+      >
+        {m[1]}
+      </a>,
+    );
+    remaining = remaining.slice(m.index + m[0].length);
+    key += 1;
+  }
+
+  const filtered = nodes.filter(Boolean);
+  if (filtered.length === 0) return text;
+  if (filtered.length === 1) return filtered[0];
+  return <>{filtered}</>;
 }
 
 export default function LessonChecklist({ lessonId, checklist }: LessonChecklistProps) {
