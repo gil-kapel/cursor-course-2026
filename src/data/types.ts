@@ -11,9 +11,11 @@ export interface Lesson {
   videoUrl?: string;
   attachedFiles?: AttachedFile[];
   notes?: string[];
-  /** Copy-paste agent prompts for the "פרומפטים" tab; if omitted, tab uses setup strip prompt when available. */
+  /** Copy-paste agent prompts for the "פרומפטים להתקנה" tab. */
   prompts?: string[];
   transcript?: string;
+  /** Simple numbered step list shown below the video. */
+  checklist?: string[];
 }
 
 export interface Chapter {

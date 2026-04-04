@@ -22,35 +22,65 @@ export const courseData: Course = {
           duration: '08:00',
           status: 'available',
           badge: 'FREE',
-          attachedFiles: [
-            {
-              id: 'f-1.1-prompt',
-              name: 'cursor-first-setup.en.txt',
-              type: 'txt',
-              size: '0.3 KB',
-            },
-          ],
           notes: [
             'Cursor הוא עורך הקוד וסביבת העבודה; הצ׳אט, הקומפוזר והסוכן מובנים באפליקציה.',
             'חוק ברזל: תמיד עובדים בתוך תיקיית פרויקט (Workspace), לעולם לא על קובץ בודד.',
           ],
-          transcript: `ברוכים הבאים למודול הראשון של הקורס.
+          prompts: [
+            `Set up ASM in this project and leave it in a working state.
 
-אם אי פעם כתבתם מסמך אפיון מדהים למערכת ניהול תקציב חודשית… ואז הייתם צריכים לחכות שבועות או חודשים למתכנת שיבנה אותו, הקורס הזה הולך לשנות לכם את החיים.
+ASM (Agent Skill Manager) is a project-local skill system. It installs skills into \`.asm/\`, builds \`.asm/main_asm.md\`, groups skills into expertises, and syncs the router into the active agent config.
 
-הגיע הזמן שנפסיק להיות צרכנים של צ׳אטים. רוב האנשים עדיין משתמשים בבינה מלאכותית כמו במנוע חיפוש: שואלים שאלה בדפדפן, מקבלים תשובה, ומעתיקים קוד ממקום למקום. זו עבודה שחורה, והיא מובילה להרבה מאוד תסכול ושגיאות.
+Do this in order:
 
-בקורס הזה אנחנו משנים גישה. אנחנו הופכים מ"כותבי פרומפטים" למנהלי פיתוח. וכדי לעשות את זה, אנחנו צריכים להכיר את סביבת העבודה החדשה שלנו.
+1. Check whether \`asm\` is already installed. If not, install it with:
+   \`curl -LsSf https://raw.githubusercontent.com/gil-kapel/asm/main/install.sh | sh\`
 
-Cursor הוא עורך קוד שמותקן על המחשב, עם סוכן AI מובנה: צ׳אט, עריכה בשורה, וקומפוזר לעבודה על כמה קבצים — הכול באותה אפליקציה.
+2. Check whether this repo already has ASM initialized by looking for \`asm.toml\`.
+   - If ASM is not initialized, run \`asm init\`.
+   - If ASM is already initialized, do not recreate it.
 
-נפתח את הדפדפן וניכנס לאתר cursor.com. נלחץ על כפתור ההורדה. ההתקנה רגילה. כשתפתחו את התוכנה בפעם הראשונה, זה אולי ייראה קצת מאיים — אל תתנו לזה להלחיץ אתכם.
+3. Inspect the current project briefly and choose the most relevant skill search queries for this repo.
+   - Prefer curated, high-signal skills.
+   - Do not install a large pile of generic skills.
 
-נוודא שאתם מחוברים לחשבון Cursor ויודעים איפה לבחור מודל בברירת המחדל, בעזרת המשפט באנגלית שמתחת לסרטון וקומנד־אל לפתיחת הצ׳אט.
+4. Search and install only the most relevant skills.
+   - Use \`asm search "<query>"\`.
+   - Use \`asm add skill <source>\` for the best matches.
 
-הדבר האחרון לשיעור הזה הוא חוק ברזל: תמיד עובדים בתוך מרחב עבודה, Workspace. File, Open Folder, ובוחרים תיקייה.
+5. Configure expertise routing for the current project task or stack.
+   - Run \`asm expertise auto "<task description>"\` with a concrete description of what this project needs.
 
-זה הכל לשיעור הראשון. יש לנו Cursor מותקן, התחלנו להגדיר חשבון ומודלים בתוך האפליקציה, ואנחנו יודעים לעבוד בתוך תיקיית פרויקט מסודרת.`,
+6. Sync ASM into the active agent config.
+   - Run \`asm sync\`.
+
+7. If \`ASM_CLOUD_API_URL\` is configured and there is at least one local skill worth checking, run one cloud analysis:
+   - \`asm skill analyze <skill-name> --cloud\`
+
+8. At the end, report:
+   - whether ASM was installed or already present
+   - whether the workspace was initialized or already initialized
+   - which skills were installed
+   - which expertise was selected or created
+   - which agent config(s) were synced
+   - whether cloud analysis was run, and where the scorecard was saved
+
+Success criteria:
+- \`asm.toml\` exists
+- \`.asm/main_asm.md\` exists
+- at least one relevant skill is installed
+- at least one expertise is active or created
+- agent sync completed successfully`,
+          ],
+          checklist: [
+            'הורידו את Cursor מאתר cursor.com/download (האתר מזהה את מערכת ההפעלה אוטומטית)',
+            'התקינו והפעילו את Cursor בפעם הראשונה',
+            'התחברו לחשבון Cursor (או צרו חשבון חדש)',
+            'צרו תיקייה חדשה לפרויקט (למשל בשולחן העבודה)',
+            'בתפריט: File → Open Folder ובחרו את התיקייה שיצרתם',
+            'ודאו שהפרויקט נפתח ושאתם רואים את תיקיית הפרויקט בסרגל הצד',
+            'העתיקו את הפרומפט מלשונית "פרומפטים להתקנה" למטה, הדביקו בצ׳אט של Cursor (⌘L / Ctrl+L) ואשרו — הסוכן יתקין את ASM וירכוש סקילים לפרויקט',
+          ],
         },
         {
           id: '1.2',

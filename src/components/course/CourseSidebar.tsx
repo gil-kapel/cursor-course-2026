@@ -127,7 +127,7 @@ export default function CourseSidebar({
   }, [chapters, activeLessonId]);
 
   const [expandedModules, setExpandedModules] = useState<Set<string>>(
-    () => new Set(chapters.map((ch) => ch.id)),
+    () => new Set(activeChapterId ? [activeChapterId] : []),
   );
 
   const toggleModule = (moduleId: string) => {

@@ -22,6 +22,8 @@ Lesson links below are **scaffold only**—teaching content will be added over t
 | 1.3 | Terminal, Git, and safety nets—easing “black screen” anxiety; why to ask for an explanation before pressing Enter; Git as “save game” so the AI does not rely on stale code | [module-01-intro-and-workbench/lesson-1.3-terminal-git-and-safety](module-01-intro-and-workbench/lesson-1.3-terminal-git-and-safety/README.md) |
 | 1.4 | Guided UI tour—inline edit (Cmd+K), side chat (Cmd+L), Composer / multi-file work (Cmd+I) | [module-01-intro-and-workbench/lesson-1.4-guided-ui-tour](module-01-intro-and-workbench/lesson-1.4-guided-ui-tour/README.md) |
 | 1.5 | Context—how the “brain” works; the context window; conversation memory; noise in context; clearing clutter and starting fresh chats to avoid confusion or hallucination | [module-01-intro-and-workbench/lesson-1.5-context-window](module-01-intro-and-workbench/lesson-1.5-context-window/README.md) |
+| 1.6 | Chat modes: Agent, Ask, Plan & Debug—when to use each mode; Plan mode (Shift+Tab) for thinking before building; decision framework; combined Plan-to-Debug demo | [module-01-intro-and-workbench/lesson-1.6-chat-modes](module-01-intro-and-workbench/lesson-1.6-chat-modes/README.md) |
+| 1.7 | Cursor Settings—configuring the editor (General, Models, Tab, Agents) before starting real work; expanded deep-dive into Indexing & Docs for adding custom documentation URLs; module 1 wrap-up | [module-01-intro-and-workbench/lesson-1.7-cursor-settings](module-01-intro-and-workbench/lesson-1.7-cursor-settings/README.md) |
 
 ### Module 2: Your AI agency — Skills-based development
 

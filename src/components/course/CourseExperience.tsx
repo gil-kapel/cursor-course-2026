@@ -10,6 +10,7 @@ import MobileDrawer from './MobileDrawer';
 import CourseTabBar, { type CourseTab } from './CourseTabBar';
 import SetupModal from '@/components/setup/SetupModal';
 import LessonSetupStrip from '@/components/setup/LessonSetupStrip';
+import LessonChecklist from '@/components/setup/LessonChecklist';
 import type { Course } from '@/data/types';
 import { getLessonSetup } from '@/data/studentSetup';
 import { useClientPlatform } from '@/hooks/useClientPlatform';
@@ -32,7 +33,7 @@ export default function CourseExperience({ course, storageKey }: CourseExperienc
   const [activeLessonId, setActiveLessonId] = useState(
     () => course.chapters[0]?.lessons[0]?.id ?? '',
   );
-  const [activeTab, setActiveTab] = useState<CourseTab>('files');
+  const [activeTab, setActiveTab] = useState<CourseTab>('prompts');
   const [isPlaylistCollapsed, setIsPlaylistCollapsed] = useState(false);
   const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState(false);
   const [setupModalOpen, setSetupModalOpen] = useState(false);
@@ -49,13 +50,6 @@ export default function CourseExperience({ course, storageKey }: CourseExperienc
       activeChapter: course.chapters[0],
     };
   }, [activeLessonId, course.chapters]);
-
-  const resolvedPrompts = useMemo(() => {
-    const fromLesson = activeLesson.prompts;
-    if (fromLesson && fromLesson.length > 0) return fromLesson;
-    const block = setupContent?.agentPromptBlock?.trim();
-    return block ? [block] : [];
-  }, [activeLesson.prompts, setupContent?.agentPromptBlock]);
 
   const currentLessonIndex = allLessons.findIndex((l) => l.id === activeLessonId);
   const totalLessons = allLessons.length;
@@ -160,7 +154,13 @@ export default function CourseExperience({ course, storageKey }: CourseExperienc
           totalLessons={totalLessons}
         />
 
-        {setupContent && <LessonSetupStrip content={setupContent} />}
+        {activeLesson.checklist && activeLesson.checklist.length > 0 && (
+          <LessonChecklist lessonId={activeLesson.id} checklist={activeLesson.checklist} />
+        )}
+
+        {setupContent && !(activeLesson.checklist && activeLesson.checklist.length > 0) && (
+          <LessonSetupStrip content={setupContent} />
+        )}
 
         {/* Author + next lesson */}
         <div className="flex items-center justify-between flex-wrap gap-4">
@@ -198,10 +198,8 @@ export default function CourseExperience({ course, storageKey }: CourseExperienc
         <CourseTabBar
           activeTab={activeTab}
           onTabChange={setActiveTab}
-          files={activeLesson.attachedFiles ?? course.attachedFiles}
           notes={activeLesson.notes}
-          prompts={resolvedPrompts}
-          transcript={activeLesson.transcript}
+          prompts={activeLesson.prompts}
         />
 
         {/* Disclaimer */}
