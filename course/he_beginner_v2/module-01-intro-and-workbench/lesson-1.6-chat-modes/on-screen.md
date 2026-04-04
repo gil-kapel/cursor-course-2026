@@ -11,6 +11,7 @@
 Cursor פתוח על My-First-Project. קבצים מהשיעורים הקודמים קיימים: `index.html`, `style.css`. Git committed. פאנל הצ'אט סגור.
 
 **וידוא:**
+
 - ה-mode dropdown בצ'אט מציג Agent / Ask
 - Shift+Tab מפעיל Plan mode משורת הקלט של הצ'אט
 - הרשאות מוגדרות ל-"Ask Every Time"

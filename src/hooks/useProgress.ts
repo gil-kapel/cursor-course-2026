@@ -9,9 +9,13 @@ export function useProgress(storageKey: string, totalLessons: number) {
     try {
       const stored = localStorage.getItem(storageKey);
       if (stored) {
+        /* eslint-disable react-hooks/set-state-in-effect -- restore progress from localStorage after mount (SSR-safe) */
         setWatchedLessonIds(new Set(JSON.parse(stored) as string[]));
+        /* eslint-enable react-hooks/set-state-in-effect */
       }
-    } catch { /* noop */ }
+    } catch {
+      /* noop */
+    }
   }, [storageKey]);
 
   const markAsWatched = useCallback((lessonId: string) => {
@@ -21,7 +25,9 @@ export function useProgress(storageKey: string, totalLessons: number) {
       next.add(lessonId);
       try {
         localStorage.setItem(storageKey, JSON.stringify([...next]));
-      } catch { /* noop */ }
+      } catch {
+        /* noop */
+      }
       return next;
     });
   }, [storageKey]);

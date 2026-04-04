@@ -66,77 +66,95 @@ const SETUP: Record<string, LessonSetupContent> = {
   },
   '2.1': m2Lesson(
     '2.1',
-    'מבוא ל-Skills',
+    'מבוא ל-Skills — כללים, סקילים וסוגי ערך',
     'lesson-2.1-skills-intro',
     'cursor-skill-foundation',
-    '1) מעמוד הבית: בהתקנת ASM בחרו "צ\'אט ב-Cursor" או "טרמינל", והשלימו פעם אחת לפרויקט.\n2) אחרי שיש asm.toml, הריצו בטרמינל את שתי הפקודות ב"סקיל הקורס" — זה מתקין רק את סקיל הקורס לשיעור 2.1 (cursor-skill-foundation).',
+    'שיעור יסודות: Rules מול Skills. התקנת ASM והסקיל בפועל — בשיעור 2.3; אם כבר יש asm.toml, אפשר להריץ מלשונית "סקיל הקורס" את פקודות asm add skill + asm sync ל־cursor-skill-foundation.',
     'uv run scripts/sync_module02_project_skills.py',
   ),
-  '2.2': m2Lesson(
-    '2.2',
+  '2.2': {
+    lessonId: '2.2',
+    lessonTitle: 'אנטומיה של סקיל: טריגרים, טוב מול גרוע',
+    agentSkillsDocPath: `${MODULE2}/lesson-2.1-skills-intro/AGENT_SKILLS.md`,
+    showCursorInstall: false,
+    showAsmInstall: false,
+    agentPromptBlock: `${'תרגיל שיעור 2.2: פתחו את dev-composer-agent/SKILL.md מהריפו של הקורס. הסבירו מה ב־frontmatter עוזר לטריגר, מה סדר השלבים בגוף, ומה צורת הפלט. אל תתקינו סקילים חדשים בשיעור הזה אלא אם כבר בתרגול חופשי.'}\n\n${M2_FOLLOWUP_PROMPT}`,
+  },
+  '2.3': {
+    lessonId: '2.3',
+    lessonTitle: 'חיפוש והתקנת סקילים עם ASM',
+    agentSkillsDocPath: `${MODULE2}/lesson-2.1-skills-intro/AGENT_SKILLS.md`,
+    courseSkillRepoPath: `${MODULE2}/lesson-2.1-skills-intro/cursor-skill-foundation`,
+    showCursorInstall: false,
+    showAsmInstall: true,
+    agentPromptBlock: `${'1) ודאו ש-ASM מותקן ויש asm.toml בפרויקט (כמו בשיעור 1.1 אם עוד לא).\n2) הריצו asm search עם שאילתה רלוונטית, בחרו מועמד מהטבלה ב-AGENT_SKILLS.md של שיעור 2.1.\n3) הריצו asm add skill + asm sync. אופציונלי: asm create expertise לפי המסמך.\n4) דווחו מה הותקן ואיפה מופיע ב-.asm/main_asm.md.'}\n\n${M2_FOLLOWUP_PROMPT}`,
+    courseRepoSyncScript: 'uv run scripts/sync_module02_project_skills.py',
+  },
+  '2.4': m2Lesson(
+    '2.4',
     'סוכן מוצר: מרעיון ל-PRD',
     'lesson-2.2-product-agent-prd',
     'product-prd-agent',
     'אחרי ש-ASM מוכן, הריצו את פקודות "סקיל הקורס" בטרמינל — רק product-prd-agent מהריפו.',
   ),
-  '2.3': m2Lesson(
-    '2.3',
+  '2.5': m2Lesson(
+    '2.5',
     'סוכן Tech Lead: ארכיטקטורה וחיתוכים',
     'lesson-2.3-tech-lead-architecture',
     'tech-lead-architecture-agent',
     'אחרי ש-ASM מוכן, הריצו את פקודות "סקיל הקורס" — tech-lead-architecture-agent בלבד.',
   ),
-  '2.4': m2Lesson(
-    '2.4',
+  '2.6': m2Lesson(
+    '2.6',
     'סוכן UX: זרימות, ריק, שגיאה ומסירה',
     'lesson-2.4-ux-user-flow',
     'ux-user-flow-agent',
     'אחרי ש-ASM מוכן, הריצו את פקודות "סקיל הקורס" — ux-user-flow-agent בלבד.',
   ),
-  '2.5': m2Lesson(
-    '2.5',
+  '2.7': m2Lesson(
+    '2.7',
     'סוכן UI: מערכת עיצוב, נגישות ורספונסיביות',
     'lesson-2.5-ui-design-systems',
     'ui-design-systems-agent',
     'אחרי ש-ASM מוכן, הריצו את פקודות "סקיל הקורס" — ui-design-systems-agent בלבד.',
   ),
-  '2.6': m2Lesson(
-    '2.6',
+  '2.8': m2Lesson(
+    '2.8',
     'סוכן אבטחה',
     'lesson-2.6-security-agent',
     'security-review-agent',
     'אחרי ש-ASM מוכן, הריצו את פקודות "סקיל הקורס" — security-review-agent בלבד.',
   ),
-  '2.7': m2Lesson(
-    '2.7',
+  '2.9': m2Lesson(
+    '2.9',
     'סוכן פיתוח: Composer, דיפ והרצה מקומית',
     'lesson-2.7-dev-agent-composer',
     'dev-composer-agent',
     'אחרי ש-ASM מוכן, הריצו את פקודות "סקיל הקורס" — dev-composer-agent בלבד.',
   ),
-  '2.8': m2Lesson(
-    '2.8',
+  '2.10': m2Lesson(
+    '2.10',
     'סוכן Code Review',
     'lesson-2.8-code-review-agent',
     'code-review-cleanup-agent',
     'אחרי ש-ASM מוכן, הריצו את פקודות "סקיל הקורס" — code-review-cleanup-agent בלבד.',
   ),
-  '2.9': m2Lesson(
-    '2.9',
+  '2.11': m2Lesson(
+    '2.11',
     'סוכן QA: תכנון בדיקות וטסטים',
     'lesson-2.9-qa-tests-agent',
     'qa-tests-agent',
     'אחרי ש-ASM מוכן, הריצו את פקודות "סקיל הקורס" — qa-tests-agent בלבד.',
   ),
-  '2.10': m2Lesson(
-    '2.10',
+  '2.12': m2Lesson(
+    '2.12',
     'סוכן Debug',
     'lesson-2.10-debug-agent',
     'debug-fix-agent',
     'אחרי ש-ASM מוכן, הריצו את פקודות "סקיל הקורס" — debug-fix-agent בלבד.',
   ),
-  '2.11': m2Lesson(
-    '2.11',
+  '2.13': m2Lesson(
+    '2.13',
     'מסד מקומי: SQLite, JSON וגשר לענן',
     'lesson-2.11-local-db',
     'local-db-development-agent',

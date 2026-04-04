@@ -31,6 +31,7 @@ Error: Cannot read properties of undefined (reading 'map')
 ```
 
 **Components:**
+
 ```
 Error: [Error Type]: [Error Message]
     at [Function Name] ([File Path]:[Line]:[Column])
@@ -195,6 +196,7 @@ const email = user.profile.contact.email;
 ```
 
 **Solution:**
+
 ```javascript
 const email = user?.profile?.contact?.email;
 // Or
@@ -211,6 +213,7 @@ Error: Something went wrong
 ```
 
 **Solution:** Use `Error.captureStackTrace` or async stack traces:
+
 ```javascript
 // Enable in Node.js
 Error.stackTraceLimit = 50;
@@ -226,6 +229,7 @@ Error: t is not a function
 ```
 
 **Solution:** Use source maps:
+
 ```bash
 # Decode with source-map-cli
 source-map resolve main.a3f2b1c.js.map 1 45678
@@ -285,7 +289,9 @@ async function decodeMinifiedTrace(
 Decode and explain this stack trace:
 
 ```
+
 [paste stack trace]
+
 ```
 
 Provide:

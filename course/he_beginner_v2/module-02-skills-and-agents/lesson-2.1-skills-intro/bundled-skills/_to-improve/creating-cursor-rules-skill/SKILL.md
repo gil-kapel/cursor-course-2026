@@ -4,6 +4,7 @@ description: Expert guidance for Cursor 2.x project rules (.cursor/rules/*.mdc),
 ---
 
 > **When to load this skill (quick triggers)**  
+>
 > 1. The user asks for Cursor **rules**, **`.cursor/rules`**, **MDC**, or **project conventions**.  
 > 2. You are **bootstrapping** a repo so the team shares the same stack and folder patterns.  
 > 3. The user wants to **migrate** from a single root **`.cursorrules`** file to split rules.  
@@ -51,12 +52,14 @@ Students should **trim** sections they do not use (e.g. no Next.js → replace w
 ## When to Apply This Skill
 
 **Use when:**
+
 - User is starting a new project and needs `.cursor/rules` setup
 - User wants to improve existing project rules
 - User asks to convert skills/guidelines to Cursor format
 - Team needs consistent coding standards documented
 
 **Don't use for:**
+
 - One-time instructions (those can be asked directly)
 - User-specific preferences (those go in global settings)
 - Claude Code skills (this skill is specifically for Cursor rules)
@@ -68,12 +71,14 @@ Students should **trim** sections they do not use (e.g. no Next.js → replace w
 Rules should provide concrete guidance, not vague advice.
 
 **❌ BAD - Vague:**
+
 ```markdown
 Write clean code with good practices.
 Use proper TypeScript types.
 ```
 
 **✅ GOOD - Specific:**
+
 ```markdown
 Use functional components with TypeScript.
 Define prop types with interfaces, not inline types.
@@ -85,6 +90,7 @@ Extract custom hooks when logic exceeds 10 lines.
 Don't document what linters handle. Document architectural decisions.
 
 **❌ BAD - Linter territory:**
+
 ```markdown
 Use semicolons in JavaScript.
 Indent with 2 spaces.
@@ -92,6 +98,7 @@ Add trailing commas.
 ```
 
 **✅ GOOD - Decision guidance:**
+
 ```markdown
 Choose Zustand for global state, React Context for component trees.
 Use Zod for runtime validation at API boundaries only.
@@ -164,6 +171,7 @@ Control how rules are applied using the **type dropdown** in Cursor:
 ### Examples by Rule Type
 
 **Always Rule** (Core conventions):
+
 ```yaml
 ---
 description: TypeScript and code style conventions for the entire project
@@ -172,6 +180,7 @@ alwaysApply: true
 ```
 
 **Auto Attached Rule** (File pattern-specific):
+
 ```yaml
 ---
 description: React component patterns and conventions
@@ -181,6 +190,7 @@ alwaysApply: false
 ```
 
 **Agent Requested Rule** (Contextual):
+
 ```yaml
 ---
 description: RPC service boilerplate and patterns for creating new RPC endpoints
@@ -190,6 +200,7 @@ alwaysApply: false
 ```
 
 **Manual Rule** (Explicit invocation):
+
 ```yaml
 ---
 description: Legacy API migration patterns (deprecated, use for reference only)
@@ -267,6 +278,7 @@ try {
 ```
 
 ### API Route Structure
+
 ```typescript
 // app/api/users/route.ts
 export async function GET(request: Request) {
@@ -282,6 +294,7 @@ export async function GET(request: Request) {
   }
 }
 ```
+
 ```
 
 ## What NOT to Include
@@ -297,6 +310,7 @@ Avoid these common mistakes:
 ```
 
 **❌ Too restrictive:**
+
 ```markdown
 - Never use any third-party libraries
 - Always write everything from scratch
@@ -304,6 +318,7 @@ Avoid these common mistakes:
 ```
 
 **❌ Language-agnostic advice:**
+
 ```markdown
 - Use design patterns
 - Think before you code
@@ -390,6 +405,7 @@ export function Button() { }
 **Why:** Named exports are more refactor-friendly and enable better tree-shaking.
 
 ### ❌ Don't: Inline Type Definitions
+
 ```typescript
 // ❌ BAD
 function UserCard({ user }: { user: { name: string; email: string } }) { }
@@ -404,6 +420,7 @@ function UserCard({ user }: { user: User }) { }
 ```
 
 **Why:** Reusability and discoverability.
+
 ```
 
 ## Common Tasks
@@ -450,6 +467,7 @@ export async function POST(request: Request) {
   }
 }
 ```
+
 ```
 
 ## Best Practices
@@ -466,12 +484,14 @@ export async function POST(request: Request) {
 Break down by concern rather than creating one monolithic file:
 
 ```
+
 .cursor/rules/
   ├── tech-stack.mdc          # Core technologies
   ├── typescript-patterns.mdc # Language-specific patterns
   ├── api-conventions.mdc     # API route standards
   ├── component-patterns.mdc  # React/UI patterns
   └── testing-standards.mdc   # Testing approaches
+
 ```
 
 **Why:** Easier to maintain, update, and reuse across similar projects.
@@ -490,6 +510,7 @@ Use proper error handling in API routes.
 ```
 
 **✅ GOOD - Concrete:**
+
 ```markdown
 API routes must use try/catch with typed errors. Example:
 ```typescript
@@ -503,7 +524,9 @@ export async function POST(request: Request) {
   }
 }
 ```
+
 See `app/api/products/route.ts` for complete implementation.
+
 ```
 
 ### Write Rules Like Clear Internal Docs

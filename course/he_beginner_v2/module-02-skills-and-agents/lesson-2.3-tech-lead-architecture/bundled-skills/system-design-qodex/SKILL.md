@@ -74,4 +74,5 @@ This skill provides guidence for quality focused software development and archit
 - Avoid deep nesting (max 3 levels)
 - Keep functions focused and under 50 lines when possible
 - Keep files focused and under 200 lines of code when possible
+
 ```

@@ -22,6 +22,7 @@ Before spawning sub-tasks, ask the user to paste **in one message** (or attach f
 ## Initial Response
 
 When invoked WITH a plan/ticket file:
+
 ```
 I'll help debug issues with [file name]. Let me understand the current state.
 
@@ -34,6 +35,7 @@ I'll investigate the logs, database, and git state to help figure out what's hap
 ```
 
 When invoked WITHOUT parameters:
+
 ```
 I'll help debug your current issue.
 
@@ -50,18 +52,22 @@ I can investigate logs, database state, and recent changes to help identify the 
 You have access to these key locations and tools:
 
 **Logs**:
+
 - Application logs (check project-specific locations)
 - Common locations: `./logs/`, `~/.local/share/{app}/`, `/var/log/`
 
 **Database** (if applicable):
+
 - SQLite databases can be queried with `sqlite3`
 - Check project config for database locations
 
 **Git State**:
+
 - Check current branch, recent commits, uncommitted changes
 - Similar to how `commit` and `describe_pr` commands work
 
 **Service Status**:
+
 - Check running processes: `ps aux | grep {service}`
 - Check listening ports: `lsof -i :{port}`
 
@@ -140,15 +146,18 @@ Based on the investigation, present a focused debug report:
 ```
 
 **From Git/Files**:
+
 - [Recent changes that might be related]
 - [File state issues]
 
 ### Root Cause
+
 [Most likely explanation based on evidence]
 
 ### Next Steps
 
 1. **Try This First**:
+
    ```bash
    [Specific command or action]
    ```
@@ -159,12 +168,15 @@ Based on the investigation, present a focused debug report:
    - Run with debug flags enabled
 
 ### Can't Access?
+
 Some issues might be outside my reach:
+
 - Browser console errors (F12 in browser)
 - MCP server internal state
 - System-level issues
 
 Would you like me to investigate something specific further?
+
 ```
 
 ## Important Notes
@@ -185,6 +197,7 @@ ls -t ./logs/*.log | head -1
 ```
 
 **Database Queries** (SQLite):
+
 ```bash
 sqlite3 {database_path} ".tables"
 sqlite3 {database_path} ".schema {table}"
@@ -192,12 +205,14 @@ sqlite3 {database_path} "SELECT * FROM {table} ORDER BY created_at DESC LIMIT 5;
 ```
 
 **Service Check**:
+
 ```bash
 ps aux | grep {service_name}
 lsof -i :{port}
 ```
 
 **Git State**:
+
 ```bash
 git status
 git log --oneline -10

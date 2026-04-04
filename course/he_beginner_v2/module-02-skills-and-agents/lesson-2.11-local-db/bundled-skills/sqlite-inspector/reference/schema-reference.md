@@ -9,6 +9,7 @@ Complete reference for all MikoPBX SQLite database tables, columns, and relation
 The extensions table is the central hub connecting all phone number entities in MikoPBX.
 
 **Key columns:**
+
 - `number` - Extension number (2-8 digits, PRIMARY KEY)
 - `type` - Extension type: `SIP`, `EXTERNAL`, `QUEUE`, `CONFERENCE`, `DIALPLAN APPLICATION`, `IVR MENU`
 - `callerid` - Display name
@@ -17,6 +18,7 @@ The extensions table is the central hub connecting all phone number entities in 
 - `is_general_user_number` - "1" for primary user extension
 
 **Common queries:**
+
 ```sql
 -- All SIP extensions
 SELECT * FROM m_Extensions WHERE type = 'SIP';
@@ -37,6 +39,7 @@ LEFT JOIN m_Users u ON e.userid = u.id;
 SIP account configurations linked to extensions.
 
 **Key columns:**
+
 - `id` - Auto-increment PRIMARY KEY
 - `extension` - Foreign key to m_Extensions.number (UNIQUE)
 - `secret` - SIP password
@@ -45,6 +48,7 @@ SIP account configurations linked to extensions.
 - `manualattributes` - Custom SIP headers
 
 **Common queries:**
+
 ```sql
 -- SIP accounts with network filters
 SELECT s.extension, s.secret, s.transport, nf.permit, nf.deny
@@ -62,6 +66,7 @@ SELECT * FROM m_Sip WHERE extension = '100';
 User accounts and profiles.
 
 **Key columns:**
+
 - `id` - Auto-increment PRIMARY KEY
 - `email` - User email (UNIQUE)
 - `username` - Display name
@@ -69,6 +74,7 @@ User accounts and profiles.
 - `avatar` - Avatar file path
 
 **Common queries:**
+
 ```sql
 -- Users with their extensions
 SELECT u.id, u.username, u.email,
@@ -85,6 +91,7 @@ GROUP BY u.id;
 SIP/IAX provider (trunk) configurations.
 
 **Key columns:**
+
 - `uniqid` - Unique identifier (PRIMARY KEY)
 - `type` - Provider type: `SIP` or `IAX`
 - `description` - Provider name
@@ -92,6 +99,7 @@ SIP/IAX provider (trunk) configurations.
 - `disabled` - "1" if disabled
 
 **Common queries:**
+
 ```sql
 -- Active SIP providers
 SELECT * FROM m_Providers
@@ -113,6 +121,7 @@ FROM m_Providers p;
 DID/Incoming call routing rules.
 
 **Key columns:**
+
 - `id` - Auto-increment PRIMARY KEY
 - `number` - DID pattern (can contain wildcards)
 - `provider` - Foreign key to m_Providers.uniqid
@@ -122,6 +131,7 @@ DID/Incoming call routing rules.
 - `timeout` - Ring timeout in seconds
 
 **Common queries:**
+
 ```sql
 -- All incoming routes ordered by priority
 SELECT ir.number, ir.provider, ir.extension, ir.action, ir.priority,
@@ -141,6 +151,7 @@ SELECT * FROM m_IncomingRoutingTable WHERE provider = 'PROVIDER_UNIQID';
 Outbound call routing rules.
 
 **Key columns:**
+
 - `id` - Auto-increment PRIMARY KEY
 - `providerid` - Foreign key to m_Providers.uniqid
 - `numberbeginswith` - Pattern to match (e.g., "1" for US, "00" for international)
@@ -150,6 +161,7 @@ Outbound call routing rules.
 - `priority` - Rule order (0-9999, lower = higher priority)
 
 **Common queries:**
+
 ```sql
 -- Outbound routes by priority
 SELECT or.numberbeginswith, or.restnumbers, or.trimfrombegin, or.prepend,
@@ -168,6 +180,7 @@ ORDER BY or.priority;
 Call queue configurations.
 
 **Key columns:**
+
 - `uniqid` - Unique identifier (PRIMARY KEY)
 - `name` - Queue name
 - `extension` - Queue extension number (Foreign key to m_Extensions.number)
@@ -177,11 +190,13 @@ Call queue configurations.
 - `timeout_to_redirect_to_extension` - Timeout before overflow
 
 **Related table:** `m_CallQueueMembers`
+
 - `queue` - Foreign key to m_CallQueues.uniqid
 - `extension` - Member extension (Foreign key to m_Extensions.number)
 - `priority` - Member priority
 
 **Common queries:**
+
 ```sql
 -- Queue with members
 SELECT cq.name, cq.extension, cq.strategy,
@@ -201,6 +216,7 @@ ORDER BY cqm.priority;
 Conference room configurations.
 
 **Key columns:**
+
 - `uniqid` - Unique identifier (PRIMARY KEY)
 - `name` - Conference name
 - `extension` - Conference extension (Foreign key to m_Extensions.number)
@@ -213,6 +229,7 @@ Conference room configurations.
 Interactive Voice Response menus and digit actions.
 
 **m_IvrMenu columns:**
+
 - `uniqid` - Unique identifier (PRIMARY KEY)
 - `name` - IVR menu name
 - `extension` - IVR extension (Foreign key to m_Extensions.number)
@@ -221,12 +238,14 @@ Interactive Voice Response menus and digit actions.
 - `number_of_repeat` - How many times to repeat menu
 
 **m_IvrMenuActions columns:**
+
 - `id` - Auto-increment PRIMARY KEY
 - `ivr_menu_id` - Foreign key to m_IvrMenu.uniqid
 - `digits` - Pressed digit: `0-9`, `*`, `#`, `timeout`
 - `extension` - Destination extension
 
 **Common queries:**
+
 ```sql
 -- IVR menu with actions
 SELECT im.name, im.extension,
@@ -246,6 +265,7 @@ ORDER BY ima.digits;
 IP-based access restrictions.
 
 **Key columns:**
+
 - `id` - Auto-increment PRIMARY KEY
 - `description` - Filter description
 - `permit` - Allowed IP/CIDR (can contain multiple comma-separated)
@@ -253,6 +273,7 @@ IP-based access restrictions.
 - `local_network` - "1" if this represents local network
 
 **Common queries:**
+
 ```sql
 -- SIP accounts with IP restrictions
 SELECT s.extension, s.secret, nf.permit, nf.deny, nf.description
@@ -268,6 +289,7 @@ WHERE s.networkfilterid IS NOT NULL;
 Firewall access rules.
 
 **Key columns:**
+
 - `id` - Auto-increment PRIMARY KEY
 - `category` - Service category: `SIP`, `WEB`, `SSH`, `AMI`, `ICMP`, `CTI`
 - `networkfilterid` - Foreign key to m_NetworkFilters
@@ -275,6 +297,7 @@ Firewall access rules.
 - `description` - Rule description
 
 **Common queries:**
+
 ```sql
 -- Firewall rules with network filters
 SELECT fr.category, fr.action, fr.description,
@@ -291,6 +314,7 @@ ORDER BY fr.category;
 Fail2ban intrusion prevention rules.
 
 **Key columns:**
+
 - `id` - Auto-increment PRIMARY KEY
 - `maxretry` - Max failed attempts before ban (default: 5)
 - `findtime` - Time window to count retries in seconds (default: 1800)
@@ -306,10 +330,12 @@ Fail2ban intrusion prevention rules.
 Key-value configuration store.
 
 **Key columns:**
+
 - `key` - Setting name (PRIMARY KEY)
 - `value` - Setting value
 
 **Important keys:**
+
 - `PBXVersion` - System version
 - `PBXLanguage` - Default system language
 - `WebAdminLogin` - Admin username
@@ -317,6 +343,7 @@ Key-value configuration store.
 - `PBXTimezone` - System timezone
 
 **Common queries:**
+
 ```sql
 -- Get specific setting
 SELECT value FROM m_PbxSettings WHERE key = 'PBXVersion';
@@ -332,6 +359,7 @@ SELECT * FROM m_PbxSettings WHERE key LIKE '%Language%';
 Audio file registry.
 
 **Key columns:**
+
 - `id` - Auto-increment PRIMARY KEY
 - `name` - File display name
 - `path` - Filesystem path
@@ -344,6 +372,7 @@ Audio file registry.
 Custom configuration file overrides.
 
 **Key columns:**
+
 - `id` - Auto-increment PRIMARY KEY
 - `filepath` - Path to file being customized
 - `content` - Custom content
@@ -359,6 +388,7 @@ Custom configuration file overrides.
 Historical call detail records.
 
 **Key columns:**
+
 - `id` - Auto-increment PRIMARY KEY
 - `start` - Call start timestamp
 - `answer` - Call answer timestamp
@@ -375,6 +405,7 @@ Historical call detail records.
 - `linkedid` - Unique call identifier
 
 **Common queries:**
+
 ```sql
 -- Calls for specific extension
 SELECT start, src_num, dst_num, duration, billsec, disposition
@@ -402,12 +433,14 @@ ORDER BY start DESC;
 Currently active calls.
 
 **Same schema as cdr_general**, but records are:
+
 - Inserted when call starts
 - Updated during call
 - Moved to `cdr_general` when call ends
 - `endtime IS NULL` indicates active call
 
 **Common queries:**
+
 ```sql
 -- Active calls right now
 SELECT src_num, dst_num, start, duration
@@ -463,7 +496,9 @@ m_IvrMenuActions (ivr_menu_id)
 ## Enum Values Reference
 
 ### m_Extensions.type
+
 Valid values:
+
 - `SIP` - SIP phone extension
 - `EXTERNAL` - External number
 - `QUEUE` - Call queue
@@ -472,32 +507,42 @@ Valid values:
 - `IVR MENU` - IVR menu
 
 ### m_Providers.type
+
 Valid values:
+
 - `SIP` - SIP trunk
 - `IAX` - IAX trunk
 
 ### m_IncomingRoutingTable.action
+
 Valid values:
+
 - `extension` - Route to extension
 - `hangup` - Hang up call
 - `busy` - Return busy signal
 - `voicemail` - Send to voicemail
 
 ### m_CallQueues.strategy
+
 Valid values:
+
 - `ringall` - Ring all members simultaneously
 - `leastrecent` - Ring member who answered least recently
 - `random` - Random member selection
 - `rrmemory` - Round-robin with memory
 
 ### m_Sip.transport
+
 Valid values:
+
 - `udp` - UDP transport
 - `tcp` - TCP transport
 - `tls` - TLS encrypted transport
 
 ### m_FirewallRules.category
+
 Valid values:
+
 - `SIP` - SIP protocol
 - `WEB` - Web interface
 - `SSH` - SSH access
@@ -506,7 +551,9 @@ Valid values:
 - `CTI` - Computer Telephony Integration
 
 ### m_CustomFiles.mode
+
 Valid values:
+
 - `append` - Append to file
 - `override` - Replace file
 - `script` - Execute as script
@@ -516,21 +563,25 @@ Valid values:
 ## Data Validation Rules
 
 ### Extension Numbers
+
 - Length: 2-8 digits
 - Format: Numeric only
 - Must be unique
 
 ### Priorities
+
 - Range: 0-9999
 - Lower value = higher priority
 - Used in routing tables and queue members
 
 ### Boolean Fields
+
 - Values: "0" (false) or "1" (true)
 - Stored as TEXT, not INTEGER
 - Examples: disabled, show_in_phonebook, is_general_user_number
 
 ### IP/CIDR Format
+
 - Single IP: `192.168.1.1`
 - CIDR range: `192.168.1.0/24`
 - Multiple: `192.168.1.1,10.0.0.0/8`

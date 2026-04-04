@@ -78,7 +78,7 @@ Rules:
 
 Use clear Given / When / Then with IDs that map back to the plan:
 
-```
+```text
 TC-F-001: Create item with valid input
   Given: authenticated user on the create form
   When:  fills name "Widget" and submits

@@ -19,6 +19,7 @@ For defining and testing real user experiences - not just specs, but actual flow
 **Specs test features. Journeys test experiences.**
 
 A feature can pass all specs but still deliver a terrible experience. User journeys capture:
+
 - How users actually navigate (not how we think they should)
 - Emotional states at each step (frustrated, confused, delighted)
 - Recovery from mistakes (users will make them)
@@ -561,6 +562,7 @@ trackJourneyStep({
 ## Common Journey Patterns
 
 ### Progressive Disclosure Journey
+
 User sees simple view first, complexity revealed as needed.
 
 ```markdown
@@ -570,6 +572,7 @@ Step 3: Expert mode unlocks everything
 ```
 
 ### Guided Setup Journey
+
 Hand-hold new users through initial configuration.
 
 ```markdown
@@ -581,6 +584,7 @@ Step 5: Success + remove training wheels
 ```
 
 ### Recovery Journey
+
 User returns after failure or abandonment.
 
 ```markdown
@@ -608,6 +612,7 @@ Step 5: Complete original goal
 ## Quick Reference
 
 ### Journey Priorities
+
 | Priority | Criteria | Test Frequency |
 |----------|----------|----------------|
 | Critical | Revenue, core value | Every deploy |
@@ -628,6 +633,7 @@ Step 5: Complete original goal
 ```
 
 ### Journey Documentation Checklist
+
 - [ ] User goal clearly stated
 - [ ] All steps documented
 - [ ] Success criteria per step

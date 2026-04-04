@@ -11,6 +11,7 @@ Perform a comprehensive code review on $ARGUMENTS. This is a **read-only** revie
 ## Review Categories
 
 ### 1. Dead Code Detection
+
 - Unused imports
 - Unused variables, functions, components, hooks
 - Unreachable code paths
@@ -18,13 +19,16 @@ Perform a comprehensive code review on $ARGUMENTS. This is a **read-only** revie
 - Unused type definitions / interfaces
 
 ### 2. Code Duplication
+
 - Duplicated logic that could be extracted to a shared utility
 - Similar components that could be consolidated
 - Repeated patterns that warrant a custom hook
 - Copy-pasted code blocks across files
 
 ### 3. Coding Pattern Violations
+
 Check against these rules:
+
 - **Collocation > Distribution**: Related code should live together, not scattered
 - **`let` > `const`**: Prefer `let` over `const` for variable declarations
 - **Named exports > Default exports**: Use `export function Foo` not `export default`
@@ -34,6 +38,7 @@ Check against these rules:
 - **`ALL_CAPS` for constants**: Constants should be `SCREAMING_SNAKE_CASE`
 
 ### 4. Bugs & Memory Leaks
+
 - Missing cleanup in useEffect
 - Event listeners not removed
 - Subscriptions not unsubscribed
@@ -44,6 +49,7 @@ Check against these rules:
 - Incorrect dependency arrays
 
 ### 5. Optimization Opportunities
+
 - Unnecessary re-renders
 - Heavy computations in render path
 - Missing keys in lists
@@ -67,6 +73,7 @@ CATEGORY NAME
 ```
 
 **Important formatting rules:**
+
 - Use ALL CAPS for category names
 - Use sequential numbering wrapped in brackets `[1]`, `[2]`, etc. across ALL categories
 - Highlight file references with backticks: `filename:line`
@@ -74,6 +81,7 @@ CATEGORY NAME
 - For **Coding Pattern Violations**: If multiple items with the same problem occur in the same file, list only ONCE (e.g., "5 usages of `const`" instead of listing each). No fix suggestions needed - these are easy fixes.
 
 Example:
+
 ```
 DEAD CODE
 

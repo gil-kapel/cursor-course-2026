@@ -122,7 +122,7 @@ export default function VideoPlayer({ lesson, chapterTitle, lessonNumber, totalL
             initial={false}
             animate={{ opacity: isHovered || !isPlaying ? 1 : 0 }}
             transition={{ duration: 0.2 }}
-            className="absolute bottom-0 inset-x-0 z-10 bg-gradient-to-t from-black/50 to-transparent pt-10"
+            className="absolute bottom-0 inset-x-0 z-10 bg-linear-to-t from-black/50 to-transparent pt-10"
           >
             {/* Progress bar */}
             <div className="px-4 mb-1">
@@ -169,7 +169,7 @@ export default function VideoPlayer({ lesson, chapterTitle, lessonNumber, totalL
             <p className="text-[0.8125rem] font-medium text-[#7E7F90] mb-1">{chapterTitle}</p>
             <h2 className="text-[1.125rem] font-bold text-[#303150]">{lesson.title}</h2>
           </div>
-          <div className="flex items-center gap-2 flex-shrink-0 mt-1">
+          <div className="flex items-center gap-2 shrink-0 mt-1">
             {lesson.badge && <LessonBadge type={lesson.badge} />}
             <div
               className="flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-bold text-[#7E7F90]"

@@ -560,6 +560,7 @@ GROUP BY cq.uniqid;
 ## Query Output Formatting
 
 ### Column Mode
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT * FROM m_Extensions LIMIT 5" \
@@ -567,6 +568,7 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 ```
 
 ### JSON Output
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT * FROM m_Extensions LIMIT 5" \
@@ -574,6 +576,7 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 ```
 
 ### CSV Export
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT * FROM m_Extensions" \
@@ -581,6 +584,7 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 ```
 
 ### HTML Table
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT * FROM m_Extensions LIMIT 10" \

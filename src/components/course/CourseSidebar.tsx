@@ -47,13 +47,13 @@ function getChapterDuration(lessons: Lesson[]): string {
 function LessonStatusIcon({ lessonId, isActive, watched }: { lessonId: string; isActive: boolean; watched: boolean }) {
   if (watched) {
     return (
-      <div className="w-4 h-4 rounded-full bg-[#0DBACC]/12 flex items-center justify-center flex-shrink-0">
+      <div className="w-4 h-4 rounded-full bg-[#0DBACC]/12 flex items-center justify-center shrink-0">
         <Check className="w-2.5 h-2.5 text-[#0DBACC]" strokeWidth={2.5} />
       </div>
     );
   }
   return (
-    <div className={`w-2 h-2 rounded-full flex-shrink-0 ${isActive ? 'bg-[#69ADFF]' : 'bg-[#E8E8ED]'}`} />
+    <div className={`w-2 h-2 rounded-full shrink-0 ${isActive ? 'bg-[#69ADFF]' : 'bg-[#E8E8ED]'}`} />
   );
 }
 
@@ -72,7 +72,7 @@ function ModuleDot({
   isLocked: boolean;
   onClick: () => void;
 }) {
-  const base = 'w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0';
+  const base = 'w-8 h-8 rounded-full flex items-center justify-center shrink-0';
 
   if (isLocked) {
     return (
@@ -157,7 +157,7 @@ export default function CourseSidebar({
       initial={false}
       animate={{ width: isCollapsed ? 56 : 340 }}
       transition={{ duration: 0.2, ease: 'easeInOut' }}
-      className="hidden lg:flex flex-col bg-white border-e border-[#F7F7F8] overflow-hidden flex-shrink-0"
+      className="hidden lg:flex flex-col bg-white border-e border-[#F7F7F8] overflow-hidden shrink-0"
       dir="rtl"
       lang="he"
     >
@@ -165,7 +165,7 @@ export default function CourseSidebar({
       <div className={`flex items-center border-b border-[#F7F7F8] ${isCollapsed ? 'justify-center py-3.5 px-2' : 'justify-between px-4 py-3.5'}`}>
         {!isCollapsed && (
           <div className="flex items-center gap-2 min-w-0">
-            <ListVideo className="w-4 h-4 text-[#69ADFF] flex-shrink-0" strokeWidth={1.75} />
+            <ListVideo className="w-4 h-4 text-[#69ADFF] shrink-0" strokeWidth={1.75} />
             <h3 className="text-[0.8125rem] font-bold text-[#303150] whitespace-nowrap truncate">
               תוכן הקורס
             </h3>
@@ -174,7 +174,7 @@ export default function CourseSidebar({
         <button
           type="button"
           onClick={onToggleCollapse}
-          className="w-7 h-7 rounded-lg flex items-center justify-center hover:bg-[#F7F7F8] transition-colors duration-150 cursor-pointer flex-shrink-0"
+          className="w-7 h-7 rounded-lg flex items-center justify-center hover:bg-[#F7F7F8] transition-colors duration-150 cursor-pointer shrink-0"
           title={isCollapsed ? 'הרחב תפריט' : 'כווץ תפריט'}
         >
           <motion.div animate={{ rotate: isCollapsed ? 0 : 180 }} transition={{ duration: 0.2 }}>
@@ -255,7 +255,7 @@ export default function CourseSidebar({
                       ${!isLast ? 'border-b border-b-[#F7F7F8]' : ''}
                     `}
                   >
-                    <div className="w-7 h-7 rounded-lg bg-[#69ADFF]/8 flex items-center justify-center flex-shrink-0">
+                    <div className="w-7 h-7 rounded-lg bg-[#69ADFF]/8 flex items-center justify-center shrink-0">
                       <Icon className="w-3.5 h-3.5 text-[#69ADFF]" strokeWidth={1.75} />
                     </div>
                     <div className="flex-1 min-w-0">
@@ -271,13 +271,13 @@ export default function CourseSidebar({
                       <motion.div
                         animate={{ rotate: isExpanded ? 180 : 0 }}
                         transition={{ duration: 0.2 }}
-                        className="flex-shrink-0"
+                        className="shrink-0"
                       >
                         <ChevronDown className="w-4 h-4 text-[#BDBDCB]" strokeWidth={1.75} />
                       </motion.div>
                     )}
                     {allLocked && (
-                      <Lock className="w-4 h-4 text-[#BDBDCB] flex-shrink-0" strokeWidth={1.75} />
+                      <Lock className="w-4 h-4 text-[#BDBDCB] shrink-0" strokeWidth={1.75} />
                     )}
                   </button>
 
@@ -319,7 +319,7 @@ export default function CourseSidebar({
                                 </p>
                               </div>
                               {isLocked && (
-                                <Lock className="w-3.5 h-3.5 text-[#BDBDCB] flex-shrink-0" strokeWidth={1.75} />
+                                <Lock className="w-3.5 h-3.5 text-[#BDBDCB] shrink-0" strokeWidth={1.75} />
                               )}
                             </button>
                           );

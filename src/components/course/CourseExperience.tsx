@@ -55,7 +55,9 @@ export default function CourseExperience({ course, storageKey }: CourseExperienc
       if (!id) return;
       const lesson = allLessons.find((l) => l.id === id);
       if (!lesson || lesson.status === 'locked') return;
+      /* eslint-disable react-hooks/set-state-in-effect -- restore persisted lesson after SSR/hydration */
       setActiveLessonId(id);
+      /* eslint-enable react-hooks/set-state-in-effect */
     } catch {
       /* noop */
     }
@@ -67,16 +69,16 @@ export default function CourseExperience({ course, storageKey }: CourseExperienc
 
   const setupContent = useMemo(() => getLessonSetup(activeLessonId), [activeLessonId]);
 
-  const { activeLesson, activeChapter } = useMemo(() => {
-    for (const ch of course.chapters) {
-      const lesson = ch.lessons.find((l) => l.id === activeLessonId);
-      if (lesson) return { activeLesson: lesson, activeChapter: ch };
+  let activeLesson = course.chapters[0].lessons[0];
+  let activeChapter = course.chapters[0];
+  for (const ch of course.chapters) {
+    const lesson = ch.lessons.find((l) => l.id === activeLessonId);
+    if (lesson) {
+      activeLesson = lesson;
+      activeChapter = ch;
+      break;
     }
-    return {
-      activeLesson: course.chapters[0].lessons[0],
-      activeChapter: course.chapters[0],
-    };
-  }, [activeLessonId, course.chapters]);
+  }
 
   const currentLessonIndex = allLessons.findIndex((l) => l.id === activeLessonId);
   const totalLessons = allLessons.length;
@@ -195,7 +197,7 @@ export default function CourseExperience({ course, storageKey }: CourseExperienc
         {/* Author + next lesson */}
         <div className="flex items-center justify-between flex-wrap gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-sm flex-shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-linear-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-sm shrink-0">
               <GraduationCap className="w-5 h-5 text-white" strokeWidth={2.5} />
             </div>
             <div>
@@ -234,7 +236,7 @@ export default function CourseExperience({ course, storageKey }: CourseExperienc
 
         {/* Disclaimer */}
         <div className="flex items-start gap-2 py-3 px-4 rounded-xl bg-[#F7F7F8]/60 border border-[#F7F7F8]">
-          <Info className="w-3.5 h-3.5 text-[#BDBDCB] flex-shrink-0 mt-0.5" strokeWidth={1.75} />
+          <Info className="w-3.5 h-3.5 text-[#BDBDCB] shrink-0 mt-0.5" strokeWidth={1.75} />
           <p className="text-[0.6875rem] text-[#BDBDCB] leading-relaxed">
             תוכן לימודי על פיתוח עם Cursor וסוכני AI מובנים. אינו מהווה ייעוץ מקצועי מכל סוג שהוא.
           </p>

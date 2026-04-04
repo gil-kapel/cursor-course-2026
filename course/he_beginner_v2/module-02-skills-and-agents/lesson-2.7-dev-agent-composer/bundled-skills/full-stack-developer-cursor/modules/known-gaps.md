@@ -3,7 +3,9 @@
 ## Scope Limitations
 
 ### **Platform-Specific Development**
+
 **Not Covered:**
+
 - iOS/Android native development (React Native, Flutter, Swift/Kotlin)
 - Desktop applications (Electron, Tauri, Qt)
 - Game development (Unity, Unreal Engine, Godot)
@@ -12,13 +14,16 @@
 - AR/VR development (WebXR, A-Frame)
 
 **Reason:** This skill focuses on web-based fullstack applications. For platform-specific development, use specialized skills:
+
 - `mobile-app-developer` (React Native, Flutter)
 - `desktop-app-developer` (Electron, Tauri)
 - `game-developer` (Unity, Godot)
 - `blockchain-developer` (Ethereum, Solana)
 
 ### **Legacy Technology Support**
+
 **Not Covered:**
+
 - PHP/Laravel stack maintenance
 - Ruby on Rails applications
 - Java Spring Boot enterprise apps
@@ -29,7 +34,9 @@
 **Reason:** Focus on modern, actively maintained technologies. Legacy system modernization should use `legacy-system-modernizer` skill.
 
 ### **Specialized Domains**
+
 **Not Covered:**
+
 - Data science and machine learning pipelines
 - Computer vision and image processing
 - Natural language processing at scale
@@ -44,7 +51,9 @@
 ## Technical Depth Limitations
 
 ### **Advanced Database Concepts**
+
 **Not Covered:**
+
 - Database sharding and partitioning strategies
 - Distributed database systems (CockroachDB, TiDB)
 - Time-series databases (InfluxDB, TimescaleDB)
@@ -53,12 +62,15 @@
 - Database administration (backup/restore, replication)
 
 **Complementary Skills:**
+
 - `database-administrator`
 - `data-architect`
 - `distributed-systems-engineer`
 
 ### **Advanced Security**
+
 **Not Covered:**
+
 - Penetration testing and ethical hacking
 - Cryptography implementation (AES, RSA, ECC)
 - Zero-knowledge proofs
@@ -68,12 +80,15 @@
 - Formal verification methods
 
 **Complementary Skills:**
+
 - `security-researcher`
 - `cryptography-engineer`
 - `penetration-tester`
 
 ### **Performance Engineering**
+
 **Not Covered:**
+
 - Kernel-level optimization
 - Custom memory allocators
 - JIT compilation techniques
@@ -83,12 +98,15 @@
 - Real-time systems design
 
 **Complementary Skills:**
+
 - `performance-engineer`
 - `systems-programmer`
 - `distributed-computing-specialist`
 
 ### **Enterprise Architecture**
+
 **Not Covered:**
+
 - Service mesh implementation (Istio, Linkerd)
 - API gateway patterns (Kong, Apigee)
 - Enterprise service bus (ESB)
@@ -98,6 +116,7 @@
 - Microservices communication patterns
 
 **Complementary Skills:**
+
 - `enterprise-architect`
 - `microservices-architect`
 - `event-driven-architect`
@@ -105,7 +124,9 @@
 ## Tool Ecosystem Gaps
 
 ### **Alternative Development Environments**
+
 **Not Covered:**
+
 - Visual Studio Code extensions deep-dive
 - JetBrains IDEs optimization (WebStorm, PyCharm)
 - Vim/Neovim configuration for development
@@ -115,7 +136,9 @@
 **Note:** Basic IDE setup covered, but advanced customization requires `ide-optimization-specialist`.
 
 ### **Build Tools & Task Runners**
+
 **Not Covered:**
+
 - Webpack 5+ advanced configuration
 - Rollup.js optimization strategies
 - esbuild configuration and plugins
@@ -125,11 +148,14 @@
 - Lerna package management
 
 **Complementary Skills:**
+
 - `build-tool-specialist`
 - `monorepo-architect`
 
 ### **Testing Frameworks Deep-Dive**
+
 **Not Covered:**
+
 - Cypress advanced patterns
 - Playwright custom fixtures
 - Jest advanced mocking strategies
@@ -139,13 +165,16 @@
 - Appium mobile testing
 
 **Complementary Skills:**
+
 - `testing-automation-expert`
 - `quality-assurance-engineer`
 
 ## Cloud Platform Specifics
 
 ### **Advanced Cloud Services**
+
 **Not Covered:**
+
 - AWS Lambda@Edge and CloudFront Functions
 - Google Cloud Functions (2nd gen)
 - Azure Functions advanced bindings
@@ -156,13 +185,16 @@
 - Cloud-native security (AWS IAM, GCP IAM, Azure RBAC)
 
 **Complementary Skills:**
+
 - `cloud-architect-aws`
 - `cloud-architect-gcp`
 - `cloud-architect-azure`
 - `multi-cloud-architect`
 
 ### **Infrastructure as Code**
+
 **Not Covered:**
+
 - Terraform modules development
 - AWS CloudFormation advanced patterns
 - Google Cloud Deployment Manager
@@ -172,13 +204,16 @@
 - Infrastructure testing (Terratest, kitchensink)
 
 **Complementary Skills:**
+
 - `infrastructure-engineer`
 - `devops-architect`
 
 ## Emerging Technology Gaps
 
 ### **Cutting-Edge Technologies**
+
 **Not Covered:**
+
 - WebAssembly (WASM) applications
 - Edge computing deployment
 - Serverless database integration
@@ -190,7 +225,9 @@
 **Note:** These technologies are too new or specialized for general fullstack development guidance.
 
 ### **AI/ML Integration Advanced**
+
 **Not Covered:**
+
 - Large language model fine-tuning
 - Custom model training pipelines
 - MLOps and model deployment
@@ -200,6 +237,7 @@
 - AI safety and alignment
 
 **Complementary Skills:**
+
 - `machine-learning-engineer`
 - `ai-infrastructure-engineer`
 - `mlops-engineer`
@@ -207,7 +245,9 @@
 ## Operational Limitations
 
 ### **Scale and Performance**
+
 **Not Covered:**
+
 - Applications serving 1M+ users
 - Sub-millisecond latency requirements
 - Petabyte-scale data processing
@@ -217,12 +257,15 @@
 - Zero-downtime deployment strategies
 
 **Complementary Skills:**
+
 - `scalability-architect`
 - `performance-engineer`
 - `site-reliability-engineer`
 
 ### **Compliance and Regulations**
+
 **Not Covered:**
+
 - GDPR implementation details
 - HIPAA healthcare compliance
 - PCI DSS payment processing
@@ -232,6 +275,7 @@
 - SOC 2 audit preparation
 
 **Complementary Skills:**
+
 - `compliance-officer`
 - `security-auditor`
 - `regulatory-specialist`
@@ -239,7 +283,9 @@
 ## Geographic and Cultural Considerations
 
 ### **Internationalization**
+
 **Not Covered:**
+
 - Right-to-left language support
 - Unicode normalization and collation
 - Cultural date/time formatting
@@ -249,11 +295,14 @@
 - GDPR vs CCPA vs other privacy laws
 
 **Complementary Skills:**
+
 - `internationalization-specialist`
 - `legal-tech-engineer`
 
 ### **Accessibility**
+
 **Not Covered:**
+
 - WCAG 2.1 AA compliance details
 - Screen reader optimization
 - Keyboard navigation patterns
@@ -263,13 +312,16 @@
 - Legal accessibility requirements
 
 **Complementary Skills:**
+
 - `accessibility-engineer`
 - `ux-researcher`
 
 ## Educational and Career Development
 
 ### **Learning Path Gaps**
+
 **Not Covered:**
+
 - Formal computer science education
 - Algorithm design and analysis
 - Data structures deep-dive
@@ -279,12 +331,15 @@
 - Network programming fundamentals
 
 **Complementary Skills:**
+
 - `computer-science-educator`
 - `systems-programmer`
 - `algorithm-specialist`
 
 ### **Career Development**
+
 **Not Covered:**
+
 - Interview preparation strategies
 - Resume optimization techniques
 - Networking and job search
@@ -294,6 +349,7 @@
 - Technical writing and blogging
 
 **Complementary Skills:**
+
 - `career-coach`
 - `technical-writer`
 - `leadership-mentor`
@@ -301,7 +357,9 @@
 ## Integration Limitations
 
 ### **Third-Party Service Integration**
+
 **Not Covered:**
+
 - Stripe payment processing deep-dive
 - Twilio communication APIs
 - SendGrid email service configuration
@@ -313,7 +371,9 @@
 **Note:** Basic integration patterns covered, but vendor-specific deep-dive requires `integration-specialist-[vendor]`.
 
 ### **API Design and Management**
+
 **Not Covered:**
+
 - API versioning strategies (URL vs headers vs query params)
 - API rate limiting algorithms
 - API documentation automation
@@ -323,13 +383,16 @@
 - API marketplace management
 
 **Complementary Skills:**
+
 - `api-architect`
 - `api-product-manager`
 
 ## Maintenance and Evolution
 
 ### **Code Maintenance**
+
 **Not Covered:**
+
 - Technical debt assessment frameworks
 - Refactoring large codebases
 - Legacy code modernization
@@ -339,11 +402,14 @@
 - Team onboarding procedures
 
 **Complementary Skills:**
+
 - `technical-debt-specialist`
 - `refactoring-expert`
 
 ### **Team and Process**
+
 **Not Covered:**
+
 - Agile vs Kanban vs Scrum implementation
 - Remote team collaboration tools
 - Code review best practices
@@ -353,6 +419,7 @@
 - Open source contribution workflows
 
 **Complementary Skills:**
+
 - `engineering-manager`
 - `technical-recruiter`
 - `open-source-maintainer`
@@ -362,6 +429,7 @@
 ## Integration with SOTA Fullstack Builder
 
 The SOTA Fullstack App Builder addresses many gaps by providing:
+
 - **Pre-configured integrations** for popular third-party services
 - **Scalable architecture templates** for high-traffic applications
 - **Security hardening** following enterprise standards

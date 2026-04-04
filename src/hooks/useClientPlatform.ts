@@ -54,6 +54,7 @@ export function useClientPlatform(): ClientPlatformState {
   const [macCpu, setMacCpu] = useState<MacCpuKind>(null);
 
   useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect -- client-only: navigator + localStorage after mount (SSR-safe) */
     const p = detectPlatform();
     setDetected(p);
     if (p === 'mac') setMacCpu(detectMacCpu());
@@ -65,6 +66,7 @@ export function useClientPlatform(): ClientPlatformState {
     } catch {
       /* ignore */
     }
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, []);
 
   const setOverride = useCallback((value: ClientPlatform | null) => {

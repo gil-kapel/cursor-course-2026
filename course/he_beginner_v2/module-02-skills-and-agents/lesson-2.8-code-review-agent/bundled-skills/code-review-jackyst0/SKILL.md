@@ -13,6 +13,7 @@ license: CC0-1.0
 ## When to Use
 
 当用户请求以下操作时使用此 skill：
+
 - 审查代码 / Review code
 - 检查代码质量 / Check code quality
 - 寻找代码中的问题 / Find issues in code
@@ -68,21 +69,25 @@ def calc(x,y):
 ## 代码审查报告
 
 ### 概述
+
 简单的加法函数，存在命名和格式问题。
 
 ### 发现的问题
+
 - [ ] 函数名 `calc` 不具描述性
 - [ ] 缺少类型提示
 - [ ] 缺少文档字符串
 - [ ] 运算符周围缺少空格
 
 ### 改进建议
+
 1. 将函数重命名为 `add_numbers`
 2. 添加类型提示：`def add_numbers(x: int, y: int) -> int:`
 3. 添加 docstring 说明函数用途
 4. 遵循 PEP 8 格式规范
 
 ### 评分
+
 - 代码质量: 6/10
 - 可读性: 7/10
 - 可维护性: 5/10

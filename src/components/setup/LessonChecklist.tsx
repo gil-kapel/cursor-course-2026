@@ -12,6 +12,7 @@ interface LessonChecklistProps {
 const STORAGE_PREFIX = 'lesson-checklist-';
 
 const URL_SPLIT = /\b(https?:\/\/\S+|[\w-]+\.[\w]{2,}(?:\/\S*)?)\b/g;
+/** Match [label](https://...) — URLs must be absolute http(s) so links work in the browser. */
 const MD_LINK = /\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g;
 const linkClass =
   'text-[#69ADFF] underline underline-offset-2 hover:text-[#4A90D9] transition-colors';
@@ -191,7 +192,7 @@ export default function LessonChecklist({ lessonId, checklist }: LessonChecklist
                         onClick={() => toggle(idx)}
                         className={`w-full flex items-start gap-3 p-2.5 rounded-xl text-right transition-colors duration-150 cursor-pointer group ${
                           isDone
-                            ? 'bg-[#0DBACC]/[0.04] hover:bg-[#0DBACC]/[0.08]'
+                            ? 'bg-[#0DBACC]/4 hover:bg-[#0DBACC]/8'
                             : 'hover:bg-[#F7F7F8]'
                         }`}
                       >

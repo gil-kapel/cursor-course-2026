@@ -15,6 +15,7 @@ Transform product requirements into structured test cases that ensure complete c
 ## When to Use
 
 Trigger this skill when:
+
 - User provides a PRD or requirements document and requests test cases
 - User asks to "generate test cases", "create test scenarios", or "plan QA"
 - User mentions testing coverage for a feature or requirement
@@ -58,6 +59,7 @@ Analyze requirements and extract test scenarios:
 4. **State transition scenarios** - If the feature involves state, map all transitions
 
 For each requirement, identify:
+
 - Preconditions (what must be true before testing)
 - Test steps (actions to perform)
 - Expected results (what should happen)
@@ -177,6 +179,7 @@ If coverage gaps exist, generate additional test cases.
 ### Step 6: Output Test Cases
 
 Write the test cases to `tests/<name>-test-cases.md` where `<name>` is derived from:
+
 - The feature name from the PRD
 - The user's specified name
 - A sanitized version of the requirement title
@@ -186,6 +189,7 @@ Use the Write tool to create the file with the structured test cases.
 ### Step 7: Summary
 
 After generating test cases, provide a brief summary in Chinese:
+
 - Total number of test cases generated
 - Coverage breakdown (functional, edge, error, state)
 - Any assumptions made or areas needing clarification
@@ -211,6 +215,7 @@ Before finalizing test cases, verify:
 **User**: "Generate test cases for the user authentication feature in docs/auth-prd.md"
 
 **Process**:
+
 1. Read docs/auth-prd.md
 2. Extract requirements: login, logout, password reset, session management
 3. Identify scenarios: successful login, invalid credentials, expired session, etc.
@@ -221,4 +226,5 @@ Before finalizing test cases, verify:
 ## References
 
 For detailed testing methodologies and best practices, see:
+
 - `references/testing-principles.md` - Core testing principles and patterns

@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS schema_migrations (
 ### Migration Script
 
 For production, use established tools:
+
 - **PostgreSQL**: golang-migrate, Flyway, sqitch
 - **MySQL**: Flyway, Liquibase
 - **SQLite**: golang-migrate, custom scripts
@@ -273,6 +274,7 @@ default_pool_size = 20
 ### Application-level
 
 Most database libraries support connection pooling. Configure:
+
 - `max_connections`: Total pool size
 - `min_idle`: Minimum idle connections
 - `max_lifetime`: Time before connection is recycled

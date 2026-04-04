@@ -1,0 +1,15 @@
+{
+  // Scope: project-authored Markdown. Exclude ASM object cache and vendored skill trees.
+  "globs": ["**/*.md"],
+  "ignores": [
+    "node_modules/**",
+    ".asm/objects/**",
+    "**/bundled-skills/**"
+  ],
+  "config": {
+    // Narration, URLs, and RTL prose don't fit 80 columns; not auto-fixable meaningfully.
+    "MD013": false,
+    // README tables use compact pipes; "aligned" style would churn hundreds of files.
+    "MD060": false
+  }
+}

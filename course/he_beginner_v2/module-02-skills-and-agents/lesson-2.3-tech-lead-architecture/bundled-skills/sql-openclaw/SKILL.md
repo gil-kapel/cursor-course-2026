@@ -109,17 +109,20 @@ sqlcmd -S localhost -d mydb -E                   # Windows auth
 ## Common Traps
 
 ### NULL Traps
+
 - `NOT IN (subquery)` returns empty if subquery has NULL → use `NOT EXISTS`
 - `NULL = NULL` is NULL, not true → use `IS NULL`
 - `COUNT(column)` excludes NULLs, `COUNT(*)` counts all
 
 ### Index Killers
+
 - Functions on columns → `WHERE YEAR(date) = 2024` scans full table
 - Type conversion → `WHERE varchar_col = 123` skips index
 - `LIKE '%term'` can't use index → only `LIKE 'term%'` works
 - Composite `(a, b)` won't help filtering only on `b`
 
 ### Join Traps
+
 - LEFT JOIN with WHERE on right table becomes INNER JOIN
 - Missing JOIN condition = Cartesian product
 - Multiple LEFT JOINs can multiply rows
@@ -137,6 +140,7 @@ EXPLAIN QUERY PLAN SELECT * FROM orders WHERE user_id = 5;
 ```
 
 **Red flags:**
+
 - `Seq Scan` on large tables → needs index
 - `Rows Removed by Filter` high → index doesn't cover filter
 - Actual vs estimated rows differ → run `ANALYZE tablename;`
@@ -170,7 +174,9 @@ CREATE INDEX idx_pending ON orders(user_id) WHERE status = 'pending';
 ---
 
 ## Related Skills
+
 Install with `clawhub install <slug>` if user confirms:
+
 - `prisma` — Node.js ORM
 - `sqlite` — SQLite-specific patterns
 - `analytics` — data analysis queries

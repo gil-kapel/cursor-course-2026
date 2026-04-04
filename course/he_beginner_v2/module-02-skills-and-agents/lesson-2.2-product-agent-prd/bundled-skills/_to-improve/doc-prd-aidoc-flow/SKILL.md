@@ -50,6 +50,7 @@ Create **Product Requirements Documents (PRD)** - Layer 2 artifact in the SDD wo
 **Before creating this document, you MUST:**
 
 1. **List existing upstream artifacts**:
+
    ```bash
    ls docs/01_BRD/ docs/02_PRD/ 2>/dev/null
    ```
@@ -71,6 +72,7 @@ Before creating a PRD, read:
 ## When to Use This Skill
 
 Use `doc-prd` when:
+
 - Have completed BRD (Layer 1)
 - Need to define product features and user requirements
 - Translating business needs to product specifications
@@ -86,6 +88,7 @@ PRD documents follow the **MVP template structure** (21 sections). See `ai_dev_s
 > **Note**: MVP template is the framework standard. All readiness scores use ≥90% thresholds. Expansion happens through NEW MVP iterations (PRD-02, PRD-03), not template changes.
 
 **Section 1. Document Control** (MANDATORY - First section):
+
 - Status, Version, Date Created, Last Updated
 - Author, Reviewer, Approver
 - BRD Reference (`@brd: BRD.NN.EE.SS`)
@@ -95,6 +98,7 @@ PRD documents follow the **MVP template structure** (21 sections). See `ai_dev_s
 - Document Revision History table
 
 **All 21 Sections (in order)**:
+
 1. **Document Control**: Metadata, versioning, dual scoring (SYS-Ready + EARS-Ready >=90%)
 2. **Executive Summary**: Business value and timeline overview (2-3 sentences)
 3. **Problem Statement**: Current state, business impact, opportunity assessment
@@ -118,6 +122,7 @@ PRD documents follow the **MVP template structure** (21 sections). See `ai_dev_s
 21. **Quality Assurance & Testing Strategy**: QA standards, testing strategy
 
 **Critical Notes**:
+
 - All 21 sections are MANDATORY with explicit numbering (`## N. Title` format)
 - Section 10 (Customer-Facing Content) is blocking - must contain substantive content
 - Section 8 (User Stories) must include layer separation scope note
@@ -135,12 +140,14 @@ PRD documents require **two quality scores** in Document Control:
 **Format**: `XX% (Target: >=90%)`
 
 **SYS-Ready Scoring Criteria (100%)**:
+
 - Product Requirements Completeness (40%): All 21 sections, measurable KPIs, acceptance criteria, stakeholder analysis
 - Technical Readiness (30%): System boundaries, quality attributes quantified, Architecture Decision Requirements
 - Business Alignment (20%): ROI validated, market analysis, success metrics, risk mitigation
 - Traceability (10%): Upstream BRD references, downstream links
 
 **EARS-Ready Scoring Criteria (100%)**:
+
 - Business Requirements Clarity (40%): SMART objectives, functional requirements, acceptance criteria
 - Requirements Maturity (35%): System boundaries, stakeholder requirements, problem statement
 - EARS Translation Readiness (20%): User journeys, quality attributes quantified
@@ -155,6 +162,7 @@ PRD documents require **two quality scores** in Document Control:
 | **Automation-Focused** | 1-12 (12) | n8n workflows, event processing |
 
 **Selection Criteria**:
+
 1. ML/AI agent? -> Agent-Based
 2. n8n workflow/automation? -> Automation-Focused
 3. Otherwise -> Standard (default)
@@ -162,6 +170,7 @@ PRD documents require **two quality scores** in Document Control:
 ### 4. User Stories Scope (Section 8)
 
 **Layer Separation Principle**:
+
 - **PRD (Layer 2)**: User role definitions, story summaries, product-level acceptance criteria
 - **EARS (Layer 3)**: Detailed behavioral scenarios (WHEN-THE-SHALL-WITHIN format)
 - **BDD (Layer 4)**: Executable test scenarios (Given-When-Then format)
@@ -172,12 +181,14 @@ PRD documents require **two quality scores** in Document Control:
 **User Story Format**: "As a [role], I want [capability] so that [benefit]"
 
 **PRD-Level Content (INCLUDE)**:
+
 - User role definitions (personas)
 - Story titles and summaries (2-3 sentences max)
 - Product-level acceptance criteria
 - Business value justification
 
 **NOT PRD-Level (EXCLUDE)**:
+
 - EARS-level specifications -> Layer 3
 - BDD-level test scenarios -> Layer 4
 - Technical implementation details -> Layer 6/7
@@ -188,6 +199,7 @@ PRD documents require **two quality scores** in Document Control:
 **Status**: BLOCKING - error if missing or placeholder-only
 
 **Required Content Categories** (minimum 3):
+
 1. Product positioning statements
 2. Key messaging themes
 3. Feature descriptions for marketing
@@ -203,6 +215,7 @@ PRD documents require **two quality scores** in Document Control:
 **Purpose**: Elaborate BRD Section 7.2 topics with **technical content** (options, criteria).
 
 **Layer Separation**:
+
 ```
 BRD Section 7.2          ->    PRD Section 18         ->    ADR
 (WHAT & WHY)                   (HOW to evaluate)           (Final decision)
@@ -212,6 +225,7 @@ Business constraints           Evaluation criteria         Trade-off analysis
 ```
 
 **PRD Section 18 Format**:
+
 ```markdown
 ##### BRD.NN.32.SS: [Topic Name]
 
@@ -240,6 +254,7 @@ Business constraints           Evaluation criteria         Trade-off analysis
 **Purpose**: Establish lightweight, machine-readable hints for AI discoverability and dependency tracing across PRD documents without blocking validation.
 
 **Tags Supported**:
+
 - `@depends: PRD-NN` — Hard prerequisite; this PRD cannot proceed without the referenced PRD
 - `@discoverability: PRD-NN (short rationale)` — Related document for AI search and ranking (informational)
 
@@ -248,6 +263,7 @@ Business constraints           Evaluation criteria         Trade-off analysis
 **Placement**: Add tags to Traceability section (Section 18) or inline with dependency descriptions.
 
 **Example**:
+
 ```markdown
 @depends: PRD-01 (Core Platform)
 @discoverability: PRD-02 (Feature Enhancements - shared architecture)
@@ -264,11 +280,13 @@ Business constraints           Evaluation criteria         Trade-off analysis
 **Required Subsections**:
 
 **20.1 Timing Profile Matrix**:
+
 | Operation | p50 | p95 | p99 | Unit | Trigger Event | Notes |
 |-----------|-----|-----|-----|------|---------------|-------|
 | [operation] | [value] | [value] | [value] | ms | [event] | [constraints] |
 
 **20.2 Boundary Value Matrix**:
+
 | Threshold | Operator | Value | At Boundary | Above | Below |
 |-----------|----------|-------|-------------|-------|-------|
 | [name] | >= or > or <= or < | [value] | [behavior] | [behavior] | [behavior] |
@@ -276,6 +294,7 @@ Business constraints           Evaluation criteria         Trade-off analysis
 **20.3 State Transition Diagram**: Mermaid stateDiagram-v2 with error states
 
 **20.4 Fallback Path Documentation**:
+
 | Dependency | Failure Mode | Detection | Fallback Behavior | Timeout | Recovery |
 |------------|--------------|-----------|-------------------|---------|----------|
 
@@ -289,6 +308,7 @@ Business constraints           Evaluation criteria         Trade-off analysis
 | Dot | TYPE.NN.xxxx | BRD, PRD, EARS, BDD, SYS, REQ, IMPL, TASKS | Hierarchical - element references |
 
 **Key Distinction**:
+
 - `@adr: ADR-033` -> Points to document `ADR-033_slug.md`
 - `@brd: BRD.17.0101` -> Points to element 01.01 inside `BRD-017.md`
 
@@ -312,6 +332,7 @@ Business constraints           Evaluation criteria         Trade-off analysis
 | Stakeholder Need | 24 | PRD.02.2401 |
 
 **REMOVED Patterns** (Do NOT use):
+
 - `AC-XXX` -> Use `PRD.NN.06.SS`
 - `FR-XXX` -> Use `PRD.NN.01.SS`
 - `F-XXX` -> Use `PRD.NN.09.SS`
@@ -331,6 +352,7 @@ Business constraints           Evaluation criteria         Trade-off analysis
 **Rationale**: Document context (PRD-01) already provides namespace. Embedding PRD number in feature ID is redundant. Feature IDs match document ID numbering convention.
 
 **Examples**:
+
 - `01`: First feature (in any PRD)
 - `15`: 15th feature
 - `99`: 99th feature
@@ -347,6 +369,7 @@ When referencing features from other PRDs, use the cross-reference format:
 ```
 
 **Components**:
+
 - `@prd:` - Tag prefix
 - `PRD-NN` - Document ID (NN in element ID)
 - `.01` - Element type (01 = Functional Requirement)
@@ -355,6 +378,7 @@ When referencing features from other PRDs, use the cross-reference format:
 **Uniqueness**: `PRD.22.0115` is globally unique (PRD-022, Feature 015)
 
 **Invalid Formats** (Do NOT Use):
+
 | Invalid Format | Issue | Correct Format |
 |----------------|-------|----------------|
 | `Feature-022-001` | Deprecated format | `PRD.22.0101` |
@@ -370,6 +394,7 @@ When referencing features from other PRDs, use the cross-reference format:
 **Tag Count**: 1 tag (@brd)
 
 **Format**:
+
 ```markdown
 ## 18. Traceability
 
@@ -384,11 +409,14 @@ When referencing features from other PRDs, use the cross-reference format:
 - BRD.01.0110 - Success criteria from business case
 
 **Upstream Sources**:
+
 - [BRD-01](../../../ai_dev_ssd_flow/PROJECT/fixtures/budget_alert/BRD-01.md) - Parent business requirements
 
 **Downstream Artifacts**:
+
 - EARS-NN (to be created) - Formal requirements
 - BDD-NN (to be created) - Test scenarios
+
 ```
 
 ## Creation Process
@@ -423,17 +451,21 @@ Check `docs/02_PRD/` for next available ID number (e.g., PRD-01, PRD-02).
 
 **Sectioned PRD** (for large documents >25KB):
 ```
+
 docs/02_PRD/PRD-01_user_authentication/
   PRD-01.0_index.md
   PRD-01.1_executive_summary.md
   PRD-01.2_problem_statement.md
   ...
+
 ```
 
 **Monolithic PRD** (for smaller documents ≤25KB):
 ```
+
 docs/02_PRD/PRD-01_user_authentication/
   PRD-01_user_authentication.md
+
 ```
 
 **CRITICAL**: Even monolithic PRDs MUST be in a nested folder. Never create `docs/02_PRD/PRD-NN_{slug}.md` directly in the `02_PRD/` directory.
@@ -494,9 +526,10 @@ Quality standards and testing strategy (moved from BRD).
    ```markdown
   - Downstream Artifacts: [PRD-01](../../../ai_dev_ssd_flow/PROJECT/fixtures/budget_alert/PRD-01.md)
    ```
-4. Commit BRD update with PRD creation (single commit)
+1. Commit BRD update with PRD creation (single commit)
 
 **Why This Matters**:
+
 - Enables bidirectional navigation between BRD and PRD
 - Impact analysis: BRD changes show affected PRDs
 - Audit compliance: Regulators require bidirectional traceability
@@ -526,6 +559,7 @@ python ai_dev_ssd_flow/scripts/validate_tags_against_docs.py --artifact PRD-NN -
 ## Validation Checklist
 
 **Structure (21 Sections)**:
+
 - [ ] All 21 numbered sections present (1-21)
 - [ ] Document Control (Section 1) at top with all required fields
 - [ ] Customer-Facing Content (Section 10) has substantive content
@@ -534,6 +568,7 @@ python ai_dev_ssd_flow/scripts/validate_tags_against_docs.py --artifact PRD-NN -
 - [ ] Quality Assurance & Testing Strategy (Section 21) completed
 
 **Document Control Required Fields**:
+
 - [ ] Status, Version, Date Created, Last Updated
 - [ ] Author, Reviewer, Approver
 - [ ] BRD Reference with @brd tag
@@ -543,6 +578,7 @@ python ai_dev_ssd_flow/scripts/validate_tags_against_docs.py --artifact PRD-NN -
 - [ ] Document Revision History table initialized
 
 **Content Quality**:
+
 - [ ] Parent BRD identified and referenced
 - [ ] Problem-Goals framework completed
 - [ ] User personas and user stories defined (PRD-level only)
@@ -554,6 +590,7 @@ python ai_dev_ssd_flow/scripts/validate_tags_against_docs.py --artifact PRD-NN -
 - [ ] EARS Enhancement Appendix complete (timing, boundary, state, fallback)
 
 **Traceability**:
+
 - [ ] Cumulative tags: @brd included
 - [ ] Traceability matrix created/updated
 - [ ] Upstream BRD traceability section updated with this PRD
@@ -561,6 +598,7 @@ python ai_dev_ssd_flow/scripts/validate_tags_against_docs.py --artifact PRD-NN -
 - [ ] No broken links
 
 **Size Limits**:
+
 - [ ] File size <50,000 tokens (standard) or <100,000 tokens (maximum)
 
 ## Post-Creation Validation (MANDATORY - NO CONFIRMATION)
@@ -630,6 +668,7 @@ custom_fields:
 ```
 
 **FORBIDDEN Values**:
+
 - Tags: `product-prd`, `feature-prd`, `product-requirements`
 - document_type: `product-requirements`, `product_requirements`
 - `architecture_approach: value` (singular form)
@@ -648,6 +687,7 @@ After creating PRD, use:
 **`doc-ears`** - Create formal EARS requirements (Layer 3)
 
 The EARS will:
+
 - Reference this PRD as upstream source
 - Include `@brd` and `@prd` tags (cumulative)
 - Use WHEN-THE-SHALL-WITHIN format
@@ -665,6 +705,7 @@ The EARS will:
 - **Shared Standards**: `.claude/skills/doc-flow/SHARED_CONTENT.md`
 
 **Section Templates** (DEFAULT for all PRD documents):
+
 - **Structure**: `docs/02_PRD/PRD-NN_{slug}/PRD-NN.S_{slug}.md`
 - Index template: `ai_dev_ssd_flow/02_PRD/PRD-SECTION-0-TEMPLATE.md`
 - Content template: `ai_dev_ssd_flow/02_PRD/PRD-SECTION-TEMPLATE.md`
@@ -679,6 +720,7 @@ The EARS will:
 **Tags Required**: @brd (1 tag)
 
 **Key Sections**:
+
 - Section 1: Document Control with dual scoring (SYS-Ready + EARS-Ready >=90%)
 - Section 8: User Stories (PRD-level only)
 - Section 10: Customer-Facing Content (MANDATORY)

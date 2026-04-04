@@ -11,7 +11,9 @@
 ## Coverage Requirements
 
 ### 1. Happy Path Coverage
+
 Test all normal use cases from requirements:
+
 - Primary user flows
 - Expected inputs and outputs
 - Standard workflows
@@ -20,7 +22,9 @@ Test all normal use cases from requirements:
 **Example**: For a login feature, test successful login with valid credentials.
 
 ### 2. Edge Case Coverage
+
 Test boundary conditions and unusual inputs:
+
 - Empty inputs (null, undefined, empty string, empty array)
 - Boundary values (min, max, zero, negative)
 - Maximum limits (character limits, file size limits, array lengths)
@@ -30,7 +34,9 @@ Test boundary conditions and unusual inputs:
 **Example**: For a login feature, test with empty username, maximum length password, special characters in credentials.
 
 ### 3. Error Handling Coverage
+
 Test failure scenarios and error conditions:
+
 - Invalid inputs (wrong type, format, range)
 - Permission errors (unauthorized access, insufficient privileges)
 - Network failures (timeout, connection lost, server error)
@@ -40,7 +46,9 @@ Test failure scenarios and error conditions:
 **Example**: For a login feature, test with invalid credentials, account locked, server timeout.
 
 ### 4. State Transition Coverage
+
 If the feature involves state, test all valid state changes:
+
 - Initial state to each possible next state
 - All valid state transitions
 - Invalid state transitions (should be rejected)
@@ -67,6 +75,7 @@ Every test case must include:
 ### Test Case Naming Convention
 
 Use prefixes to categorize test cases:
+
 - **TC-F-XXX**: Functional tests (happy path)
 - **TC-E-XXX**: Edge case tests (boundaries)
 - **TC-ERR-XXX**: Error handling tests (failures)
@@ -79,11 +88,13 @@ Use prefixes to categorize test cases:
 ### Pattern 1: Arrange-Act-Assert (AAA)
 
 Structure test steps using AAA pattern:
+
 1. **Arrange** - Set up preconditions and test data
 2. **Act** - Execute the action being tested
 3. **Assert** - Verify expected results
 
 **Example**:
+
 ```
 Preconditions:
 - User account exists with username "testuser"
@@ -100,11 +111,13 @@ Test Steps:
 ### Pattern 2: Equivalence Partitioning
 
 Group inputs into equivalence classes and test one representative from each class:
+
 - Valid equivalence class
 - Invalid equivalence classes
 - Boundary values
 
 **Example**: For age input (valid range 18-100):
+
 - Valid class: 18, 50, 100
 - Invalid class: 17, 101, -1, "abc"
 - Boundaries: 17, 18, 100, 101
@@ -145,6 +158,7 @@ Prioritize test cases based on:
 ## Test Quality Indicators
 
 ### Good Test Cases
+
 - ✓ Maps directly to a requirement
 - ✓ Tests behavior, not implementation
 - ✓ Has clear, executable steps
@@ -154,6 +168,7 @@ Prioritize test cases based on:
 - ✓ Fails only when behavior is broken
 
 ### Poor Test Cases
+
 - ✗ Tests implementation details
 - ✗ Has vague or ambiguous steps
 - ✗ Has unmeasurable expected results
@@ -194,6 +209,7 @@ Before finalizing test cases, verify:
 ## Test Documentation Standards
 
 ### File Organization
+
 ```
 tests/
 ├── <feature>-test-cases.md     # Test cases for specific feature
@@ -202,6 +218,7 @@ tests/
 ```
 
 ### Markdown Structure
+
 - Use clear headings for test categories
 - Use tables for coverage matrices
 - Use code blocks for test data examples
@@ -209,6 +226,7 @@ tests/
 - Include metadata (feature, date, version)
 
 ### Maintenance
+
 - Update test cases when requirements change
 - Remove obsolete test cases
 - Add new test cases for bug fixes
@@ -218,6 +236,7 @@ tests/
 ## References
 
 These principles are derived from:
+
 - Industry-standard QA practices
 - Game QA methodologies (Unity Test Framework, Unreal Automation, Godot GUT)
 - Pragmatic testing philosophy: "Test what matters"

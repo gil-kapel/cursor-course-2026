@@ -57,7 +57,7 @@ export default function MobileDrawer({ chapters, activeLessonId, onSelectLesson,
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="lg:hidden fixed inset-y-0 end-0 z-50 w-[85vw] max-w-sm bg-white shadow-xl flex flex-col"
+              className="lg:hidden fixed inset-y-0 inset-e-0 z-50 w-[85vw] max-w-sm bg-white shadow-xl flex flex-col"
               dir="rtl"
               lang="he"
             >
@@ -94,7 +94,7 @@ export default function MobileDrawer({ chapters, activeLessonId, onSelectLesson,
                           border-b border-b-[#F7F7F8]
                         `}
                       >
-                        <div className="w-7 h-7 rounded-lg bg-[#69ADFF]/8 flex items-center justify-center flex-shrink-0">
+                        <div className="w-7 h-7 rounded-lg bg-[#69ADFF]/8 flex items-center justify-center shrink-0">
                           <Icon className="w-3.5 h-3.5 text-[#69ADFF]" strokeWidth={1.75} />
                         </div>
                         <div className="flex-1 min-w-0">
@@ -102,7 +102,7 @@ export default function MobileDrawer({ chapters, activeLessonId, onSelectLesson,
                           <p className="text-[0.6875rem] text-[#BDBDCB]">{chapter.lessons.length} שיעורים</p>
                         </div>
                         {allLocked ? (
-                          <Lock className="w-4 h-4 text-[#BDBDCB] flex-shrink-0" strokeWidth={1.75} />
+                          <Lock className="w-4 h-4 text-[#BDBDCB] shrink-0" strokeWidth={1.75} />
                         ) : (
                           <motion.div animate={{ rotate: isExpanded ? 180 : 0 }} transition={{ duration: 0.2 }}>
                             <ChevronDown className="w-4 h-4 text-[#BDBDCB]" strokeWidth={1.75} />
@@ -137,16 +137,16 @@ export default function MobileDrawer({ chapters, activeLessonId, onSelectLesson,
                                   `}
                                 >
                                   {watched ? (
-                                    <div className="w-4 h-4 rounded-full bg-[#0DBACC]/12 flex items-center justify-center flex-shrink-0">
+                                    <div className="w-4 h-4 rounded-full bg-[#0DBACC]/12 flex items-center justify-center shrink-0">
                                       <Check className="w-2.5 h-2.5 text-[#0DBACC]" strokeWidth={2.5} />
                                     </div>
                                   ) : (
-                                    <div className={`w-2 h-2 rounded-full flex-shrink-0 ${isActive ? 'bg-[#69ADFF]' : 'bg-[#E8E8ED]'}`} />
+                                    <div className={`w-2 h-2 rounded-full shrink-0 ${isActive ? 'bg-[#69ADFF]' : 'bg-[#E8E8ED]'}`} />
                                   )}
                                   <p className={`text-[0.8125rem] truncate flex-1 ${isActive ? 'font-bold text-[#303150]' : 'font-medium text-[#303150]'}`}>
                                     {lesson.title}
                                   </p>
-                                  {isLocked && <Lock className="w-3.5 h-3.5 text-[#BDBDCB] flex-shrink-0" strokeWidth={1.75} />}
+                                  {isLocked && <Lock className="w-3.5 h-3.5 text-[#BDBDCB] shrink-0" strokeWidth={1.75} />}
                                 </button>
                               );
                             })}

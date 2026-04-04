@@ -29,7 +29,7 @@ Lesson links below are **scaffold only**—teaching content will be added over t
 
 **Module goal:** Run Cursor’s AI as a team of specialists, using a structured Skills/rules pack across the development lifecycle.
 
-**How the arc fits together:** Lessons **2.2 → 2.6** are a *planning and design gate* (idea → PRD → architecture → UX → UI → security review before you over-invest in code). Lessons **2.7 → 2.10** are a *delivery loop* you can repeat (build in Composer → review the diff → add tests → debug with evidence). Lesson **2.11** adds *local persistence* that stays disposable until **Module 4** moves data to the cloud (e.g. Supabase). You can skim a single agent lesson out of order, but the numbering mirrors how PM-led teams hand work off.
+**How the arc fits together (app playlist IDs):** **2.1 → 2.3** are the *skills foundation* (Rules vs Skills, skill anatomy, ASM install). **2.4 → 2.8** are the *planning and design gate* (PRD → architecture → UX → UI → security). **2.9 → 2.12** are the *delivery loop* (Composer → code review → QA → debug). **2.13** is *local persistence* before **Module 4** (e.g. Supabase). Repo folders still use names like `lesson-2.12-skill-anatomy` / `lesson-2.2-product-agent-prd`; the app uses consecutive **2.1–2.13** in teaching order.
 
 **Downloadable skills (ASM):** Every lesson in this module includes **`AGENT_SKILLS.md`** (next to `README.md`) with ranked skills, scores, copy-paste `asm add skill` sources for the good ones, and a suggested `asm create expertise` bundle so students can install the same agent packs into their own project.
 
@@ -41,27 +41,29 @@ Lesson links below are **scaffold only**—teaching content will be added over t
 
 | Lesson | Topic | Links |
 |--------|--------|--------|
-| 2.1 | Introduction to Skills—course skill layout, **Skills vs one-off prompts**, ASM sync, and wiring **`.cursor/skills`** / **`.cursor/rules`** so the model keeps a specialist role | [README](module-02-skills-and-agents/lesson-2.1-skills-intro/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.1-skills-intro/AGENT_SKILLS.md) |
-| 2.2 | Product agent—turning an idea into a PRD (problem, users, scope, flows, metrics, acceptance criteria, risks) | [README](module-02-skills-and-agents/lesson-2.2-product-agent-prd/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.2-product-agent-prd/AGENT_SKILLS.md) |
-| 2.3 | Tech lead agent—PRD → stack, boundaries, folder layout, APIs, implementation slices | [README](module-02-skills-and-agents/lesson-2.3-tech-lead-architecture/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.3-tech-lead-architecture/AGENT_SKILLS.md) |
-| 2.4 | UX agent—journeys, screen logic, empty/error states, handoff before pixels | [README](module-02-skills-and-agents/lesson-2.4-ux-user-flow/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.4-ux-user-flow/AGENT_SKILLS.md) |
-| 2.5 | UI agent—components, tokens, states, a11y, responsive behavior (e.g. shadcn-style patterns) | [README](module-02-skills-and-agents/lesson-2.5-ui-design-systems/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.5-ui-design-systems/AGENT_SKILLS.md) |
-| 2.6 | Security agent—auth, permissions, secrets, data exposure, abuse cases *before* implementation hardens the wrong path | [README](module-02-skills-and-agents/lesson-2.6-security-agent/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.6-security-agent/AGENT_SKILLS.md) |
+| 2.1 | Skills foundations—**Rules vs Skills** (Cursor 3), two value types (**knowledge injection** vs **workflow orchestration**), where **`.cursor/rules`** and **`.cursor/skills`** live | [README](module-02-skills-and-agents/lesson-2.1-skills-intro/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.1-skills-intro/AGENT_SKILLS.md) |
+| 2.2 | Skill anatomy—how the agent **picks** a skill (frontmatter triggers, progressive disclosure), **good vs bad** `SKILL.md` patterns · folder `lesson-2.12-*` | [README](module-02-skills-and-agents/lesson-2.12-skill-anatomy/README.md) |
+| 2.3 | ASM in practice—**`asm search` / `add` / `sync`**, **AGENT_SKILLS.md** scores, **`asm create expertise`** · folder `lesson-2.13-*` | [README](module-02-skills-and-agents/lesson-2.13-asm-discovery/README.md) · [Agent skills (same as 2.1)](module-02-skills-and-agents/lesson-2.1-skills-intro/AGENT_SKILLS.md) |
+| 2.4 | Product agent—turning an idea into a PRD (problem, users, scope, flows, metrics, acceptance criteria, risks); start **`.cursor/rules/project.mdc`** · folder `lesson-2.2-*` | [README](module-02-skills-and-agents/lesson-2.2-product-agent-prd/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.2-product-agent-prd/AGENT_SKILLS.md) |
+| 2.5 | Tech lead agent—PRD → stack, boundaries, folder layout, APIs, implementation slices; add **`.cursor/rules/stack.mdc`** · folder `lesson-2.3-*` | [README](module-02-skills-and-agents/lesson-2.3-tech-lead-architecture/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.3-tech-lead-architecture/AGENT_SKILLS.md) |
+| 2.6 | UX agent—journeys, screen logic, empty/error states, handoff before pixels · folder `lesson-2.4-*` | [README](module-02-skills-and-agents/lesson-2.4-ux-user-flow/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.4-ux-user-flow/AGENT_SKILLS.md) |
+| 2.7 | UI agent—components, tokens, states, a11y, responsive behavior (e.g. shadcn-style patterns) · folder `lesson-2.5-*` | [README](module-02-skills-and-agents/lesson-2.5-ui-design-systems/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.5-ui-design-systems/AGENT_SKILLS.md) |
+| 2.8 | Security agent—auth, permissions, secrets, data exposure, abuse cases *before* implementation hardens the wrong path · folder `lesson-2.6-*` | [README](module-02-skills-and-agents/lesson-2.6-security-agent/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.6-security-agent/AGENT_SKILLS.md) |
 
 #### Implementation and production
 
 | Lesson | Topic | Links |
 |--------|--------|--------|
-| 2.7 | Dev agent—vertical slice in **Composer** (data + services + UI + validation) with reviewable diffs | [README](module-02-skills-and-agents/lesson-2.7-dev-agent-composer/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.7-dev-agent-composer/AGENT_SKILLS.md) |
-| 2.8 | Code review agent—bugs, regressions, security footguns, maintainability, merge readiness (not just “LGTM”) | [README](module-02-skills-and-agents/lesson-2.8-code-review-agent/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.8-code-review-agent/AGENT_SKILLS.md) |
-| 2.9 | QA agent—test plans and automated tests: happy paths, edge cases, failures, state vs acceptance criteria | [README](module-02-skills-and-agents/lesson-2.9-qa-tests-agent/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.9-qa-tests-agent/AGENT_SKILLS.md) |
-| 2.10 | Debug agent—stack traces / logs → minimal repro → smallest safe fix (no whole-repo guessing) | [README](module-02-skills-and-agents/lesson-2.10-debug-agent/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.10-debug-agent/AGENT_SKILLS.md) |
+| 2.9 | Dev agent—vertical slice in **Composer** (data + services + UI + validation) with reviewable diffs · folder `lesson-2.7-*` | [README](module-02-skills-and-agents/lesson-2.7-dev-agent-composer/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.7-dev-agent-composer/AGENT_SKILLS.md) |
+| 2.10 | Code review agent—bugs, regressions, security footguns, maintainability, merge readiness (not just “LGTM”) · folder `lesson-2.8-*` | [README](module-02-skills-and-agents/lesson-2.8-code-review-agent/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.8-code-review-agent/AGENT_SKILLS.md) |
+| 2.11 | QA agent—test plans and automated tests: happy paths, edge cases, failures, state vs acceptance criteria · folder `lesson-2.9-*` | [README](module-02-skills-and-agents/lesson-2.9-qa-tests-agent/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.9-qa-tests-agent/AGENT_SKILLS.md) |
+| 2.12 | Debug agent—stack traces / logs → minimal repro → smallest safe fix (no whole-repo guessing) · folder `lesson-2.10-*` | [README](module-02-skills-and-agents/lesson-2.10-debug-agent/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.10-debug-agent/AGENT_SKILLS.md) |
 
 #### Basic data handling
 
 | Lesson | Topic | Links |
 |--------|--------|--------|
-| 2.11 | Local DB—when SQLite vs JSON fits, schema-first thinking, disposable dev data (bridge to cloud DB later) | [README](module-02-skills-and-agents/lesson-2.11-local-db/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.11-local-db/AGENT_SKILLS.md) |
+| 2.13 | Local DB—when SQLite vs JSON fits, schema-first thinking, disposable dev data (bridge to cloud DB later) · folder `lesson-2.11-*` | [README](module-02-skills-and-agents/lesson-2.11-local-db/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.11-local-db/AGENT_SKILLS.md) |
 
 ### Module 3: Superpowers with MCP servers (Model Context Protocol)
 

@@ -13,6 +13,7 @@ After performing REST API operations (create, update, delete), use these scenari
 **When to use**: After creating an extension via REST API
 
 **What to verify**:
+
 - Extension record exists in m_Extensions
 - SIP account created in m_Sip (for SIP extensions)
 - Foreign key relationship is correct
@@ -21,6 +22,7 @@ After performing REST API operations (create, update, delete), use these scenari
 **Step-by-step verification**:
 
 ### Step 1: Check Extension Record
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT number, type, callerid, userid FROM m_Extensions WHERE number='NEW_NUMBER'" \
@@ -28,12 +30,14 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 ```
 
 **Expected result**:
+
 - Record exists
 - `type` is correct (SIP, EXTERNAL, etc.)
 - `callerid` matches API request
 - `userid` references valid user (if specified)
 
 ### Step 2: Check SIP Account Created
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT extension, secret, transport FROM m_Sip WHERE extension='NEW_NUMBER'" \
@@ -41,12 +45,14 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 ```
 
 **Expected result**:
+
 - Record exists for SIP extensions
 - `extension` matches extension number
 - `secret` (password) is set
 - `transport` is valid (udp/tcp/tls)
 
 ### Step 3: Verify Foreign Key Relationship
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT e.number, e.type, s.extension, s.secret
@@ -57,10 +63,12 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 ```
 
 **Expected result**:
+
 - JOIN returns data (no NULL for SIP type)
 - `e.number` = `s.extension`
 
 ### Step 4: Verify Complete Profile
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT e.number, e.type, e.callerid, u.username, u.email, s.secret
@@ -80,6 +88,7 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 **When to use**: After creating/updating a SIP or IAX provider via REST API
 
 **What to verify**:
+
 - Provider record exists in m_Providers
 - SIP/IAX account record exists
 - Routing rules reference correct provider
@@ -88,6 +97,7 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 **Step-by-step verification**:
 
 ### Step 1: Check Provider Record
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT uniqid, type, description, host, disabled FROM m_Providers
@@ -96,12 +106,14 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 ```
 
 **Expected result**:
+
 - Record exists
 - `type` is SIP or IAX
 - `host` is set
 - `disabled` matches API request
 
 ### Step 2: Check Associated SIP/IAX Account
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT * FROM m_Sip WHERE uniqid='PROVIDER_ID'" \
@@ -109,10 +121,12 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 ```
 
 **Expected result**:
+
 - Record exists for SIP providers
 - Account credentials are set
 
 ### Step 3: Verify Routing Rules Exist
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT
@@ -123,6 +137,7 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 **Expected result**: Counts match expected number of routes
 
 ### Step 4: Check Provider Not Orphaned
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT p.description,
@@ -141,6 +156,7 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 **When to use**: After creating/modifying a call queue via REST API
 
 **What to verify**:
+
 - Queue record exists in m_CallQueues
 - Queue extension exists in m_Extensions
 - Queue members exist in m_CallQueueMembers
@@ -149,6 +165,7 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 **Step-by-step verification**:
 
 ### Step 1: Check Queue Settings
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT uniqid, name, extension, strategy, seconds_to_ring_each_member
@@ -157,11 +174,13 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 ```
 
 **Expected result**:
+
 - Record exists
 - `strategy` is valid (ringall, leastrecent, random, rrmemory)
 - `extension` is set
 
 ### Step 2: Check Queue Members
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT cqm.extension, cqm.priority, e.callerid
@@ -173,11 +192,13 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 ```
 
 **Expected result**:
+
 - All members have valid extensions (e.callerid NOT NULL)
 - Priorities are unique and sequential
 - Member count matches API request
 
 ### Step 3: Verify Extension Record Exists
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT number, type FROM m_Extensions
@@ -185,10 +206,12 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 ```
 
 **Expected result**:
+
 - Extension exists
 - `type` = 'QUEUE'
 
 ### Step 4: Check Complete Queue Configuration
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT cq.name, cq.extension, cq.strategy,
@@ -211,6 +234,7 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 **When to use**: After creating/updating incoming or outbound routing rules
 
 **What to verify**:
+
 - Routing rule exists
 - Provider reference is valid
 - Destination extension exists (for incoming routes)
@@ -218,7 +242,7 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 
 **Step-by-step verification**:
 
-### For Incoming Routes:
+### For Incoming Routes
 
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
@@ -231,13 +255,14 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 ```
 
 **Expected result**:
+
 - Record exists
 - `provider` references valid provider (p.description NOT NULL)
 - `extension` exists if action='extension'
 - `priority` is correct
 - `action` is valid enum value
 
-### For Outbound Routes:
+### For Outbound Routes
 
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
@@ -250,12 +275,13 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 ```
 
 **Expected result**:
+
 - Record exists
 - `providerid` references valid provider
 - Pattern fields (numberbeginswith, restnumbers) are correct
 - Priority is correct
 
-### Check Destination Extension (Incoming Only):
+### Check Destination Extension (Incoming Only)
 
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
@@ -274,6 +300,7 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 **When to use**: After creating user with extensions via REST API
 
 **What to verify**:
+
 - User record exists in m_Users
 - Extensions exist and reference user
 - Primary extension is marked correctly
@@ -282,6 +309,7 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 **Step-by-step verification**:
 
 ### Step 1: Check User Record
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT id, email, username, language FROM m_Users WHERE id='USER_ID'" \
@@ -289,11 +317,13 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 ```
 
 **Expected result**:
+
 - Record exists
 - Email is unique
 - Username is set
 
 ### Step 2: Check User's Extensions
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT number, type, callerid, is_general_user_number
@@ -303,11 +333,13 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 ```
 
 **Expected result**:
+
 - All extensions exist
 - Exactly ONE extension has `is_general_user_number='1'`
 - Extension count matches API request
 
 ### Step 3: Full User Profile with Extensions
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT u.username, u.email, e.number, e.type, e.callerid
@@ -320,6 +352,7 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 **Expected result**: Complete profile matches API request
 
 ### Step 4: Verify No Orphaned Extensions
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT e.number
@@ -337,6 +370,7 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 **When to use**: After any batch operations or before release testing
 
 **What to verify**:
+
 - No orphaned records
 - Foreign key integrity
 - Referential integrity
@@ -344,6 +378,7 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 **Step-by-step verification**:
 
 ### Step 1: Find Orphaned SIP Accounts
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT s.extension FROM m_Sip s
@@ -354,6 +389,7 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 **Expected result**: No results (empty)
 
 ### Step 2: Find SIP Extensions Without Accounts
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT e.number FROM m_Extensions e
@@ -364,6 +400,7 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 **Expected result**: No results (empty)
 
 ### Step 3: Find Routing Rules with Invalid Destinations
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT ir.number, ir.extension FROM m_IncomingRoutingTable ir
@@ -374,6 +411,7 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 **Expected result**: No results (empty)
 
 ### Step 4: Find Queue Members with Invalid Extensions
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT cqm.queue, cqm.extension FROM m_CallQueueMembers cqm
@@ -384,6 +422,7 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 **Expected result**: No results (empty)
 
 ### Step 5: Find Invalid Provider References
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT ir.id, ir.provider FROM m_IncomingRoutingTable ir
@@ -394,6 +433,7 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 **Expected result**: No results (empty)
 
 ### Step 6: Find Invalid Network Filter References
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT s.extension, s.networkfilterid FROM m_Sip s
@@ -410,6 +450,7 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 **When to use**: After configuring network filters and firewall rules
 
 **What to verify**:
+
 - Network filter exists
 - Filter is referenced by SIP accounts or firewall rules
 - IP/CIDR format is valid
@@ -418,6 +459,7 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 **Step-by-step verification**:
 
 ### Step 1: Check Network Filter
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT id, description, permit, deny, local_network
@@ -426,11 +468,13 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 ```
 
 **Expected result**:
+
 - Record exists
 - `permit` or `deny` is set
 - IP/CIDR format is correct
 
 ### Step 2: Check What Uses This Filter
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT
@@ -441,6 +485,7 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 **Expected result**: At least one reference (not orphaned)
 
 ### Step 3: Check Firewall Rules
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT fr.category, fr.action, nf.permit, nf.deny
@@ -451,12 +496,14 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 ```
 
 **Expected result**:
+
 - Rules exist
 - `category` is valid enum
 - `action` is allow or block
 - Network filter data is populated
 
 ### Step 4: Verify SIP Accounts Using Filter
+
 ```bash
 docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
   "SELECT s.extension, s.secret, e.callerid

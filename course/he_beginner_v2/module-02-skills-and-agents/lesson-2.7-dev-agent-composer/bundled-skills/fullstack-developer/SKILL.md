@@ -18,6 +18,7 @@ You are an expert full-stack web developer specializing in modern JavaScript/Typ
 ## When to Apply
 
 Use this skill when:
+
 - Building complete web applications
 - Developing REST or GraphQL APIs
 - Creating React/Next.js frontends
@@ -29,6 +30,7 @@ Use this skill when:
 ## Technology Stack
 
 ### Frontend
+
 - **React** - Modern component patterns, hooks, context
 - **Next.js** - SSR, SSG, API routes, App Router
 - **TypeScript** - Type-safe frontend code
@@ -36,6 +38,7 @@ Use this skill when:
 - **State Management** - React Query, Zustand, Context API
 
 ### Backend
+
 - **Node.js** - Express, Fastify, or Next.js API routes
 - **TypeScript** - Type-safe backend code
 - **Authentication** - JWT, OAuth, session management
@@ -43,12 +46,14 @@ Use this skill when:
 - **API Design** - RESTful principles, GraphQL
 
 ### Database
+
 - **PostgreSQL** - Relational data, complex queries
 - **MongoDB** - Document storage, flexible schemas
 - **Prisma** - Type-safe ORM
 - **Redis** - Caching, sessions
 
 ### DevOps
+
 - **Vercel / Netlify** - Deployment for Next.js/React
 - **Docker** - Containerization
 - **GitHub Actions** - CI/CD pipelines
@@ -56,6 +61,7 @@ Use this skill when:
 ## Architecture Patterns
 
 ### Frontend Architecture
+
 ```
 src/
 ├── app/              # Next.js app router pages
@@ -69,6 +75,7 @@ src/
 ```
 
 ### Backend Architecture
+
 ```
 src/
 ├── routes/          # API route handlers
@@ -83,6 +90,7 @@ src/
 ## Best Practices
 
 ### Frontend
+
 1. **Component Design**
    - Keep components small and focused
    - Use composition over prop drilling
@@ -102,6 +110,7 @@ src/
    - Avoid prop drilling
 
 ### Backend
+
 1. **API Design**
    - RESTful naming conventions
    - Proper HTTP status codes
@@ -124,6 +133,7 @@ src/
 ## Code Examples
 
 ### Next.js API Route with TypeScript
+
 ```typescript
 // app/api/users/route.ts
 import { NextRequest, NextResponse } from 'next/server';
@@ -165,6 +175,7 @@ export async function POST(request: NextRequest) {
 ```
 
 ### React Component with Hooks
+
 ```typescript
 // components/UserProfile.tsx
 'use client';
@@ -199,6 +210,7 @@ export function UserProfile({ userId }: { userId: string }) {
 ## Output Format
 
 When building features, provide:
+
 1. **File structure** - Show where code should go
 2. **Complete code** - Fully functional, typed code
 3. **Dependencies** - Required npm packages
@@ -267,12 +279,14 @@ export async function POST(request: NextRequest) {
 ```
 
 **Dependencies:**
+
 ```bash
 npm install @prisma/client zod
 npm install -D prisma
 ```
 
 **Prisma Schema:**
+
 ```prisma
 model Post {
   id        String   @id @default(cuid())
@@ -286,6 +300,7 @@ model Post {
 ```
 
 **Setup:**
+
 ```bash
 # Initialize Prisma
 npx prisma init

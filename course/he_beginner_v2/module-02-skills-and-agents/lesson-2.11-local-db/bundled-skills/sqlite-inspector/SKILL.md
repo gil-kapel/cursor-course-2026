@@ -19,6 +19,7 @@ Quick database verification for MikoPBX after REST API operations to ensure data
 ## When to Use
 
 Use this skill when you need to:
+
 - **After API operations** - Verify create/update/delete operations modified database correctly
 - **Debugging data issues** - Investigate inconsistencies between API responses and database state
 - **Before integration tests** - Ensure database is in expected state
@@ -36,7 +37,9 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db "SELECT * FROM m_Extensio
 ## Available Databases
 
 ### Main Database: `/cf/conf/mikopbx.db`
+
 Primary configuration database containing:
+
 - Extensions (SIP/IAX, queues, IVR, conferences)
 - Users and authentication
 - Routing rules (incoming/outgoing)
@@ -44,7 +47,9 @@ Primary configuration database containing:
 - Security settings (firewall, fail2ban, network filters)
 
 ### CDR Database: Location varies
+
 Call detail records database:
+
 - `cdr_general` - Historical call records
 - `cdr` - Active calls
 
@@ -225,26 +230,31 @@ docker exec <container_id> sqlite3 /cf/conf/mikopbx.db \
 ## Key Tables Reference
 
 ### Core Tables
+
 - **m_Extensions** - All phone numbers (SIP, queues, IVR, conferences)
 - **m_Sip** - SIP account configurations
 - **m_Users** - User accounts and profiles
 - **m_Providers** - SIP/IAX trunks
 
 ### Routing
+
 - **m_IncomingRoutingTable** - DID/incoming routes
 - **m_OutgoingRoutingTable** - Outbound routes
 
 ### Call Features
+
 - **m_CallQueues** + **m_CallQueueMembers** - Call queues
 - **m_ConferenceRooms** - Conference rooms
 - **m_IvrMenu** + **m_IvrMenuActions** - IVR menus
 
 ### Security
+
 - **m_NetworkFilters** - IP-based restrictions
 - **m_FirewallRules** - Firewall rules
 - **m_Fail2BanRules** - Intrusion prevention
 
 ### CDR
+
 - **cdr_general** - Historical call records
 - **cdr** - Active calls
 

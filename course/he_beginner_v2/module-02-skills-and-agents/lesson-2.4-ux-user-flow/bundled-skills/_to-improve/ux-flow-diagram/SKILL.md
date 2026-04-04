@@ -37,6 +37,7 @@ Use `flowchart TD` for top-down layouts. Keep **≤ 12 nodes** per chart; split 
 ## Flow Diagram Symbols
 
 ### Basic Nodes
+
 ```
 ┌─────────┐
 │ Screen  │     ← Screen/Page
@@ -52,6 +53,7 @@ Use `flowchart TD` for top-down layouts. Keep **≤ 12 nodes** per chart; split 
 ```
 
 ### Connection Lines
+
 ```
 ───→     Unidirectional flow
 ←──→     Bidirectional flow
@@ -62,6 +64,7 @@ Use `flowchart TD` for top-down layouts. Keep **≤ 12 nodes** per chart; split 
 ## Flow Patterns
 
 ### Linear Flow (Sequential)
+
 ```
 ╔═══════════╗    ┌───────────┐    ╔═══════════╗
 ║   Start   ║───→│  Step 1   │───→║    End    ║
@@ -69,6 +72,7 @@ Use `flowchart TD` for top-down layouts. Keep **≤ 12 nodes** per chart; split 
 ```
 
 ### Branching Flow
+
 ```
                          Yes  ┌───────────┐
                     ┌────────→│  Path A   │────┐
