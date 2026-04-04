@@ -13,3 +13,14 @@ Hebrew-first lesson assets; this index is in English to match the course README.
 ## Syllabus topic
 
 Journeys, screen logic, empty/error states, and handoffs before visual UI work—so engineering and design share one narrative of what happens on each step.
+
+## Learning outcomes
+
+- Describe **user journeys** and **screen-level logic** including empty, loading, and error paths.
+- Produce a handoff that UI/visual work (2.5) can implement without re-negotiating the story.
+
+## Where this sits
+
+- **Phase:** Planning / design — behavior before pixels.
+- **Prerequisite:** Rough product intent (e.g. [2.2](../lesson-2.2-product-agent-prd/README.md)) and preferably technical boundaries ([2.3](../lesson-2.3-tech-lead-architecture/README.md)).
+- **Next:** [Lesson 2.5 — UI / design systems](../lesson-2.5-ui-design-systems/README.md).

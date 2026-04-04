@@ -13,3 +13,14 @@ Hebrew-first lesson assets; this index is in English to match the course README.
 ## Syllabus topic
 
 Structured pass over a diff: bugs, regressions, security footguns, maintainability, and cleanup—so merges are safe, not just “LGTM.”
+
+## Learning outcomes
+
+- Review changes with a **checklist mindset**: correctness, regressions, risky patterns, readability, and merge readiness.
+- Produce actionable feedback that complements automated tests (2.9).
+
+## Where this sits
+
+- **Phase:** Implementation — quality gate on concrete diffs.
+- **Prerequisite:** Code to review (e.g. after [2.7](../lesson-2.7-dev-agent-composer/README.md)).
+- **Next:** [Lesson 2.9 — QA / tests](../lesson-2.9-qa-tests-agent/README.md).

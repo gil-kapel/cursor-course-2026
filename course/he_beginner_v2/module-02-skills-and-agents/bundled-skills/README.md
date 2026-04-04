@@ -8,7 +8,7 @@ Each lesson’s `bundled-skills/` directory contains **read-only copies** of ups
 To refresh from upstream, re-run from repo root:
 
 ```bash
-python3 scripts/bundle_module02_skills.py
+uv run scripts/bundle_module02_skills.py
 ```
 
 **Warning:** that command **re-downloads** skills and **overwrites** `bundled-skills/`, including **`_to-improve/`** edits (course patches in `SKILL.md`). Commit or stash before refreshing; re-apply patches from git history if needed.
