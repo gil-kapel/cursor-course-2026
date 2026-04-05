@@ -13,3 +13,18 @@ Hebrew-first lesson assets; this index is in English to match the course README.
 ## Syllabus topic
 
 Turning a vague product idea into a structured Product Requirements Document (PRD). Defining the problem, users, scope, and acceptance criteria using a specialized agent skill. Learning how to create a "source of truth" for the rest of the development cycle.
+
+## Practical outcomes
+
+- Turn one rough idea into a saved `docs/prd.md`.
+- Ask clarifying questions before drafting instead of letting the model guess.
+- Capture scope, acceptance criteria, and open questions in one place.
+
+## Verify
+
+- `docs/prd.md` exists and includes problem, users, scope, key flows, acceptance criteria, and risks.
+- You can attach `@docs/prd.md` in the next lesson as the source of truth.
+
+## Next
+
+- [Lesson 2.5 — Tech lead agent (architecture handoff)](../lesson-2.5-tech-lead-architecture/README.md)

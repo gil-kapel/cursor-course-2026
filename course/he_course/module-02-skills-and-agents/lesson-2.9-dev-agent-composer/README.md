@@ -13,3 +13,18 @@ Hebrew-first lesson assets; this index is in English to match the course README.
 ## Syllabus topic
 
 Shipping a "vertical slice" of your application using Cursor's Composer (Agent mode). Connecting data models, services, and UI components in a single session. Learning how to manage multi-file changes while maintaining code quality.
+
+## Practical outcomes
+
+- Implement one narrow slice with Agent/Composer using the planning docs as context.
+- Review the proposed diff before applying changes.
+- Run the app and verify that the slice works.
+
+## Verify
+
+- You can point to a reviewable multi-file diff and a working slice.
+- The implementation clearly follows the architecture and UI planning documents.
+
+## Next
+
+- [Lesson 2.10 — Code review agent (cleanup & merge readiness)](../lesson-2.10-code-review-agent/README.md)

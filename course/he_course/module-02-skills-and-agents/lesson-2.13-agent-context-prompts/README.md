@@ -20,6 +20,11 @@ How to start any agent task with a **sharp prompt** and the right **context pack
 - Keep context isolated between tasks so agents do not pollute one another.
 - Save 2-3 reusable prompts as personal playbooks.
 
+## Verify
+
+- You can compare a weak opening prompt with a sharp one and explain the difference.
+- You finish with 2-3 reusable starter prompts for planning, implementation, or debugging.
+
 ## Next
 
 - Module 3 — MCP and live tools.

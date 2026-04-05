@@ -7,37 +7,39 @@
 ## 00:00 – 01:00
 
 טרמינל פתוח בתוך Cursor בתיקיית הפרויקט.
-הרצת פקודת `ls -a` והצגת קובץ `asm.toml`.
+הרצת `ls -a` והצגת `asm.toml`.
+אם אין `asm.toml`, מראים עצירה קצרה והקלדת `asm init` כדוגמת fallback.
 כיתוב overlay: **ASM — Agent Skill Manager**.
-הדגשת העובדה שאנחנו בתוך סביבת עבודה מנוהלת.
 
 ---
 
 ## 01:00 – 02:30
 
-הרצת פקודת `asm search "skill creator"` בטרמינל.
+הרצת `asm search "skill creator"` בטרמינל.
 צפייה בתוצאות שחוזרות.
 פתיחת `AGENT_SKILLS.md` של שיעור 2.1 בטאב נפרד.
-גלילה על טבלת הציון והדגשת השורה של `skill-creator` (ציון 95).
+גלילה על טבלת הציון והדגשת skill מומלץ.
+Overlay קטן: **Search -> compare -> choose**.
 
 ---
 
 ## 02:30 – 04:00
 
-העתקת פקודת ה־`asm add skill` מהמסמך והרצה בטרמינל.
-הרצת `asm sync`.
+העתקת פקודת `asm add skill` מהמסמך והרצה בטרמינל.
+מיד אחריה הרצת `asm sync`.
 פתיחת תיקיית `.cursor/skills` ב־Explorer כדי להראות שהסקיל החדש הגיע ליעדו.
 פתיחת `.asm/main_asm.md` והצגת העדכון האוטומטי.
+זום קצר על העובדה שהשינוי נראה גם בדיסק וגם במבנה של ASM.
 
 ---
 
 ## 04:00 – 05:00
 
-הרצת פקודת `asm create expertise` לדוגמה (למשל `cursor-skill-foundation`).
+הרצת `asm create expertise` לדוגמה עבור קבוצה קטנה של skills.
 מעבר מהיר על ה־Sidebar שמציג את מבנה התיקיות החדש.
-מסך סיום: **Next — Lesson 2.4: Product Agent**.
-(אופציונלי: זום על פקודת ה־`asm sync` האחרונה).
+מסך סיכום עם 3 שורות:
+- `asm search`
+- `asm add skill`
+- `asm sync`
 
----
-
-## 05:00 – 06:00
+כותרת סיום: **Next — Lesson 2.4: Product Agent**.

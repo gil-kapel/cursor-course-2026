@@ -20,6 +20,11 @@ Managing **specialist agents** in Cursor: creating separate agents per task/doma
 - Understand when to open a new chat versus when to open a new agent.
 - Learn a practical "starter prompt" shape that helps each agent begin with the right context.
 
+## Verify
+
+- You can explain each agent in one sentence: what it gets and what it returns.
+- You know when to open a new task or new context instead of continuing an old thread.
+
 ## Next
 
 - [Lesson 2.3 — ASM discovery & install](../lesson-2.3-asm-discovery/README.md)

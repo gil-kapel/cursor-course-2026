@@ -7,14 +7,14 @@
 ## 00:00 – 00:50
 
 Cursor פתוח. בטאבים למעלה רואים את `docs/prd.md` ו־`docs/architecture.md`.
-העכבר פותח את הצ'אט ומצרף את שניהם (`@docs...`).
+העכבר פותח את ה־Agent ומצרף את שניהם (`@docs...`).
 כיתוב overlay: **Step 3: The UX Agent**.
 
 ---
 
 ## 00:50 – 02:15
 
-הפעלת סקיל ה־UX: `ux-user-flow-agent/SKILL.md`.
+פתיחת משימה חדשה עם `@docs/prd.md` ו־`@docs/architecture.md`.
 הדבקת הפרומפט מה־Appendix.
 צפייה בסוכן מפרט את ה־User Journeys.
 הדגשת טבלה או רשימה שכוללת: "Initial login", "Creating a task", "Handling network error".
@@ -40,4 +40,8 @@ Cursor פתוח. בטאבים למעלה רואים את `docs/prd.md` ו־`docs
 
 סיום: שלושת הקבצים ב־Sidebar תחת תיקיית `docs` מודגשים.
 מעבר מהיר בין `prd.md`, `architecture.md`, ו־`ux-flows.md`.
+Overlay מסכם:
+- `Artifact: docs/ux-flows.md`
+- `Check: empty + loading + error + edge case`
+
 כותרת סיום: **Lesson 2.7 — UI / Design Systems**.

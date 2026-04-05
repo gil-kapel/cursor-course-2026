@@ -6,11 +6,11 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 ## 00:00 – 00:50
 
-"בואו נעשה את זה יפה" — זה בדרך כלל המשפט שבו פרויקטים מתחילים להסתבך.
+"בואו נעשה את זה יפה" - זה בדרך כלל המשפט שבו פרויקטים מתחילים להסתבך.
 
-בשיעור הזה אנחנו מדברים על **סוכן ה־UX**. והדבר הראשון שחשוב להבין הוא ש־UX הוא לא עיצוב. UX הוא הסיפור של המשתמש בתוך האפליקציה שלנו: מה הוא רואה קודם? מה הוא לוחץ? ומה קורה כשהדברים **לא** עובדים כמו שצריך?
+בשיעור הזה אנחנו מדברים על **סוכן ה־UX**. והדבר הראשון שחשוב להבין הוא ש־UX הוא לא עיצוב. UX הוא הסיפור של המשתמש בתוך האפליקציה שלנו: מה הוא רואה קודם, על מה הוא לוחץ, ומה קורה כשהדברים **לא** עובדים כמו שצריך.
 
-כדי שהסוכן שלנו ייתן תשובות חכמות, אנחנו נצרף לו את ה־PRD ואת מסמך הארכיטקטורה. ככה הוא ידע גם מה המטרה וגם מה המגבלות הטכניות שלנו.
+כדי שהסוכן שלנו ייתן תשובות חכמות, אנחנו נצרף לו את `@docs/prd.md` ואת `@docs/architecture.md`. ככה הוא ידע גם מה המטרה וגם מה המגבלות הטכניות שלנו.
 
 ---
 
@@ -26,9 +26,9 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 ## 02:15 – 03:30
 
-כמו תמיד, אנחנו שומרים את הכל בקובץ מסודר: `ux-flows.md`.
+כמו תמיד, אנחנו שומרים את הכל בקובץ מסודר: `docs/ux-flows.md`.
 
-למה זה חשוב? כי כנגיע לשלב העיצוב (UI) ולשלב הפיתוח, אנחנו לא נצטרך לנחש מה היתה הכוונה המקורית. יהיה לנו מסמך שאומר בדיוק: "במסך הזה יש כפתור כזה, ואם לוחצים עליו קורה X".
+למה זה חשוב? כי כשנגיע לשלב העיצוב ולשלב הפיתוח, לא נצטרך לנחש מה היתה הכוונה המקורית. יהיה לנו מסמך שאומר בדיוק: "במסך הזה יש כפתור כזה, ואם לוחצים עליו קורה X".
 
 זה חוסך לנו המון ויכוחים וסבבי תיקונים בהמשך הדרך.
 
@@ -40,13 +40,13 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 שאלו אותו שאלות כמו "מה קורה אם משתמש מנסה למחוק משימה בלי הרשאה?" או "איך המערכת מתנהגת כשיש המון נתונים על המסך?". אלו המקומות שבהם ה־AI באמת עוזר לכם לחשוב על הדברים שקל לשכוח.
 
-אם התשובה שלו לא מספיק ברורה — תחזרו ל־PRD או לארכיטקטורה ותעדכנו אותם. הכל מחובר.
+אם התשובה שלו לא מספיק ברורה - תחזרו ל־PRD או לארכיטקטורה ותעדכנו אותם. הכל מחובר.
 
 ---
 
 ## 04:45 – 05:45
 
-לסיכום: יש לנו עכשיו "סיפור משתמש" מוצק, שמבוסס על הצרכים של המוצר והיכולות של הטכנולוגיה.
+לסיכום: יש לנו עכשיו `docs/ux-flows.md` - סיפור משתמש מסודר שמבוסס על הצרכים של המוצר ועל היכולות של הטכנולוגיה.
 
 בשיעור הבא, 2.7, אנחנו סוף סוף עוברים לראות צבעים. נדבר על סוכן ה־UI, על מערכות עיצוב (Design Systems), ואיך הופכים את כל הזרימות האלו לממשק מדהים ונגיש.
 
@@ -57,5 +57,5 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 ## Appendix — English prompt (UX user flow)
 
 ```text
-Check @docs/prd.md and @docs/architecture.md. Use the UX/User Flow skill to define core user journeys. Focus on: main interaction paths, empty states, loading indicators, and error handling for critical actions. Save the final flows to `docs/ux-flows.md`.
+You are a UX flow agent. Goal: define the core user journeys before UI work starts. Context: check `@docs/prd.md` and `@docs/architecture.md`. Output: save `docs/ux-flows.md` with main flows, empty states, loading states, error handling, and permission-related edge cases. Constraints: stay concrete, cover critical actions only, and make each flow easy to verify.
 ```

@@ -6,7 +6,7 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 ## 00:00 – 01:00
 
-דבר אחד בטוח בפיתוח: דברים הולכים להישבר. השאלה היא לא אם יהיה באג, אלא כמה זמן ייקח לכם למצוא ולתקן אותו.
+דבר אחד בטוח בפיתוח: דברים יישברו. השאלה היא לא אם יהיה באג, אלא כמה זמן ייקח לכם למצוא ולתקן אותו.
 
 בשיעור הזה אנחנו מפעילים את **סוכן הדיבאג**. הטעות הכי נפוצה בדיבאג היא להתחיל לנחש ולשנות קוד בצורה אקראית בתקווה שמשהו יעבוד. התוצאה היא בדרך כלל קוד מבולגן ובאגים חדשים.
 
@@ -18,7 +18,7 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 כשמפעילים את סקיל הדיבאג, אנחנו מבקשים מהסוכן ניתוח מסודר, לא רק "תתקן מהר".
 
-סוכן טוב יאלץ אתכם לעבוד בשיטה: קודם כל לבודד את הבעיה, אחרי זה לאמת אותה בעזרת "שחזור מינימלי" (Reproduction), ורק בסוף להציע תיקון נקודתי וקטן.
+סוכן טוב יאלץ אתכם לעבוד בשיטה: קודם לבודד את הבעיה, אחר כך לאמת אותה בעזרת שחזור מינימלי, ורק בסוף להציע תיקון קטן וממוקד.
 
 אם אתם רואים שהסוכן מציע לשכתב חצי מהפרויקט כדי לפתור שגיאת כתיב — תעצרו אותו. המטרה שלנו היא התיקון המינימלי והבטוח ביותר האפשרי.
 
@@ -28,7 +28,7 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 בואו נראה איך זה נראה כשאנחנו מתקנים באג אמיתי.
 
-אנחנו מעתיקים את השגיאה מהטרמינל לתוך הצ'אט של Cursor. הסוכן מנתח את הראיות ומציע לנו לבדוק קובץ קונפיגורציה ספציפי או להוסיף שורת לוג כדי לאמת השערה.
+אנחנו מעתיקים את השגיאה מהטרמינל לתוך ה־Agent של Cursor. הסוכן מנתח את הראיות ומציע לנו קודם צעדי אימות - למשל לבדוק קובץ קונפיגורציה ספציפי או להוסיף שורת לוג כדי לאמת השערה.
 
 ברגע שמצאנו את הבעיה, אנחנו מיישמים את התיקון. שימו לב כמה התיקון הזה ממוקד — הוא מטפל בדיוק בשורש הבעיה בלי לגעת בדברים שלא קשורים אליה.
 
@@ -36,9 +36,9 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 ## 03:45 – 05:00
 
-הרגע שבו מריצים את הפקודה שוב בטרמינל והכל "ירוק" הוא רגע הסיפוק הכי גדול בפיתוח.
+הרגע שבו מריצים את הפקודה שוב בטרמינל, והכול "ירוק", הוא אחד הרגעים המספקים ביותר בפיתוח.
 
-אבל גם אם זה עדיין נכשל — זה בסדר. עכשיו יש לנו ראיה חדשה ושגיאה חדשה וברורה יותר. דיבאג הוא לפעמים תהליך של כמה סבבים, וכל סבב מקרב אותנו לפתרון הסופי.
+אבל גם אם זה עדיין נכשל - זה בסדר. עכשיו יש לנו ראיה חדשה ושגיאה חדשה וברורה יותר. דיבאג הוא לפעמים תהליך של כמה סבבים, וכל סבב מקרב אותנו לפתרון.
 
 היכולת לעבוד עם ה־AI בצורה שיטתית היא מה שיהפוך אתכם למפתחים שיודעים לפתור בעיות מורכבות תוך דקות במקום שעות.
 
@@ -48,7 +48,7 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 לסיכום: למדנו איך להפוך ראיות לתיקון בטוח בעזרת סוכן הדיבאג.
 
-בשיעור האחרון של המודול, 2.13, נדבר על **נתונים מקומיים**. נלמד איך להוסיף "זיכרון" לאפליקציה שלנו בעזרת SQLite או קבצי JSON, כדי שכל מה שבנינו יישמר גם אחרי שנסגור את התוכנה.
+בשיעור האחרון של המודול, 2.13, לא נוסיף עוד Agent חדש - אלא נלמד איך לפתוח כל משימה עם prompt חד וקונטקסט נכון. זה השלב שסוגר את כל המודול והופך את העבודה עם כל צוות הסוכנים שלנו לעקבית באמת.
 
 נתראה שם.
 
@@ -57,5 +57,5 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 ## Appendix — English prompt (Debug evidence)
 
 ```text
-I'm seeing an error in the terminal: [PASTE ERROR HERE]. Use the Debug & Fix skill to analyze the evidence. Don't guess—propose a few verification steps first, then suggest a minimal, safe fix that addresses the root cause without rewriting unrelated code.
+You are a debug agent. Goal: help me find the root cause of this error and fix it safely. Context: I'm seeing this terminal error: [PASTE ERROR HERE]. Output: first give verification steps, then a minimal fix, then a rerun checklist. Constraints: do not guess, do not rewrite unrelated code, and prefer the smallest safe change that explains the failure.
 ```

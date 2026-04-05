@@ -7,7 +7,7 @@
 ## 00:00 – 00:50
 
 Cursor פתוח על פרויקט ריק.
-העכבר מצביע על שורת הפקודה (Cmd+L).
+העכבר מצביע על משטח ה־Agent.
 כיתוב overlay: **Step 1: The Product Agent**.
 אנימציה של "Idea" הופכת ל"Document".
 
@@ -15,7 +15,7 @@ Cursor פתוח על פרויקט ריק.
 
 ## 00:50 – 02:30
 
-הקלדת הפרומפט מה־Appendix לתוך הצ'אט.
+הקלדת הפרומפט מה־Appendix לתוך ה־Agent.
 הצגת הסוכן שואל שאלות הבהרה (Clarifying questions).
 הקלדת תשובות קצרות (למשל: "Small teams", "Focus on simplicity").
 צפייה בסוכן מייצר את ה־PRD. גלילה על הכותרות: Problem Statement, User Personas, Scope, Acceptance Criteria.
@@ -26,14 +26,14 @@ Cursor פתוח על פרויקט ריק.
 
 הצגת הסוכן יוצר את הקובץ `docs/prd.md`.
 העכבר פותח את הקובץ החדש בסייר הקבצים (Explorer).
-זום קל על מבנה ה־Markdown: הדגשת בולטים (Bullet points) וטבלאות.
-הדגמה של שימוש ב־`@docs/prd.md` בתוך הצ'אט כדי להראות איך "מושכים" את ההקשר.
+זום קל על מבנה ה־Markdown: Problem, Users, Scope, Acceptance Criteria.
+הדגמה של שימוש ב־`@docs/prd.md` כדי להראות איך מושכים את ההקשר הלאה.
 
 ---
 
 ## 03:45 – 05:15
 
-הוספת הערה בצ'אט: "Add a section for risks and open questions".
+הוספת הערה ב־Agent: "Add a section for risks and open questions".
 צפייה בקובץ ה־PRD מתעדכן (או שנוצר בלוק קוד חדש להעתקה).
 הדגשת השאלה: "Who can delete tasks?".
 
@@ -41,5 +41,9 @@ Cursor פתוח על פרויקט ריק.
 
 ## 05:15 – 06:15
 
-סיום על מסך ה־Split View: מצד אחד `docs/prd.md` פתוח, מצד שני הצ'אט מוכן לשלב הבא.
+סיום על מסך ה־Split View: מצד אחד `docs/prd.md` פתוח, מצד שני ה־Agent מוכן לשלב הבא.
+Overlay מסכם:
+- `Artifact: docs/prd.md`
+- `Check: problem + users + scope + acceptance criteria + risks`
+
 כותרת סיום: **Lesson 2.5 — Tech Lead / Architecture**.

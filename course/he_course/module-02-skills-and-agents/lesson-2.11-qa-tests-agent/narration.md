@@ -6,11 +6,11 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 ## 00:00 – 01:00
 
-"אצלי זה עובד" — זה המשפט שהכי מפחיד מנהלי פיתוח לשמוע.
+"אצלי זה עובד" - זה המשפט שהכי מפחיד מנהלי פיתוח לשמוע.
 
-בשיעור הזה אנחנו מפעילים את **סוכן ה־QA**. התפקיד שלו הוא לוודא שהקוד שלנו לא רק "עובד" כשהכל מושלם, אלא שהוא יודע להתמודד עם המציאות המבולגנת. אנחנו קוראים לזה לבדוק מעבר ל"מסלול המחייך" (Happy Path).
+בשיעור הזה אנחנו מפעילים את **סוכן ה־QA**. התפקיד שלו הוא לוודא שהקוד שלנו לא רק "עובד" כשהכול מושלם, אלא יודע להתמודד גם עם המציאות המבולגנת. אנחנו קוראים לזה לבדוק מעבר ל־Happy Path.
 
-כדי שהבדיקות יהיו רלוונטיות, אנחנו נצרף לסוכן את ה־PRD עם קריטריוני הקבלה שהגדרנו בהתחלה. ככה הוא ידע בדיוק מה הבטחנו למשתמשים שלנו לספק.
+כדי שהבדיקות יהיו רלוונטיות, אנחנו נצרף לסוכן את `@docs/prd.md` עם קריטריוני הקבלה שהגדרנו בהתחלה, וגם את הקונטקסט של הקוד הנוכחי. ככה הוא ידע בדיוק מה הבטחנו למשתמשים שלנו לספק.
 
 ---
 
@@ -20,15 +20,15 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 סוכן טוב יחפש את מקרי הקצה (Edge Cases): מה קורה כשהרשימה ריקה? מה קורה כשהמשתמש מזין טקסט ארוך מדי? ומה קורה אם האינטרנט מתנתק בדיוק באמצע השמירה?
 
-אם אתם לא רואים בתשובה של הסוכן לפחות כמה "בדיקות שליליות" (בדיקות של כשלונות), תבקשו ממנו במפורש: "תאתגר את הקוד שלי עם מצבי שגיאה". זה מה שימנע באגים מביכים בייצור (Production).
+אם אתם לא רואים בתשובה של הסוכן לפחות כמה בדיקות שליליות, תבקשו ממנו במפורש: "תאתגר את הקוד שלי עם מצבי שגיאה". זה מה שימנע באגים מביכים ב־production.
 
 ---
 
 ## 02:30 – 03:45
 
-כמו תמיד, אנחנו מתעדים הכל בקובץ: `test-plan.md`.
+כמו תמיד, אנחנו מתעדים הכל בקובץ: `docs/test-plan.md`.
 
-הקובץ הזה הוא המצפון של הפרויקט. הוא מאפשר לנו לעבור סעיף סעיף ולוודא שכלום לא התפספס. אתם יכולים לצרף את המסמך הזה לכל משימה או לבקש מהסוכן לכתוב בדיקות אוטומטיות (Automated Tests) שמתבססות בדיוק על התוכנית הזו.
+הקובץ הזה הוא המצפון של הפרויקט. הוא מאפשר לנו לעבור סעיף סעיף ולוודא שכלום לא התפספס. ואז מגיע הצעד החשוב הבא: לקחת מקרה אחד מהתוכנית ולבקש מהסוכן לכתוב בדיקה אוטומטית אמיתית.
 
 פיתוח מקצועי הוא כזה שבו אנחנו יודעים שהקוד תקין לא כי "לחצנו על הכפתור וזה עבד", אלא כי יש לנו מערכת של הוכחות.
 
@@ -38,7 +38,7 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 בואו נראה איך זה נראה כשיש לנו בדיקה אוטומטית.
 
-אנחנו נבקש מהסוכן לכתוב טסט יחיד ופשוט שמכסה את אחד המקרים מהתוכנית שלנו. כשנריץ את הבדיקות בטרמינל ונראה את ה"ירוק" — נדע שהקוד שלנו באמת מוכן.
+אנחנו נבקש מהסוכן לכתוב טסט יחיד ופשוט שמכסה את אחד המקרים מהתוכנית שלנו. כשנריץ את הבדיקות בטרמינל ונראה ירוק, נדע שיש לנו גם תוכנית וגם הוכחה אוטומטית אחת שעובדת.
 
 ואם משהו נכשל? זה מעולה. עדיף שזה ייכשל עכשיו מאשר אצל הלקוח. בשיעור הבא נלמד איך לעבוד עם שגיאות כאלו בצורה חכמה.
 
@@ -46,7 +46,7 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 ## 05:00 – 06:00
 
-לסיכום: בניתם תוכנית בדיקות, אתגרתם את הקוד שלכם, ויצרתם שכבת ביטחון נוספת לפרויקט.
+לסיכום: בניתם `docs/test-plan.md`, אתגרתם את הקוד שלכם, והרצתם לפחות בדיקה אוטומטית אחת.
 
 בשיעור הבא, 2.12, נכיר את **סוכן הדיבאג**. נלמד איך להשתמש בראיות — לוגים, שגיאות וטרמינל — כדי למצוא ולתקן בעיות מורכבות בצורה שיטתית, בלי לנחש.
 
@@ -57,5 +57,5 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 ## Appendix — English prompt (QA test plan)
 
 ```text
-Check @docs/prd.md and current code context. Use the QA Tests skill to create a comprehensive test plan. Include: happy path scenarios, critical edge cases, and potential failure modes (e.g., network errors, invalid input). Save the plan to `docs/test-plan.md`.
+You are a QA test agent. Goal: produce a practical test plan and one focused automated test. Context: check `@docs/prd.md` and the current code for this feature. Output: 1) save `docs/test-plan.md` with happy path, edge cases, and failure modes, then 2) propose one small automated test that covers a critical case. Constraints: tie tests to acceptance criteria, include at least one negative case, and keep the first automated test narrow and runnable.
 ```

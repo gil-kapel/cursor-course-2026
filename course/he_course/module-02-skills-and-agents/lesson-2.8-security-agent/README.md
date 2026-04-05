@@ -13,3 +13,18 @@ Hebrew-first lesson assets; this index is in English to match the course README.
 ## Syllabus topic
 
 Practical risk assessment before heavy implementation. Reviewing authentication assumptions, permissions, secrets handling, and potential abuse cases. Identifying "release blockers" in the design phase.
+
+## Practical outcomes
+
+- Review the planned app with a dedicated security agent.
+- Save prioritized findings to `docs/security-notes.md`.
+- Separate release blockers from lower-priority risks before implementation expands.
+
+## Verify
+
+- `docs/security-notes.md` includes at least one high-priority issue or confirms there are none.
+- You have a short auth/security checklist to carry into development and review.
+
+## Next
+
+- [Lesson 2.9 — Dev agent (Composer / multi-file work)](../lesson-2.9-dev-agent-composer/README.md)

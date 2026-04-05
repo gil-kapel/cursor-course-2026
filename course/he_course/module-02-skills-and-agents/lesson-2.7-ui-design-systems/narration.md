@@ -6,9 +6,9 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 ## 00:00 – 01:00
 
-אנחנו מתקרבים לרגע שבו נתחיל לכתוב קוד, אבל לפני שזה קורה — אנחנו צריכים להחליט איך הכל ייראה ויתנהג. ברוכים הבאים לשיעור על **סוכן ה־UI**.
+אנחנו מתקרבים לרגע שבו נתחיל לכתוב קוד, אבל לפני שזה קורה אנחנו צריכים להחליט איך הכל ייראה ויתנהג. ברוכים הבאים לשיעור על **סוכן ה־UI**.
 
-שימו לב: המטרה כאן היא לא "לצייר מסכים יפים". המטרה היא לבנות **מערכת**. כשאנחנו עובדים עם AI, אנחנו רוצים שפה עיצובית עקבית: שהכפתורים ייראו אותו דבר בכל מקום, שהצבעים יהיו מוגדרים מראש, ושכל רכיב ידע איך להתנהג במצבים שונים.
+שימו לב: המטרה כאן היא לא "לצייר מסכים יפים". המטרה היא לבנות **מערכת**. כשאנחנו עובדים עם AI, אנחנו רוצים שפה עיצובית עקבית: שהכפתורים ייראו אותו דבר בכל מקום, שהצבעים יהיו מוגדרים מראש, ושכל רכיב יידע איך להתנהג במצבים שונים.
 
 בשיעור הזה אנחנו מחברים את זרימות ה־UX שתכננו למציאות הויזואלית של האפליקציה.
 
@@ -16,9 +16,9 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 ## 01:00 – 02:30
 
-כשאנחנו מפעילים את סקיל ה־UI, אנחנו מבקשים מהסוכן לפרק את הזרימות שלנו לרכיבים (Components) ולמצבים (States).
+כשאנחנו מפעילים את סקיל ה־UI, אנחנו מבקשים מהסוכן לפרק את `@docs/ux-flows.md` לרכיבים (Components) ולמצבים (States).
 
-למשל, במקום להגיד "תעשה טופס", אנחנו נגדיר: אילו שדות יש בו? איך הוא נראה כשהוא ממוקד (Focused)? מה קורה כשהמשתמש מזין נתונים לא תקינים? ואיך הוא מתאים את עצמו למסכים קטנים (Responsiveness)?
+למשל, במקום להגיד "תעשה טופס", אנחנו נגדיר אילו שדות יש בו, איך הוא נראה כשהוא ממוקד, מה קורה כשהמשתמש מזין נתונים לא תקינים, ואיך הוא מתאים את עצמו למסכים קטנים.
 
 אם הסוכן נותן לכם רק תיאור כללי, אל תהססו לבקש טבלה מסודרת של רכיבים, מצבים והתנהגות. זה הפירוט שיחסוך לכם שעות של "תיקוני CSS" מעצבנים בהמשך.
 
@@ -34,7 +34,7 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 ## 03:45 – 05:00
 
-כמו בכל שלב, אנחנו מסכמים הכל במסמך: `ui-plan.md`.
+כמו בכל שלב, אנחנו מסכמים הכל במסמך: `docs/ui-plan.md`.
 
 המסמך הזה הוא ה"מדריך הויזואלי" שלנו. הוא יכלול את רשימת הרכיבים, את ה"טוקנים" (Tokens) של העיצוב — כמו צבעים וריווחים — ואת הכללים של הממשק.
 
@@ -44,7 +44,7 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 ## 05:00 – 06:00
 
-לסיכום: עברנו מסיפור המשתמש (UX) לתכנון רכיבים ומצבים (UI).
+לסיכום: עברנו מסיפור המשתמש (UX) לתכנון רכיבים ומצבים (UI), ושמרנו את התוצאה ב־`docs/ui-plan.md`.
 
 בשיעור הבא, 2.8, נעשה עצירה קצרה וחשובה מאוד: **סקירת אבטחה**. לפני שאנחנו כותבים שורה אחת של קוד שמטפל בנתונים של משתמשים, אנחנו רוצים לוודא שאין לנו חורי אבטחה בסיסיים בתכנון.
 
@@ -55,5 +55,5 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 ## Appendix — English prompt (UI design plan)
 
 ```text
-Check @docs/ux-flows.md and @docs/architecture.md. Use the UI Design Systems skill to break down the "Task Creation" flow into a detailed UI plan. Include: a list of components, their states (default, loading, error, success), and accessibility considerations (ARIA labels, keyboard navigation). Save to `docs/ui-plan.md`.
+You are a UI design systems agent. Goal: turn the planned UX flow into a UI implementation plan. Context: check `@docs/ux-flows.md` and `@docs/architecture.md`. Output: save `docs/ui-plan.md` with components, states, accessibility requirements, and responsive notes for the Task Creation flow. Constraints: stay concrete, include keyboard/accessibility behavior, and use a format a builder agent can implement directly.
 ```

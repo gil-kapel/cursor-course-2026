@@ -6,11 +6,11 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 ## 00:00 – 01:00
 
-הגענו לרגע שחיכינו לו — הרגע שבו התכנון הופך לקוד אמיתי. ברוכים הבאים לשיעור על **סוכן הפיתוח**.
+הגענו לרגע שחיכינו לו - הרגע שבו התכנון הופך לקוד אמיתי. ברוכים הבאים לשיעור על **סוכן הפיתוח**.
 
 עד היום, אולי השתמשתם ב־Cursor כדי לערוך קובץ אחד בכל פעם. אבל בפרויקט אמיתי, שינוי אחד בדרך כלל משפיע על כמה קבצים: צריך לעדכן את בסיס הנתונים, להוסיף לוגיקה בשירות (Service), ולבנות את הרכיב ב־UI.
 
-בשביל זה יש לנו את ה־**Composer** (או Agent Mode). זה הכלי שמאפשר לסוכן לעבוד על כל הפרויקט בבת אחת, כשהוא מחזיק מול העיניים את כל מסמכי התכנון שיצרנו בשיעורים הקודמים.
+בשביל זה יש לנו את ה־**Composer** בתוך Agent Mode. זה הכלי שמאפשר לסוכן לעבוד על כמה קבצים יחד, כשהוא מחזיק מול העיניים את כל מסמכי התכנון שיצרנו בשיעורים הקודמים.
 
 ---
 
@@ -18,9 +18,9 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 בואו נבנה את "הפרוסה הראשונה" (Slice 1) של האפליקציה שלנו.
 
-במקום לנסות לבנות הכל בבת אחת, אנחנו מתמקדים במשימה אחת קטנה וקונקרטית: למשל, הצגת רשימת משימות. אנחנו מפעילים את סקיל הפיתוח ומצרפים לו את ה־PRD, הארכיטקטורה ותכנון ה־UI.
+במקום לנסות לבנות הכל בבת אחת, אנחנו מתמקדים במשימה אחת קטנה וקונקרטית: למשל, הצגת רשימת משימות. אנחנו מפעילים את סקיל הפיתוח ומצרפים לו את `@docs/prd.md`, `@docs/architecture.md`, ו־`@docs/ui-plan.md`.
 
-שימו לב לקסם: הסוכן לא רק כותב קוד — הוא מבין את ההקשר. הוא יודע באילו תיקיות להשתמש, איך לקרוא למשתנים לפי התקן שלנו, ואיך לחבר את הכל ביחד. הוא יציע לנו סדרה של שינויים בכמה קבצים במקביל.
+שימו לב לקסם: הסוכן לא רק כותב קוד - הוא מבין את ההקשר. הוא יודע באילו תיקיות להשתמש, איך לקרוא למשתנים לפי התקן שלנו, ואיך לחבר את הכל יחד. הוא יציע לנו סדרה של שינויים בכמה קבצים במקביל.
 
 ---
 
@@ -30,7 +30,7 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 הקומפוזר מציג לכם את כל השינויים (Diff). התפקיד שלכם כמנהלי פיתוח הוא לעבור על הרשימה, לראות מה הגיוני ומה אולי דורש תיקון. אתם יכולים לאשר קובץ אחד ולבקש מהסוכן לחשוב שוב על קובץ אחר.
 
-זכרו: אתם המנהלים, והסוכן הוא איש הביצוע הכי מהיר שיש לכם. השילוב של הבקרה שלכם והמהירות שלו הוא מה שהופך אתכם למפתחי־על.
+זכרו: אתם המנהלים, והסוכן הוא איש הביצוע הכי מהיר שיש לכם. השילוב בין הבקרה שלכם למהירות שלו הוא מה שהופך אתכם למפתחי־על.
 
 ---
 
@@ -38,7 +38,7 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 אחרי שאישרנו את השינויים, הגיע הזמן לבדוק שהכל עובד.
 
-אנחנו נריץ את הפרויקט בטרמינל ונראה את התוצאה. אם משהו נשבר — אל תיבהלו. זה חלק מהתהליך. אנחנו פשוט נגיד לסוכן מה השגיאה שקיבלנו, והוא יעזור לנו לתקן אותה במקום.
+אנחנו נריץ את הפרויקט בטרמינל ונראה את התוצאה. אם משהו נשבר - לא נבהלים. זה חלק מהתהליך. אנחנו פשוט אומרים לסוכן מה השגיאה שקיבלנו, והוא יעזור לנו לתקן אותה במקום.
 
 המטרה של השיעור הזה היא לסיים עם "פרוסה" אחת שעובדת מקצה לקצה: מהנתונים ועד למסך שהמשתמש רואה.
 
@@ -46,7 +46,7 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 ## 05:30 – 06:30
 
-לסיכום: הפכנו תכנון לביצוע בעזרת ה־Composer.
+לסיכום: הפכנו תכנון לביצוע בעזרת ה־Composer, ובדקנו שיש לנו פרוסה אחת שעובדת מקצה לקצה.
 
 אבל העבודה לא נגמרת כשהקוד רץ. בשיעור הבא, 2.10, נפעיל את **סוכן ה־Code Review**. אנחנו נבקש ממנו לעבור על כל מה שכתבנו עכשיו ולחפש באגים, בעיות ביצועים או סתם מקומות שאפשר לכתוב בהם קוד נקי יותר לפני שאנחנו ממשיכים הלאה.
 
@@ -57,5 +57,5 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 ## Appendix — English prompt (Development slice)
 
 ```text
-Check @docs/prd.md, @docs/architecture.md, and @docs/ui-plan.md. Use the Dev/Composer skill to implement "Slice 1": a static task list component and its supporting types/service. Ensure you follow the folder structure and naming conventions defined in the architecture. Let me review each file change before applying.
+You are a development agent working in Composer. Goal: implement Slice 1 of this app. Context: check `@docs/prd.md`, `@docs/architecture.md`, and `@docs/ui-plan.md`. Output: propose a small multi-file implementation for a static task list, then wait for my review before applying changes. Constraints: follow the architecture naming and folder structure, keep the slice narrow, and include verification steps before you finish.
 ```

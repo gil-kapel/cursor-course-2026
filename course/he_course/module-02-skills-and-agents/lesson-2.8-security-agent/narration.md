@@ -6,11 +6,11 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 ## 00:00 – 01:00
 
-אבטחה היא לא "צ'ק ליסט" שעושים בסוף הפרויקט. אבטחה היא חלק בלתי נפרד מהתכנון.
+אבטחה היא לא checklist שעושים בסוף הפרויקט. אבטחה היא חלק בלתי נפרד מהתכנון.
 
 בשיעור הזה אנחנו מפעילים את **סוכן האבטחה**. התפקיד שלו הוא לא להפחיד אותנו, אלא לעזור לנו למצוא חורים בתכנון עוד לפני שכתבנו שורה אחת של קוד.
 
-כדי שהסקירה תהיה רצינית, אנחנו מצרפים את כל מה שבנינו עד עכשיו: ה־PRD, הארכיטקטורה, והתכנון הויזואלי. הסוכן יחפש טעויות נפוצות: איפה נשמרים המפתחות הסודיים שלנו? מי באמת מורשה לראות את הנתונים? ומה קורה אם מישהו מנסה "לשבור" את המערכת?
+כדי שהסקירה תהיה רצינית, אנחנו מצרפים את כל מה שבנינו עד עכשיו: `@docs/prd.md`, `@docs/architecture.md`, ו־`@docs/ui-plan.md`. הסוכן יחפש טעויות נפוצות: איפה נשמרים המפתחות הסודיים שלנו? מי באמת מורשה לראות את הנתונים? ומה קורה אם מישהו מנסה לשבור את המערכת?
 
 ---
 
@@ -18,7 +18,7 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 כשמפעילים את סקיל האבטחה, אנחנו מבקשים מהסוכן לדרג את הסיכונים.
 
-סוכן טוב ידע להבדיל בין "משהו שמעצבן מפתחים" לבין "חור אבטחה שיכול לחשוף נתונים של לקוחות". למשל, הוא יכול לעלות על זה שתכננו API שמחזיר יותר מדי שדות — מידע שהמשתמש לא אמור לראות בכלל.
+סוכן טוב יידע להבדיל בין "משהו שמעצבן מפתחים" לבין "חור אבטחה שיכול לחשוף נתונים של לקוחות". למשל, הוא יכול לעלות על זה שתכננו API שמחזיר יותר מדי שדות - מידע שהמשתמש בכלל לא אמור לראות.
 
 זה השלב שבו אנחנו מוצאים את ה־Release Blockers — אותן בעיות שחייבים לפתור לפני שבכלל מתחילים לפתח.
 
@@ -26,11 +26,11 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 ## 02:30 – 03:45
 
-כמו תמיד, אנחנו שומרים את הכל בקובץ: `security-notes.md`.
+כמו תמיד, אנחנו שומרים את הכל בקובץ: `docs/security-notes.md`.
 
 שימו לב לטיפ חשוב: לעולם אל תציגו מפתחות API אמיתיים או סיסמאות על המסך, גם לא בתוך Cursor. השתמשו תמיד בדוגמאות מזויפות כמו `YOUR_API_KEY`. הסוכן יבין את הכוונה שלכם גם בלי לראות את הסודות האמיתיים.
 
-המסמך הזה יהיה צמוד אלינו כשלב ה"שומר" בכל פעם שנכתוב קוד או נעשה סקירה (Code Review).
+המסמך הזה יהיה צמוד אלינו כשלב ה"שומר" בכל פעם שנכתוב קוד או נעשה סקירה.
 
 ---
 
@@ -38,7 +38,7 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 לפני שאנחנו מסיימים, כדאי לשאול את הסוכן: "מה רשימת הבדיקות (Checklist) שחייבים לעשות לפני שמחברים מערכת הזדהות (Auth)?".
 
-הוא ייתן לנו רשימה קונקרטית: איפה נשמר הטוקן? איך מתבצעת התנתקות? ואיך אנחנו מוודאים שמשתמש א' לא יכול לגשת לנתונים של משתמש ב' בצד השרת.
+הוא ייתן לנו רשימה קונקרטית: איפה נשמר הטוקן, איך מתבצעת התנתקות, ואיך אנחנו מוודאים שמשתמש א' לא יכול לגשת לנתונים של משתמש ב' בצד השרת.
 
 אלו שאלות שחוסכות המון כאב ראש (ותביעות) בהמשך הדרך.
 
@@ -46,7 +46,7 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 ## 05:00 – 06:00
 
-לסיכום: עברנו על התכנון שלנו בעיניים של "האקר חיובי", מצאנו חורים, ותיעדנו אותם.
+לסיכום: עברנו על התכנון שלנו בעיניים של האקר חיובי, מצאנו חורים, ותיעדנו אותם ב־`docs/security-notes.md`.
 
 עכשיו אנחנו באמת מוכנים להתחיל לכתוב קוד. בשיעור הבא, 2.9, אנחנו הולכים להשתמש ב־Composer — הכלי הכי חזק ב־Cursor — כדי לבנות "פרוסה אנכית" של האפליקציה: נחבר נתונים, לוגיקה וממשק, הכל במקום אחד.
 
@@ -57,5 +57,5 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 ## Appendix — English prompt (Security review)
 
 ```text
-Check @docs/prd.md, @docs/architecture.md, and @docs/ui-plan.md. Use the Security Review skill to perform a practical risk assessment. Identify potential vulnerabilities in authentication, data exposure, secrets handling, and abuse cases. Highlight any "release blockers" and save to `docs/security-notes.md`.
+You are a security review agent. Goal: run a practical security review before implementation grows. Context: check `@docs/prd.md`, `@docs/architecture.md`, and `@docs/ui-plan.md`. Output: save `docs/security-notes.md` with prioritized risks, release blockers, and a short auth/security checklist. Constraints: never ask for real secrets; focus on auth, permissions, data exposure, and abuse cases.
 ```

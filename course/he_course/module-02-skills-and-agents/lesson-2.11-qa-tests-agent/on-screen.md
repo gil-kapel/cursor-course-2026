@@ -6,7 +6,7 @@
 
 ## 00:00 – 01:00
 
-Cursor פתוח. פתיחת `docs/prd.md` וחלון הצ'אט.
+Cursor פתוח. פתיחת `docs/prd.md` ומשטח ה־Agent.
 צירוף ה־PRD (`@docs/prd.md`) והסבר קצר על חשיבות ה־Acceptance Criteria.
 כיתוב overlay: **Step 7: The QA Agent**.
 
@@ -14,7 +14,7 @@ Cursor פתוח. פתיחת `docs/prd.md` וחלון הצ'אט.
 
 ## 01:00 – 02:30
 
-הפעלת סקיל ה־QA: `qa-tests-agent/SKILL.md`.
+פתיחת משימת QA חדשה עם `@docs/prd.md` והקוד הרלוונטי.
 הדבקת הפרומפט מה־Appendix.
 צפייה בסוכן מייצר תוכנית בדיקות.
 הדגשת סעיפים בטקסט: "Empty state check", "Invalid date format", "Network timeout handling".
@@ -32,8 +32,8 @@ Cursor פתוח. פתיחת `docs/prd.md` וחלון הצ'אט.
 
 ## 03:45 – 05:00
 
-פתיחת קובץ בדיקה אוטומטית (למשל `tests/task.test.ts`).
-הצגת ריצה של פקודת `npm test` בטרמינל.
+פתיחת קובץ בדיקה אוטומטית אחד (למשל `tests/task.test.ts`).
+הצגת ריצה של פקודת test בטרמינל.
 זום על השורה הירוקה: "All tests passed".
 (אופציונלי: הדגמת כשל מכוון ותיקונו).
 
@@ -43,4 +43,8 @@ Cursor פתוח. פתיחת `docs/prd.md` וחלון הצ'אט.
 
 סיום: תיקיית `docs` כוללת את כל מסמכי השרשרת עד כה.
 מעבר מהיר על כולם: PRD -> Arch -> UX -> UI -> Security -> Test Plan.
+Overlay מסכם:
+- `Artifact 1: docs/test-plan.md`
+- `Artifact 2: one passing automated test`
+
 כותרת סיום: **Lesson 2.12 — Debug / Troubleshooting**.

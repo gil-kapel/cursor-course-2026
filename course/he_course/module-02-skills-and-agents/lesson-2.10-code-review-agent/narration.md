@@ -8,15 +8,15 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 הקוד רץ, הכל נראה בסדר, ואנחנו כבר רוצים ללחוץ על Merge ולהמשיך הלאה. עצרו רגע.
 
-בשיעור הזה אנחנו מפעילים את **סוכן ה־Code Review**. התפקיד שלו הוא לא להגיד לנו אם הקוד "יפה", אלא להיות ה"שומר" שמוודא שלא הכנסנו טעויות קריטיות בזמן הפיתוח המהיר עם ה־Composer.
+בשיעור הזה אנחנו מפעילים את **סוכן ה־Code Review**. התפקיד שלו הוא לא להגיד לנו אם הקוד יפה, אלא להיות השומר שמוודא שלא הכנסנו טעויות קריטיות בזמן הפיתוח המהיר עם ה־Composer.
 
-סקירת קוד עם AI היא כלי אדיר לצמצום סיכונים: באגים חבויים, שבירה של פונקציונליות קיימת, או סתם קוד מורכב מדי שיהיה לנו קשה לתחזק בעוד חודש מהיום.
+סקירת קוד עם AI היא כלי אדיר לצמצום סיכונים: באגים חבויים, שבירה של פונקציונליות קיימת, או סתם קוד מורכב מדי שיהיה לנו קשה לתחזק עוד חודש מהיום.
 
 ---
 
 ## 01:00 – 02:30
 
-כשמפעילים את סקיל הסקירה, אנחנו מבקשים מהסוכן לעבור על ה־Diff — כלומר, רק על מה שהשתנה.
+כשמפעילים את סקיל הסקירה, אנחנו מבקשים מהסוכן לעבור על ה־diff - כלומר, רק על מה שהשתנה.
 
 סוכן טוב יחלק לנו את ההערות לפי חומרה. הוא יחפש "פצצות זמן" כמו לוגים שנשארו בטעות, חוסר בטיפול בשגיאות, או שימוש לא נכון בטיפוסים (Types).
 
@@ -28,7 +28,7 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 הכוח האמיתי של הסקירה הוא בתיקון.
 
-בשיעור הזה נראה איך לקחת הערה אחת משמעותית מהסוכן ולתקן אותה במקום. זה לא חייב להיות שינוי ענק — לפעמים שינוי שם של משתנה או הוספת הערה מסבירה עושים את כל ההבדל בין קוד "עובד" לקוד "מקצועי".
+בשיעור הזה נראה איך לקחת הערה אחת משמעותית מהסוכן ולתקן אותה במקום. זה לא חייב להיות שינוי ענק - לפעמים טיפול נכון בשגיאה או הסרת קוד מבלבל עושים את ההבדל בין קוד עובד לקוד שאפשר באמת למזג.
 
 השאיפה שלנו היא להגיע למצב שהקוד לא רק עובר קומפילציה, אלא הוא גם קריא ובטוח לכל מי שיקרא אותו אחרינו.
 
@@ -36,11 +36,11 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 ## 03:45 – 05:00
 
-טיפ לסיום הסקירה: תמיד תשאלו את הסוכן "מה הכי דחוף לתקן לפני Merge?".
+טיפ לסיום הסקירה: תמיד תשאלו את הסוכן "מה הכי דחוף לתקן לפני merge?".
 
 זה יעזור לכם לסנן את ה"רעש" (כמו הערות סגנון קטנות) ולהתמקד במה שבאמת חשוב: דליפות נתונים, באגים לוגיים, או בעיות ביצועים.
 
-כשיש לכם אישור מהסוכן שכל הבעיות הקריטיות נפתרו, אתם יכולים למזג את הקוד בראש שקט.
+כשיש לכם אישור שכל הבעיות הקריטיות נפתרו, ורק אחרי שבדקתם שההערות באמת טופלו, אפשר להכריז על merge readiness.
 
 ---
 
@@ -57,5 +57,5 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 ## Appendix — English prompt (Code review)
 
 ```text
-Use the Code Review skill to analyze my current changes (diff). Focus on: logic bugs, regressions, security risks, and maintainability issues. Categorize findings by severity (High/Medium/Low) and suggest specific, actionable fixes. Tell me what is the "Must Fix" before I merge this code.
+You are a code review agent. Goal: review my current diff before merge. Context: inspect only the current changes. Output: findings grouped by High, Medium, and Low severity, plus one clear "Must Fix before merge" section. Constraints: stay focused on bugs, regressions, security, and maintainability; do not suggest rewriting unrelated parts of the app.
 ```

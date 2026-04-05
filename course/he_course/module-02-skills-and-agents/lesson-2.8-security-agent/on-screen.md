@@ -7,14 +7,14 @@
 ## 00:00 – 01:00
 
 Cursor פתוח. בטאבים למעלה רואים את כל מסמכי ה־`docs`.
-העכבר פותח את הצ'אט ומצרף את `prd.md`, `architecture.md`, ו־`ui-plan.md`.
+העכבר פותח את ה־Agent ומצרף את `docs/prd.md`, `docs/architecture.md`, ו־`docs/ui-plan.md`.
 כיתוב overlay: **Step 5: The Security Agent**.
 
 ---
 
 ## 01:00 – 02:30
 
-הפעלת סקיל האבטחה: `security-review-agent/SKILL.md`.
+פתיחת משימה חדשה עם שלושת קבצי ה־docs.
 הדבקת הפרומפט מה־Appendix.
 צפייה בסוכן מנתח ומציג רשימת סיכונים.
 הדגשת חומרה (Severity): "High", "Medium".
@@ -40,4 +40,8 @@ Cursor פתוח. בטאבים למעלה רואים את כל מסמכי ה־`do
 
 סיום: תיקיית `docs` מלאה וגאה.
 מעבר מהיר על כל חמשת הקבצים שיצרנו עד עכשיו.
+Overlay מסכם:
+- `Artifact: docs/security-notes.md`
+- `Check: at least one blocker + one lower-priority risk`
+
 כותרת סיום: **Lesson 2.9 — Dev Agent / Composer**.

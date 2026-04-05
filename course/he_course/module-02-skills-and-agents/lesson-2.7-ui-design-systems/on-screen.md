@@ -7,14 +7,14 @@
 ## 00:00 – 01:00
 
 Cursor פתוח. בטאבים למעלה רואים את `docs/ux-flows.md`.
-העכבר פותח את הצ'אט ומצרף את הקובץ (`@docs/ux-flows.md`).
+העכבר פותח את ה־Agent ומצרף את הקובץ (`@docs/ux-flows.md`).
 כיתוב overlay: **Step 4: The UI Agent**.
 
 ---
 
 ## 01:00 – 02:30
 
-הפעלת סקיל ה־UI: `ui-design-systems-agent/SKILL.md`.
+פתיחת משימה חדשה עם `@docs/ux-flows.md` ו־`@docs/architecture.md`.
 הדבקת הפרומפט מה־Appendix.
 צפייה בסוכן מפרט את רכיבי הממשק: "Task Input", "Priority Selector", "Submit Button".
 הדגשת טבלה שמראה מצבים (States): "Enabled", "Disabled during submission", "Error highlighting".
@@ -32,7 +32,7 @@ Cursor פתוח. בטאבים למעלה רואים את `docs/ux-flows.md`.
 
 ## 03:45 – 05:00
 
-הדגמה קצרה בקומפוזר (Cmd+I): "Create a Button component based on the UI plan".
+הדגמה קצרה ב־Agent / Composer (`Cmd+I` ב־Mac, `Ctrl+I` ב־Windows): "Create a Button component based on the UI plan".
 צפייה בסוכן כותב קוד (למשל ב־Tailwind) שמשתמש בטוקנים שהוגדרו.
 (הערה: לא צריך לסיים את כל הלחצן, רק להראות את החיבור לתכנון).
 
@@ -42,4 +42,8 @@ Cursor פתוח. בטאבים למעלה רואים את `docs/ux-flows.md`.
 
 סיום: ארבעת קבצי התיעוד ב־`docs` פתוחים זה לצד זה.
 זום על המילה "Design System" במסמך ה־UI.
+Overlay מסכם:
+- `Artifact: docs/ui-plan.md`
+- `Check: components + states + accessibility + responsiveness`
+
 כותרת סיום: **Lesson 2.8 — Security Review**.

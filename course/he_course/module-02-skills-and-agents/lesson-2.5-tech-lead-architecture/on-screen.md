@@ -6,7 +6,7 @@
 
 ## 00:00 – 00:50
 
-פיצול מסך: מצד אחד `docs/prd.md` פתוח, מצד שני חלון הצ'אט.
+פיצול מסך: מצד אחד `docs/prd.md` פתוח, מצד שני משטח ה־Agent.
 הקלדת `@docs/prd.md` בשורת הפרומפט.
 כיתוב overlay: **Step 2: The Tech Lead Agent**.
 
@@ -14,7 +14,7 @@
 
 ## 00:50 – 02:10
 
-הפעלת סקיל הארכיטקטורה: `tech-lead-architecture-agent/SKILL.md`.
+פתיחת Agent מתאים או משימה חדשה עם הקשר `@docs/prd.md`.
 הדבקת הפרומפט מה־Appendix.
 צפייה בסוכן מנתח את ה־PRD ומציע פתרונות: "Using SQLite for local storage", "React components structure", וכו'.
 גלילה על מבנה התיקיות המוצע (Tree view בטקסט).
@@ -40,4 +40,8 @@
 ## 04:45 – 05:45
 
 סיום על מסך ה־Explorer כשהתיקייה `docs` פתוחה וכוללת את `prd.md` ו־`architecture.md`.
+Overlay מסכם:
+- `Artifact: docs/architecture.md`
+- `Check: stack + folders + API boundaries + slices`
+
 כותרת סיום: **Lesson 2.6 — UX User Flow**.
