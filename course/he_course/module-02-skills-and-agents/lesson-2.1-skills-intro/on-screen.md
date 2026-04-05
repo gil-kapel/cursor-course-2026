@@ -41,4 +41,4 @@
 צפייה בסוכן סורק את התיקיות ומחזיר תשובה מסודרת על הכללים והסקילים שהוא מצא.
 
 סיום על מסך ה־Explorer כשהתיקיות `.cursor/rules` ו־`.cursor/skills` מודגשות.
-כותרת סיום: **Lesson 2.2 — Skill Anatomy**.
+כותרת סיום: **Lesson 2.2 — Agent Management in Cursor**.
