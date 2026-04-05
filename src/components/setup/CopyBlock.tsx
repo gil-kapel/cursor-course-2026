@@ -51,7 +51,7 @@ export default function CopyBlock({ label, value, ariaLabel, contentDir = 'auto'
         </button>
       </div>
       <pre
-        className="p-3 text-[0.6875rem] leading-relaxed text-[#303150] whitespace-pre-wrap break-all overflow-x-auto max-h-48 overflow-y-auto"
+        className="p-3 text-[0.6875rem] leading-relaxed text-[#303150] whitespace-pre-wrap break-words overflow-x-auto max-h-48 overflow-y-auto"
         dir={contentDir}
         lang={contentDir === 'ltr' ? 'en' : contentDir === 'rtl' ? 'he' : undefined}
         style={{ fontFamily: 'ui-monospace, monospace' }}

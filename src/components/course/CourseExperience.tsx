@@ -149,7 +149,7 @@ export default function CourseExperience({ course, storageKey }: CourseExperienc
         watchedLessonIds={watchedLessonIds}
       />
 
-      <div className="flex-1 min-w-0 p-4 lg:p-6 space-y-6">
+      <div className="flex-1 min-w-0 p-4 lg:p-6 space-y-6 max-w-4xl mx-auto w-full">
         {/* Course header */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}

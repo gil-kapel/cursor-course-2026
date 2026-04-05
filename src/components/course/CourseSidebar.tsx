@@ -157,7 +157,7 @@ export default function CourseSidebar({
       initial={false}
       animate={{ width: isCollapsed ? 56 : 340 }}
       transition={{ duration: 0.2, ease: 'easeInOut' }}
-      className="hidden lg:flex flex-col bg-white border-e border-[#F7F7F8] overflow-hidden shrink-0"
+      className="hidden md:flex flex-col bg-white border-e border-[#F7F7F8] overflow-hidden shrink-0"
       dir="rtl"
       lang="he"
     >
