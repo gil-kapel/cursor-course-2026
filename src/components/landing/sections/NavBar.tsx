@@ -60,10 +60,10 @@ export default function NavBar() {
         <div className="flex items-center gap-3">
           <Link
             href="/login"
-            className="hidden sm:inline-flex items-center gap-2 border border-[#69ADFF]/40 bg-[#69ADFF]/10 px-5 py-2 rounded-lg text-[#303150] font-bold text-sm transition-all duration-300 hover:bg-[#69ADFF] hover:text-white hover:border-[#69ADFF]"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[#7E7F90] font-semibold text-sm transition-colors duration-200 hover:text-[#303150] hover:bg-[#F7F7F8]"
           >
-            כניסה לקורס
-            <GoogleIcon size={16} />
+            כניסה
+            <GoogleIcon size={14} />
           </Link>
           <button
             type="button"
@@ -98,10 +98,10 @@ export default function NavBar() {
             <Link
               href="/login"
               onClick={() => setMobileOpen(false)}
-              className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-bold text-[#303150] border border-[#69ADFF]/40 bg-[#69ADFF]/10 transition-all duration-300"
+              className="flex items-center justify-center gap-2 py-3 px-4 rounded-xl font-semibold text-[#7E7F90] hover:text-[#303150] hover:bg-[#F7F7F8] transition-colors"
             >
-              כניסה לקורס
-              <GoogleIcon size={16} />
+              כניסה
+              <GoogleIcon size={14} />
             </Link>
           </motion.div>
         )}

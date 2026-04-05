@@ -88,9 +88,9 @@ function getVisibleIndices(active: number): [number, number, number] {
 type Slot = 'left' | 'center' | 'right' | 'exit';
 
 const slotVariants: Record<Slot, { x: string; scale: number; opacity: number; zIndex: number }> = {
-  left: { x: '75%', scale: 0.88, opacity: 0.5, zIndex: 1 },
+  left: { x: '75%', scale: 0.88, opacity: 0.55, zIndex: 1 },
   center: { x: '0%', scale: 1, opacity: 1, zIndex: 10 },
-  right: { x: '-75%', scale: 0.88, opacity: 0.5, zIndex: 1 },
+  right: { x: '-75%', scale: 0.88, opacity: 0.55, zIndex: 1 },
   exit: { x: '0%', scale: 0.8, opacity: 0, zIndex: 0 },
 };
 
@@ -144,56 +144,57 @@ export default function TestimonialSection() {
         {/* ---- Avatar Row ---- */}
         <motion.div
           variants={fadeUp}
-          className="flex justify-center items-center gap-3 md:gap-4 mb-14 md:mb-20"
+          className="flex flex-col items-center mb-16 md:mb-24"
         >
-          {testimonials.map((t, i) => {
-            const isActive = i === mod(active);
-            return (
-              <button
-                key={t.name}
-                onClick={() => goTo(i)}
-                className="relative cursor-pointer group"
-                aria-label={`המלצה של ${t.name}`}
-              >
-                <motion.div
-                  animate={{
-                    scale: isActive ? 1 : 0.78,
-                    opacity: isActive ? 1 : 0.45,
-                  }}
-                  transition={{ type: 'spring', damping: 22, stiffness: 120, mass: 1 }}
-                  className={`rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center
-                              w-12 h-12 md:w-14 md:h-14
-                              ring-2 transition-shadow duration-300
-                              ${isActive
-                                ? 'ring-[#69ADFF] shadow-[0_0_20px_rgba(105,173,255,0.3)]'
-                                : 'ring-[#E0E0E5] group-hover:ring-[#69ADFF]/40'
-                              }`}
+          <div className="flex justify-center items-center gap-3 md:gap-4">
+            {testimonials.map((t, i) => {
+              const isActive = i === mod(active);
+              return (
+                <button
+                  key={t.name}
+                  onClick={() => goTo(i)}
+                  className="relative cursor-pointer group"
+                  aria-label={`המלצה של ${t.name}`}
                 >
-                  <span className="text-white font-bold text-sm md:text-base select-none">
-                    {t.initials}
-                  </span>
-                </motion.div>
-                {/* Name label under active avatar */}
-                <AnimatePresence>
-                  {isActive && (
-                    <motion.span
-                      initial={{ opacity: 0, y: -4 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -4 }}
-                      transition={easeFade}
-                      className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[0.65rem] font-bold text-[#303150] whitespace-nowrap"
-                    >
-                      {t.name}
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </button>
-            );
-          })}
+                  <motion.div
+                    animate={{
+                      scale: isActive ? 1 : 0.78,
+                      opacity: isActive ? 1 : 0.45,
+                    }}
+                    transition={{ type: 'spring', damping: 22, stiffness: 120, mass: 1 }}
+                    className={`rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center
+                                w-12 h-12 md:w-14 md:h-14
+                                ring-2 transition-shadow duration-300
+                                ${isActive
+                                  ? 'ring-[#69ADFF] shadow-[0_0_20px_rgba(105,173,255,0.3)]'
+                                  : 'ring-[#E0E0E5] group-hover:ring-[#69ADFF]/40'
+                                }`}
+                  >
+                    <span className="text-white font-bold text-sm md:text-base select-none">
+                      {t.initials}
+                    </span>
+                  </motion.div>
+                </button>
+              );
+            })}
+          </div>
+          {/* Name label under active avatar — with proper spacing */}
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={testimonials[mod(active)].name}
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={easeFade}
+              className="mt-3 text-[0.7rem] font-bold text-[#303150] whitespace-nowrap"
+            >
+              {testimonials[mod(active)].name}
+            </motion.span>
+          </AnimatePresence>
         </motion.div>
 
         {/* ---- Carousel ---- */}
-        <motion.div variants={fadeUp} className="relative h-[340px] md:h-[300px]">
+        <motion.div variants={fadeUp} className="relative h-[380px] md:h-[340px]">
           <AnimatePresence mode="popLayout">
             {testimonials.map((t, i) => {
               const slot = slotFor(i);
@@ -216,7 +217,7 @@ export default function TestimonialSection() {
                   transition={{ type: 'spring', damping: 24, stiffness: 100, mass: 1.2 }}
                   onClick={() => goTo(i)}
                   className={`absolute top-0 left-1/2 -translate-x-1/2 w-[320px] md:w-[420px]
-                              rounded-2xl p-6 md:p-8 cursor-pointer
+                              rounded-2xl cursor-pointer
                               border transition-colors duration-300
                               ${isCenter
                                 ? 'bg-white border-[#69ADFF]/30 shadow-[0_12px_40px_rgba(105,173,255,0.12)]'
@@ -224,54 +225,60 @@ export default function TestimonialSection() {
                               }`}
                   style={{ zIndex: v.zIndex }}
                 >
-                  {/* Author row */}
-                  <div className="flex items-center gap-3 mb-4">
-                    <div
-                      className={`w-10 h-10 rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center ring-2
-                                  ${isCenter ? 'ring-[#69ADFF]/20' : 'ring-[#E0E0E5]'}`}
-                    >
-                      <span className="text-white font-bold text-sm">
-                        {t.initials}
+                  <div className="p-6 md:p-8">
+                    {/* ---- Card Header: Avatar + Identity Block (RTL) ---- */}
+                    <div className="flex items-center gap-3 mb-3">
+                      <div
+                        className={`w-10 h-10 shrink-0 rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center ring-2
+                                    ${isCenter ? 'ring-[#69ADFF]/20' : 'ring-[#E0E0E5]'}`}
+                      >
+                        <span className="text-white font-bold text-sm">
+                          {t.initials}
+                        </span>
+                      </div>
+                      <div className="min-w-0">
+                        <p className="font-headline font-bold text-[0.9rem] text-[#303150] leading-snug">
+                          {t.name}
+                        </p>
+                        <p className="text-xs text-[#9B9CAD] font-normal leading-snug">
+                          {t.role}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* ---- Stars ---- */}
+                    <div className="flex items-center gap-1.5 mb-5">
+                      <div className="flex gap-0.5">
+                        {Array.from({ length: t.stars }).map((_, s) => (
+                          <Star
+                            key={s}
+                            className="w-3.5 h-3.5 text-[#F5A623] fill-[#F5A623]"
+                          />
+                        ))}
+                      </div>
+                      <span className="text-[0.65rem] font-bold text-[#9B9CAD]">
+                        {t.stars}.0
                       </span>
                     </div>
-                    <div>
-                      <p className="font-headline font-bold text-sm text-[#303150]">
-                        {t.name}
-                      </p>
-                      <p className="text-xs text-[#7E7F90]">{t.role}</p>
-                    </div>
-                  </div>
 
-                  {/* Stars + rating */}
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="flex gap-0.5">
-                      {Array.from({ length: t.stars }).map((_, s) => (
-                        <Star
-                          key={s}
-                          className="w-4 h-4 text-[#F5A623] fill-[#F5A623]"
-                        />
+                    {/* ---- Quote ---- */}
+                    <blockquote className="text-[#303150] text-sm md:text-[0.95rem] leading-[1.6] pt-1 pb-6 border-t border-[#F0F0F3]">
+                      <span className="block pt-5">
+                        &ldquo;{t.quote}&rdquo;
+                      </span>
+                    </blockquote>
+
+                    {/* ---- Tags ---- */}
+                    <div className="flex flex-wrap gap-2">
+                      {t.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-3 py-1 rounded-full bg-[#E8F0FE] border border-[#D4E4F7] text-[0.7rem] font-semibold text-[#4A6FA5]"
+                        >
+                          {tag}
+                        </span>
                       ))}
                     </div>
-                    <span className="text-xs font-bold text-[#7E7F90]">
-                      {t.stars}.0
-                    </span>
-                  </div>
-
-                  {/* Quote */}
-                  <blockquote className="text-[#303150] text-sm md:text-[0.95rem] leading-relaxed mb-5">
-                    &ldquo;{t.quote}&rdquo;
-                  </blockquote>
-
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2">
-                    {t.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-3 py-1 rounded-full bg-[#F5F5F7] border border-[#EDEDF0] text-[0.7rem] font-semibold text-[#7E7F90]"
-                      >
-                        {tag}
-                      </span>
-                    ))}
                   </div>
                 </motion.div>
               );

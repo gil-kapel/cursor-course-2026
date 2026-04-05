@@ -59,14 +59,16 @@ export default function HeroSection() {
           >
             <Link
               href="/login"
-              className="inline-flex items-center gap-2.5 bg-[#69ADFF]/15 border border-[#69ADFF]/40 px-7 py-3.5 rounded-lg text-[#303150] text-base font-bold transition-all duration-300 hover:bg-[#69ADFF] hover:text-white hover:border-[#69ADFF] active:scale-95"
+              className="inline-flex items-center gap-3 bg-[#303150] px-7 py-3.5 rounded-xl text-white text-base font-bold transition-all duration-200 shadow-[0_4px_14px_rgba(0,0,0,0.12)] hover:bg-[#1a1a30] hover:shadow-[0_8px_28px_rgba(0,0,0,0.25)] hover:-translate-y-0.5 active:scale-[0.97]"
             >
               הצטרפו לקורס
-              <GoogleIcon size={16} />
+              <span className="w-6 h-6 rounded-full bg-white flex items-center justify-center shrink-0">
+                <GoogleIcon size={14} />
+              </span>
             </Link>
             <a
               href="#syllabus"
-              className="inline-flex items-center gap-2.5 bg-[#69ADFF]/15 border border-[#69ADFF]/40 px-7 py-3.5 rounded-lg text-[#303150] text-base font-bold transition-all duration-300 hover:bg-[#69ADFF] hover:text-white hover:border-[#69ADFF] active:scale-95"
+              className="inline-flex items-center gap-2.5 bg-transparent border border-[#303150]/20 px-7 py-3.5 rounded-xl text-[#303150] text-base font-semibold transition-all duration-200 hover:bg-[#303150]/8 hover:border-[#303150]/40 hover:-translate-y-0.5 active:scale-[0.97]"
             >
               צפו בסילבוס
               <ArrowLeft className="w-4 h-4" strokeWidth={2} />
