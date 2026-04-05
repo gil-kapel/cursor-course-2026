@@ -39,7 +39,6 @@ SKILL_SOURCES = [
     MODULE2 / "lesson-2.8-code-review-agent" / "code-review-cleanup-agent",
     MODULE2 / "lesson-2.9-qa-tests-agent" / "qa-tests-agent",
     MODULE2 / "lesson-2.10-debug-agent" / "debug-fix-agent",
-    MODULE2 / "lesson-2.11-local-db" / "local-db-development-agent",
 ]
 
 CURSOR_SKILLS = REPO_ROOT / ".cursor" / "skills"

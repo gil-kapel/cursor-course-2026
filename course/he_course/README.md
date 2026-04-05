@@ -29,7 +29,7 @@ Lesson links below are **scaffold only**—teaching content will be added over t
 
 **Module goal:** Run Cursor’s AI as a team of specialists, using a structured Skills/rules pack across the development lifecycle.
 
-**How the arc fits together (app playlist IDs):** **2.1 → 2.3** are the *skills foundation* (Rules vs Skills, skill anatomy, ASM install). **2.4 → 2.8** are the *planning and design gate* (PRD → architecture → UX → UI → security). **2.9 → 2.12** are the *delivery loop* (Composer → code review → QA → debug). **2.13** is *local persistence* before **Module 4** (e.g. Supabase). Repo folders use consecutive **2.1–2.13** in teaching order.
+**How the arc fits together (app playlist IDs):** **2.1 → 2.3** are the *practical skills foundation* (Rules vs Skills, **Agent management / context separation**, ASM install). **2.4 → 2.8** are the *planning and design gate* (PRD → architecture → UX → UI → security). **2.9 → 2.12** are the *delivery loop* (Composer → code review → QA → debug). **2.13** closes the module with **sharp prompts and task-specific context building**, so students can operate their agent team cleanly in real projects. Repo folders use consecutive **2.1–2.13** in teaching order.
 
 **Downloadable skills (ASM):** Every lesson in this module includes **`AGENT_SKILLS.md`** (next to `README.md`) with ranked skills, scores, copy-paste `asm add skill` sources for the good ones, and a suggested `asm create expertise` bundle so students can install the same agent packs into their own project.
 
@@ -42,7 +42,7 @@ Lesson links below are **scaffold only**—teaching content will be added over t
 | Lesson | Topic | Links |
 |--------|--------|--------|
 | 2.1 | Skills foundations—**Rules vs Skills** (Cursor 3), two value types (**knowledge injection** vs **workflow orchestration**), where **`.cursor/rules`** and **`.cursor/skills`** live | [README](module-02-skills-and-agents/lesson-2.1-skills-intro/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.1-skills-intro/AGENT_SKILLS.md) |
-| 2.2 | Skill anatomy—how the agent **picks** a skill (frontmatter triggers, progressive disclosure), **good vs bad** `SKILL.md` patterns | [README](module-02-skills-and-agents/lesson-2.2-skill-anatomy/README.md) |
+| 2.2 | Agent management in Cursor—creating **specialist agents**, giving each one its own context, and avoiding cross-task context pollution | [README](module-02-skills-and-agents/lesson-2.2-agent-management/README.md) |
 | 2.3 | ASM in practice—**`asm search` / `add` / `sync`**, **AGENT_SKILLS.md** scores, **`asm create expertise`** | [README](module-02-skills-and-agents/lesson-2.3-asm-discovery/README.md) · [Agent skills (same as 2.1)](module-02-skills-and-agents/lesson-2.1-skills-intro/AGENT_SKILLS.md) |
 | 2.4 | Product agent—turning an idea into a PRD (problem, users, scope, flows, metrics, acceptance criteria, risks); start **`.cursor/rules/project.mdc`** | [README](module-02-skills-and-agents/lesson-2.4-product-agent-prd/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.4-product-agent-prd/AGENT_SKILLS.md) |
 | 2.5 | Tech lead agent—PRD → stack, boundaries, folder layout, APIs, implementation slices; add **`.cursor/rules/stack.mdc`** | [README](module-02-skills-and-agents/lesson-2.5-tech-lead-architecture/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.5-tech-lead-architecture/AGENT_SKILLS.md) |
@@ -63,28 +63,29 @@ Lesson links below are **scaffold only**—teaching content will be added over t
 
 | Lesson | Topic | Links |
 |--------|--------|--------|
-| 2.13 | Local DB—when SQLite vs JSON fits, schema-first thinking, disposable dev data (bridge to cloud DB later) | [README](module-02-skills-and-agents/lesson-2.13-local-db/README.md) · [Agent skills](module-02-skills-and-agents/lesson-2.13-local-db/AGENT_SKILLS.md) |
+| 2.13 | Agent prompt kits—**sharp prompts**, task-scoped context, `@` file selection, and why each agent/task should keep its own clean context | [README](module-02-skills-and-agents/lesson-2.13-agent-context-prompts/README.md) |
 
 ### Module 3: Superpowers with MCP servers (Model Context Protocol)
 
-**Module goal:** Extend Cursor so the built-in AI can pull live information from external tools via MCP.
+**Module goal:** Extend Cursor so the built-in AI can pull live information from external tools via MCP, use those tools inside real development workflows, and integrate their outputs and server setups into the student’s own project.
 
 | Lesson | Topic | Folder |
 |--------|--------|--------|
-| 3.1 | MCP introduction—what the protocol is and how to add a server in Cursor settings | [module-03-mcp/lesson-3.1-mcp-intro](module-03-mcp/lesson-3.1-mcp-intro/README.md) |
-| 3.2 | Notion MCP—pulling requirements from PRD docs into Cursor | [module-03-mcp/lesson-3.2-notion-mcp](module-03-mcp/lesson-3.2-notion-mcp/README.md) |
-| 3.3 | Figma MCP—from studio designs to code | [module-03-mcp/lesson-3.3-figma-mcp](module-03-mcp/lesson-3.3-figma-mcp/README.md) |
-| 3.4 | Web search / fetch—internet for competitor research, up-to-date library docs, and live troubleshooting | [module-03-mcp/lesson-3.4-web-search-fetch](module-03-mcp/lesson-3.4-web-search-fetch/README.md) |
+| 3.1 | MCP introduction—what the protocol is, how to add a server in Cursor settings, and a repeatable workflow for integrating any MCP into a real project | [module-03-mcp/lesson-3.1-mcp-intro](module-03-mcp/lesson-3.1-mcp-intro/README.md) |
+| 3.2 | Stitch MCP—get a fast first draft for one frontend section and turn it into a real build step inside the app | [module-03-mcp/lesson-3.2-stitch-mcp](module-03-mcp/lesson-3.2-stitch-mcp/README.md) |
+| 3.3 | Figma MCP—inspect the real design and polish one frontend section with more precise implementation details | [module-03-mcp/lesson-3.3-figma-mcp](module-03-mcp/lesson-3.3-figma-mcp/README.md) |
+| 3.4 | Web search / fetch and other practical MCPs—use live docs, research, and troubleshooting tools, then decide which other MCPs belong in the student’s project workflow | [module-03-mcp/lesson-3.4-web-search-fetch](module-03-mcp/lesson-3.4-web-search-fetch/README.md) |
 
 ### Module 4: Integrations and deployments
 
-**Module goal:** Move the app off your machine, wire real cloud services, and ship.
+**Module goal:** Start with practical local data, then move the app to real cloud services, package it cleanly, and ship a live URL.
 
 | Lesson | Topic | Folder |
 |--------|--------|--------|
-| 4.1 | Remote DB with Supabase—from local DB to the cloud, including secure Auth | [module-04-deployments/lesson-4.1-supabase-remote-db](module-04-deployments/lesson-4.1-supabase-remote-db/README.md) |
-| 4.2 | GitHub prep—packaging the project and pushing to GitHub | [module-04-deployments/lesson-4.2-github-prep](module-04-deployments/lesson-4.2-github-prep/README.md) |
-| 4.3 | Deploy with Vercel—connect Vercel to GitHub, builds, public URL | [module-04-deployments/lesson-4.3-vercel-deploy](module-04-deployments/lesson-4.3-vercel-deploy/README.md) |
+| 4.1 | Local DB basics—what a local database is, when JSON is enough, when to use SQLite, and how to build a tiny practical data layer with one real read/write flow | [module-04-deployments/lesson-4.1-local-db-basics](module-04-deployments/lesson-4.1-local-db-basics/README.md) |
+| 4.2 | Remote DB with Supabase—move the same schema to the cloud, wire env vars safely, and add first-pass RLS | [module-04-deployments/lesson-4.1-supabase-remote-db](module-04-deployments/lesson-4.1-supabase-remote-db/README.md) |
+| 4.3 | GitHub prep—clean the repo, protect secrets, add a minimal README, and push safely | [module-04-deployments/lesson-4.2-github-prep](module-04-deployments/lesson-4.2-github-prep/README.md) |
+| 4.4 | Deploy with Vercel—connect GitHub, set build/runtime config, and verify a real public flow | [module-04-deployments/lesson-4.3-vercel-deploy](module-04-deployments/lesson-4.3-vercel-deploy/README.md) |
 
 ### Module 5: End-to-end capstone projects
 
@@ -104,7 +105,7 @@ Lesson links below are **scaffold only**—teaching content will be added over t
 
 ## Work-in-progress note
 
-**Module 2** includes full **lesson production scaffolds** per lesson: English `README.md` index, Hebrew **`on-screen.md`** (recording beat sheet), and Hebrew **`narration.md`** (ElevenLabs voiceover, timestamp-aligned to the same beats). Other modules remain scaffold-first until their lesson packs are authored the same way.
+**Module 2** and **Module 4** include full **lesson production scaffolds** per lesson: English `README.md` index, Hebrew **`on-screen.md`** (recording beat sheet), and Hebrew **`narration.md`** (ElevenLabs voiceover, timestamp-aligned to the same beats). Other modules remain scaffold-first until their lesson packs are authored the same way.
 
 Screen recordings, audio exports, and deep-dive add-ons are still added lesson by lesson. When a lesson is split in the app playlist, **duplicate or trim** beat sheets so each part stays within the 3–6 minute target.
 

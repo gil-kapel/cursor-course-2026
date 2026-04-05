@@ -1,4 +1,5 @@
-import { prisma } from './db';
+import { getPrisma } from './db';
+import { isLocalDevBypassEnabled } from './dev-mode';
 
 export type AccessLevel = 'full' | 'preview' | 'locked';
 
@@ -21,9 +22,11 @@ export async function canAccessLesson(
   staticStatus?: string,
 ): Promise<AccessLevel> {
   if (staticStatus !== 'locked') return 'full';
+  if (isLocalDevBypassEnabled) return 'full';
   if (!userId) return 'locked';
 
   const moduleId = extractModuleId(lessonId);
+  const prisma = getPrisma();
 
   const entitlement = await prisma.entitlement.findFirst({
     where: {

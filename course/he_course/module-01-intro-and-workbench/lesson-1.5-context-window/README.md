@@ -13,4 +13,4 @@ Hebrew-first lesson assets; this index is in English to match the course README.
 
 ## Syllabus topic
 
-How the context window works and why it degrades over long conversations; signs of context overload (contradictions, hallucinations, forgetting decisions); noise vs. signal in a chat; three habits — start fresh chats by topic, use `@` references instead of pasting code, prime new chats with a 3-line summary. Final lesson of Module 1; closes with a recap of the full module and a bridge to Module 2 (Skills-based agents).
+How the context window works and why it degrades over long conversations; signs of context overload (contradictions, hallucinations, forgetting decisions); noise vs. signal in a chat; three habits — start fresh chats by topic, use `@` references instead of pasting code, prime new chats with a 3-line summary. Bridges to lesson 1.6 (chat modes) instead of closing the full module.

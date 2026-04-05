@@ -3,210 +3,93 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Laptop, Users, Plug, Rocket, Trophy } from 'lucide-react';
-import { fadeUp, staggerContainer, staggerItem, sectionViewport, easeFade } from '../motion';
+import { courseData } from '@/data/courseData';
+import type { Chapter, Lesson, LessonBadgeType } from '@/data/types';
+import { fadeUp, staggerContainer, sectionViewport, easeFade } from '../motion';
 
 /* ------------------------------------------------------------------ */
 /*  Syllabus data – every lesson with a short one-liner               */
 /* ------------------------------------------------------------------ */
 
-const moduleIcons = [Laptop, Users, Plug, Rocket, Trophy];
+const iconMap = {
+  Laptop,
+  Users,
+  Plug,
+  Rocket,
+  Trophy,
+};
 
-interface LessonCard {
-  id: string;
-  title: string;
-  blurb: string;
-}
+const badgeCopy: Record<LessonBadgeType, string> = {
+  FREE: 'חינם',
+  BEGINNER: 'מתחילים',
+  INTERMEDIATE: 'ביניים',
+  PREMIUM: 'פרימיום',
+};
 
-interface ModuleTab {
+const moduleMeta: Record<
+  string,
+  {
+    label: string;
+    summary: string;
+  }
+> = {
+  'module-1': {
+    label: 'מבוא וסביבת עבודה',
+    summary: 'הקמה נכונה של Cursor, מודלים, Git והרגלי עבודה רגועים.',
+  },
+  'module-2': {
+    label: 'פיתוח מבוסס Skills',
+    summary: 'עובדים עם צוות סוכנים שלם: Product, Tech Lead, UX, UI, QA ו-Debug.',
+  },
+  'module-3': {
+    label: 'כוחות-על עם MCP',
+    summary: 'Stitch להתחלה מהירה, Figma לדיוק, וחיבורים חכמים לכלים חיצוניים.',
+  },
+  'module-4': {
+    label: 'אינטגרציות ופריסה',
+    summary: 'מעבירים את הפרויקט ממחשב מקומי לענן, GitHub ו-URL ציבורי.',
+  },
+  'module-5': {
+    label: 'פרויקטי גמר',
+    summary: 'שני פרויקטים מעשיים שמחברים את כל מה שנלמד בקורס.',
+  },
+};
+
+interface LandingModule {
   id: string;
   label: string;
+  summary: string;
   icon: typeof Laptop;
   lessonCount: number;
-  lessons: LessonCard[];
+  promptCount: number;
+  taskCount: number;
+  lessons: Array<{
+    id: string;
+    title: string;
+    blurb: string;
+    badge?: LessonBadgeType;
+  }>;
 }
 
-const modules: ModuleTab[] = [
-  {
-    id: 'module-1',
-    label: 'מבוא וסביבת עבודה',
-    icon: Laptop,
-    lessonCount: 5,
-    lessons: [
-      {
-        id: '1.1',
-        title: 'מה זה Cursor: הורדה והתקנה',
-        blurb: 'התקנת Cursor, חיבור לחשבון, ופתיחת הפרויקט הראשון שלכם.',
-      },
-      {
-        id: '1.2',
-        title: 'מנויים ומודלים',
-        blurb: 'איך לבחור מודל מהיר מול חזק, ולנהל שימוש חכם ביום-יום.',
-      },
-      {
-        id: '1.3',
-        title: 'טרמינל, Git ורשתות ביטחון',
-        blurb: 'הטרמינל בלי פחד, Git כשמירת משחק, וקומיט לפני כל שינוי.',
-      },
-      {
-        id: '1.4',
-        title: 'סיור בממשק: Cmd+K, Cmd+L ו-Composer',
-        blurb: 'שלושה כלים, שלוש סיטואציות: שורה, חשיבה, ובנייה.',
-      },
-      {
-        id: '1.5',
-        title: 'חלון הקונטקסט והרגלים',
-        blurb: 'למה הסוכן "שוכח" ואיך לשמור על תשובות עקביות.',
-      },
-    ],
-  },
-  {
-    id: 'module-2',
-    label: 'פיתוח מבוסס Skills',
-    icon: Users,
-    lessonCount: 13,
-    lessons: [
-      {
-        id: '2.1',
-        title: 'מבוא ל-Skills',
-        blurb: 'ההבדל בין Rule ל-Skill ושני סוגי הערך: ידע ותזמור.',
-      },
-      {
-        id: '2.2',
-        title: 'אנטומיה של סקיל',
-        blurb: 'טריגרים, מבנה קובץ SKILL.md, ומה הופך סקיל לטוב.',
-      },
-      {
-        id: '2.3',
-        title: 'חיפוש והתקנה עם ASM',
-        blurb: 'Agent Skill Manager: חיפוש, התקנה וסנכרון סקילים.',
-      },
-      {
-        id: '2.4',
-        title: 'סוכן מוצר: מרעיון ל-PRD',
-        blurb: 'בעיה, משתמשים, היקף, זרימות ומדדי הצלחה.',
-      },
-      {
-        id: '2.5',
-        title: 'סוכן Tech Lead',
-        blurb: 'סטאק, גבולות מערכת, מבנה תיקיות וחיתוכי מימוש.',
-      },
-      {
-        id: '2.6',
-        title: 'סוכן UX',
-        blurb: 'מסע משתמש, מצבי ריק ושגיאה, ומסירה ל-UI.',
-      },
-      {
-        id: '2.7',
-        title: 'סוכן UI',
-        blurb: 'מערכת עיצוב, טוקנים, נגישות ורספונסיביות.',
-      },
-      {
-        id: '2.8',
-        title: 'סוכן אבטחה',
-        blurb: 'סיכוני הרשאות, סודות וחשיפת מידע, לפני קוד כבד.',
-      },
-      {
-        id: '2.9',
-        title: 'סוכן פיתוח: Composer',
-        blurb: 'Composer, צירוף מסמכים, פרוסה אנכית והרצה מקומית.',
-      },
-      {
-        id: '2.10',
-        title: 'סוכן Code Review',
-        blurb: 'מעבר על דיפ: באגים, רגרסיות ומוכנות למיזוג.',
-      },
-      {
-        id: '2.11',
-        title: 'סוכן QA',
-        blurb: 'תכנון בדיקות: נתיבים שמחים, קצוות וטסטים.',
-      },
-      {
-        id: '2.12',
-        title: 'סוכן Debug',
-        blurb: 'איסוף ראיות, השערה, שחזור מינימלי ותיקון ממוקד.',
-      },
-      {
-        id: '2.13',
-        title: 'מסד מקומי: SQLite ו-JSON',
-        blurb: 'חשיבה סכימה-ראשונה וגשר לענן.',
-      },
-    ],
-  },
-  {
-    id: 'module-3',
-    label: 'כוחות-על עם MCP',
-    icon: Plug,
-    lessonCount: 4,
-    lessons: [
-      {
-        id: '3.1',
-        title: 'מבוא ל-MCP',
-        blurb: 'מה זה MCP, איך זה שונה מצ׳אט רגיל, והמלצות בטיחות.',
-      },
-      {
-        id: '3.2',
-        title: 'Notion MCP',
-        blurb: 'משיכת דרישות, סנכרון משימות ועבודה בטוחה.',
-      },
-      {
-        id: '3.3',
-        title: 'Figma MCP',
-        blurb: 'מבנה מסכים וטוקנים מהסטודיו ישירות לקוד.',
-      },
-      {
-        id: '3.4',
-        title: 'חיפוש ווב ו-Fetch',
-        blurb: 'ניסוח בקשות, אימות מקורות ושימוש בתוצאות בקוד.',
-      },
-    ],
-  },
-  {
-    id: 'module-4',
-    label: 'אינטגרציות ופריסה',
-    icon: Rocket,
-    lessonCount: 3,
-    lessons: [
-      {
-        id: '4.1',
-        title: 'Supabase: סכימה ו-RLS',
-        blurb: 'מסד מקומי לענן: סכימה, משתני סביבה ומדיניות.',
-      },
-      {
-        id: '4.2',
-        title: 'GitHub: ריפו, ענפים ודחיפה',
-        blurb: '.gitignore, קומיט ראשון, ומתי branch נפרד.',
-      },
-      {
-        id: '4.3',
-        title: 'Vercel: פריסה לאוויר',
-        blurb: 'חיבור, build, משתני סביבה ו-URL ציבורי.',
-      },
-    ],
-  },
-  {
-    id: 'module-5',
-    label: 'פרויקטי גמר',
-    icon: Trophy,
-    lessonCount: 3,
-    lessons: [
-      {
-        id: '5.1',
-        title: 'אוטומציה אישית',
-        blurb: 'טריגר, עיבוד, פלט. אוטומציה עם גבולות והרשאות.',
-      },
-      {
-        id: '5.2',
-        title: 'דף נחיתה אינטראקטיבי',
-        blurb: 'מבנה, CTA, הוכחה חברתית ואינטראקציה שמוסיפה ערך.',
-      },
-      {
-        id: '5.3',
-        title: 'סיכום ומה הלאה',
-        blurb: 'חזרה על מה שלמדתם ושלוש משימות המשך מעשיות.',
-      },
-    ],
-  },
-];
+function getLessonBlurb(lesson: Lesson): string {
+  return lesson.notes?.[0] ?? '';
+}
+
+const modules: LandingModule[] = courseData.chapters.map((chapter: Chapter) => ({
+  id: chapter.id,
+  label: moduleMeta[chapter.id]?.label ?? chapter.title,
+  summary: moduleMeta[chapter.id]?.summary ?? chapter.title,
+  icon: iconMap[chapter.icon as keyof typeof iconMap] ?? Laptop,
+  lessonCount: chapter.lessons.length,
+  promptCount: chapter.lessons.reduce((sum, lesson) => sum + (lesson.prompts?.length ?? 0), 0),
+  taskCount: chapter.lessons.reduce((sum, lesson) => sum + (lesson.checklist?.length ?? 0), 0),
+  lessons: chapter.lessons.map((lesson) => ({
+    id: lesson.id,
+    title: lesson.title,
+    blurb: getLessonBlurb(lesson),
+    badge: lesson.badge,
+  })),
+}));
 
 /* ------------------------------------------------------------------ */
 /*  Component                                                          */
@@ -280,10 +163,31 @@ export default function SyllabusBento() {
         </motion.div>
 
         {/* ---- Module info line ---- */}
-        <motion.div variants={fadeUp} className="text-center mb-8">
-          <p className="text-sm text-[#7E7F90] font-medium">
-            מודול {activeModule + 1} · {current.lessonCount} שיעורים
-          </p>
+        <motion.div variants={fadeUp} className="max-w-3xl mx-auto mb-8">
+          <div className="rounded-2xl border border-[#EDEDF0] bg-white px-5 md:px-6 py-5">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              <div>
+                <p className="text-sm text-[#7E7F90] font-medium mb-1">
+                  מודול {activeModule + 1} · {current.lessonCount} שיעורים
+                </p>
+                <h3 className="font-headline text-xl md:text-2xl font-bold text-[#303150] mb-2">
+                  {current.label}
+                </h3>
+                <p className="text-sm md:text-[0.95rem] text-[#6E6E73] leading-relaxed max-w-2xl">
+                  {current.summary}
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-2 md:justify-end">
+                <span className="inline-flex items-center rounded-full bg-[#F5F5F7] px-3 py-1.5 text-xs font-semibold text-[#303150]">
+                  {current.promptCount} פרומפטים
+                </span>
+                <span className="inline-flex items-center rounded-full bg-[#F5F5F7] px-3 py-1.5 text-xs font-semibold text-[#303150]">
+                  {current.taskCount} משימות
+                </span>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
         {/* ---- Lesson Index List ---- */}
@@ -313,7 +217,7 @@ export default function SyllabusBento() {
                     <div className="relative flex flex-col items-center shrink-0 pt-0.5">
                       <span className="text-[15px] font-semibold text-[#8E8EA0] tabular-nums select-none
                                        group-hover:text-[#69ADFF] transition-colors duration-200">
-                        {String(idx + 1).padStart(2, '0')}.
+                        {lesson.id}
                       </span>
                       {/* Vertical connector line (hidden on last visible item) */}
                       {idx < visibleLessons.length - 1 && (
@@ -323,9 +227,16 @@ export default function SyllabusBento() {
 
                     {/* Content */}
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-headline text-[1rem] md:text-[1.05rem] font-bold text-[#1C1C1E] leading-snug mb-1">
-                        {lesson.title}
-                      </h3>
+                      <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                        <h3 className="font-headline text-[1rem] md:text-[1.05rem] font-bold text-[#1C1C1E] leading-snug">
+                          {lesson.title}
+                        </h3>
+                        {lesson.badge && (
+                          <span className="inline-flex items-center rounded-full bg-[#F5F5F7] px-2 py-0.5 text-[11px] font-semibold text-[#7E7F90]">
+                            {badgeCopy[lesson.badge]}
+                          </span>
+                        )}
+                      </div>
                       <p className="text-sm text-[#6E6E73] leading-relaxed">
                         {lesson.blurb}
                       </p>

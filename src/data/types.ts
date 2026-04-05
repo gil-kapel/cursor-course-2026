@@ -11,7 +11,7 @@ export interface Lesson {
   videoUrl?: string;
   attachedFiles?: AttachedFile[];
   notes?: string[];
-  /** Copy-paste agent prompts for the "פרומפטים להתקנה" tab. */
+  /** Copy-paste agent prompts for the "פרומפטים" tab. */
   prompts?: string[];
   transcript?: string;
   /** Simple numbered step list shown below the video. */

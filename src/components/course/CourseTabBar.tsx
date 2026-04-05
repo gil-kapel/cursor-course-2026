@@ -13,7 +13,7 @@ import CopyBlock from '@/components/setup/CopyBlock';
 export type CourseTab = 'prompts' | 'notes';
 
 const tabs: { id: CourseTab; label: string; icon: typeof StickyNote }[] = [
-  { id: 'prompts', label: 'פרומפטים להתקנה', icon: Sparkles },
+  { id: 'prompts', label: 'פרומפטים', icon: Sparkles },
   { id: 'notes', label: 'הערות', icon: StickyNote },
 ];
 
@@ -72,7 +72,7 @@ export default function CourseTabBar({
         />
       </div>
 
-      <div className="max-h-[24rem] overflow-y-auto scrollbar-ghost">
+      <div className="max-h-96 overflow-y-auto scrollbar-ghost">
         <div className="p-6" dir="rtl" lang="he">
           {activeTab === 'prompts' && (
             <>

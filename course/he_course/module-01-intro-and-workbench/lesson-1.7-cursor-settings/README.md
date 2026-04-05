@@ -2,7 +2,7 @@
 
 Hebrew-first lesson assets; this index is in English to match the course README.
 
-**Scope:** Walkthrough of the Cursor Settings panel for first-time users — General preferences (editor font, theme, layout), Plan & Usage (quotas callback to 1.2), Models (choosing and switching), Tab autocomplete, Agents, and an expanded deep-dive into Indexing & Docs (adding custom documentation URLs so the AI understands your specific stack). Plugins through Hooks are explicitly deferred to Modules 2–3. Final lesson of Module 1; closes with a module recap and bridge to Module 2.
+**Scope:** Practical setup of `Cursor Settings` for first-time users: what beginners should actually change now, what to leave alone, where to revisit `Plan & Usage` and `Models`, how to use `Indexing & Docs`, and how to give Cursor strong prompts that review the current setup and prepare the workspace for future debugging.
 
 ## Files in this folder
 
@@ -13,4 +13,4 @@ Hebrew-first lesson assets; this index is in English to match the course README.
 
 ## Syllabus topic
 
-Configuring Cursor before starting real work: General editor preferences (font, theme, minimap, keyboard shortcuts, layout); Plan & Usage for monitoring quotas; Models for selecting the right AI model; Tab autocomplete tuning; Agent and Cloud Agents settings; expanded coverage of Indexing & Docs — what codebase indexing does and how to add custom documentation URLs (e.g. Tailwind, React) so the AI gives better, library-aware answers. Plugins, Rules/Skills/Subagents, Tools & MCPs, and Hooks are mentioned but deferred to later modules. Final lesson of Module 1; module celebration and Module 2 teaser.
+Configuring Cursor before starting real work: the small set of settings that matter to a beginner right now, where to revisit usage and models, how codebase indexing and docs improve answers, and how to use strong setup prompts so Cursor can explain and validate the environment before changing anything. Advanced sections are explicitly deferred to later modules. Final lesson of Module 1; module celebration and Module 2 teaser.

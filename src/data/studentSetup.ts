@@ -70,25 +70,25 @@ const SETUP: Record<string, LessonSetupContent> = {
     'מבוא ל-Skills — כללים, סקילים וסוגי ערך',
     'lesson-2.1-skills-intro',
     'cursor-skill-foundation',
-    'שיעור יסודות: Rules מול Skills. התקנת ASM והסקיל בפועל — בשיעור 2.3; אם כבר יש asm.toml, אפשר להריץ מלשונית "סקיל הקורס" את פקודות asm add skill + asm sync ל־cursor-skill-foundation.',
+    'שיעור יסודות: הבינו קודם Rules מול Skills. התקנת ASM והסקיל בפועל שייכת לשיעור 2.3; אם כבר יש asm.toml, אפשר להריץ מלשונית "סקיל הקורס" את פקודות asm add skill + asm sync ל־cursor-skill-foundation.',
     'uv run scripts/sync_module02_project_skills.py',
   ),
   '2.2': {
     lessonId: '2.2',
-    lessonTitle: 'אנטומיה של סקיל: טריגרים, טוב מול גרוע',
-    agentSkillsDocPath: `${MODULE2}/lesson-2.2-skill-anatomy/README.md`,
+    lessonTitle: 'ניהול Agents ב-Cursor: סוכן לכל משימה',
+    agentSkillsDocPath: '',
     showCursorInstall: false,
     showAsmInstall: false,
-    agentPromptBlock: `${'תרגיל שיעור 2.2: פתחו את dev-composer-agent/SKILL.md מהריפו של הקורס. הסבירו מה ב־frontmatter עוזר לטריגר, מה סדר השלבים בגוף, ומה צורת הפלט. אל תתקינו סקילים חדשים בשיעור הזה אלא אם כבר בתרגול חופשי.'}\n\n${M2_FOLLOWUP_PROMPT}`,
+    agentPromptBlock: `${'אתם Agent Architect. מטרה: לעזור לי להגדיר 3 Agents שונים ב-Cursor לפרויקט שלי: Product, Builder, Reviewer. פלט: לכל Agent תפקיד, קלט מומלץ, פלט צפוי, ומה לא לערבב איתו. בסוף תנו לי פתיח קצר ומוכן להדבקה לכל Agent.'}\n\n${M2_FOLLOWUP_PROMPT}`,
   },
   '2.3': {
     lessonId: '2.3',
     lessonTitle: 'חיפוש והתקנת סקילים עם ASM',
-    agentSkillsDocPath: `${MODULE2}/lesson-2.3-asm-discovery/README.md`,
+    agentSkillsDocPath: `${MODULE2}/lesson-2.1-skills-intro/AGENT_SKILLS.md`,
     courseSkillRepoPath: `${MODULE2}/lesson-2.1-skills-intro/cursor-skill-foundation`,
     showCursorInstall: false,
     showAsmInstall: true,
-    agentPromptBlock: `${'1) ודאו ש-ASM מותקן ויש asm.toml בפרויקט (כמו בשיעור 1.1 אם עוד לא).\n2) הריצו asm search עם שאילתה רלוונטית, בחרו מועמד מהטבלה ב-AGENT_SKILLS.md של שיעור 2.1.\n3) הריצו asm add skill + asm sync. אופציונלי: asm create expertise לפי המסמך.\n4) דווחו מה הותקן ואיפה מופיע ב-.asm/main_asm.md.'}\n\n${M2_FOLLOWUP_PROMPT}`,
+    agentPromptBlock: `${'אתם ASM Guide. 1) ודאו ש-ASM מותקן ושיש asm.toml בפרויקט. 2) הריצו asm search עם שאילתה רלוונטית ובחרו מועמד מהטבלה ב-AGENT_SKILLS.md של שיעור 2.1. 3) הריצו asm add skill + asm sync. 4) דווחו מה הותקן, למה בחרתם בו, ואיפה זה מופיע ב-.asm/main_asm.md. אופציונלי: asm create expertise.'}\n\n${M2_FOLLOWUP_PROMPT}`,
     courseRepoSyncScript: 'uv run scripts/sync_module02_project_skills.py',
   },
   '2.4': m2Lesson(
@@ -154,13 +154,14 @@ const SETUP: Record<string, LessonSetupContent> = {
     'debug-fix-agent',
     'אחרי ש-ASM מוכן, הריצו את פקודות "סקיל הקורס" — debug-fix-agent בלבד.',
   ),
-  '2.13': m2Lesson(
-    '2.13',
-    'מסד מקומי: SQLite, JSON וגשר לענן',
-    'lesson-2.13-local-db',
-    'local-db-development-agent',
-    'אחרי ש-ASM מוכן, הריצו את פקודות "סקיל הקורס" — local-db-development-agent בלבד.',
-  ),
+  '2.13': {
+    lessonId: '2.13',
+    lessonTitle: 'קונטקסט ופרומפטים חדים לסוכנים',
+    agentSkillsDocPath: '',
+    showCursorInstall: false,
+    showAsmInstall: false,
+    agentPromptBlock: `${'בחרו משימה אחת אמיתית מהפרויקט. בקשו מהסוכן לנסח לכם פתיח חד בן 4–5 שורות: מטרה, @ קבצים, פלט רצוי, מגבלות, ו«סיימנו כש…». אחר כך פתחו Agent או שיחה נפרדת והריצו אותו בדיוק עם הפתיח הזה.'}\n\n${M2_FOLLOWUP_PROMPT}`,
+  },
 };
 
 export function getLessonSetup(lessonId: string): LessonSetupContent | null {
