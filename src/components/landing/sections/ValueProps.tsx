@@ -9,26 +9,26 @@ const CARDS = [
     Icon: Laptop,
     title: 'בניית סביבת עבודה חכמה',
     description:
-      'הורדת Cursor, הגדרת מודלים, Git וטרמינל — סביבה מושלמת לפיתוח עם AI מהיום הראשון.',
+      'הורדת Cursor, הגדרת מודלים, Git וטרמינל. סביבה מושלמת לפיתוח עם AI מהיום הראשון.',
   },
   {
     Icon: Users,
     title: 'שרשרת סוכנים מקצה לקצה',
     description:
-      'PRD, ארכיטקטורה, UX, אבטחה, פיתוח, Code Review ו-QA — כל שלב עם הסקיל המתאים.',
+      'PRD, ארכיטקטורה, UX, אבטחה, פיתוח, Code Review ו-QA. כל שלב עם הסקיל המתאים.',
     offset: true,
   },
   {
     Icon: Plug,
     title: 'כוחות-על עם MCP',
     description:
-      'Notion, Figma, חיפוש אינטרנטי — חיבור הסוכן לכלים חיצוניים ופריסה ל-Vercel.',
+      'Notion, Figma, חיפוש אינטרנטי. חיבור הסוכן לכלים חיצוניים ופריסה ל-Vercel.',
   },
 ];
 
 export default function ValueProps() {
   return (
-    <section className="py-24 md:py-32 px-6 bg-[#F2F4F4]">
+    <section className="py-24 md:py-32 px-6 bg-[#F7F7F8]">
       <motion.div
         variants={staggerContainer}
         initial="hidden"
@@ -37,11 +37,11 @@ export default function ValueProps() {
         className="max-w-7xl mx-auto"
       >
         <motion.div variants={fadeUp} className="text-center mb-16 md:mb-24">
-          <h2 className="font-headline text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] mb-6 text-[#2D3435]">
+          <h2 className="font-headline text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-[-0.03em] mb-6 text-[#303150]">
             מה תלמדו בקורס
           </h2>
-          <p className="text-lg md:text-xl text-[#5A6061] max-w-xl mx-auto">
-            מסלול מעשי מאפס ועד פרויקטי גמר — בלי ידע קודם בתכנות.
+          <p className="text-lg md:text-xl text-[#7E7F90] max-w-xl mx-auto">
+            מסלול מעשי מאפס ועד פרויקטי גמר, בלי ידע קודם בתכנות.
           </p>
         </motion.div>
 
@@ -50,17 +50,17 @@ export default function ValueProps() {
             <motion.div
               key={i}
               variants={staggerItem}
-              className={`p-8 md:p-10 rounded-2xl bg-white shadow-[0_20px_40px_rgba(45,52,53,0.04)] flex flex-col gap-6 hover:translate-y-[-4px] transition-transform duration-500 ${
+              className={`p-8 md:p-10 rounded-2xl bg-white shadow-[0_20px_40px_rgba(48,49,80,0.04)] flex flex-col gap-6 hover:translate-y-[-4px] transition-transform duration-500 ${
                 offset ? 'md:translate-y-12' : ''
               }`}
             >
-              <div className="w-12 h-12 rounded-xl bg-[#E4E9EA] flex items-center justify-center">
-                <Icon className="w-6 h-6 text-[#4A4BD7]" strokeWidth={1.75} />
+              <div className="w-12 h-12 rounded-xl bg-[#E8E8ED] flex items-center justify-center">
+                <Icon className="w-6 h-6 text-[#69ADFF]" strokeWidth={1.75} />
               </div>
-              <h3 className="font-headline text-xl md:text-2xl font-bold text-[#2D3435]">
+              <h3 className="font-headline text-xl md:text-2xl font-bold text-[#303150]">
                 {title}
               </h3>
-              <p className="text-[#5A6061] leading-relaxed">{description}</p>
+              <p className="text-[#7E7F90] leading-relaxed">{description}</p>
             </motion.div>
           ))}
         </div>

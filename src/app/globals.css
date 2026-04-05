@@ -9,6 +9,11 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Hide scrollbar utility */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 /* Landing page marquee */
 @keyframes landing-marquee {
   from { transform: translateX(0); }
@@ -17,6 +22,9 @@ html {
 
 .landing-marquee {
   display: flex;
+  /* Force LTR layout so the duplicated half lines up physically,
+     then translateX(-50%) creates a seamless rightward loop in RTL pages. */
+  direction: ltr;
   animation: landing-marquee 25s linear infinite;
   will-change: transform;
 }
@@ -25,6 +33,16 @@ html {
   .landing-marquee {
     animation-play-state: paused;
   }
+}
+
+/* Hero section grid pattern */
+.landing-hero-grid {
+  background-image:
+    linear-gradient(to right, rgba(48,49,80,0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(48,49,80,0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 50% at 50% 30%, black, transparent);
+  -webkit-mask-image: radial-gradient(ellipse 70% 50% at 50% 30%, black, transparent);
 }
 
 /* ============================================
