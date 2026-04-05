@@ -1,9 +1,11 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Check, Zap, Crown, Users } from 'lucide-react';
+import { Check, Zap, Crown, Users, Loader2 } from 'lucide-react';
 import { fadeUp, staggerContainer, staggerItem, sectionViewport } from '../motion';
+import type { PlanId } from '@/lib/checkout';
 
 /* ------------------------------------------------------------------ */
 /*  Plans                                                              */
@@ -11,6 +13,7 @@ import { fadeUp, staggerContainer, staggerItem, sectionViewport } from '../motio
 
 interface Plan {
   icon: typeof Zap;
+  planId: PlanId | null;
   name: string;
   tagline: string;
   price: string;
@@ -25,6 +28,7 @@ interface Plan {
 const plans: Plan[] = [
   {
     icon: Zap,
+    planId: 'monthly',
     name: 'מנוי חודשי',
     tagline: 'גישה לכל הקורסים, היום ובעתיד.',
     price: '₪97',
@@ -42,6 +46,7 @@ const plans: Plan[] = [
   },
   {
     icon: Crown,
+    planId: 'one_time',
     name: 'קנייה חד-פעמית',
     tagline: 'גישה לצמיתות לקורס Cursor.',
     price: '₪379',
@@ -60,6 +65,7 @@ const plans: Plan[] = [
   },
   {
     icon: Users,
+    planId: null,
     name: 'שיעורים פרטיים',
     tagline: 'Cursor או Claude Code, 1 על 1 עם המייסדים.',
     price: 'בואו נדבר',
@@ -81,7 +87,12 @@ const plans: Plan[] = [
 /*  Component                                                          */
 /* ------------------------------------------------------------------ */
 
-export default function CtaSection() {
+interface CtaSectionProps {
+  onSelectPlan?: (plan: PlanId) => void;
+}
+
+export default function CtaSection({ onSelectPlan }: CtaSectionProps) {
+  const [loadingPlan, setLoadingPlan] = useState<PlanId | null>(null);
   return (
     <section id="pricing" className="py-24 md:py-32 px-6 bg-[#F5F5F7]">
       <motion.div
@@ -195,16 +206,40 @@ export default function CtaSection() {
                 </ul>
 
                 {/* CTA */}
-                <Link
-                  href={plan.href}
-                  className={`block text-center py-3.5 px-6 rounded-xl font-bold text-sm transition-all duration-200 active:scale-[0.97]
-                    ${plan.highlighted
-                      ? 'bg-white text-[#303150] hover:bg-[#F5F5F7] shadow-[0_4px_12px_rgba(255,255,255,0.15)]'
-                      : 'bg-[#303150] text-white hover:bg-[#3D3D5C]'
-                    }`}
-                >
-                  {plan.cta}
-                </Link>
+                {plan.planId && onSelectPlan ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setLoadingPlan(plan.planId);
+                      setTimeout(() => {
+                        onSelectPlan(plan.planId!);
+                        setLoadingPlan(null);
+                      }, 200);
+                    }}
+                    className={`w-full flex items-center justify-center py-3.5 px-6 rounded-xl font-bold text-sm transition-all duration-200 active:scale-[0.97] cursor-pointer
+                      ${plan.highlighted
+                        ? 'bg-white text-[#303150] hover:bg-[#F5F5F7] shadow-[0_4px_12px_rgba(255,255,255,0.15)]'
+                        : 'bg-[#303150] text-white hover:bg-[#3D3D5C]'
+                      }`}
+                  >
+                    {loadingPlan === plan.planId ? (
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                    ) : (
+                      plan.cta
+                    )}
+                  </button>
+                ) : (
+                  <Link
+                    href={plan.href}
+                    className={`block text-center py-3.5 px-6 rounded-xl font-bold text-sm transition-all duration-200 active:scale-[0.97]
+                      ${plan.highlighted
+                        ? 'bg-white text-[#303150] hover:bg-[#F5F5F7] shadow-[0_4px_12px_rgba(255,255,255,0.15)]'
+                        : 'bg-[#303150] text-white hover:bg-[#3D3D5C]'
+                      }`}
+                  >
+                    {plan.cta}
+                  </Link>
+                )}
               </motion.div>
             );
           })}

@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { LogOut, User as UserIcon } from 'lucide-react';
 import Link from 'next/link';
+import { signOutUser } from '@/app/actions/auth';
 
 interface UserMenuProps {
   user: {
@@ -75,7 +76,7 @@ export default function UserMenu({ user }: UserMenuProps) {
             )}
           </div>
 
-          <form action="/api/auth/signout" method="POST">
+          <form action={signOutUser}>
             <button
               type="submit"
               className="w-full flex items-center gap-2 px-4 py-2.5 text-[0.8125rem] text-[#7E7F90] hover:bg-[#F7F7F8] hover:text-[#303150] transition-colors cursor-pointer"
