@@ -16,12 +16,19 @@ import { getLessonSetup } from '@/data/studentSetup';
 import { useClientPlatform } from '@/hooks/useClientPlatform';
 import { useProgress } from '@/hooks/useProgress';
 
+interface SessionUser {
+  name?: string | null;
+  email?: string | null;
+  image?: string | null;
+}
+
 interface CourseExperienceProps {
   course: Course;
   storageKey: string;
+  user?: SessionUser | null;
 }
 
-export default function CourseExperience({ course, storageKey }: CourseExperienceProps) {
+export default function CourseExperience({ course, storageKey, user }: CourseExperienceProps) {
   const allLessons = useMemo(
     () => course.chapters.flatMap((ch) => ch.lessons),
     [course.chapters],
@@ -136,7 +143,8 @@ export default function CourseExperience({ course, storageKey }: CourseExperienc
         totalLessons={totalLessons}
         onOpenMobileMenu={() => setIsMobileDrawerOpen(true)}
         onOpenHelp={() => setSetupModalOpen(true)}
-        quickStartHref="/"
+        quickStartHref="/setup"
+        user={user}
       />
 
       <div className="flex flex-1 min-h-0">
@@ -149,7 +157,7 @@ export default function CourseExperience({ course, storageKey }: CourseExperienc
         watchedLessonIds={watchedLessonIds}
       />
 
-      <div className="flex-1 min-w-0 p-4 lg:p-6 space-y-6">
+      <div className="flex-1 min-w-0 p-4 lg:p-6 space-y-6 max-w-4xl mx-auto w-full">
         {/* Course header */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}

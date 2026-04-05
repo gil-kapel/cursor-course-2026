@@ -27,6 +27,7 @@
 # large media files
 *.mov
 *.mp4
+!public/area.mp4
 
 # debug
 npm-debug.log*
@@ -49,3 +50,5 @@ CLAUDE.md
 .claude/
 .cursor/
 
+
+/src/generated/prisma

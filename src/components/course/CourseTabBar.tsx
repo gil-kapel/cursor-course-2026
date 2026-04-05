@@ -72,7 +72,7 @@ export default function CourseTabBar({
         />
       </div>
 
-      <div className="h-[17rem] overflow-y-auto scrollbar-ghost">
+      <div className="max-h-[24rem] overflow-y-auto scrollbar-ghost">
         <div className="p-6" dir="rtl" lang="he">
           {activeTab === 'prompts' && (
             <>

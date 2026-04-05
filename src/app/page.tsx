@@ -1,5 +1,5 @@
-import FastStartPage from '@/components/setup/FastStartPage';
+import LandingPage from '@/components/landing/LandingPage';
 
 export default function Home() {
-  return <FastStartPage />;
+  return <LandingPage />;
 }
