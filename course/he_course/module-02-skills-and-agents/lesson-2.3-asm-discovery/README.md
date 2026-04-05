@@ -11,18 +11,21 @@ Hebrew-first lesson assets; this index is in English to match the course README.
 
 ## Syllabus topic
 
-Practical workflow with the **Agent Skill Manager (ASM)**. Learning how to use `asm search` to find skills, evaluating them using the course rubric, and managing them with `asm add skill`, `asm sync`, and `asm create expertise`. Automating the setup of your AI team.
+Practical workflow with the **Agent Skill Manager (ASM)** through the **Agent** itself. Learning how to ask Cursor to inspect the current ASM setup, recommend a skill using the course rubric, perform the ASM steps inside the agent workflow, and then verify the resulting project files instead of relying on a terminal-first flow.
 
 ## Practical outcomes
 
-- Search for a skill with `asm search` and compare it against the course rubric.
-- Install one skill with `asm add skill` and sync it into the project with `asm sync`.
-- Understand when `asm create expertise` is useful for grouping related skills.
+- Ask the agent to inspect whether ASM is ready in the current project.
+- Let the agent recommend one skill based on `AGENT_SKILLS.md` and explain why it is the best fit.
+- Let the agent handle the ASM workflow, then verify the updated files in the workspace.
+- Understand when an expertise bundle is useful for grouping related skills.
 
 ## Verify
 
-- You can see the installed skill on disk after `asm sync`.
-- You know what to do if `asm.toml` is missing before you start.
+- You can point to `asm.toml` as the project-level ASM setup file.
+- You can point to `.asm/main_asm.md` as the generated ASM registry view.
+- You can open `.cursor/skills/<skill-name>/SKILL.md` and confirm the installed skill exists where Cursor can use it.
+- You can explain the difference between "let the agent operate ASM" and "manage the whole flow manually in the CLI".
 
 ## Next
 
