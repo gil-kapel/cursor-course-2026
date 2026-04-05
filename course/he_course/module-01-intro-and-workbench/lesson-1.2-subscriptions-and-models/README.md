@@ -2,15 +2,15 @@
 
 Hebrew-first lesson assets; this index is in English to match the course README.
 
-**Scope:** How to use **Cursor** pricing and usage information in practice: where to see the official pricing page, where to open `Plan & Usage` and `Models` inside Cursor, how to understand the major differences between model choices, and how to pick a sensible default model without wasting usage.
+**Scope:** How Cursor's individual plans really differ in practice, using the official pricing and docs as the source of truth: `Hobby` / free, `Pro`, `Pro+`, and `Ultra`; where to see pricing and usage; how Cursor's usage pools work; how model selection affects cost; and what beginners should choose when and why.
 
 ## Files in this folder
 
 | File | Purpose |
 |------|---------|
-| [on-screen.md](on-screen.md) | Screen recording beat sheet (Hebrew); official pricing page, `Cursor Settings`, `Plan & Usage`, `Models`, and model picker |
-| [narration.md](narration.md) | Hebrew voiceover for ElevenLabs; same timestamps as `on-screen.md`; verify labels against your Cursor version before recording |
+| [on-screen.md](on-screen.md) | Screen recording beat sheet (Hebrew); official pricing page, plan comparison, usage pools, `Plan & Usage`, `Models`, and model-choice examples |
+| [narration.md](narration.md) | Hebrew voiceover for ElevenLabs; same timestamps as `on-screen.md`; verify labels and pricing against your Cursor version before recording |
 
 ## Syllabus topic
 
-How to find pricing and usage as a beginner; the difference between plan, usage, and model selection; where to open those surfaces in Cursor; major practical differences between a faster everyday model and a stronger reasoning model; and a simple default rule for switching models wisely. Use the official Cursor website and in-app UI as the source of truth.
+How to explain the real differences between Cursor's individual plans and what changes when you upgrade; the distinction between `Auto + Composer` usage and model-specific API usage; where to inspect pricing and usage in the website and app; practical model pricing examples from the official docs; and a beginner-friendly decision framework for when to use cheaper models, stronger models, or Auto/Composer. Use the official Cursor website and docs as the source of truth.
