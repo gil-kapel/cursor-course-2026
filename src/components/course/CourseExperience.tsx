@@ -16,12 +16,19 @@ import { getLessonSetup } from '@/data/studentSetup';
 import { useClientPlatform } from '@/hooks/useClientPlatform';
 import { useProgress } from '@/hooks/useProgress';
 
+interface SessionUser {
+  name?: string | null;
+  email?: string | null;
+  image?: string | null;
+}
+
 interface CourseExperienceProps {
   course: Course;
   storageKey: string;
+  user?: SessionUser | null;
 }
 
-export default function CourseExperience({ course, storageKey }: CourseExperienceProps) {
+export default function CourseExperience({ course, storageKey, user }: CourseExperienceProps) {
   const allLessons = useMemo(
     () => course.chapters.flatMap((ch) => ch.lessons),
     [course.chapters],
@@ -137,6 +144,7 @@ export default function CourseExperience({ course, storageKey }: CourseExperienc
         onOpenMobileMenu={() => setIsMobileDrawerOpen(true)}
         onOpenHelp={() => setSetupModalOpen(true)}
         quickStartHref="/"
+        user={user}
       />
 
       <div className="flex flex-1 min-h-0">

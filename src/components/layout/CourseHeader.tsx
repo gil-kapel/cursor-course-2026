@@ -8,6 +8,13 @@ import {
   BookOpen,
   Home,
 } from 'lucide-react';
+import UserMenu from './UserMenu';
+
+interface SessionUser {
+  name?: string | null;
+  email?: string | null;
+  image?: string | null;
+}
 
 interface CourseHeaderProps {
   watchedCount: number;
@@ -16,6 +23,8 @@ interface CourseHeaderProps {
   onOpenHelp?: () => void;
   /** Link to fast-start homepage (e.g. "/"). */
   quickStartHref?: string;
+  /** Current authenticated user (null = not signed in). */
+  user?: SessionUser | null;
 }
 
 export default function CourseHeader({
@@ -24,6 +33,7 @@ export default function CourseHeader({
   onOpenMobileMenu,
   onOpenHelp,
   quickStartHref,
+  user,
 }: CourseHeaderProps) {
   const progressPercent = totalLessons > 0 ? Math.round((watchedCount / totalLessons) * 100) : 0;
 
@@ -95,6 +105,9 @@ export default function CourseHeader({
             >
               <HelpCircle className="w-[18px] h-[18px]" strokeWidth={1.75} />
             </button>
+
+            {/* User menu */}
+            <UserMenu user={user ?? null} />
 
             {/* Hamburger — mobile only */}
             <button

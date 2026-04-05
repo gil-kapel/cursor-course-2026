@@ -49,3 +49,5 @@ CLAUDE.md
 .claude/
 .cursor/
 
+
+/src/generated/prisma
