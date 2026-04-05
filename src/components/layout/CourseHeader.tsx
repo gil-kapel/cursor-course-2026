@@ -90,7 +90,7 @@ export default function CourseHeader({
                 className="hidden sm:inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[0.75rem] font-semibold text-[#69ADFF] hover:bg-[#69ADFF]/10 transition-colors"
               >
                 <Home className="w-3.5 h-3.5" strokeWidth={2} />
-                התחלה מהירה
+                הכנה לקורס
               </Link>
             )}
 

@@ -143,7 +143,7 @@ export default function CourseExperience({ course, storageKey, user }: CourseExp
         totalLessons={totalLessons}
         onOpenMobileMenu={() => setIsMobileDrawerOpen(true)}
         onOpenHelp={() => setSetupModalOpen(true)}
-        quickStartHref="/"
+        quickStartHref="/setup"
         user={user}
       />
 
