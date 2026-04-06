@@ -30,15 +30,15 @@ MODULE2 = REPO_ROOT / "course" / "he_course" / "module-02-skills-and-agents"
 
 SKILL_SOURCES = [
     MODULE2 / "lesson-2.1-skills-intro" / "cursor-skill-foundation",
-    MODULE2 / "lesson-2.2-product-agent-prd" / "product-prd-agent",
-    MODULE2 / "lesson-2.3-tech-lead-architecture" / "tech-lead-architecture-agent",
-    MODULE2 / "lesson-2.4-ux-user-flow" / "ux-user-flow-agent",
-    MODULE2 / "lesson-2.5-ui-design-systems" / "ui-design-systems-agent",
-    MODULE2 / "lesson-2.6-security-agent" / "security-review-agent",
-    MODULE2 / "lesson-2.7-dev-agent-composer" / "dev-composer-agent",
-    MODULE2 / "lesson-2.8-code-review-agent" / "code-review-cleanup-agent",
-    MODULE2 / "lesson-2.9-qa-tests-agent" / "qa-tests-agent",
-    MODULE2 / "lesson-2.10-debug-agent" / "debug-fix-agent",
+    MODULE2 / "lesson-2.4-product-agent-prd" / "product-prd-agent",
+    MODULE2 / "lesson-2.5-tech-lead-architecture" / "tech-lead-architecture-agent",
+    MODULE2 / "lesson-2.6-ux-user-flow" / "ux-user-flow-agent",
+    MODULE2 / "lesson-2.7-ui-design-systems" / "ui-design-systems-agent",
+    MODULE2 / "lesson-2.8-security-agent" / "security-review-agent",
+    MODULE2 / "lesson-2.9-dev-agent-composer" / "dev-composer-agent",
+    MODULE2 / "lesson-2.10-code-review-agent" / "code-review-cleanup-agent",
+    MODULE2 / "lesson-2.11-qa-tests-agent" / "qa-tests-agent",
+    MODULE2 / "lesson-2.12-debug-agent" / "debug-fix-agent",
 ]
 
 CURSOR_SKILLS = REPO_ROOT / ".cursor" / "skills"

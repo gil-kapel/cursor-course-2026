@@ -311,6 +311,54 @@ JOBS: list[tuple[str, str, str, str, str, str]] = [
 ]
 
 
+POST_COPY_PATCHES: dict[tuple[str, str], list[tuple[str, str, str]]] = {
+    # (lesson, folder) → [(file_relative_to_dest, old_text, new_text), ...]
+    ("lesson-2.4-ux-user-flow", "user-journeys"): [
+        (
+            "SKILL.md",
+            "*Load with: base.md + playwright-testing.md*\n\nFor defining and testing real user experiences",
+            "> **Course note:** The upstream skill references `base.md` and `playwright-testing.md` "
+            "which are not bundled here. Within this course, load only this file. The Playwright "
+            "examples below are useful reference but optional — skip them if your project does not "
+            "use E2E tests yet.\n\nFor defining and testing real user experiences",
+        ),
+    ],
+    ("lesson-2.4-ux-user-flow", "ui-ux-designer"): [
+        (
+            "SKILL.md",
+            "---\n\n## Use this skill when",
+            "---\n\n> **Course note:** This is a broad community skill. Within lesson 2.4, focus on "
+            "information architecture, screen states, and handoff — visual design and component work "
+            "belong to lesson 2.5 (UI agent). The upstream `resources/implementation-playbook.md` is "
+            "not bundled here.\n\n## Use this skill when",
+        ),
+        (
+            "SKILL.md",
+            "- If detailed examples are required, open `resources/implementation-playbook.md`.\n",
+            "",
+        ),
+    ],
+}
+
+
+def apply_post_copy_patches(lesson: str, folder: str, dest: Path) -> None:
+    """Apply course-specific text patches to a freshly cloned bundled skill."""
+    patches = POST_COPY_PATCHES.get((lesson, folder))
+    if not patches:
+        return
+    for rel_file, old_text, new_text in patches:
+        target = dest / rel_file
+        if not target.is_file():
+            print(f"  PATCH SKIP (file missing): {target}")
+            continue
+        content = target.read_text(encoding="utf-8")
+        if old_text not in content:
+            print(f"  PATCH SKIP (text not found): {target}")
+            continue
+        target.write_text(content.replace(old_text, new_text, 1), encoding="utf-8")
+        print(f"  PATCH applied: {target.name}")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--lesson", help="Only process one lesson folder name prefix")
@@ -339,6 +387,7 @@ def main() -> int:
         except Exception as e:
             print(f"FAILED {dest}: {e}", file=sys.stderr)
             return 1
+        apply_post_copy_patches(lesson, folder, dest)
 
     if not args.dry_run:
         write_improvement_docs()

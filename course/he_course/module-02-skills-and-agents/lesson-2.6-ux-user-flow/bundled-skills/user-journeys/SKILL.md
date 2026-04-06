@@ -8,7 +8,7 @@ effort: medium
 
 # User Journeys Skill
 
-*Load with: base.md + playwright-testing.md*
+> **Course note:** The upstream skill references `base.md` and `playwright-testing.md` which are not bundled here. Within this course, load only this file. The Playwright examples below are useful reference but optional — skip them if your project does not use E2E tests yet.
 
 For defining and testing real user experiences - not just specs, but actual flows humans take through your application.
 

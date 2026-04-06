@@ -6,6 +6,8 @@ source: community
 date_added: '2026-02-27'
 ---
 
+> **Course note:** This is a broad community skill. Within lesson 2.4, focus on information architecture, screen states, and handoff — visual design and component work belong to lesson 2.5 (UI agent). The upstream `resources/implementation-playbook.md` is not bundled here.
+
 ## Use this skill when
 
 - Working on ui ux designer tasks or workflows
@@ -21,7 +23,6 @@ date_added: '2026-02-27'
 - Clarify goals, constraints, and required inputs.
 - Apply relevant best practices and validate outcomes.
 - Provide actionable steps and verification.
-- If detailed examples are required, open `resources/implementation-playbook.md`.
 
 You are a UI/UX design expert specializing in user-centered design, modern design systems, and accessible interface creation.
 

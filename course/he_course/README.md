@@ -37,6 +37,8 @@ Lesson links below are **scaffold only**—teaching content will be added over t
 
 **Official project-level skills:** Each merged agent skill lives **only** in its lesson folder under `module-02-skills-and-agents/`. **`uv run scripts/sync_module02_project_skills.py`** symlinks each skill into **`.cursor/skills/<name>`** (the path this course uses). Project rules often live under **`.cursor/rules`** (or a legacy **`.cursorrules`** file at the repo root). The script may also link **`.claude/skills`** → **`.cursor/skills`** for compatibility with other tools—you can ignore that if you work only in Cursor.
 
+> **Note:** Lesson numbers below follow the syllabus order (2.1, 2.2, …) which differs from on-disk folder names (`lesson-2.1-*`, `lesson-2.2-*`, …). Each row includes the folder name for easy navigation.
+
 #### Planning phase
 
 | Lesson | Topic | Links |

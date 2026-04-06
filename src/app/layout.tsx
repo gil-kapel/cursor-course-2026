@@ -1,25 +1,11 @@
 import type { Metadata } from "next";
-import { Heebo, Nunito, Manrope } from "next/font/google";
+import { Heebo } from "next/font/google";
 import "./globals.css";
 
 const heebo = Heebo({
   subsets: ["hebrew", "latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   variable: "--font-heebo",
-  display: "swap",
-});
-
-const nunito = Nunito({
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-nunito",
-  display: "swap",
-});
-
-const manrope = Manrope({
-  subsets: ["latin", "latin-ext"],
-  weight: ["600", "700", "800"],
-  variable: "--font-manrope",
   display: "swap",
 });
 
@@ -36,10 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="he" dir="rtl">
-      <body
-        className={`${heebo.variable} ${nunito.variable} ${manrope.variable} antialiased`}
-        style={{ fontFamily: 'var(--font-heebo), var(--font-nunito), system-ui, sans-serif' }}
-      >
+      <body className={`${heebo.variable} font-sans antialiased`}>
         {children}
       </body>
     </html>

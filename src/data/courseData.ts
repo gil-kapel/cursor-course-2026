@@ -126,6 +126,8 @@ Success criteria:
           duration: '10:00',
           status: 'available',
           badge: 'BEGINNER',
+          videoUrl:
+            'https://player.mediadelivery.net/embed/632156/6fa6a1fd-fb5b-457e-947a-aab04b07b836?autoplay=true&loop=false&muted=false&preload=true&responsive=true',
           prompts: [
             'לפני שאני מריץ פקודה בטרמינל: הסבר לי בצורה פשוטה מה הפקודה הבאה עושה, מה הסיכונים, ומה חלופה בטוחה יותר אם יש: [הדבק כאן את הפקודה]',
             'עזרו לי להבין Git בפרויקט שלי: מה זה קומיט, איך לראות מה השתנה, ומה צעד מינימלי אחרי שינוי קטן בקוד לפני שאמשיך לבנות.',

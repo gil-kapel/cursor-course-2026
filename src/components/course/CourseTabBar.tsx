@@ -121,7 +121,6 @@ export default function CourseTabBar({
                         className="text-[0.8125rem] text-[#303150] leading-relaxed whitespace-pre-line"
                         dir="rtl"
                         lang="he"
-                        style={{ fontFamily: 'var(--font-nunito), system-ui, sans-serif' }}
                       >
                         {note}
                       </p>
