@@ -1,7 +1,7 @@
 'use server';
 
 import { requireAdmin, getAdminEmailsList } from '@/lib/admin';
-import { prisma } from '@/lib/db';
+import { getPrisma } from '@/lib/db';
 import {
   createAdminTaskSchema,
   updateAdminTaskSchema,
@@ -17,6 +17,7 @@ async function ensureAdmin() {
 
 export async function getRoadmapData(): Promise<RoadmapData> {
   await ensureAdmin();
+  const prisma = getPrisma();
 
   const groups = await prisma.adminTaskGroup.findMany({
     include: {
@@ -40,6 +41,7 @@ export async function createTask(
   input: unknown
 ): Promise<AdminTask> {
   await ensureAdmin();
+  const prisma = getPrisma();
   const data = createAdminTaskSchema.parse(input);
 
   const parentId = data.parentId ?? null;
@@ -72,6 +74,7 @@ export async function updateTask(
   input: unknown
 ): Promise<AdminTask> {
   await ensureAdmin();
+  const prisma = getPrisma();
   const data = updateAdminTaskSchema.parse(input);
 
   const updatedTask = await prisma.adminTask.update({
@@ -100,6 +103,7 @@ export async function updateTaskGroupOrder(
   input: unknown
 ): Promise<{ success: boolean }> {
   await ensureAdmin();
+  const prisma = getPrisma();
   const items = updateAdminTaskGroupOrderSchema.parse(input);
 
   await prisma.$transaction(
@@ -119,6 +123,7 @@ export async function updateTaskGroup(
   input: unknown
 ): Promise<AdminTaskGroupWithTasks> {
   await ensureAdmin();
+  const prisma = getPrisma();
   const data = updateAdminTaskGroupSchema.parse(input);
 
   const updatedGroup = await prisma.adminTaskGroup.update({
@@ -141,6 +146,7 @@ export async function updateTaskGroup(
 
 export async function deleteTask(id: string): Promise<{ success: boolean }> {
   await ensureAdmin();
+  const prisma = getPrisma();
   await prisma.adminTask.delete({ where: { id } });
   return { success: true };
 }
@@ -149,6 +155,7 @@ export async function createTaskGroup(
   input: unknown
 ): Promise<AdminTaskGroupWithTasks> {
   await ensureAdmin();
+  const prisma = getPrisma();
   const data = createAdminTaskGroupSchema.parse(input);
 
   const maxOrder = await prisma.adminTaskGroup.findFirst({
@@ -176,6 +183,7 @@ export async function createTaskGroup(
 
 export async function getAdminUsers(): Promise<{ email: string; name: string }[]> {
   await ensureAdmin();
+  const prisma = getPrisma();
   const emails = getAdminEmailsList();
   const users = await prisma.user.findMany({
     where: { email: { in: emails } },
