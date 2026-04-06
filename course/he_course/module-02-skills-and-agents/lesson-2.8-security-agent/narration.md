@@ -6,56 +6,67 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 ## 00:00 – 01:00
 
-אבטחה היא לא checklist שעושים בסוף הפרויקט. אבטחה היא חלק בלתי נפרד מהתכנון.
+בשיעור הזה אני ממשיך את אותה דוגמה מהשיעור הקודם.
 
-בשיעור הזה אנחנו מפעילים את **סוכן האבטחה**. התפקיד שלו הוא לא להפחיד אותנו, אלא לעזור לנו למצוא חורים בתכנון עוד לפני שכתבנו שורה אחת של קוד.
+יש לי כבר PRD, ארכיטקטורה, מסמך UX, ומסמך UI עבור זרימת בחירת חבילה ותשלום בחלון צד. עכשיו אני עדיין לא רוצה לממש. אני רוצה קודם לעצור ולבנות תוכנית.
 
-כדי שהסקירה תהיה רצינית, אנחנו מצרפים את כל מה שבנינו עד עכשיו: `@docs/prd.md`, `@docs/architecture.md`, ו־`@docs/ui-plan.md`. הסוכן יחפש טעויות נפוצות: איפה נשמרים המפתחות הסודיים שלנו? מי באמת מורשה לראות את הנתונים? ומה קורה אם מישהו מנסה לשבור את המערכת?
-
----
-
-## 01:00 – 02:30
-
-כשמפעילים את סקיל האבטחה, אנחנו מבקשים מהסוכן לדרג את הסיכונים.
-
-סוכן טוב יידע להבדיל בין "משהו שמעצבן מפתחים" לבין "חור אבטחה שיכול לחשוף נתונים של לקוחות". למשל, הוא יכול לעלות על זה שתכננו API שמחזיר יותר מדי שדות - מידע שהמשתמש בכלל לא אמור לראות.
-
-זה השלב שבו אנחנו מוצאים את ה־Release Blockers — אותן בעיות שחייבים לפתור לפני שבכלל מתחילים לפתח.
+לכן אני מעביר את הסוכן ל־**Plan mode**. זה חשוב, כי כרגע אני לא רוצה קוד. אני רוצה סדר.
 
 ---
 
-## 02:30 – 03:45
+## 01:00 – 02:15
 
-כמו תמיד, אנחנו שומרים את הכל בקובץ: `docs/security-notes.md`.
+עכשיו אני מצרף את כל המסמכים:
+`@docs/prd.md`,
+`@docs/architecture.md`,
+`@docs/ux-flows.md`,
+ו־`@docs/ui-plan.md`.
 
-שימו לב לטיפ חשוב: לעולם אל תציגו מפתחות API אמיתיים או סיסמאות על המסך, גם לא בתוך Cursor. השתמשו תמיד בדוגמאות מזויפות כמו `YOUR_API_KEY`. הסוכן יבין את הכוונה שלכם גם בלי לראות את הסודות האמיתיים.
+אני עושה את זה כי אני רוצה שהתוכנית לא תישען רק על מסמך אחד. אם אני אתכנן רק לפי ה־UI, אני עלול לפספס אילוצים טכניים. אם אתכנן רק לפי הארכיטקטורה, אני עלול לפספס את הזרימה של המשתמש.
 
-המסמך הזה יהיה צמוד אלינו כשלב ה"שומר" בכל פעם שנכתוב קוד או נעשה סקירה.
-
----
-
-## 03:45 – 05:00
-
-לפני שאנחנו מסיימים, כדאי לשאול את הסוכן: "מה רשימת הבדיקות (Checklist) שחייבים לעשות לפני שמחברים מערכת הזדהות (Auth)?".
-
-הוא ייתן לנו רשימה קונקרטית: איפה נשמר הטוקן, איך מתבצעת התנתקות, ואיך אנחנו מוודאים שמשתמש א' לא יכול לגשת לנתונים של משתמש ב' בצד השרת.
-
-אלו שאלות שחוסכות המון כאב ראש (ותביעות) בהמשך הדרך.
+כלומר, המטרה שלי כאן היא לבנות תמונה אחת מסודרת מכל מה שכבר יצרתי.
 
 ---
 
-## 05:00 – 06:00
+## 02:15 – 03:30
 
-לסיכום: עברנו על התכנון שלנו בעיניים של האקר חיובי, מצאנו חורים, ותיעדנו אותם ב־`docs/security-notes.md`.
+עכשיו אני מבקש מהסוכן לפרק את העבודה ל־slices.
 
-עכשיו אנחנו באמת מוכנים להתחיל לכתוב קוד. בשיעור הבא, 2.9, אנחנו הולכים להשתמש ב־Composer — הכלי הכי חזק ב־Cursor — כדי לבנות "פרוסה אנכית" של האפליקציה: נחבר נתונים, לוגיקה וממשק, הכל במקום אחד.
+למשל:
+Slice 1 - להציג את החבילות ולפתוח את חלון הצד.
+Slice 2 - לחבר את הלוגיקה של התשלום.
+Slice 3 - להוסיף polish, states, ושגיאות.
 
-נתראה שם.
+אני מסביר את זה בקול כי זה כל הערך של השיעור: לא "מה אפשר לבנות", אלא "מה בונים קודם כדי לא להסתבך".
 
 ---
 
-## Appendix — English prompt (Security review)
+## 03:30 – 04:45
+
+בשלב הזה אני בודק שהתוכנית לא נשארת ברמת כותרות. אני רוצה שלכל slice יהיה:
+מטרה,
+קבצים צפויים,
+בדיקת הצלחה,
+וגבול ברור של out of scope.
+
+למה זה חשוב? כי בלי זה Composer יתחיל לגלוש. ברגע שהתוכנית חדה, גם המימוש הבא יהיה הרבה יותר מדויק.
+
+---
+
+## 04:45 – 06:00
+
+עכשיו אני שומר את התוצאה כ־`docs/implementation-plan.md` או כסדרת קבצי slice.
+
+אני פותח את המסמך, מסתכל במיוחד על Slice 1, ושואל את עצמי: אם אני עובר עכשיו לשיעור הבא, האם ברור לי בדיוק מה אני מבקש מהסוכן לממש?
+
+אם התשובה היא כן, התוכנית טובה. אם לא, אני עדיין נשאר ב־Plan mode ומשפר אותה.
+
+בשיעור הבא, 2.9, אני לוקח בדיוק את Slice 1 הזה, ועובר ל־Composer כדי לממש רק אותו.
+
+---
+
+## Appendix — English prompt (Plan mode implementation gate)
 
 ```text
-You are a security review agent. Goal: run a practical security review before implementation grows. Context: check `@docs/prd.md`, `@docs/architecture.md`, and `@docs/ui-plan.md`. Output: save `docs/security-notes.md` with prioritized risks, release blockers, and a short auth/security checklist. Constraints: never ask for real secrets; focus on auth, permissions, data exposure, and abuse cases.
+You are a planning agent in Plan mode. Goal: turn all existing product, architecture, UX, and UI documents into a clean implementation plan before any coding starts. Context: check `@docs/prd.md`, `@docs/architecture.md`, `@docs/ux-flows.md`, and `@docs/ui-plan.md`. Output: either save `docs/implementation-plan.md` or create `docs/slice-01.md`, `docs/slice-02.md`, and `docs/slice-03.md`, with clear build order, blockers, expected files, and verification for each slice. Constraints: do not implement code yet; keep Slice 1 small and concrete; call out any blocker that should be solved before implementation.
 ```

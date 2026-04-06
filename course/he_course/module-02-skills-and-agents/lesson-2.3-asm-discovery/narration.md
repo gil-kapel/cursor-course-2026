@@ -6,52 +6,48 @@ Plain paragraphs for TTS. Section headers match on-screen beats. Trim pauses in 
 
 ## 00:00 – 01:00
 
-הגענו לשלב שבו אנחנו מכניסים סקילים חדשים לפרויקט. הכלי שמנהל את זה הוא **ASM** - Agent Skill Manager.
+הגענו לשלב שבו אנחנו לא רק מדברים על Skills, אלא ממש מתקינים אחד לפרויקט. הכלי שמנהל את זה הוא **ASM** - Agent Skill Manager.
 
-אבל שימו לב לשינוי החשוב של השיעור הזה: אנחנו לא עובדים מול ASM בצורה "טרמינל־ראשונה", וגם לא בצורה "הסוכן אומר ואני מקליד". אנחנו עובדים דרך ה־Agent מקצה לקצה.
+והפעם אנחנו עושים משהו חשוב מאוד: מתקינים Skill אמיתי לשיעור הבא. לא דוגמה כללית, אלא את הסקיל של סוכן המוצר, כדי ש־2.4 יתחיל כבר מתוך סביבת עבודה מוכנה.
 
-ה־Agent בודק את המצב, בוחר את הפעולה, מפעיל את הזרימה, ואז אנחנו בודקים את התוצאה דרך הקבצים שנוצרו או התעדכנו.
+כלומר, בשיעור הזה חייב להיות ברור גם **מה** קורה, גם **איך** זה קורה, וגם **איפה** רואים שזה באמת הותקן.
 
 ---
 
 ## 01:00 – 02:30
 
-הצעד הראשון הוא לבקש מה־Agent לבדוק את מצב הפרויקט. האם יש `asm.toml`? האם ASM כבר מאותחל? האם יש בסביבה הזו משהו שחסר לפני שממשיכים?
+הצעד הראשון הוא לבקש מה־Agent לבדוק את מצב ה־ASM בפרויקט. האם יש `asm.toml`? האם ASM כבר מאותחל? האם יש משהו שחסר לפני שאפשר להתקין Skill?
 
-זו נקודה חשובה למתחילים: לא רצים ישר לפקודות. קודם נותנים ל־Agent למפות את המצב, ואז ממשיכים לפי מה שהוא מצא.
+אם חסר `asm.toml`, זה אומר שעדיין אין שכבת ASM מסודרת בפרויקט. אם הוא קיים, סימן שיש לנו בסיס לעבוד ממנו.
 
-אם חסר `asm.toml`, ה־Agent אמור להגיד שהוא צריך להכין את ה־ASM setup קודם. אם הכול מוכן, הוא ממשיך לשלב הבא.
+כאן חשוב לעצור על ההסבר: `asm.toml` הוא קובץ ההגדרה של ASM. אחר כך נראה גם את `.asm/main_asm.md`, שמציג את התמונה ש־ASM מנהל, ובסוף נבדוק שהסקיל עצמו הגיע אל `.cursor/skills`.
 
 ---
 
 ## 02:30 – 04:00
 
-עכשיו אנחנו מבקשים מה־Agent למצוא skill מתאים. הוא יכול לבדוק מול ASM, להשוות את התוצאות מול `AGENT_SKILLS.md`, ולהסביר לנו איזה skill באמת שווה להכניס לפרויקט.
+עכשיו אנחנו מבקשים מה־Agent לבחור Skill אחד קונקרטי לשיעור הבא. בדמו הזה אנחנו רוצים להתקין את `product-prd-agent`, כי זה בדיוק הסקיל שנשתמש בו בשיעור הבא.
 
-המטרה היא לא "להתקין כמה שיותר", אלא לבחור skill אחד טוב, להבין למה הוא מתאים, ורק אז להמשיך.
+ה־Agent לא רק בוחר - הוא גם מסביר למה. הוא משווה מול טבלת הדירוג, מסביר למה זה הסקיל הנכון, ואז מפעיל את זרימת ה־ASM כדי להוסיף אותו לפרויקט.
 
-אחרי הבחירה, ה־Agent מבצע את זרימת ה־ASM, ואם צריך גם יוצר expertise לקבוצה של skills. ההבדל הוא שעכשיו אנחנו לא מנחשים את הזרימה, ולא מנהלים אותה ידנית - אנחנו נותנים ל־Agent להוביל אותה ואז בודקים את התוצאה.
+זה המקום שבו חייבים להיות ברורים במלל: ASM הוא מה שמכניס את הסקיל לסביבת העבודה. ובסוף הזרימה, אנחנו אמורים לראות את הסקיל עצמו בתוך `.cursor/skills/product-prd-agent/SKILL.md`.
 
 ---
 
 ## 04:00 – 05:00
 
-הבדיקה שלנו פשוטה: בסוף התהליך אנחנו אמורים לראות כמה קבצים ברורים.
+ועכשיו מגיע שלב האימות. קודם בודקים את `asm.toml`. אחר כך פותחים את `.asm/main_asm.md` ורואים שה־ASM מכיר את מה שמותקן. ואז פותחים את `.cursor/skills/product-prd-agent/SKILL.md`, ושם רואים את הסקיל עצמו במקום שבו Cursor באמת יכול להשתמש בו.
 
-קודם כול `asm.toml`, שהוא קובץ ההגדרה של ASM ברמת הפרויקט.
-אחר כך `.asm/main_asm.md`, שבו רואים את תמונת המצב ש־ASM מנהל.
-ואז `.cursor/skills`, שם אמור להופיע הסקיל עצמו, בדרך כלל בתוך תיקייה משלו עם `SKILL.md`.
+אם שלושת הדברים האלו ברורים לכם, הבנתם את הסיפור המלא: ASM לא רק "עשה משהו ברקע". הוא שינה את סביבת העבודה שלכם בצורה שאפשר לראות, להסביר, ולהשתמש בה מיד.
 
-זה בדיוק ההרגל שאנחנו רוצים לבנות: להשתמש ב־Agent כדי להבין, לתכנן, ולהפעיל את הכלים הנכונים, ואז לדעת לבדוק את הקבצים שהשתנו. לא להתחיל מהקלדה עיוורת, אלא מהבנה.
-
-בשיעור הבא, 2.4, ניקח את אותו רעיון של עבודה מודרכת עם Agent ונפעיל את סוכן המוצר כדי להפוך רעיון גולמי למסמך `docs/prd.md`.
+בשיעור הבא, 2.4, נשתמש בדיוק בסקיל שהתקנו עכשיו כדי להפוך רעיון גולמי למסמך `docs/prd.md`.
 
 נתראה שם.
 
 ---
 
-## Appendix — English prompt (ASM through the agent)
+## Appendix — English prompt (ASM install for next lesson)
 
 ```text
-You are my ASM guide inside Cursor. Goal: add one useful skill to this project through an agent-led ASM workflow. Context: first inspect whether `asm.toml` exists and whether ASM looks initialized, then compare likely skills against `course/he_course/module-02-skills-and-agents/lesson-2.1-skills-intro/AGENT_SKILLS.md`. Output: 1) current ASM readiness, 2) the best skill to add and why, 3) perform the ASM steps if the project is ready, and 4) tell me which files I should inspect afterward, including `asm.toml`, `.asm/main_asm.md`, and `.cursor/skills`. Constraints: explain what you are doing before each step, do not assume ASM is initialized, and treat the workspace files as the main verification surface.
+You are my ASM guide inside Cursor. Goal: install the product PRD skill for the next lesson through an agent-led ASM workflow. Context: first inspect whether `asm.toml` exists and whether ASM looks initialized, then recommend the right product skill for the next lesson. Output: 1) current ASM readiness, 2) why `product-prd-agent` is or is not the right choice, 3) perform the install flow if the project is ready, and 4) tell me to verify `asm.toml`, `.asm/main_asm.md`, and `.cursor/skills/product-prd-agent/SKILL.md`. Constraints: explain what you are doing, do not skip the setup check, and use the resulting files as the main proof that installation worked.
 ```

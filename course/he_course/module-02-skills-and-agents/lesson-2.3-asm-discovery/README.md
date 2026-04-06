@@ -1,4 +1,4 @@
-# Lesson 2.3 — ASM: Discovery and installation
+# Lesson 2.3 — ASM: Agent-led skill install
 
 Hebrew-first lesson assets; this index is in English to match the course README.
 
@@ -11,21 +11,21 @@ Hebrew-first lesson assets; this index is in English to match the course README.
 
 ## Syllabus topic
 
-Practical workflow with the **Agent Skill Manager (ASM)** through the **Agent** itself. Learning how to ask Cursor to inspect the current ASM setup, recommend a skill using the course rubric, perform the ASM steps inside the agent workflow, and then verify the resulting project files instead of relying on a terminal-first flow.
+Installing a real skill for the next lesson through an **agent-led ASM workflow**. The student asks the agent to inspect ASM readiness, choose the right skill using the course rubric, perform the install flow, and then verify the result through project files like `asm.toml`, `.asm/main_asm.md`, and `.cursor/skills/product-prd-agent/SKILL.md`.
 
 ## Practical outcomes
 
 - Ask the agent to inspect whether ASM is ready in the current project.
-- Let the agent recommend one skill based on `AGENT_SKILLS.md` and explain why it is the best fit.
-- Let the agent handle the ASM workflow, then verify the updated files in the workspace.
+- Install one concrete skill for the next lesson, not just talk about ASM in theory.
+- Understand which files change when a skill is installed with ASM.
 - Understand when an expertise bundle is useful for grouping related skills.
 
 ## Verify
 
 - You can point to `asm.toml` as the project-level ASM setup file.
 - You can point to `.asm/main_asm.md` as the generated ASM registry view.
-- You can open `.cursor/skills/<skill-name>/SKILL.md` and confirm the installed skill exists where Cursor can use it.
-- You can explain the difference between "let the agent operate ASM" and "manage the whole flow manually in the CLI".
+- You can open `.cursor/skills/product-prd-agent/SKILL.md` and confirm the product skill exists for lesson `2.4`.
+- You understand the install story in words, not just by seeing a file appear.
 
 ## Next
 

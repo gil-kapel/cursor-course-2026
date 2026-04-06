@@ -6,44 +6,69 @@
 
 ## 00:00 – 01:00
 
-Cursor פתוח. בטאבים למעלה רואים את `docs/ux-flows.md`.
-העכבר פותח את ה־Agent ומצרף את הקובץ (`@docs/ux-flows.md`).
-כיתוב overlay: **Step 4: The UI Agent**.
+Cursor פתוח.
+בטאב אחד `docs/ux-flows.md`, בטאב שני `docs/architecture.md`.
+העכבר מדגיש את הזרימה של "package selection -> payment".
+כיתוב overlay: **One full example: pricing flow to side-panel payment**.
 
 ---
 
-## 01:00 – 02:30
+## 01:00 – 02:15
 
-פתיחת משימה חדשה עם `@docs/ux-flows.md` ו־`@docs/architecture.md`.
+פתיחת ה־Agent.
+צירוף `@docs/ux-flows.md` ו־`@docs/architecture.md`.
 הדבקת הפרומפט מה־Appendix.
-צפייה בסוכן מפרט את רכיבי הממשק: "Task Input", "Priority Selector", "Submit Button".
-הדגשת טבלה שמראה מצבים (States): "Enabled", "Disabled during submission", "Error highlighting".
+צפייה בסוכן שואל שאלות משלימות על:
+- visual style
+- trust cues
+- mobile behavior
+- CTA placement
+
+אחר כך רואים אותו יוצר את `docs/ui-plan.md`.
+זום על סעיפים של:
+- components
+- states
+- accessibility
+- visual direction
+
+הערת צילום: הקריין מסביר למה מתחילים כאן ולא ישר ב־Stitch.
 
 ---
 
-## 02:30 – 03:45
+## 02:15 – 03:30
 
-זום על סעיף ה־"Accessibility" בתשובת הסוכן.
-הצגת המלצות ל־`aria-label` ו־`tabindex`.
-הסוכן יוצר את הקובץ `docs/ui-plan.md`.
-פתיחת הקובץ והצגת רשימת ה־Design Tokens (צבעים, פונטים, ריווחים).
+פתיחת `docs/ui-plan.md`.
+העכבר מסמן חלקים ספציפיים שמדברים על חלון הצד לתשלום.
+אחר כך פתיחת אתר השראה אחד ליד המסמך.
+זום על מה אוהבים בו: היררכיה, spacing, אזור תשלום ברור.
 
----
-
-## 03:45 – 05:00
-
-הדגמה קצרה ב־Agent / Composer (`Cmd+I` ב־Mac, `Ctrl+I` ב־Windows): "Create a Button component based on the UI plan".
-צפייה בסוכן כותב קוד (למשל ב־Tailwind) שמשתמש בטוקנים שהוגדרו.
-(הערה: לא צריך לסיים את כל הלחצן, רק להראות את החיבור לתכנון).
+הערת צילום: הקריין מסביר למה השראה היא כלי עבודה, לא רק "טעם".
 
 ---
 
-## 05:00 – 06:00
+## 03:30 – 04:45
 
-סיום: ארבעת קבצי התיעוד ב־`docs` פתוחים זה לצד זה.
-זום על המילה "Design System" במסמך ה־UI.
+מעבר ל־Stitch.
+העלאת המסמך או הדבקת ה־handoff.
+הצגת אתר ההשראה ליד תהליך ההזנה.
+צפייה ב־Stitch מייצר draft למסך בחירת חבילה עם Side Panel לתשלום.
+
+הערת צילום: הקריין מסביר למה בחרנו בדיוק את הזרימה הזו כדמו.
+
+---
+
+## 04:45 – 06:00
+
+הצגת הורדה של קבצים או export רלוונטי מ־Stitch.
+חזרה ל־Cursor.
+פתיחת התיקייה שאליה החזרנו את חומרי העיצוב.
+Split view:
+- מצד אחד `docs/ui-plan.md`
+- מצד שני חומרי Stitch שחזרו לפרויקט
+
 Overlay מסכם:
-- `Artifact: docs/ui-plan.md`
-- `Check: components + states + accessibility + responsiveness`
+- `Agent -> UI plan`
+- `Inspiration -> Stitch draft`
+- `Back to Cursor -> implementation-ready material`
 
-כותרת סיום: **Lesson 2.8 — Security Review**.
+כותרת סיום: **Lesson 2.8 — Plan Agent / Slice Planning**.

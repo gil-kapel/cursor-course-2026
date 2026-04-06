@@ -8,44 +8,49 @@
 
 פתיחת משטח ה־Agent בתוך Cursor.
 הדבקה של הפרומפט מה־Appendix.
-ה־Agent מתחיל בבדיקת readiness של ASM: האם יש `asm.toml`, האם ASM נראה מאותחל, ומה צריך לבדוק לפני שממשיכים.
-ה־Explorer פתוח ברקע כדי שאפשר יהיה לראות את הקבצים שה־Agent מזכיר.
-כיתוב overlay: **ASM through the Agent**.
+ה־Agent מסביר שאנחנו מתקינים עכשיו את ה־`product-prd-agent` בשביל שיעור 2.4.
+ה־Explorer פתוח ברקע.
+כיתוב overlay: **Install the next lesson's skill**.
 
 ---
 
 ## 01:00 – 02:30
 
-ה־Agent מסביר מה מצב הפרויקט ומציע את השלב הבא.
-אם אין `asm.toml`, מראים את ה־Agent מסביר שצריך להשלים ASM setup לפני התקנת skill.
-אם יש `asm.toml`, מראים את ה־Agent ממליץ על חיפוש skill מתאים.
+ה־Agent בודק readiness של ASM.
+ב־Explorer פותחים `asm.toml` אם הוא קיים.
+ה־Agent מסביר מה התפקיד של `asm.toml` בשכבת ה־ASM של הפרויקט.
 
-פתיחת `AGENT_SKILLS.md` של שיעור 2.1 בטאב נפרד.
-גלילה על טבלת הציון והדגשת skill מומלץ.
-Overlay קטן: **Inspect -> compare -> choose**.
+אחר כך נשארים על משטח ה־Agent בזמן שהוא ממליץ על `product-prd-agent` או על הסקיל שנבחר לשיעור הבא.
+אם יש רשימת המלצות בתוך הממשק, מראים אותה. אם לא, נשארים עם ההסבר של ה־Agent עצמו.
+Overlay קטן: **Check setup -> choose the exact skill**.
 
 ---
 
 ## 02:30 – 04:00
 
-ה־Agent מבצע את זרימת ה־ASM מתוך העבודה שלו.
-לא פותחים טרמינל בשלב הזה.
+ה־Agent מפעיל את זרימת ההתקנה.
+לא פותחים טרמינל בכלל.
+
 המצלמה נשארת על ה־Agent ועל ה־Explorer.
-פותחים `asm.toml` כדי להראות את קובץ ה־setup של הפרויקט.
-אחר כך פותחים `.asm/main_asm.md` כדי להראות את תמונת המצב של ASM.
-אחר כך פותחים `.cursor/skills` ומדגימים שהסקיל החדש מופיע שם בתוך תיקייה משלו עם `SKILL.md`.
-זום קצר על העובדה שהאימות נעשה דרך הקבצים, לא דרך פלט CLI.
+פותחים `.asm/main_asm.md` כדי להראות את התמונה ש־ASM מנהל.
+אחר כך פותחים `.cursor/skills/product-prd-agent/`.
+לבסוף פותחים `SKILL.md` שבתוך התיקייה, כדי להראות שהסקיל באמת הותקן ו־Cursor יכול להשתמש בו.
+
+זום קצר על שלושת המקומות החשובים:
+- `asm.toml`
+- `.asm/main_asm.md`
+- `.cursor/skills/product-prd-agent/SKILL.md`
 
 ---
 
 ## 04:00 – 05:00
 
-ה־Agent מסביר מתי כדאי ליצור expertise, ומציע דוגמה לקבוצה קטנה של skills.
-אם רוצים, מראים את ההסבר ברמת הרעיון בלבד - לא חייבים להדגים עוד פעולה.
+ה־Agent מסביר בקצרה מתי Expertise יכול להיות שימושי, אבל לא הופכים את זה למרכז השיעור.
+העיקר הוא שהסטודנט מבין את סיפור ההתקנה והאימות.
 
 מסך סיכום עם 3 שורות:
-- `Ask the agent to inspect first`
-- `Let the agent run the ASM flow`
-- `Verify with project files: asm.toml, .asm, .cursor/skills`
+- `Agent checks ASM readiness`
+- `Agent installs the exact skill for the next lesson`
+- `You verify the result in project files`
 
 כותרת סיום: **Next — Lesson 2.4: Product Agent**.

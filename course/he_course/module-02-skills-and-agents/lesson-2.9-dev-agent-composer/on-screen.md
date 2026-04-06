@@ -6,46 +6,54 @@
 
 ## 00:00 – 01:00
 
-Cursor פתוח. העכבר פותח את ה־Composer (`Cmd+I` ב־Mac, `Ctrl+I` ב־Windows) או עובר ל־Agent Mode.
-כיתוב overlay: **The Heart of Implementation**.
-צירוף תיקיית `docs` המלאה לצ'אט (`@docs`).
+Cursor פתוח.
+`docs/implementation-plan.md` או `docs/slice-01.md` פתוח על המסך.
+זום על החלק שמגדיר את Slice 1: package list + open payment side panel.
+כיתוב overlay: **Implement only the first slice**.
 
 ---
 
-## 01:00 – 02:45
+## 01:00 – 02:15
 
-פתיחת משימת Agent עם הקשר `@docs`.
+העכבר פותח את Composer (`Cmd+I` ב־Mac, `Ctrl+I` ב־Windows) או עובר ל־Agent Mode.
+מצרפים את מסמך ה־slice ואת מסמכי הרקע הרלוונטיים.
 הדבקת הפרומפט מה־Appendix.
-צפייה בסוכן מתחיל לנתח ומציע שינויים ב־3-4 קבצים במקביל.
-זום על פאנל ה־Composer שמראה את רשימת הקבצים: `types.ts`, `taskService.ts`, `TaskList.tsx`.
+צפייה בסוכן מתחיל לנתח ומציע שינויים בכמה קבצים.
+
+הערת צילום: הקריין מסביר למה קוראים שוב את ה־slice לפני שמתחילים.
 
 ---
 
-## 02:45 – 04:15
+## 02:15 – 03:30
 
-מעבר על ה־Diff של אחד הקבצים.
-הדגמה של לחיצה על "Accept" עבור קובץ אחד ו־"Reject" או הערה לשיפור עבור אחר.
-הסוכן מעדכן את הקוד לפי ההערה.
-אם צריך, מראים הערת follow-up במקום אישור עיוור.
-לא חייבים להראות "Accept All"; העיקר הוא review לפני apply.
-
----
-
-## 04:15 – 05:30
-
-פתיחת הטרמינל המובנה ב־Cursor.
-הרצת הפרויקט (למשל `npm run dev`).
-הצגת חלון דפדפן (או פריוויו פנימי) שמראה את רשימת המשימות הסטטית החדשה.
-זום על התוצאה הוויזואלית שמתאימה ל־`ui-plan.md`.
+מעבר על ה־diff של אחד הקבצים.
+הדגמה של Accept לקובץ אחד והערת follow-up לקובץ אחר.
+הדגשה ויזואלית: האם השינוי באמת שייך רק לפתיחת חלון הצד ולהצגת החבילות?
+אם יש סטייה, מראים איך עוצרים ומחזירים את הסוכן לגבול של Slice 1.
 
 ---
 
-## 05:30 – 06:30
+## 03:30 – 04:45
 
-סיום: ה־Explorer מציג את הקבצים החדשים.
-מעבר מהיר על הקוד שנוצר.
+הצגת התוצאה במסך או preview.
+מראים את רשימת החבילות.
+אחר כך לחיצה על חבילה, ופתיחה של חלון הצד לתשלום.
+
+הערת צילום: הקריין מסביר למה דווקא זה הקריטריון להצלחה של השלב הזה.
+
+---
+
+## 04:45 – 06:00
+
+חזרה קצרה ל־`docs/implementation-plan.md` או `docs/slice-01.md`.
+הדגשה של מה הושלם ומה נשאר ל־Slice הבא.
+Split view:
+- מצד אחד ה־preview
+- מצד שני מסמך התוכנית
+
 Overlay מסכם:
-- `Artifact: running slice + reviewable diff`
-- `Check: docs were used, diff was reviewed, UI renders`
+- `Slice 1 implemented`
+- `Diff stayed inside the planned boundary`
+- `Return to the plan before Slice 2`
 
 כותרת סיום: **Lesson 2.10 — Code Review Agent**.

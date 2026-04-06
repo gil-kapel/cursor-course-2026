@@ -6,27 +6,28 @@
 
 ## 00:00 – 00:50
 
-Cursor פתוח על פרויקט ריק.
-העכבר מצביע על משטח ה־Agent.
-כיתוב overlay: **Step 1: The Product Agent**.
-אנימציה של "Idea" הופכת ל"Document".
+Cursor פתוח על הפרויקט.
+העכבר פותח `.cursor/skills/product-prd-agent/` ואז את `SKILL.md`.
+זום קצר על שם הסקיל.
+כיתוב overlay: **The skill from lesson 2.3 is now installed**.
 
 ---
 
 ## 00:50 – 02:30
 
-הקלדת הפרומפט מה־Appendix לתוך ה־Agent.
-הצגת הסוכן שואל שאלות הבהרה (Clarifying questions).
-הקלדת תשובות קצרות (למשל: "Small teams", "Focus on simplicity").
-צפייה בסוכן מייצר את ה־PRD. גלילה על הכותרות: Problem Statement, User Personas, Scope, Acceptance Criteria.
+מעבר למשׁטח ה־Agent.
+הקלדת הפרומפט מה־Appendix.
+הצגת הסוכן שואל שאלות הבהרה.
+הקלדת תשובות קצרות.
+צפייה בסוכן מייצר את ה־PRD. גלילה על הכותרות: Problem Statement, Users, Scope, Acceptance Criteria.
 
 ---
 
 ## 02:30 – 03:45
 
 הצגת הסוכן יוצר את הקובץ `docs/prd.md`.
-העכבר פותח את הקובץ החדש בסייר הקבצים (Explorer).
-זום קל על מבנה ה־Markdown: Problem, Users, Scope, Acceptance Criteria.
+העכבר פותח את הקובץ החדש ב־Explorer.
+זום קל על מבנה ה־Markdown.
 הדגמה של שימוש ב־`@docs/prd.md` כדי להראות איך מושכים את ההקשר הלאה.
 
 ---
@@ -34,16 +35,17 @@ Cursor פתוח על פרויקט ריק.
 ## 03:45 – 05:15
 
 הוספת הערה ב־Agent: "Add a section for risks and open questions".
-צפייה בקובץ ה־PRD מתעדכן (או שנוצר בלוק קוד חדש להעתקה).
+צפייה בקובץ ה־PRD מתעדכן.
 הדגשת השאלה: "Who can delete tasks?".
 
 ---
 
-## 05:15 – 06:15
+## 05:15 – 06:00
 
-סיום על מסך ה־Split View: מצד אחד `docs/prd.md` פתוח, מצד שני ה־Agent מוכן לשלב הבא.
+סיום על מסך ה־Split View: מצד אחד `SKILL.md` של `product-prd-agent`, מצד שני `docs/prd.md`.
 Overlay מסכם:
+- `Installed skill: product-prd-agent`
 - `Artifact: docs/prd.md`
-- `Check: problem + users + scope + acceptance criteria + risks`
+- `Check: you understand both the install and the output`
 
 כותרת סיום: **Lesson 2.5 — Tech Lead / Architecture**.

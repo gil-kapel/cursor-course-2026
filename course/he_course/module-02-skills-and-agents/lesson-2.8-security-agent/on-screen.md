@@ -6,42 +6,61 @@
 
 ## 00:00 – 01:00
 
-Cursor פתוח. בטאבים למעלה רואים את כל מסמכי ה־`docs`.
-העכבר פותח את ה־Agent ומצרף את `docs/prd.md`, `docs/architecture.md`, ו־`docs/ui-plan.md`.
-כיתוב overlay: **Step 5: The Security Agent**.
+Cursor פתוח.
+בטאבים למעלה רואים את כל מסמכי ה־`docs`.
+העכבר מעביר את הסוכן ל־Plan mode.
+כיתוב overlay: **Same example, now planning the build**.
 
 ---
 
-## 01:00 – 02:30
+## 01:00 – 02:15
 
-פתיחת משימה חדשה עם שלושת קבצי ה־docs.
+הצמדה של:
+- `docs/prd.md`
+- `docs/architecture.md`
+- `docs/ux-flows.md`
+- `docs/ui-plan.md`
+
 הדבקת הפרומפט מה־Appendix.
-צפייה בסוכן מנתח ומציג רשימת סיכונים.
-הדגשת חומרה (Severity): "High", "Medium".
+הערת צילום: הקריין מסביר למה מצרפים את כל המסמכים ולא רק אחד מהם.
 
 ---
 
-## 02:30 – 03:45
+## 02:15 – 03:30
 
-הסוכן יוצר את הקובץ `docs/security-notes.md`.
-פתיחת הקובץ. זום על סעיף ה־"Secrets Handling".
-הצגת דוגמה של קובץ `.env.example` (בלי סודות אמיתיים) כדי להראות איך מנהלים סביבת עבודה בטוחה.
+צפייה בסוכן מפרק את העבודה ל־slices.
+הדגשת מבנה לדוגמה:
+- Slice 1: package list + side panel open
+- Slice 2: payment logic
+- Slice 3: polish and error states
 
----
-
-## 03:45 – 05:00
-
-שאילת שאלת המשך בצ'אט: "What's the checklist for implementing Auth securely?".
-צפייה בסוכן מפרט: "Token storage", "CSRF protection", "Server-side validation".
+הערת צילום: הקריין מסביר למה זו חלוקה בריאה למימוש.
 
 ---
 
-## 05:00 – 06:00
+## 03:30 – 04:45
 
-סיום: תיקיית `docs` מלאה וגאה.
-מעבר מהיר על כל חמשת הקבצים שיצרנו עד עכשיו.
+פתיחת `docs/implementation-plan.md` או `docs/slice-01.md`.
+זום על סעיף של Slice 1 עם:
+- goal
+- expected files
+- verification
+- out of scope
+
+הערת צילום: הקריין מסביר למה זה השלב שמונע מ־Composer "לגלוש" רחוק מדי.
+
+---
+
+## 04:45 – 06:00
+
+שאלת follow-up ב־Plan mode:
+"Is Slice 1 small enough to implement safely in one pass?".
+הסוכן עונה ומחדד את התוכנית.
+
+סיום: תיקיית `docs` פתוחה עם תוכנית המימוש החדשה.
 Overlay מסכם:
-- `Artifact: docs/security-notes.md`
-- `Check: at least one blocker + one lower-priority risk`
+- `Plan mode before Composer`
+- `One clear Slice 1`
+- `Implementation starts only after the plan is concrete`
 
-כותרת סיום: **Lesson 2.9 — Dev Agent / Composer**.
+כותרת סיום: **Lesson 2.9 — Dev Agent / Slice 1**.
