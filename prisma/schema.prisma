@@ -116,3 +116,57 @@ model UserProgress {
   @@unique([userId, lessonId])
   @@index([userId])
 }
+
+// ---------------------------------------------------------------------------
+// Admin Roadmap — internal task management
+// ---------------------------------------------------------------------------
+
+enum AdminTaskStatus {
+  WORKING_ON_IT
+  DONE
+  STUCK
+  NOT_STARTED
+}
+
+enum AdminTaskPriority {
+  HIGH
+  MEDIUM
+  LOW
+}
+
+model AdminTaskGroup {
+  id         String      @id @default(cuid())
+  title      String
+  color      String      @default("#69ADFF")
+  orderIndex Int         @default(0)
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  tasks      AdminTask[]
+
+  @@index([orderIndex])
+}
+
+model AdminTask {
+  id         String            @id @default(cuid())
+  groupId    String
+  parentId   String?
+  title      String
+  ownerId    String?
+  status     AdminTaskStatus   @default(NOT_STARTED)
+  priority   AdminTaskPriority @default(MEDIUM)
+  startDate  DateTime?
+  endDate    DateTime?
+  orderIndex Int               @default(0)
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+  group      AdminTaskGroup    @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  parent     AdminTask?        @relation("SubTasks", fields: [parentId], references: [id], onDelete: Cascade)
+  children   AdminTask[]       @relation("SubTasks")
+
+  @@index([groupId])
+  @@index([groupId, orderIndex])
+  @@index([parentId])
+  @@index([groupId, parentId, orderIndex])
+  @@index([status])
+  @@index([priority])
+}
