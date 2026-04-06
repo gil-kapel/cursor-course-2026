@@ -23,7 +23,9 @@ import {
   getAdminUsers,
 } from '@/app/actions/admin-roadmap';
 import { useToast } from '@/hooks/useToast';
+import { useIsMobile } from '@/hooks/useIsMobile';
 import ToastContainer from '@/components/admin/ToastContainer';
+import BottomSheet from './BottomSheet';
 import TaskGroup from './TaskGroup';
 import AddGroupButton from './AddGroupButton';
 import TimelineView from './TimelineView';
@@ -54,6 +56,8 @@ export default function RoadmapBoard() {
   const [sortDir, setSortDir] = useState<SortDir>('asc');
   const [showSortDropdown, setShowSortDropdown] = useState(false);
   const [mounted, setMounted] = useState(false);
+
+  const isMobile = useIsMobile();
 
   const prevDataRef = useRef<RoadmapData | null>(null);
   const filterBtnRef = useRef<HTMLButtonElement>(null);
@@ -163,6 +167,8 @@ export default function RoadmapBoard() {
     return { groups };
   }, [data, searchQuery, filterStatus, filterPriority, sortBy, sortDir]);
 
+  // --- All handler callbacks (unchanged from before) ---
+
   const handleDragEnd = useCallback(
     async (result: DropResult) => {
       const { source, destination, draggableId } = result;
@@ -211,9 +217,7 @@ export default function RoadmapBoard() {
   const handleTaskUpdate = useCallback(
     async (taskId: string, updates: Record<string, unknown>) => {
       if (!data) return;
-
       saveSnapshot();
-
       const newGroups: AdminTaskGroupWithTasks[] = JSON.parse(JSON.stringify(data.groups));
       let found = false;
       for (const group of newGroups) {
@@ -237,7 +241,6 @@ export default function RoadmapBoard() {
         }
       }
       setData({ groups: newGroups });
-
       try {
         await updateTask(taskId, updates);
       } catch {
@@ -250,34 +253,21 @@ export default function RoadmapBoard() {
   const handleTaskDelete = useCallback(
     async (taskId: string) => {
       if (!data) return;
-
       saveSnapshot();
-
       const newGroups: AdminTaskGroupWithTasks[] = JSON.parse(JSON.stringify(data.groups));
       let found = false;
       for (const group of newGroups) {
         if (found) break;
         const idx = group.tasks.findIndex((t: AdminTaskWithChildren) => t.id === taskId);
-        if (idx !== -1) {
-          group.tasks.splice(idx, 1);
-          found = true;
-          break;
-        }
+        if (idx !== -1) { group.tasks.splice(idx, 1); found = true; break; }
         for (const task of group.tasks) {
           const childIdx = task.children?.findIndex((c: AdminTask) => c.id === taskId) ?? -1;
-          if (childIdx !== -1) {
-            task.children.splice(childIdx, 1);
-            found = true;
-            break;
-          }
+          if (childIdx !== -1) { task.children.splice(childIdx, 1); found = true; break; }
         }
       }
       setData({ groups: newGroups });
-
       try {
-        if (!taskId.startsWith('temp_')) {
-          await deleteTaskAction(taskId);
-        }
+        if (!taskId.startsWith('temp_')) await deleteTaskAction(taskId);
       } catch {
         rollback('שגיאה במחיקת המשימה');
       }
@@ -288,10 +278,8 @@ export default function RoadmapBoard() {
   const handleTaskCreate = useCallback(
     async (groupId: string, title: string, parentId?: string) => {
       if (!data) return;
-
       const group = data.groups.find((g: AdminTaskGroupWithTasks) => g.id === groupId);
       if (!group) return;
-
       const tempId = `temp_${Date.now()}`;
 
       if (parentId) {
@@ -299,24 +287,13 @@ export default function RoadmapBoard() {
         const maxChildOrder = parentTask
           ? Math.max(...(parentTask.children ?? []).map((c: AdminTask) => c.orderIndex), -1)
           : 0;
-
         const optimisticChild = {
-          id: tempId,
-          groupId,
-          parentId,
-          title,
-          ownerId: null,
-          status: 'NOT_STARTED' as const,
-          priority: 'MEDIUM' as const,
-          startDate: null,
-          endDate: null,
-          orderIndex: maxChildOrder + 1,
-          createdAt: new Date(),
-          updatedAt: new Date(),
+          id: tempId, groupId, parentId, title, ownerId: null,
+          status: 'NOT_STARTED' as const, priority: 'MEDIUM' as const,
+          startDate: null, endDate: null, orderIndex: maxChildOrder + 1,
+          createdAt: new Date(), updatedAt: new Date(),
         };
-
         saveSnapshot();
-
         const newGroups: AdminTaskGroupWithTasks[] = JSON.parse(JSON.stringify(data.groups));
         const targetParent = newGroups.find((g: AdminTaskGroupWithTasks) => g.id === groupId)?.tasks.find((t: AdminTaskWithChildren) => t.id === parentId);
         if (targetParent) {
@@ -324,84 +301,47 @@ export default function RoadmapBoard() {
           targetParent.children.push(optimisticChild);
         }
         setData({ groups: newGroups });
-
         try {
-          const serverTask = await createTask({
-            groupId,
-            parentId,
-            title,
-            status: 'NOT_STARTED',
-            priority: 'MEDIUM',
-          });
+          const serverTask = await createTask({ groupId, parentId, title, status: 'NOT_STARTED', priority: 'MEDIUM' });
           setData((prev) => {
             if (!prev) return prev;
             const updated = JSON.parse(JSON.stringify(prev)) as RoadmapData;
             for (const g of updated.groups) {
               for (const t of g.tasks) {
                 const idx = t.children?.findIndex((c: AdminTask) => c.id === tempId) ?? -1;
-                if (idx !== -1) {
-                  t.children[idx] = serverTask as typeof t.children[0];
-                  return updated;
-                }
+                if (idx !== -1) { t.children[idx] = serverTask as typeof t.children[0]; return updated; }
               }
             }
             return updated;
           });
-        } catch {
-          rollback('שגיאה ביצירת תת-משימה');
-        }
+        } catch { rollback('שגיאה ביצירת תת-משימה'); }
         return;
       }
 
       const maxOrder = Math.max(...group.tasks.map((t: AdminTaskWithChildren) => t.orderIndex), -1);
       const optimisticTask: AdminTaskWithChildren = {
-        id: tempId,
-        groupId,
-        parentId: null,
-        title,
-        ownerId: null,
-        status: 'NOT_STARTED' as const,
-        priority: 'MEDIUM' as const,
-        startDate: null,
-        endDate: null,
-        orderIndex: maxOrder + 1,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        children: [],
+        id: tempId, groupId, parentId: null, title, ownerId: null,
+        status: 'NOT_STARTED' as const, priority: 'MEDIUM' as const,
+        startDate: null, endDate: null, orderIndex: maxOrder + 1,
+        createdAt: new Date(), updatedAt: new Date(), children: [],
       };
-
       saveSnapshot();
-
       const newGroups: AdminTaskGroupWithTasks[] = JSON.parse(JSON.stringify(data.groups));
       const targetGroup = newGroups.find((g: AdminTaskGroupWithTasks) => g.id === groupId);
-      if (targetGroup) {
-        targetGroup.tasks.push(optimisticTask);
-      }
+      if (targetGroup) targetGroup.tasks.push(optimisticTask);
       setData({ groups: newGroups });
-
       try {
-        const serverTask = await createTask({
-          groupId,
-          title,
-          status: 'NOT_STARTED',
-          priority: 'MEDIUM',
-        });
-
+        const serverTask = await createTask({ groupId, title, status: 'NOT_STARTED', priority: 'MEDIUM' });
         setData((prev) => {
           if (!prev) return prev;
           const updated = JSON.parse(JSON.stringify(prev)) as RoadmapData;
           for (const g of updated.groups) {
             const idx = g.tasks.findIndex((t: AdminTaskWithChildren) => t.id === tempId);
-            if (idx !== -1) {
-              g.tasks[idx] = { ...serverTask, children: [] } as AdminTaskWithChildren;
-              break;
-            }
+            if (idx !== -1) { g.tasks[idx] = { ...serverTask, children: [] } as AdminTaskWithChildren; break; }
           }
           return updated;
         });
-      } catch {
-        rollback('שגיאה ביצירת משימה');
-      }
+      } catch { rollback('שגיאה ביצירת משימה'); }
     },
     [data, saveSnapshot, rollback],
   );
@@ -409,21 +349,12 @@ export default function RoadmapBoard() {
   const handleGroupUpdate = useCallback(
     async (groupId: string, updates: Record<string, unknown>) => {
       if (!data) return;
-
       saveSnapshot();
-
       const newGroups: AdminTaskGroupWithTasks[] = JSON.parse(JSON.stringify(data.groups));
       const group = newGroups.find((g: AdminTaskGroupWithTasks) => g.id === groupId);
-      if (group) {
-        Object.assign(group, updates);
-      }
+      if (group) Object.assign(group, updates);
       setData({ groups: newGroups });
-
-      try {
-        await updateTaskGroup(groupId, updates);
-      } catch {
-        rollback('שגיאה בעדכון הקבוצה');
-      }
+      try { await updateTaskGroup(groupId, updates); } catch { rollback('שגיאה בעדכון הקבוצה'); }
     },
     [data, saveSnapshot, rollback],
   );
@@ -431,36 +362,23 @@ export default function RoadmapBoard() {
   const handleGroupCreate = useCallback(
     async (title: string, color: string) => {
       if (!data) return;
-
       saveSnapshot();
-
       const tempId = `temp_group_${Date.now()}`;
       const optimisticGroup: AdminTaskGroupWithTasks = {
-        id: tempId,
-        title,
-        color,
-        orderIndex: data.groups.length,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        tasks: [],
+        id: tempId, title, color, orderIndex: data.groups.length,
+        createdAt: new Date(), updatedAt: new Date(), tasks: [],
       };
-
       setData({ groups: [...data.groups, optimisticGroup] });
-
       try {
         const serverGroup = await createTaskGroup({ title, color });
         setData((prev) => {
           if (!prev) return prev;
           const updated = JSON.parse(JSON.stringify(prev)) as RoadmapData;
           const idx = updated.groups.findIndex((g: AdminTaskGroupWithTasks) => g.id === tempId);
-          if (idx !== -1) {
-            updated.groups[idx] = serverGroup;
-          }
+          if (idx !== -1) updated.groups[idx] = serverGroup;
           return updated;
         });
-      } catch {
-        rollback('שגיאה ביצירת קבוצה');
-      }
+      } catch { rollback('שגיאה ביצירת קבוצה'); }
     },
     [data, saveSnapshot, rollback],
   );
@@ -494,23 +412,25 @@ export default function RoadmapBoard() {
   };
 
   const getFilterBtnPos = () => {
-    if (!filterBtnRef.current) return { top: 0, left: 0 };
+    if (!filterBtnRef.current) return { top: 0, right: 0 };
     const r = filterBtnRef.current.getBoundingClientRect();
-    return { top: r.bottom + 4, left: r.left };
+    return { top: r.bottom + 4, right: window.innerWidth - r.right };
   };
 
   const getSortBtnPos = () => {
-    if (!sortBtnRef.current) return { top: 0, left: 0 };
+    if (!sortBtnRef.current) return { top: 0, right: 0 };
     const r = sortBtnRef.current.getBoundingClientRect();
-    return { top: r.bottom + 4, left: r.left };
+    return { top: r.bottom + 4, right: window.innerWidth - r.right };
   };
 
-  if (loading) return <RoadmapSkeleton />;
+  const effectiveView = isMobile ? 'table' : currentView;
+
+  if (loading) return <RoadmapSkeleton isMobile={isMobile} />;
 
   if (error) {
     return (
       <div className="flex items-center justify-center min-h-[40vh]">
-        <div className="text-center p-8 bg-white rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.08)]">
+        <div className="text-center p-6 md:p-8 bg-white rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.08)]">
           <p className="text-[#303150] font-semibold mb-2">שגיאה</p>
           <p className="text-[#7E7F90] text-sm">{error}</p>
         </div>
@@ -520,13 +440,89 @@ export default function RoadmapBoard() {
 
   if (!data || !filteredData) return null;
 
+  // --- Filter/Sort dropdown content (shared between portal and bottom sheet) ---
+  const filterContent = (
+    <div dir="rtl">
+      <p className="px-3 pb-1 text-xs font-semibold text-[#7E7F90]">סטטוס</p>
+      {(Object.values(StatusEnum) as AdminTaskStatus[]).map((s) => (
+        <button
+          key={s}
+          onClick={() => { setFilterStatus(filterStatus === s ? null : s); }}
+          className="w-full px-3 py-2.5 md:py-1.5 flex items-center gap-2 hover:bg-[#F7F7F8] transition-colors text-sm text-[#303150]"
+        >
+          <span className="w-3 h-3 rounded-sm shrink-0" style={{ backgroundColor: STATUS_COLORS[s] }} />
+          <span className="flex-1 text-start">{STATUS_LABELS[s]}</span>
+          {filterStatus === s && <Check className="w-3.5 h-3.5 text-[#69ADFF]" strokeWidth={2} />}
+        </button>
+      ))}
+      <div className="h-px bg-[#F7F7F8] my-1.5" />
+      <p className="px-3 pb-1 text-xs font-semibold text-[#7E7F90]">עדיפות</p>
+      {(Object.values(PriorityEnum) as AdminTaskPriority[]).map((p) => (
+        <button
+          key={p}
+          onClick={() => { setFilterPriority(filterPriority === p ? null : p); }}
+          className="w-full px-3 py-2.5 md:py-1.5 flex items-center gap-2 hover:bg-[#F7F7F8] transition-colors text-sm text-[#303150]"
+        >
+          <span className="w-3 h-3 rounded-sm shrink-0" style={{ backgroundColor: PRIORITY_COLORS[p] }} />
+          <span className="flex-1 text-start">{PRIORITY_LABELS[p]}</span>
+          {filterPriority === p && <Check className="w-3.5 h-3.5 text-[#69ADFF]" strokeWidth={2} />}
+        </button>
+      ))}
+      {hasActiveFilters && (
+        <>
+          <div className="h-px bg-[#F7F7F8] my-1.5" />
+          <button
+            onClick={() => { setFilterStatus(null); setFilterPriority(null); }}
+            className="w-full px-3 py-2.5 md:py-1.5 text-sm text-red-500 hover:bg-red-50 transition-colors text-start"
+          >
+            נקה סינון
+          </button>
+        </>
+      )}
+    </div>
+  );
+
+  const sortContent = (
+    <div dir="rtl">
+      {([
+        { field: 'title' as SortField, label: 'לפי שם' },
+        { field: 'startDate' as SortField, label: 'לפי תאריך התחלה' },
+        { field: 'priority' as SortField, label: 'לפי עדיפות' },
+      ]).map(({ field, label }) => (
+        <button
+          key={field}
+          onClick={() => handleSortSelect(field)}
+          className="w-full px-3 py-2.5 md:py-1.5 flex items-center gap-2 hover:bg-[#F7F7F8] transition-colors text-sm text-[#303150]"
+        >
+          <span className="flex-1 text-start">{label}</span>
+          {sortBy === field && (
+            <span className="text-xs text-[#69ADFF] font-medium">
+              {sortDir === 'asc' ? '\u2191' : '\u2193'}
+            </span>
+          )}
+        </button>
+      ))}
+      {sortBy && (
+        <>
+          <div className="h-px bg-[#F7F7F8] my-1.5" />
+          <button
+            onClick={() => { setSortBy(null); setShowSortDropdown(false); }}
+            className="w-full px-3 py-2.5 md:py-1.5 text-sm text-red-500 hover:bg-red-50 transition-colors text-start"
+          >
+            נקה מיון
+          </button>
+        </>
+      )}
+    </div>
+  );
+
   return (
     <div dir="rtl">
       {/* Tabs */}
-      <div className="flex items-center gap-1 border-b border-[#F7F7F8] mb-5">
+      <div className="flex items-center gap-1 border-b border-[#F7F7F8] mb-4 md:mb-5">
         <button
           onClick={() => setCurrentView('table')}
-          className={`flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold -mb-px transition-colors ${
+          className={`flex items-center gap-1.5 px-3 md:px-4 py-2.5 text-sm font-semibold -mb-px transition-colors ${
             currentView === 'table'
               ? 'text-[#303150] border-b-2 border-[#69ADFF]'
               : 'text-[#BDBDCB] hover:text-[#7E7F90]'
@@ -535,181 +531,132 @@ export default function RoadmapBoard() {
           טבלה ראשית
           <Table2 className="w-4 h-4" strokeWidth={1.75} />
         </button>
-        <button
-          onClick={() => setCurrentView('timeline')}
-          className={`flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold -mb-px transition-colors ${
-            currentView === 'timeline'
-              ? 'text-[#303150] border-b-2 border-[#69ADFF]'
-              : 'text-[#BDBDCB] hover:text-[#7E7F90]'
-          }`}
-        >
-          ציר זמן
-          <GanttChart className="w-4 h-4" strokeWidth={1.75} />
-        </button>
-        <button className="px-3 py-2.5 text-[#BDBDCB] hover:text-[#7E7F90] transition-colors -mb-px">
+        {!isMobile && (
+          <button
+            onClick={() => setCurrentView('timeline')}
+            className={`flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold -mb-px transition-colors ${
+              currentView === 'timeline'
+                ? 'text-[#303150] border-b-2 border-[#69ADFF]'
+                : 'text-[#BDBDCB] hover:text-[#7E7F90]'
+            }`}
+          >
+            ציר זמן
+            <GanttChart className="w-4 h-4" strokeWidth={1.75} />
+          </button>
+        )}
+        <button className="px-3 py-2.5 text-[#BDBDCB] hover:text-[#7E7F90] transition-colors -mb-px hidden md:block">
           <Plus className="w-4 h-4" strokeWidth={1.75} />
         </button>
-        <button className="px-2 py-2.5 text-[#BDBDCB] hover:text-[#7E7F90] transition-colors -mb-px">
+        <button className="px-2 py-2.5 text-[#BDBDCB] hover:text-[#7E7F90] transition-colors -mb-px hidden md:block">
           <MoreHorizontal className="w-4 h-4" strokeWidth={1.75} />
         </button>
       </div>
 
       {/* Toolbar */}
-      <div className="flex items-center gap-2 mb-6 flex-wrap">
-        <button
-          onClick={handleMainNewTask}
-          className="flex items-center gap-1.5 px-4 py-2 bg-[#69ADFF] text-white rounded-xl text-sm font-medium hover:bg-[#5A9EE6] transition-colors shadow-sm"
-        >
-          משימה חדשה
-          <Plus className="w-4 h-4" strokeWidth={2} />
-        </button>
+      <div className="flex flex-col md:flex-row md:items-center gap-2 mb-4 md:mb-6">
+        <div className="flex items-center gap-2">
+          <button
+            onClick={handleMainNewTask}
+            className="flex items-center gap-1.5 px-4 py-2.5 md:py-2 bg-[#69ADFF] text-white rounded-xl text-sm font-medium hover:bg-[#5A9EE6] transition-colors shadow-sm"
+          >
+            משימה חדשה
+            <Plus className="w-4 h-4" strokeWidth={2} />
+          </button>
 
-        <div className="relative">
+          <button
+            ref={filterBtnRef}
+            onClick={() => { setShowFilterDropdown(!showFilterDropdown); setShowSortDropdown(false); }}
+            className={`relative flex items-center gap-1.5 px-3 py-2.5 md:py-2 text-sm rounded-xl transition-colors ${
+              hasActiveFilters
+                ? 'text-[#69ADFF] bg-[#69ADFF]/10 font-medium'
+                : 'text-[#7E7F90] hover:bg-[#F7F7F8]'
+            }`}
+          >
+            <span className="hidden md:inline">סינון</span>
+            <Filter className="w-4 h-4" strokeWidth={1.75} />
+            {hasActiveFilters && (
+              <span className="w-1.5 h-1.5 rounded-full bg-[#69ADFF] absolute top-1.5 start-1.5" />
+            )}
+          </button>
+
+          <button
+            ref={sortBtnRef}
+            onClick={() => { setShowSortDropdown(!showSortDropdown); setShowFilterDropdown(false); }}
+            className={`flex items-center gap-1.5 px-3 py-2.5 md:py-2 text-sm rounded-xl transition-colors ${
+              sortBy
+                ? 'text-[#69ADFF] bg-[#69ADFF]/10 font-medium'
+                : 'text-[#7E7F90] hover:bg-[#F7F7F8]'
+            }`}
+          >
+            <span className="hidden md:inline">מיון</span>
+            <ArrowUpDown className="w-4 h-4" strokeWidth={1.75} />
+          </button>
+
+          <button className="p-2 text-[#7E7F90] hover:bg-[#F7F7F8] rounded-lg transition-colors hidden md:block">
+            <MoreHorizontal className="w-4 h-4" strokeWidth={1.75} />
+          </button>
+        </div>
+
+        <div className="relative w-full md:w-40">
           <Search className="absolute right-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-[#BDBDCB]" strokeWidth={1.75} />
           <input
             type="text"
             placeholder="חיפוש"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pe-9 ps-3 py-2 text-sm border border-[#E8E8ED] rounded-xl bg-white text-[#303150] placeholder-[#BDBDCB] focus:outline-none focus:border-[#69ADFF] focus:ring-2 focus:ring-[#69ADFF]/20 w-40 transition-all"
+            className="w-full pe-9 ps-3 py-2.5 md:py-2 text-sm border border-[#E8E8ED] rounded-xl bg-white text-[#303150] placeholder-[#BDBDCB] focus:outline-none focus:border-[#69ADFF] focus:ring-2 focus:ring-[#69ADFF]/20 transition-all"
           />
         </div>
-
-        <button
-          ref={filterBtnRef}
-          onClick={() => { setShowFilterDropdown(!showFilterDropdown); setShowSortDropdown(false); }}
-          className={`relative flex items-center gap-1.5 px-3 py-2 text-sm rounded-xl transition-colors ${
-            hasActiveFilters
-              ? 'text-[#69ADFF] bg-[#69ADFF]/10 font-medium'
-              : 'text-[#7E7F90] hover:bg-[#F7F7F8]'
-          }`}
-        >
-          סינון
-          <Filter className="w-4 h-4" strokeWidth={1.75} />
-          {hasActiveFilters && (
-            <span className="w-1.5 h-1.5 rounded-full bg-[#69ADFF] absolute top-1.5 start-1.5" />
-          )}
-        </button>
-
-        <button
-          ref={sortBtnRef}
-          onClick={() => { setShowSortDropdown(!showSortDropdown); setShowFilterDropdown(false); }}
-          className={`flex items-center gap-1.5 px-3 py-2 text-sm rounded-xl transition-colors ${
-            sortBy
-              ? 'text-[#69ADFF] bg-[#69ADFF]/10 font-medium'
-              : 'text-[#7E7F90] hover:bg-[#F7F7F8]'
-          }`}
-        >
-          מיון
-          <ArrowUpDown className="w-4 h-4" strokeWidth={1.75} />
-        </button>
-
-        <button className="p-2 text-[#7E7F90] hover:bg-[#F7F7F8] rounded-lg transition-colors">
-          <MoreHorizontal className="w-4 h-4" strokeWidth={1.75} />
-        </button>
       </div>
 
-      {/* Filter Dropdown Portal */}
-      {showFilterDropdown && mounted && createPortal(
-        <div
-          ref={filterDropRef}
-          className="fixed z-[10000] bg-white rounded-xl py-2 w-56"
-          style={{
-            top: getFilterBtnPos().top,
-            left: getFilterBtnPos().left,
-            boxShadow: '0 4px 20px rgba(0,0,0,0.12)',
-            border: '1px solid #F7F7F8',
-          }}
-          dir="rtl"
-        >
-          <p className="px-3 pb-1 text-xs font-semibold text-[#7E7F90]">סטטוס</p>
-          {(Object.values(StatusEnum) as AdminTaskStatus[]).map((s) => (
-            <button
-              key={s}
-              onClick={() => { setFilterStatus(filterStatus === s ? null : s); }}
-              className="w-full px-3 py-1.5 flex items-center gap-2 hover:bg-[#F7F7F8] transition-colors text-sm text-[#303150]"
-            >
-              <span className="w-3 h-3 rounded-sm shrink-0" style={{ backgroundColor: STATUS_COLORS[s] }} />
-              <span className="flex-1 text-start">{STATUS_LABELS[s]}</span>
-              {filterStatus === s && <Check className="w-3.5 h-3.5 text-[#69ADFF]" strokeWidth={2} />}
-            </button>
-          ))}
-          <div className="h-px bg-[#F7F7F8] my-1.5" />
-          <p className="px-3 pb-1 text-xs font-semibold text-[#7E7F90]">עדיפות</p>
-          {(Object.values(PriorityEnum) as AdminTaskPriority[]).map((p) => (
-            <button
-              key={p}
-              onClick={() => { setFilterPriority(filterPriority === p ? null : p); }}
-              className="w-full px-3 py-1.5 flex items-center gap-2 hover:bg-[#F7F7F8] transition-colors text-sm text-[#303150]"
-            >
-              <span className="w-3 h-3 rounded-sm shrink-0" style={{ backgroundColor: PRIORITY_COLORS[p] }} />
-              <span className="flex-1 text-start">{PRIORITY_LABELS[p]}</span>
-              {filterPriority === p && <Check className="w-3.5 h-3.5 text-[#69ADFF]" strokeWidth={2} />}
-            </button>
-          ))}
-          {hasActiveFilters && (
-            <>
-              <div className="h-px bg-[#F7F7F8] my-1.5" />
-              <button
-                onClick={() => { setFilterStatus(null); setFilterPriority(null); }}
-                className="w-full px-3 py-1.5 text-sm text-red-500 hover:bg-red-50 transition-colors text-start"
-              >
-                נקה סינון
-              </button>
-            </>
-          )}
-        </div>,
-        document.body,
+      {/* Filter Dropdown — Bottom sheet on mobile, portal on desktop */}
+      {isMobile ? (
+        <BottomSheet open={showFilterDropdown} onClose={() => setShowFilterDropdown(false)}>
+          {filterContent}
+        </BottomSheet>
+      ) : (
+        showFilterDropdown && mounted && createPortal(
+          <div
+            ref={filterDropRef}
+            className="fixed z-[10000] bg-white rounded-xl py-2 w-56"
+            style={{
+              top: getFilterBtnPos().top,
+              right: getFilterBtnPos().right,
+              boxShadow: '0 4px 20px rgba(0,0,0,0.12)',
+              border: '1px solid #F7F7F8',
+            }}
+          >
+            {filterContent}
+          </div>,
+          document.body,
+        )
       )}
 
-      {/* Sort Dropdown Portal */}
-      {showSortDropdown && mounted && createPortal(
-        <div
-          ref={sortDropRef}
-          className="fixed z-[10000] bg-white rounded-xl py-2 w-48"
-          style={{
-            top: getSortBtnPos().top,
-            left: getSortBtnPos().left,
-            boxShadow: '0 4px 20px rgba(0,0,0,0.12)',
-            border: '1px solid #F7F7F8',
-          }}
-          dir="rtl"
-        >
-          {([
-            { field: 'title' as SortField, label: 'לפי שם' },
-            { field: 'startDate' as SortField, label: 'לפי תאריך התחלה' },
-            { field: 'priority' as SortField, label: 'לפי עדיפות' },
-          ]).map(({ field, label }) => (
-            <button
-              key={field}
-              onClick={() => handleSortSelect(field)}
-              className="w-full px-3 py-1.5 flex items-center gap-2 hover:bg-[#F7F7F8] transition-colors text-sm text-[#303150]"
-            >
-              <span className="flex-1 text-start">{label}</span>
-              {sortBy === field && (
-                <span className="text-xs text-[#69ADFF] font-medium">
-                  {sortDir === 'asc' ? '\u2191' : '\u2193'}
-                </span>
-              )}
-            </button>
-          ))}
-          {sortBy && (
-            <>
-              <div className="h-px bg-[#F7F7F8] my-1.5" />
-              <button
-                onClick={() => { setSortBy(null); setShowSortDropdown(false); }}
-                className="w-full px-3 py-1.5 text-sm text-red-500 hover:bg-red-50 transition-colors text-start"
-              >
-                נקה מיון
-              </button>
-            </>
-          )}
-        </div>,
-        document.body,
+      {/* Sort Dropdown — Bottom sheet on mobile, portal on desktop */}
+      {isMobile ? (
+        <BottomSheet open={showSortDropdown} onClose={() => setShowSortDropdown(false)}>
+          {sortContent}
+        </BottomSheet>
+      ) : (
+        showSortDropdown && mounted && createPortal(
+          <div
+            ref={sortDropRef}
+            className="fixed z-[10000] bg-white rounded-xl py-2 w-48"
+            style={{
+              top: getSortBtnPos().top,
+              right: getSortBtnPos().right,
+              boxShadow: '0 4px 20px rgba(0,0,0,0.12)',
+              border: '1px solid #F7F7F8',
+            }}
+          >
+            {sortContent}
+          </div>,
+          document.body,
+        )
       )}
 
       {/* View Content */}
-      {currentView === 'table' ? (
+      {effectiveView === 'table' ? (
         <>
           <DragDropContext onDragEnd={handleDragEnd}>
             <div>
@@ -720,6 +667,7 @@ export default function RoadmapBoard() {
                     key={group.id}
                     group={group}
                     adminUsers={adminUsers}
+                    isMobile={isMobile}
                     onTaskUpdate={handleTaskUpdate}
                     onTaskCreate={handleTaskCreate}
                     onTaskDelete={handleTaskDelete}
@@ -740,7 +688,30 @@ export default function RoadmapBoard() {
   );
 }
 
-function RoadmapSkeleton() {
+function RoadmapSkeleton({ isMobile }: { isMobile: boolean }) {
+  if (isMobile) {
+    return (
+      <div dir="rtl" className="animate-pulse">
+        <div className="flex items-center gap-2 mb-4">
+          <div className="h-9 w-28 bg-[#69ADFF]/20 rounded-xl" />
+          <div className="h-9 w-9 bg-[#F7F7F8] rounded-xl" />
+          <div className="h-9 w-9 bg-[#F7F7F8] rounded-xl" />
+        </div>
+        <div className="h-10 w-full bg-[#F7F7F8] rounded-xl mb-4" />
+        {[0, 1, 2, 3].map((i) => (
+          <div key={i} className="p-3 border-b border-[#F7F7F8]">
+            <div className="h-4 w-3/4 bg-[#F7F7F8] rounded mb-2" />
+            <div className="flex gap-2 mb-2">
+              <div className="h-9 flex-1 bg-[#F7F7F8] rounded-lg" />
+              <div className="h-9 flex-1 bg-[#F7F7F8] rounded-lg" />
+            </div>
+            <div className="h-3 w-1/2 bg-[#F7F7F8] rounded" />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div dir="rtl" className="animate-pulse">
       <div className="flex items-center gap-2 border-b border-[#F7F7F8] mb-5 pb-2">

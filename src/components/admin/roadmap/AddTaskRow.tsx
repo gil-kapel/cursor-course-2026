@@ -6,10 +6,11 @@ import { GRID_COLS } from './TaskGroup';
 
 interface AddTaskRowProps {
   groupId?: string;
+  isMobile?: boolean;
   onCreate?: (groupId: string, title: string) => Promise<void>;
 }
 
-export default function AddTaskRow({ groupId, onCreate }: AddTaskRowProps) {
+export default function AddTaskRow({ groupId, isMobile = false, onCreate }: AddTaskRowProps) {
   const [isCreating, setIsCreating] = useState(false);
   const [title, setTitle] = useState('');
   const [isSaving, setIsSaving] = useState(false);
@@ -57,6 +58,38 @@ export default function AddTaskRow({ groupId, onCreate }: AddTaskRowProps) {
     }
   };
 
+  // --- Mobile layout ---
+  if (isMobile) {
+    if (isCreating) {
+      return (
+        <div className="flex items-center gap-2 px-3 py-2 border-b border-[#F7F7F8]">
+          <input
+            ref={inputRef}
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            onKeyDown={handleKeyDown}
+            onBlur={handleBlur}
+            placeholder="שם המשימה..."
+            disabled={isSaving}
+            className="flex-1 h-10 text-sm text-[#303150] bg-white border border-[#69ADFF] rounded-lg px-3 focus:outline-none focus:ring-2 focus:ring-[#69ADFF]/20 placeholder-[#BDBDCB] disabled:opacity-50"
+          />
+        </div>
+      );
+    }
+
+    return (
+      <div
+        onClick={() => setIsCreating(true)}
+        className="flex items-center gap-2 px-3 py-3 border-b border-[#F7F7F8] hover:bg-[#F7F7F8] transition-colors cursor-pointer active:bg-[#F0F0F0]"
+      >
+        <Plus className="w-4 h-4 text-[#BDBDCB]" strokeWidth={1.75} />
+        <span className="text-sm text-[#BDBDCB]">הוסף משימה</span>
+      </div>
+    );
+  }
+
+  // --- Desktop layout ---
   if (isCreating) {
     return (
       <div className={`${GRID_COLS} items-center border-b border-[#F7F7F8]`}>

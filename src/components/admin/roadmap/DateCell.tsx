@@ -56,14 +56,14 @@ export default function DateCell({ date, onChange }: DateCellProps) {
 
   if (isEditing && onChange) {
     return (
-      <div className="flex items-center justify-center h-9">
+      <div className="flex items-center justify-center min-h-[44px] md:min-h-0 md:h-9">
         <input
           ref={inputRef}
           type="date"
           defaultValue={toInputValue(date)}
           onChange={handleChange}
           onBlur={() => setIsEditing(false)}
-          className="w-full h-8 text-sm text-[#303150] bg-white border border-[#69ADFF] rounded-lg px-2 focus:outline-none focus:ring-2 focus:ring-[#69ADFF]/20 text-center"
+          className="w-full h-9 md:h-8 text-sm text-[#303150] bg-white border border-[#69ADFF] rounded-lg px-2 focus:outline-none focus:ring-2 focus:ring-[#69ADFF]/20 text-center"
         />
       </div>
     );
@@ -73,7 +73,7 @@ export default function DateCell({ date, onChange }: DateCellProps) {
     return (
       <div
         onClick={() => onChange && setIsEditing(true)}
-        className="flex items-center justify-center h-9 text-sm text-[#BDBDCB] cursor-pointer hover:text-[#7E7F90] transition-colors"
+        className="flex items-center justify-center min-h-[44px] md:min-h-0 md:h-9 text-sm text-[#BDBDCB] cursor-pointer hover:text-[#7E7F90] transition-colors"
       >
         —
       </div>
@@ -83,7 +83,7 @@ export default function DateCell({ date, onChange }: DateCellProps) {
   return (
     <div
       onClick={() => onChange && setIsEditing(true)}
-      className="flex items-center justify-center h-9 text-sm text-[#303150] cursor-pointer hover:bg-[#F7F7F8] rounded-lg transition-colors"
+      className="flex items-center justify-center min-h-[44px] md:min-h-0 md:h-9 text-sm text-[#303150] cursor-pointer hover:bg-[#F7F7F8] rounded-lg transition-colors"
     >
       {formatHebrewDate(date)}
     </div>

@@ -24,7 +24,7 @@ export default function AddGroupButton({ onCreate }: AddGroupButtonProps) {
     <button
       onClick={handleClick}
       disabled={isCreating}
-      className="mt-6 flex items-center gap-2 px-5 py-2.5 bg-white border border-[#E8E8ED] rounded-xl hover:bg-[#F7F7F8] transition-colors text-sm font-medium text-[#303150] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+      className="mt-4 md:mt-6 w-full md:w-auto flex items-center justify-center md:justify-start gap-2 px-5 py-3 md:py-2.5 bg-white border border-[#E8E8ED] rounded-xl hover:bg-[#F7F7F8] transition-colors text-sm font-medium text-[#303150] cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
     >
       הוסף קבוצה חדשה
       {isCreating ? (

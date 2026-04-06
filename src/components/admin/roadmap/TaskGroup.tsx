@@ -16,6 +16,7 @@ interface AdminUser {
 interface TaskGroupProps {
   group: AdminTaskGroupWithTasks;
   adminUsers?: AdminUser[];
+  isMobile?: boolean;
   onTaskUpdate?: (taskId: string, updates: Record<string, unknown>) => Promise<void>;
   onTaskCreate?: (groupId: string, title: string) => Promise<void>;
   onTaskDelete?: (taskId: string) => Promise<void>;
@@ -39,7 +40,7 @@ function getStatusBreakdown(tasks: AdminTaskWithChildren[]) {
   }));
 }
 
-export default function TaskGroup({ group, adminUsers = [], onTaskUpdate, onTaskCreate, onTaskDelete, onGroupUpdate, onSubtaskCreate }: TaskGroupProps) {
+export default function TaskGroup({ group, adminUsers = [], isMobile = false, onTaskUpdate, onTaskCreate, onTaskDelete, onGroupUpdate, onSubtaskCreate }: TaskGroupProps) {
   const [isExpanded, setIsExpanded] = useState(true);
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [editedTitle, setEditedTitle] = useState(group.title);
@@ -95,12 +96,12 @@ export default function TaskGroup({ group, adminUsers = [], onTaskUpdate, onTask
   const tasks: AdminTaskWithChildren[] = group.tasks;
 
   return (
-    <div className="mb-8">
+    <div className="mb-6 md:mb-8">
       {/* Group Title Row */}
       <div className="flex items-center gap-2 py-2 px-1 mb-1">
         <button
           onClick={() => setIsExpanded(!isExpanded)}
-          className="cursor-pointer p-0.5 hover:bg-[#F7F7F8] rounded transition-colors"
+          className="cursor-pointer p-1.5 md:p-0.5 hover:bg-[#F7F7F8] rounded transition-colors"
         >
           {isExpanded ? (
             <ChevronDown className="w-4 h-4 text-[#7E7F90]" strokeWidth={2} />
@@ -129,6 +130,8 @@ export default function TaskGroup({ group, adminUsers = [], onTaskUpdate, onTask
             {group.title}
           </span>
         )}
+
+        <span className="text-xs text-[#BDBDCB] ms-1">({tasks.length})</span>
       </div>
 
       {isExpanded && (
@@ -136,41 +139,43 @@ export default function TaskGroup({ group, adminUsers = [], onTaskUpdate, onTask
           className="border-r-[3px] rounded-sm overflow-visible"
           style={{ borderColor: group.color }}
         >
-          {/* Column Headers */}
-          <div
-            className={`${GRID_COLS} items-center border-b border-[#E8E8ED]`}
-            style={{ backgroundColor: `${group.color}08` }}
-          >
-            <div className="h-9 flex items-center justify-center">
-              <input
-                type="checkbox"
-                className="w-4 h-4 rounded border-[#E8E8ED] text-[#69ADFF] focus:ring-[#69ADFF]/20 cursor-pointer"
-                readOnly
-              />
+          {/* Column Headers — desktop only */}
+          {!isMobile && (
+            <div
+              className={`${GRID_COLS} items-center border-b border-[#E8E8ED]`}
+              style={{ backgroundColor: `${group.color}08` }}
+            >
+              <div className="h-9 flex items-center justify-center">
+                <input
+                  type="checkbox"
+                  className="w-4 h-4 rounded border-[#E8E8ED] text-[#69ADFF] focus:ring-[#69ADFF]/20 cursor-pointer"
+                  readOnly
+                />
+              </div>
+              <div className="h-9 flex items-center pe-4">
+                <span className="text-xs font-medium text-[#7E7F90]">משימה</span>
+              </div>
+              <div className="h-9 flex items-center justify-center">
+                <span className="text-xs font-medium text-[#7E7F90]">אחראי</span>
+              </div>
+              <div className="h-9 flex items-center justify-center gap-1">
+                <span className="text-xs font-medium text-[#7E7F90]">סטטוס</span>
+                <Info className="w-3 h-3 text-[#BDBDCB]" strokeWidth={1.75} />
+              </div>
+              <div className="h-9 flex items-center justify-center gap-1">
+                <span className="text-xs font-medium text-[#7E7F90]">תאריך התחלה</span>
+              </div>
+              <div className="h-9 flex items-center justify-center gap-1">
+                <span className="text-xs font-medium text-[#7E7F90]">תאריך סיום</span>
+              </div>
+              <div className="h-9 flex items-center justify-center">
+                <span className="text-xs font-medium text-[#7E7F90]">עדיפות</span>
+              </div>
+              <div className="h-9 flex items-center justify-center">
+                <Plus className="w-4 h-4 text-[#BDBDCB]" strokeWidth={1.75} />
+              </div>
             </div>
-            <div className="h-9 flex items-center pe-4">
-              <span className="text-xs font-medium text-[#7E7F90]">משימה</span>
-            </div>
-            <div className="h-9 flex items-center justify-center">
-              <span className="text-xs font-medium text-[#7E7F90]">אחראי</span>
-            </div>
-            <div className="h-9 flex items-center justify-center gap-1">
-              <span className="text-xs font-medium text-[#7E7F90]">סטטוס</span>
-              <Info className="w-3 h-3 text-[#BDBDCB]" strokeWidth={1.75} />
-            </div>
-            <div className="h-9 flex items-center justify-center gap-1">
-              <span className="text-xs font-medium text-[#7E7F90]">תאריך התחלה</span>
-            </div>
-            <div className="h-9 flex items-center justify-center gap-1">
-              <span className="text-xs font-medium text-[#7E7F90]">תאריך סיום</span>
-            </div>
-            <div className="h-9 flex items-center justify-center">
-              <span className="text-xs font-medium text-[#7E7F90]">עדיפות</span>
-            </div>
-            <div className="h-9 flex items-center justify-center">
-              <Plus className="w-4 h-4 text-[#BDBDCB]" strokeWidth={1.75} />
-            </div>
-          </div>
+          )}
 
           {/* Droppable Task List */}
           <Droppable droppableId={group.id}>
@@ -192,6 +197,7 @@ export default function TaskGroup({ group, adminUsers = [], onTaskUpdate, onTask
                         task={task}
                         index={index}
                         adminUsers={adminUsers}
+                        isMobile={isMobile}
                         onTaskUpdate={onTaskUpdate}
                         onTaskDelete={onTaskDelete}
                         hasChildren={hasChildren || false}
@@ -206,15 +212,17 @@ export default function TaskGroup({ group, adminUsers = [], onTaskUpdate, onTask
                         <TaskRow
                           key={child.id}
                           task={child}
-                          adminUsers={adminUsers}
                           index={-1}
                           depth={1}
+                          adminUsers={adminUsers}
+                          isMobile={isMobile}
                           onTaskUpdate={onTaskUpdate}
                           onTaskDelete={onTaskDelete}
                         />
                       ))}
                       {isTaskExpanded && addingSubtaskFor === task.id && (
                         <SubtaskAddRow
+                          isMobile={isMobile}
                           onSubmit={(title) => handleSubtaskAdd(task.id, title)}
                           onCancel={() => setAddingSubtaskFor(null)}
                         />
@@ -228,7 +236,7 @@ export default function TaskGroup({ group, adminUsers = [], onTaskUpdate, onTask
           </Droppable>
 
           {/* Add Task Row */}
-          <AddTaskRow groupId={group.id} onCreate={onTaskCreate} />
+          <AddTaskRow groupId={group.id} isMobile={isMobile} onCreate={onTaskCreate} />
 
           {/* Progress Bar */}
           {tasks.length > 0 && (
@@ -254,7 +262,7 @@ export default function TaskGroup({ group, adminUsers = [], onTaskUpdate, onTask
   );
 }
 
-function SubtaskAddRow({ onSubmit, onCancel }: { onSubmit: (title: string) => void; onCancel: () => void }) {
+function SubtaskAddRow({ isMobile, onSubmit, onCancel }: { isMobile: boolean; onSubmit: (title: string) => void; onCancel: () => void }) {
   const [title, setTitle] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -267,6 +275,26 @@ function SubtaskAddRow({ onSubmit, onCancel }: { onSubmit: (title: string) => vo
     if (trimmed) onSubmit(trimmed);
     else onCancel();
   };
+
+  if (isMobile) {
+    return (
+      <div className="flex items-center gap-2 px-3 ps-8 py-2 border-b border-[#F7F7F8] bg-[#FAFAFA]">
+        <input
+          ref={inputRef}
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') { e.preventDefault(); handleSubmit(); }
+            else if (e.key === 'Escape') onCancel();
+          }}
+          onBlur={handleSubmit}
+          placeholder="שם תת-משימה..."
+          className="flex-1 h-9 text-sm text-[#303150] bg-white border border-[#69ADFF] rounded-lg px-3 focus:outline-none focus:ring-2 focus:ring-[#69ADFF]/20 placeholder-[#BDBDCB]"
+        />
+      </div>
+    );
+  }
 
   return (
     <div className={`${GRID_COLS} items-center border-b border-[#F7F7F8] bg-[#FAFAFA]`}>
