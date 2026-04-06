@@ -103,7 +103,7 @@ Success criteria:
           status: 'available',
           badge: 'FREE',
           videoUrl:
-            'https://player.mediadelivery.net/embed/632156/2e5a381e-476a-4db3-b982-15145d7bc180?autoplay=false&loop=false&muted=false&preload=true&responsive=true',
+            'https://player.mediadelivery.net/embed/632156/2e5a381e-476a-4db3-b982-15145d7bc180?autoplay=false&loop=false&muted=false&preload=true&responsive=false',
           prompts: [
             'אני בשיעור "מנויים ומודלים" בקורס Cursor. הסבר לי בקצרה איך לבחור מודל ב-Cursor (מהיר מול חזק / Auto), ואיך לנהל שימוש חכם ביום־יום. תן כלל אצבע אחד.',
           ],

@@ -30,7 +30,7 @@ export default function VideoPlayer({ lesson, chapterTitle, lessonNumber, totalL
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4, ease: 'easeOut' }}
-            className="relative w-full overflow-hidden rounded-t-3xl"
+            className="relative w-full overflow-hidden rounded-t-3xl bg-black"
             style={{ paddingTop: '56.25%' }}
           >
             <iframe
