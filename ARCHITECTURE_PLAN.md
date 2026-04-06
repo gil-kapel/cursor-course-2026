@@ -1,236 +1,286 @@
-# Architecture Plan — Admin Task Management System
+# Architecture Plan — CFO System Migration
 
 ## Overview
-העתקת מערכת ניהול משימות (Admin Roadmap) מ-FinanceManager אל פרויקט Course.
-גישה מוגבלת לשני admin users בלבד, מוגדרים במשתני סביבה.
+
+העתקת מערכת ה-CFO (ניהול פיננסי) מפרויקט FinanceManager.nosync לפרויקט Course, כתפריט חדש באזור הניהול (Admin) לצד מפת הדרכים הקיימת.
+
+### מה כולל ה-CFO?
+- **ניהול מנויים** (Subscriptions) — הוצאות/הכנסות חוזרות (חודשי/שנתי)
+- **ניהול תנועות** (Transactions) — הוצאות/הכנסות חד-פעמיות
+- **אנליטיקה** — 5 כרטיסי KPI, גרף עוגה (הוצאות), גרף עמודות (תזרים), דוח רו"ה
+- **סינון, חיפוש ומיון** מתקדמים
+- **עריכה inline** עם optimistic updates
 
 ---
 
 ## 1. Architecture & State Management
 
 ### Component Hierarchy
+
 ```
-/admin/roadmap/page.tsx          <- Server component (auth gate)
-  RoadmapBoard.tsx               <- Client component, owns all state
-      Filter/Search bar
-      TaskGroup.tsx[]             <- One per group
-         TaskRow.tsx[]            <- One per task (draggable)
-            StatusBadge.tsx
-            PriorityBadge.tsx
-            DateCell.tsx
-            OwnerCell.tsx
-         AddTaskRow.tsx
-      TimelineView.tsx            <- Gantt chart (optional toggle)
-      AddGroupButton.tsx
+AdminSidebar (update: add "CFO" nav item)
+  └─ /admin/cfo/page.tsx (server component — fetches data)
+       └─ CfoBoard.tsx (client — main container, local state)
+            ├── CfoViewToggle.tsx (month / pnl toggle)
+            ├── CfoMonthPicker.tsx (month navigation)
+            ├── CfoSummaryCards.tsx (5 KPI cards)
+            ├── CfoToolbar.tsx (search, filters, sort)
+            ├── CfoAnalytics.tsx (pie + bar charts)
+            ├── CfoSubscriptionsTable.tsx
+            │   ├── SubscriptionRow.tsx (inline editing)
+            │   └── AddSubscriptionRow.tsx
+            ├── CfoTransactionsTable.tsx
+            │   ├── TransactionRow.tsx (inline editing)
+            │   └── AddTransactionRow.tsx
+            └── CfoPnlReport.tsx (P&L view with line chart)
 ```
 
-### Admin Layout
+### Badge Sub-Components (shared by rows)
 ```
-/admin/layout.tsx                <- Server component, auth + role check
-   AdminSidebar.tsx              <- Navigation sidebar
-   {children}                    <- Page content
+CfoBadgeDropdown.tsx        (generic portal dropdown)
+  ├── TypeBadge.tsx          (INCOME / EXPENSE)
+  ├── SubscriptionStatusBadge.tsx (ACTIVE / REVIEWING / CANCELED)
+  ├── TransactionStatusBadge.tsx  (COMPLETED / PENDING)
+  └── BillingCycleBadge.tsx       (MONTHLY / YEARLY)
 ```
 
 ### State Management
-- **No Zustand** -- consistent with Course project conventions
-- All state lives in `RoadmapBoard` via `useState` (same pattern as FinanceManager)
-- Optimistic updates with snapshot-based rollback on server error
-- `useMemo` for client-side filtering/sorting
+- **No Zustand** — React hooks only (useState, useMemo, useCallback, useRef), consistent with existing roadmap pattern
+- State lives in `CfoBoard.tsx`:
+  - `data: CfoData` — subscriptions + transactions
+  - `view: 'month' | 'pnl'`
+  - `selectedMonth: string | null`
+  - `searchQuery`, `filterConfig`, `sortConfigSubs`, `sortConfigTxns`
+  - `prevDataRef` — snapshot for optimistic rollback
 
 ### Data Flow
-```
-Client -> Server Action (with ensureAdmin()) -> Prisma -> PostgreSQL
-          on success: update local state
-          on error: rollback to snapshot + toast
-```
-
-### Files to Create
-| File | Source (FinanceManager) |
-|---|---|
-| `src/app/admin/layout.tsx` | New (simplified, just auth gate) |
-| `src/app/admin/roadmap/page.tsx` | Copy + adapt |
-| `src/components/admin/roadmap/RoadmapBoard.tsx` | Copy + adapt imports |
-| `src/components/admin/roadmap/TaskGroup.tsx` | Copy + adapt |
-| `src/components/admin/roadmap/TaskRow.tsx` | Copy + adapt |
-| `src/components/admin/roadmap/AddTaskRow.tsx` | Copy + adapt |
-| `src/components/admin/roadmap/StatusBadge.tsx` | Copy + adapt |
-| `src/components/admin/roadmap/PriorityBadge.tsx` | Copy + adapt |
-| `src/components/admin/roadmap/DateCell.tsx` | Copy + adapt |
-| `src/components/admin/roadmap/OwnerCell.tsx` | Copy + adapt |
-| `src/components/admin/roadmap/AddGroupButton.tsx` | Copy + adapt |
-| `src/components/admin/roadmap/TimelineView.tsx` | Copy + adapt |
-| `src/components/admin/AdminSidebar.tsx` | New (simple nav) |
+- Server component fetches initial data via `getCfoData()`
+- Mutations via server actions → optimistic UI update → rollback on error
+- Same pattern as existing `RoadmapBoard.tsx`
 
 ---
 
 ## 2. Database (Prisma) & Performance
 
-### Schema Changes -- Add to `prisma/schema.prisma`
+### Schema Changes — Append to `prisma/schema.prisma`
 
 ```prisma
-enum AdminTaskStatus {
-  WORKING_ON_IT
-  DONE
-  STUCK
-  NOT_STARTED
+// ---------------------------------------------------------------------------
+// Admin CFO — internal financial management
+// ---------------------------------------------------------------------------
+
+enum FinanceRecordType {
+  INCOME
+  EXPENSE
 }
 
-enum AdminTaskPriority {
-  HIGH
-  MEDIUM
-  LOW
+enum BillingCycle {
+  MONTHLY
+  YEARLY
 }
 
-model AdminTaskGroup {
-  id         String   @id @default(cuid())
-  title      String
-  color      String   @default("#69ADFF")
-  orderIndex Int      @default(0)
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  tasks AdminTask[]
+enum SubscriptionStatus {
+  ACTIVE
+  REVIEWING
+  CANCELED
 }
 
-model AdminTask {
-  id         String             @id @default(cuid())
-  groupId    String
-  parentId   String?
-  title      String
-  ownerId    String?
-  status     AdminTaskStatus    @default(NOT_STARTED)
-  priority   AdminTaskPriority  @default(MEDIUM)
-  startDate  DateTime?
-  endDate    DateTime?
-  orderIndex Int                @default(0)
-  createdAt  DateTime           @default(now())
-  updatedAt  DateTime           @updatedAt
+enum TransactionStatus {
+  COMPLETED
+  PENDING
+}
 
-  group    AdminTaskGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
-  parent   AdminTask?     @relation("SubTasks", fields: [parentId], references: [id], onDelete: Cascade)
-  children AdminTask[]    @relation("SubTasks")
+model AdminSubscription {
+  id              String             @id @default(cuid())
+  title           String
+  type            FinanceRecordType
+  amount          Float
+  currency        String             @default("ILS")
+  category        String?
+  billingCycle    BillingCycle       @default(MONTHLY)
+  nextBillingDate DateTime
+  status          SubscriptionStatus @default(ACTIVE)
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
 
-  @@index([groupId])
-  @@index([groupId, orderIndex])
-  @@index([parentId])
-  @@index([groupId, parentId, orderIndex])
+  @@index([type])
   @@index([status])
-  @@index([priority])
+  @@index([billingCycle])
+  @@index([nextBillingDate])
+}
+
+model AdminTransaction {
+  id         String            @id @default(cuid())
+  title      String
+  type       FinanceRecordType
+  amount     Float
+  currency   String            @default("ILS")
+  category   String?
+  date       DateTime
+  status     TransactionStatus @default(COMPLETED)
+  receiptUrl String?
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+
+  @@index([type])
+  @@index([status])
+  @@index([date])
 }
 ```
 
 ### Query Optimization
-- `getRoadmapData()` -- single query with nested `include`, no N+1
-- Task creation uses `findFirst` for max `orderIndex` -- single query
-- Group reorder uses `$transaction` batch -- atomic
+- `getCfoData()` — single query per table with `orderBy`, no N+1
 - No pagination needed (admin-only, limited dataset)
+- Bulk updates: not needed (single-row CRUD only)
 
 ### Migration
 ```bash
-npx prisma migrate dev --name add-admin-task-management
+npx prisma migrate dev --name add-cfo-models
 ```
 
 ---
 
 ## 3. Security (Fail-Closed Standard)
 
-### Authentication & Authorization -- ENV-Based Admin Check
+### Authentication & Authorization
+- Every server action calls `requireAdmin()` from `@/lib/admin` — same as roadmap
+- Page protected by existing admin `layout.tsx` which checks admin access and redirects
+- Two-layer defense: layout guard + per-action guard
 
-**Approach:** Admin access determined solely by `ADMIN_EMAILS` env var (not the `role` DB field).
+### Input Validation — Zod Schemas
+New file: `src/lib/validations/admin-cfo.ts`
 
-```
-# .env.local
-ADMIN_EMAILS=user1@example.com,user2@example.com
-```
-
-#### New Files
-
-**`src/lib/admin.ts`** -- Server-side admin helper
-- `requireAdmin()` -- calls `auth()`, checks email against `ADMIN_EMAILS`, throws if not admin
-- `isAdminEmail(email)` -- pure check, returns boolean
-
-**`src/middleware.ts`** -- Edge middleware for `/admin/*` routes
-- Uses NextAuth `auth()` wrapper
-- Checks `req.auth.user.email` against `ADMIN_EMAILS`
-- Returns 401 if not authenticated, 403 if not admin
-- Matcher: `['/admin/:path*']`
-
-### Defense in Depth -- Two Layers
-1. **Middleware (Edge):** Blocks unauthorized requests before they reach the page
-2. **Server Actions:** Every action calls `requireAdmin()` independently -- fail-closed
-
-### Validation -- Zod Schemas
-**`src/lib/validations/admin-roadmap.ts`** -- all input validation schemas copied from FinanceManager:
-- `createAdminTaskSchema` -- requires groupId, title; optional parentId, ownerId, status, priority, dates
-- `updateAdminTaskSchema` -- all fields optional
-- `createAdminTaskGroupSchema` -- title + color
-- `updateAdminTaskGroupSchema` -- both optional
-- `updateAdminTaskGroupOrderSchema` -- array of {id, orderIndex}
+| Schema | Fields |
+|--------|--------|
+| `createAdminSubscriptionSchema` | title (1-200), type (INCOME/EXPENSE), amount (>=0), currency (<=10, default ILS), category (<=100, optional), billingCycle (MONTHLY/YEARLY), nextBillingDate (ISO date), status (default ACTIVE) |
+| `updateAdminSubscriptionSchema` | All above, all optional |
+| `createAdminTransactionSchema` | title (1-200), type (INCOME/EXPENSE), amount (>=0), currency (<=10, default ILS), category (<=100, optional), date (ISO date), status (default COMPLETED), receiptUrl (URL, optional) |
+| `updateAdminTransactionSchema` | All above, all optional |
 
 ### Vulnerability Check
-- **CSRF:** Server Actions use POST-only with Origin check (built-in Next.js protection)
-- **XSS:** React auto-escapes all rendered values; no raw HTML injection used
-- **IDOR:** Admin-only feature; no user-scoped data -- all admins see the same board
-- **Data leakage:** No sensitive data in this feature (task titles/statuses only)
+- **CSRF**: Protected by Next.js Server Actions (automatic CSRF tokens)
+- **XSS**: All user input is rendered via React (auto-escaped), no raw HTML injection
+- **IDOR**: Admin-only tables, no user-specific data — no IDOR risk
+- **Sensitive Data**: No secrets in API responses; currency amounts are non-sensitive admin data
 
 ---
 
 ## 4. UI/UX (The "Monday.com" Standard)
 
 ### Optimistic UI
-- Every mutation saves a deep-clone snapshot before applying
-- On success: state already reflects the change (instant feel)
-- On error: `rollback()` restores snapshot + toast notification
+- Same pattern as roadmap: `saveSnapshot()` before mutation → update state → call server action → rollback on error with toast
 
 ### Loading & Error States
-- Initial load: skeleton placeholders for groups and task rows
-- Server action errors: toast notification with Hebrew error message
-- Empty state: message with CTA to add first group
+- Server component renders `CfoBoard` with initial data (no loading spinner needed for initial load)
+- Toast notifications for CRUD success/error (reuse existing `useToast` + `ToastContainer`)
+- Inline editing shows immediate feedback
 
 ### RTL Localization
-- All existing labels are in Hebrew (from FinanceManager source)
-- **Strict logical properties:** `start-0`, `end-0`, `ps-`, `pe-`, `ms-`, `me-` -- no physical `left`/`right`/`pl`/`pr`/`ml`/`mr`
-- Audit all copied components and convert any physical directional classes to logical ones
-
-### Drag & Drop
-- Install `@hello-pangea/dnd` (used by the copied components)
-- Task reordering within groups + cross-group moves
+- All Tailwind: `start-*`, `end-*`, `ps-*`, `pe-*`, `ms-*`, `me-*` — NO physical `left`/`right`/`pl`/`pr`/`ml`/`mr`
+- All UI text in Hebrew
+- Date formatting with Hebrew locale
+- Currency formatting with ILS locale
 
 ---
 
 ## 5. Pre-Implementation Code Review
 
 ### Edge Cases
-- **Timezone:** Dates stored as UTC `DateTime` in Prisma; displayed using Hebrew locale formatting
-- **Empty admin emails:** If `ADMIN_EMAILS` is empty/missing, NO ONE gets access (fail-closed)
-- **Case sensitivity:** Email comparison is lowercase-normalized
+- **Currency**: amounts stored as Float, formatted with `Intl.NumberFormat` for display
+- **Dates**: stored as `DateTime` (UTC), displayed in local timezone with Hebrew locale
+- **Month filtering**: "all time" vs specific month — filter transactions by YYYY-MM prefix of `date`
+
+### New Dependency Required
+- **`recharts`** — for analytics charts (pie, bar, line). Not currently in package.json
 
 ### Race Conditions
-- Optimistic updates with rollback handle concurrent edits gracefully
-- `orderIndex` calculation uses `findFirst` max -- no gap-free guarantee, acceptable for admin-only
-- Delete guards against temp IDs (prevents deleting tasks not yet persisted)
-
-### New Dependencies
-```bash
-npm install @hello-pangea/dnd
-```
-No other new dependencies -- project already has Prisma, Framer Motion, Lucide React.
+- Optimistic updates use `prevDataRef` for rollback — same proven pattern as roadmap
+- No unmount cleanup issues (single-page admin view)
 
 ---
 
-## Implementation Order
+## Implementation Steps (Ordered)
 
-| Step | Description |
-|---|---|
-| 1 | Add `ADMIN_EMAILS` to `.env.local` |
-| 2 | Create `src/lib/admin.ts` (requireAdmin + isAdminEmail) |
-| 3 | Create `src/middleware.ts` (Edge guard for `/admin/*`) |
-| 4 | Add Prisma schema (enums + models) + run migration |
-| 5 | Create types file `src/types/admin-roadmap.ts` |
-| 6 | Create validation schemas `src/lib/validations/admin-roadmap.ts` |
-| 7 | Create server actions `src/app/actions/admin-roadmap.ts` |
-| 8 | Install `@hello-pangea/dnd` |
-| 9 | Copy + adapt all UI components to `src/components/admin/roadmap/` |
-| 10 | Create admin layout `src/app/admin/layout.tsx` + sidebar |
-| 11 | Create roadmap page `src/app/admin/roadmap/page.tsx` |
-| 12 | Test: verify admin-only access, CRUD operations, drag-and-drop |
+### Step 1: Infrastructure
+1. `npm install recharts`
+2. Add CFO enums + models to `prisma/schema.prisma`
+3. Run `npx prisma migrate dev --name add-cfo-models`
+
+### Step 2: Shared Utilities
+4. Create `src/lib/chartColors.ts` — color palette + `getChartColor()`
+5. Create `src/lib/currency.ts` — `formatCurrencyAmount()`
+6. Create `src/lib/validations/admin-cfo.ts` — Zod schemas
+7. Create `src/types/admin-cfo.ts` — types + UI label/color constants
+
+### Step 3: Server Actions
+8. Create `src/app/actions/admin-cfo-actions.ts` — 7 CRUD functions
+
+### Step 4: Components (copy and adapt from FinanceManager)
+9. Badge components: `CfoBadgeDropdown`, `TypeBadge`, `SubscriptionStatusBadge`, `TransactionStatusBadge`, `BillingCycleBadge`
+10. Table rows: `SubscriptionRow`, `TransactionRow`, `AddSubscriptionRow`, `AddTransactionRow`
+11. Tables: `CfoSubscriptionsTable`, `CfoTransactionsTable`
+12. Toolbar and nav: `CfoToolbar`, `CfoViewToggle`, `CfoMonthPicker`, `CfoHeaderButton`
+13. Analytics: `CfoSummaryCards`, `CfoAnalytics`, `CfoPnlReport`
+14. Main board: `CfoBoard.tsx`
+
+### Step 5: Page & Navigation
+15. Create `src/app/admin/cfo/page.tsx` (server component)
+16. Update `AdminSidebar.tsx` — add CFO nav item with `DollarSign` icon
+
+### Step 6: Verify
+17. Run `prisma generate` + `next build` to verify no errors
+
+---
+
+## Files Summary
+
+### New Files (25)
+
+| # | Path | Source |
+|---|------|--------|
+| 1 | `src/lib/chartColors.ts` | Adapt from FM `src/lib/chartColors.ts` |
+| 2 | `src/lib/currency.ts` | Adapt from FM `src/lib/utils.ts` (formatCurrencyAmount only) |
+| 3 | `src/lib/validations/admin-cfo.ts` | Adapt from FM `src/lib/validationSchemas.ts` |
+| 4 | `src/types/admin-cfo.ts` | Adapt from FM `src/types/admin-cfo.ts` |
+| 5 | `src/app/actions/admin-cfo-actions.ts` | Adapt from FM `src/actions/admin-cfo-actions.ts` |
+| 6 | `src/app/admin/cfo/page.tsx` | Adapt from FM `src/app/admin/cfo/page.tsx` |
+| 7 | `src/components/admin/cfo/CfoBoard.tsx` | Adapt from FM |
+| 8 | `src/components/admin/cfo/CfoViewToggle.tsx` | Adapt from FM |
+| 9 | `src/components/admin/cfo/CfoMonthPicker.tsx` | Adapt from FM |
+| 10 | `src/components/admin/cfo/CfoSummaryCards.tsx` | Adapt from FM |
+| 11 | `src/components/admin/cfo/CfoToolbar.tsx` | Adapt from FM |
+| 12 | `src/components/admin/cfo/CfoAnalytics.tsx` | Adapt from FM |
+| 13 | `src/components/admin/cfo/CfoPnlReport.tsx` | Adapt from FM |
+| 14 | `src/components/admin/cfo/CfoSubscriptionsTable.tsx` | Adapt from FM |
+| 15 | `src/components/admin/cfo/CfoTransactionsTable.tsx` | Adapt from FM |
+| 16 | `src/components/admin/cfo/SubscriptionRow.tsx` | Adapt from FM |
+| 17 | `src/components/admin/cfo/TransactionRow.tsx` | Adapt from FM |
+| 18 | `src/components/admin/cfo/AddSubscriptionRow.tsx` | Adapt from FM |
+| 19 | `src/components/admin/cfo/AddTransactionRow.tsx` | Adapt from FM |
+| 20 | `src/components/admin/cfo/CfoBadgeDropdown.tsx` | Adapt from FM |
+| 21 | `src/components/admin/cfo/TypeBadge.tsx` | Adapt from FM |
+| 22 | `src/components/admin/cfo/SubscriptionStatusBadge.tsx` | Adapt from FM |
+| 23 | `src/components/admin/cfo/TransactionStatusBadge.tsx` | Adapt from FM |
+| 24 | `src/components/admin/cfo/BillingCycleBadge.tsx` | Adapt from FM |
+| 25 | `src/components/admin/cfo/CfoHeaderButton.tsx` | Adapt from FM |
+
+### Existing Files to Modify (2)
+
+| # | Path | Change |
+|---|------|--------|
+| 1 | `prisma/schema.prisma` | Append 4 enums + 2 models |
+| 2 | `src/components/admin/AdminSidebar.tsx` | Add CFO nav item |
+
+---
+
+## Key Adaptation Notes (FM to Course)
+
+| Concern | FinanceManager | Course |
+|---------|---------------|--------|
+| Admin auth | `requireAdmin()` from `@/lib/adminHelpers` | `requireAdmin()` from `@/lib/admin` |
+| Prisma client | `import { prisma } from '@/lib/prisma'` | `import { prisma } from '@/lib/db'` |
+| Prisma types | `import { ... } from '@prisma/client'` | `import { ... } from '@/generated/prisma'` |
+| Toast | Custom useToast hook | Existing `useToast` + `ToastContainer` (identical API) |
+| RTL classes | Mostly logical, needs audit | Enforce strict logical properties |
+| Currency util | Depends on FM `formatCurrency` chain | Standalone `formatCurrencyAmount()` |
+| Chart colors | `@/lib/chartColors` | Create new `@/lib/chartColors` |

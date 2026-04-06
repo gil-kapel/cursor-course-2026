@@ -2,10 +2,11 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Map, LayoutDashboard } from 'lucide-react';
+import { Map, LayoutDashboard, DollarSign } from 'lucide-react';
 
 const NAV_ITEMS = [
   { href: '/admin/roadmap', label: 'מפת דרכים', icon: Map },
+  { href: '/admin/cfo', label: 'ניהול פיננסי', icon: DollarSign },
 ];
 
 export default function AdminSidebar() {
