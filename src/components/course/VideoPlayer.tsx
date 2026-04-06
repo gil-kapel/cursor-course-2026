@@ -18,14 +18,14 @@ export default function VideoPlayer({ lesson, chapterTitle, lessonNumber, totalL
   const [isPlaying, setIsPlaying] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
 
-  const isYouTube = lesson.videoUrl?.includes('youtube');
-  const isLocalVideo = lesson.videoUrl && !isYouTube;
+  const isIframeEmbed =
+    lesson.videoUrl?.includes('youtube') || lesson.videoUrl?.includes('mediadelivery.net');
 
   return (
     <Card padding="none" className="overflow-hidden">
       {/* Video area */}
       {lesson.videoUrl ? (
-        isYouTube ? (
+        isIframeEmbed ? (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
