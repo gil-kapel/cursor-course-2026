@@ -129,9 +129,9 @@ export default function CfoToolbar({
   };
 
   return (
-    <div className="flex items-center gap-3 flex-wrap" dir="rtl">
+    <div className="flex items-center gap-2 sm:gap-3 flex-wrap" dir="rtl">
       {/* Search */}
-      <div className="relative flex-1 min-w-[200px] max-w-[320px]">
+      <div className="relative w-full sm:w-auto sm:flex-1 sm:min-w-[200px] sm:max-w-[320px]">
         <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#7E7F90] pointer-events-none" />
         <input
           type="text"
@@ -147,7 +147,7 @@ export default function CfoToolbar({
         ref={filter.triggerRef}
         type="button"
         onClick={() => filter.setIsOpen(!filter.isOpen)}
-        className={`flex items-center gap-1.5 h-9 px-3 rounded-lg border text-sm font-medium transition-colors ${
+        className={`flex items-center gap-1.5 h-9 px-2 sm:px-3 rounded-lg border text-xs sm:text-sm font-medium transition-colors ${
           activeFilterCount > 0
             ? 'border-indigo-400 bg-indigo-50 text-indigo-600'
             : 'border-[#E8E8ED] bg-white text-[#303150] hover:bg-[#F7F7F8]'
@@ -167,7 +167,7 @@ export default function CfoToolbar({
         ref={sortSubs.triggerRef}
         type="button"
         onClick={() => sortSubs.setIsOpen(!sortSubs.isOpen)}
-        className="flex items-center gap-1.5 h-9 px-3 rounded-lg border border-[#E8E8ED] bg-white text-sm font-medium text-[#303150] hover:bg-[#F7F7F8] transition-colors"
+        className="flex items-center gap-1.5 h-9 px-2 sm:px-3 rounded-lg border border-[#E8E8ED] bg-white text-xs sm:text-sm font-medium text-[#303150] hover:bg-[#F7F7F8] transition-colors"
       >
         <ArrowUpDown className="w-4 h-4" />
         <span>מיון מנויים</span>
@@ -178,7 +178,7 @@ export default function CfoToolbar({
         ref={sortTxns.triggerRef}
         type="button"
         onClick={() => sortTxns.setIsOpen(!sortTxns.isOpen)}
-        className="flex items-center gap-1.5 h-9 px-3 rounded-lg border border-[#E8E8ED] bg-white text-sm font-medium text-[#303150] hover:bg-[#F7F7F8] transition-colors"
+        className="flex items-center gap-1.5 h-9 px-2 sm:px-3 rounded-lg border border-[#E8E8ED] bg-white text-xs sm:text-sm font-medium text-[#303150] hover:bg-[#F7F7F8] transition-colors"
       >
         <ArrowUpDown className="w-4 h-4" />
         <span>מיון תנועות</span>

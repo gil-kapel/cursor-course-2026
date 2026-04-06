@@ -21,18 +21,18 @@ interface KpiCardProps {
 
 function KpiCard({ title, value, icon: Icon, iconColor, valueColor, subtitle }: KpiCardProps) {
   return (
-    <div className="bg-white border border-[#F7F7F8] rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
-      <div className="flex items-start gap-3">
+    <div className="bg-white border border-[#F7F7F8] rounded-xl p-3 sm:p-5 shadow-sm hover:shadow-md transition-shadow">
+      <div className="flex items-start gap-2 sm:gap-3">
         <div
-          className="shrink-0 w-10 h-10 rounded-lg flex items-center justify-center"
+          className="shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center"
           style={{ backgroundColor: `${iconColor}14` }}
         >
-          <Icon className="w-5 h-5" style={{ color: iconColor }} strokeWidth={2} />
+          <Icon className="w-4 h-4 sm:w-5 sm:h-5" style={{ color: iconColor }} strokeWidth={2} />
         </div>
         <div className="min-w-0">
-          <p className="text-xs font-medium text-[#7E7F90] mb-1">{title}</p>
+          <p className="text-[10px] sm:text-xs font-medium text-[#7E7F90] mb-0.5 sm:mb-1">{title}</p>
           <p
-            className="text-xl font-bold truncate"
+            className="text-base sm:text-xl font-bold truncate"
             style={{ color: valueColor || '#303150' }}
           >
             {value}
@@ -104,7 +104,7 @@ export default function CfoSummaryCards({ data, selectedMonth }: CfoSummaryCards
     : 'החודש';
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
       <KpiCard
         title={metrics.isSpecificMonth ? `מאזן ${monthSuffix}` : 'מאזן כולל'}
         value={formatCurrencyAmount(Math.abs(metrics.periodBalance), 'ILS' as CurrencyCode)}

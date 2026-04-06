@@ -32,47 +32,51 @@ export default function CfoSubscriptionsTable({
 }: CfoSubscriptionsTableProps) {
   return (
     <div>
-      <h2 className="text-base font-bold text-[#303150] mb-3">
+      <h2 className="text-sm sm:text-base font-bold text-[#303150] mb-3">
         מנויים והוצאות קבועות
       </h2>
 
       <div className="border border-[#E8E8ED] rounded-xl overflow-hidden">
-        {/* Header */}
-        <div className={`${GRID_COLS} bg-[#FAFAFA] border-b border-[#E8E8ED]`}>
-          {COLUMN_HEADERS.map((header, i) => (
-            <div
-              key={`${header}-${i}`}
-              className="px-4 py-3 text-xs font-semibold text-[#7E7F90] flex items-center"
-            >
-              {header}
+        <div className="overflow-x-auto">
+          <div className="min-w-[900px]">
+            {/* Header */}
+            <div className={`${GRID_COLS} bg-[#FAFAFA] border-b border-[#E8E8ED]`}>
+              {COLUMN_HEADERS.map((header, i) => (
+                <div
+                  key={`${header}-${i}`}
+                  className="px-4 py-3 text-xs font-semibold text-[#7E7F90] flex items-center"
+                >
+                  {header}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
 
-        {/* Rows */}
-        {subscriptions.length === 0 && !onCreate ? (
-          <div className="px-4 py-8 text-center text-sm text-[#7E7F90]">
-            אין מנויים להצגה
-          </div>
-        ) : (
-          <>
-            {subscriptions.map((sub) => (
-              <SubscriptionRow
-                key={sub.id}
-                subscription={sub}
-                gridCols={GRID_COLS}
-                onUpdate={onUpdate}
-                onDelete={onDelete}
-              />
-            ))}
-            {onCreate && (
-              <AddSubscriptionRow
-                gridCols={GRID_COLS}
-                onCreate={onCreate}
-              />
+            {/* Rows */}
+            {subscriptions.length === 0 && !onCreate ? (
+              <div className="px-4 py-8 text-center text-sm text-[#7E7F90]">
+                אין מנויים להצגה
+              </div>
+            ) : (
+              <>
+                {subscriptions.map((sub) => (
+                  <SubscriptionRow
+                    key={sub.id}
+                    subscription={sub}
+                    gridCols={GRID_COLS}
+                    onUpdate={onUpdate}
+                    onDelete={onDelete}
+                  />
+                ))}
+                {onCreate && (
+                  <AddSubscriptionRow
+                    gridCols={GRID_COLS}
+                    onCreate={onCreate}
+                  />
+                )}
+              </>
             )}
-          </>
-        )}
+          </div>
+        </div>
       </div>
     </div>
   );

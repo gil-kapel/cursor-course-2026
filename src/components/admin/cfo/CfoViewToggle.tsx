@@ -24,7 +24,7 @@ export default function CfoViewToggle({ view, onChange }: CfoViewToggleProps) {
             key={value}
             type="button"
             onClick={() => onChange(value)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-150 ${
+            className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-150 ${
               active
                 ? 'bg-white text-indigo-600 shadow-sm'
                 : 'text-[#7E7F90] hover:text-[#303150]'

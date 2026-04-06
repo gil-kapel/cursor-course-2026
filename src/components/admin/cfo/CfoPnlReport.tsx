@@ -79,13 +79,13 @@ interface KpiCardProps {
 function KpiCard({ title, value, positive, icon: Icon }: KpiCardProps) {
   const color = positive === null ? '#7E7F90' : positive ? '#00C875' : '#E2445C';
   return (
-    <div className="bg-white border border-[#F7F7F8] rounded-xl p-5 shadow-sm flex items-start gap-3">
-      <div className="shrink-0 w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${color}18` }}>
-        <Icon className="w-5 h-5" style={{ color }} strokeWidth={2} />
+    <div className="bg-white border border-[#F7F7F8] rounded-xl p-3 sm:p-5 shadow-sm flex items-start gap-2 sm:gap-3">
+      <div className="shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${color}18` }}>
+        <Icon className="w-4 h-4 sm:w-5 sm:h-5" style={{ color }} strokeWidth={2} />
       </div>
       <div className="min-w-0">
-        <p className="text-xs font-medium text-[#7E7F90] mb-1">{title}</p>
-        <p className="text-xl font-bold" style={{ color }}>
+        <p className="text-[10px] sm:text-xs font-medium text-[#7E7F90] mb-0.5 sm:mb-1">{title}</p>
+        <p className="text-base sm:text-xl font-bold" style={{ color }}>
           {positive === false && value > 0 ? '-' : ''}{formatILS(value)}
         </p>
       </div>
@@ -154,7 +154,7 @@ export default function CfoPnlReport({ data }: CfoPnlReportProps) {
   return (
     <div className="space-y-6" dir="rtl">
       {/* KPI Summary */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
         <KpiCard title={'\u05E1\u05D4\u05F4\u05DB \u05D4\u05DB\u05E0\u05E1\u05D5\u05EA (\u05DB\u05DC \u05D4\u05D6\u05DE\u05DF)'} value={totals.income} positive={true} icon={TrendingUp} />
         <KpiCard title={'\u05E1\u05D4\u05F4\u05DB \u05D4\u05D5\u05E6\u05D0\u05D5\u05EA (\u05DB\u05DC \u05D4\u05D6\u05DE\u05DF)'} value={totals.expense} positive={false} icon={TrendingDown} />
         <KpiCard title="רווח / הפסד נטו" value={Math.abs(totals.net)} positive={totals.net >= 0} icon={Scale} />
@@ -162,7 +162,7 @@ export default function CfoPnlReport({ data }: CfoPnlReportProps) {
 
       {/* Burn rate note */}
       {monthlyBurnRate > 0 && (
-        <div className="flex items-center gap-2 px-4 py-2.5 bg-amber-50 border border-amber-100 rounded-xl text-sm text-amber-700">
+        <div className="flex items-center gap-2 px-3 sm:px-4 py-2.5 bg-amber-50 border border-amber-100 rounded-xl text-xs sm:text-sm text-amber-700">
           <TrendingDown className="w-4 h-4 shrink-0" />
           <span>
             <strong>עלות קבועה חודשית (מנויים פעילים):</strong>{' '}
@@ -173,9 +173,9 @@ export default function CfoPnlReport({ data }: CfoPnlReportProps) {
 
       {/* Trend Chart */}
       {chartData.length > 1 && (
-        <div className="bg-white border border-[#F7F7F8] rounded-xl p-6 shadow-sm">
-          <h3 className="text-base font-bold text-[#303150] mb-5">מגמת הכנסות / הוצאות / נטו</h3>
-          <ResponsiveContainer width="100%" height={260}>
+        <div className="bg-white border border-[#F7F7F8] rounded-xl p-3 sm:p-6 shadow-sm">
+          <h3 className="text-sm sm:text-base font-bold text-[#303150] mb-4 sm:mb-5">מגמת הכנסות / הוצאות / נטו</h3>
+          <ResponsiveContainer width="100%" height={220}>
             <LineChart data={chartData} margin={{ top: 4, right: 8, left: 0, bottom: 4 }}>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E8E8ED" />
               <XAxis
@@ -232,12 +232,15 @@ export default function CfoPnlReport({ data }: CfoPnlReportProps) {
 
       {/* Monthly Table */}
       <div className="bg-white border border-[#F7F7F8] rounded-xl shadow-sm overflow-hidden">
-        <div className="px-6 py-4 border-b border-[#F7F7F8]">
-          <h3 className="text-base font-bold text-[#303150]">פירוט חודשי</h3>
+        <div className="px-4 sm:px-6 py-3 sm:py-4 border-b border-[#F7F7F8]">
+          <h3 className="text-sm sm:text-base font-bold text-[#303150]">פירוט חודשי</h3>
         </div>
 
+        <div className="overflow-x-auto">
+          <div className="min-w-[550px]">
+
         {/* Header */}
-        <div className="grid grid-cols-[1fr_120px_120px_130px_44px] px-6 py-2 bg-[#F7F7F8] text-xs font-semibold text-[#7E7F90] border-b border-[#E8E8ED]">
+        <div className="grid grid-cols-[1fr_100px_100px_110px_36px] sm:grid-cols-[1fr_120px_120px_130px_44px] px-4 sm:px-6 py-2 bg-[#F7F7F8] text-[10px] sm:text-xs font-semibold text-[#7E7F90] border-b border-[#E8E8ED]">
           <span>חודש</span>
           <span className="text-end">הכנסות</span>
           <span className="text-end">הוצאות</span>
@@ -252,17 +255,17 @@ export default function CfoPnlReport({ data }: CfoPnlReportProps) {
             return (
               <div
                 key={row.key}
-                className="grid grid-cols-[1fr_120px_120px_130px_44px] px-6 py-3.5 items-center hover:bg-[#F7F7F8]/60 transition-colors"
+                className="grid grid-cols-[1fr_100px_100px_110px_36px] sm:grid-cols-[1fr_120px_120px_130px_44px] px-4 sm:px-6 py-2.5 sm:py-3.5 items-center hover:bg-[#F7F7F8]/60 transition-colors"
               >
-                <span className="text-sm font-medium text-[#303150]">{row.label}</span>
-                <span className="text-sm font-semibold text-[#00C875] text-end">
+                <span className="text-xs sm:text-sm font-medium text-[#303150]">{row.label}</span>
+                <span className="text-xs sm:text-sm font-semibold text-[#00C875] text-end">
                   {row.income > 0 ? formatILS(row.income) : '—'}
                 </span>
-                <span className="text-sm font-semibold text-[#E2445C] text-end">
+                <span className="text-xs sm:text-sm font-semibold text-[#E2445C] text-end">
                   {row.expense > 0 ? formatILS(row.expense) : '—'}
                 </span>
                 <span
-                  className="text-sm font-bold text-end"
+                  className="text-xs sm:text-sm font-bold text-end"
                   style={{ color: isPositive ? '#00C875' : '#E2445C' }}
                 >
                   {isPositive ? '+' : '-'}{formatILS(row.net)}
@@ -282,12 +285,12 @@ export default function CfoPnlReport({ data }: CfoPnlReportProps) {
         </div>
 
         {/* Totals footer */}
-        <div className="grid grid-cols-[1fr_120px_120px_130px_44px] px-6 py-3.5 bg-[#F7F7F8] border-t border-[#E8E8ED]">
-          <span className="text-sm font-bold text-[#303150]">{'\u05E1\u05D4\u05F4\u05DB'}</span>
-          <span className="text-sm font-bold text-[#00C875] text-end">{formatILS(totals.income)}</span>
-          <span className="text-sm font-bold text-[#E2445C] text-end">{formatILS(totals.expense)}</span>
+        <div className="grid grid-cols-[1fr_100px_100px_110px_36px] sm:grid-cols-[1fr_120px_120px_130px_44px] px-4 sm:px-6 py-2.5 sm:py-3.5 bg-[#F7F7F8] border-t border-[#E8E8ED]">
+          <span className="text-xs sm:text-sm font-bold text-[#303150]">{'\u05E1\u05D4\u05F4\u05DB'}</span>
+          <span className="text-xs sm:text-sm font-bold text-[#00C875] text-end">{formatILS(totals.income)}</span>
+          <span className="text-xs sm:text-sm font-bold text-[#E2445C] text-end">{formatILS(totals.expense)}</span>
           <span
-            className="text-sm font-bold text-end"
+            className="text-xs sm:text-sm font-bold text-end"
             style={{ color: totals.net >= 0 ? '#00C875' : '#E2445C' }}
           >
             {totals.net >= 0 ? '+' : '-'}{formatILS(totals.net)}
@@ -298,6 +301,9 @@ export default function CfoPnlReport({ data }: CfoPnlReportProps) {
             ) : (
               <ArrowDownRight className="w-4 h-4 text-[#E2445C]" />
             )}
+          </div>
+        </div>
+
           </div>
         </div>
       </div>

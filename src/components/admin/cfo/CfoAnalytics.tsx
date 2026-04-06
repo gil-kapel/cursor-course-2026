@@ -155,19 +155,19 @@ export default function CfoAnalytics({ subscriptions, transactions, selectedMont
   const hasCashflowData = totalIncome > 0 || totalExpense > 0;
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
       {/* Expense Breakdown Donut */}
-      <div className="bg-white border border-[#F7F7F8] rounded-xl p-6 shadow-sm">
-        <h3 className="text-base font-bold text-[#303150] mb-4">התפלגות הוצאות קבועות</h3>
+      <div className="bg-white border border-[#F7F7F8] rounded-xl p-3 sm:p-6 shadow-sm">
+        <h3 className="text-sm sm:text-base font-bold text-[#303150] mb-3 sm:mb-4">התפלגות הוצאות קבועות</h3>
         {hasExpenseData ? (
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={250}>
             <PieChart>
               <Pie
                 data={expenseChartData}
                 dataKey="value"
                 nameKey="name"
-                innerRadius={60}
-                outerRadius={80}
+                innerRadius={50}
+                outerRadius={70}
                 paddingAngle={5}
               >
                 {expenseChartData.map((_, idx) => (
@@ -191,10 +191,10 @@ export default function CfoAnalytics({ subscriptions, transactions, selectedMont
       </div>
 
       {/* Cashflow Comparison Bar */}
-      <div className="bg-white border border-[#F7F7F8] rounded-xl p-6 shadow-sm">
-        <h3 className="text-base font-bold text-[#303150] mb-4">{'\u05D4\u05DB\u05E0\u05E1\u05D5\u05EA \u05DE\u05D5\u05DC \u05D4\u05D5\u05E6\u05D0\u05D5\u05EA'} — {barTitle}</h3>
+      <div className="bg-white border border-[#F7F7F8] rounded-xl p-3 sm:p-6 shadow-sm">
+        <h3 className="text-sm sm:text-base font-bold text-[#303150] mb-3 sm:mb-4">{'\u05D4\u05DB\u05E0\u05E1\u05D5\u05EA \u05DE\u05D5\u05DC \u05D4\u05D5\u05E6\u05D0\u05D5\u05EA'} — {barTitle}</h3>
         {hasCashflowData ? (
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={250}>
             <BarChart data={cashflowData} barCategoryGap="30%">
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E8E8ED" />
               <XAxis dataKey="name" hide />

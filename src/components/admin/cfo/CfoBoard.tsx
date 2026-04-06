@@ -330,9 +330,9 @@ export default function CfoBoard({ initialData }: CfoBoardProps) {
   }, []);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* View toggle + month picker */}
-      <div className="flex flex-wrap items-center gap-3" dir="rtl">
+      <div className="flex flex-wrap items-center gap-2 sm:gap-3" dir="rtl">
         <CfoViewToggle view={view} onChange={setView} />
         {view === 'month' && (
           <CfoMonthPicker selectedMonth={selectedMonth} onChange={setSelectedMonth} />
@@ -342,7 +342,7 @@ export default function CfoBoard({ initialData }: CfoBoardProps) {
       {view === 'pnl' ? (
         <CfoPnlReport data={data} />
       ) : (
-        <div className="space-y-8">
+        <div className="space-y-5 sm:space-y-8">
           <CfoSummaryCards data={data} selectedMonth={selectedMonth} />
 
           <CfoToolbar

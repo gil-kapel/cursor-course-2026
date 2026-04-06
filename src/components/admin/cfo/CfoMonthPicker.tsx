@@ -37,12 +37,12 @@ export default function CfoMonthPicker({ selectedMonth, onChange }: CfoMonthPick
   };
 
   return (
-    <div className="flex items-center gap-2" dir="rtl">
+    <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap" dir="rtl">
       {/* All time toggle */}
       <button
         type="button"
         onClick={() => onChange(null)}
-        className={`flex items-center gap-1.5 h-9 px-3 rounded-lg border text-sm font-medium transition-all ${
+        className={`flex items-center gap-1.5 h-8 sm:h-9 px-2.5 sm:px-3 rounded-lg border text-xs sm:text-sm font-medium transition-all ${
           isAllTime
             ? 'border-indigo-400 bg-indigo-50 text-indigo-600'
             : 'border-[#E8E8ED] bg-white text-[#7E7F90] hover:bg-[#F7F7F8] hover:text-[#303150]'
@@ -53,7 +53,7 @@ export default function CfoMonthPicker({ selectedMonth, onChange }: CfoMonthPick
 
       {/* Month navigator */}
       <div
-        className={`flex items-center gap-1 h-9 rounded-lg border transition-all ${
+        className={`flex items-center gap-1 h-8 sm:h-9 rounded-lg border transition-all ${
           !isAllTime
             ? 'border-indigo-400 bg-indigo-50'
             : 'border-[#E8E8ED] bg-white'
@@ -74,7 +74,7 @@ export default function CfoMonthPicker({ selectedMonth, onChange }: CfoMonthPick
         <button
           type="button"
           onClick={() => onChange(isAllTime ? current : active)}
-          className={`px-3 text-sm font-medium min-w-[130px] text-center transition-colors ${
+          className={`px-2 sm:px-3 text-xs sm:text-sm font-medium min-w-[100px] sm:min-w-[130px] text-center transition-colors ${
             !isAllTime ? 'text-indigo-600' : 'text-[#303150]'
           }`}
         >
