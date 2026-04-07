@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useCallback } from 'react';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
-import { fadeUp, staggerContainer, sectionViewport, easeFade } from '../motion';
+import { fadeUp, staggerContainer, sectionViewport } from '../motion';
 
 /* ------------------------------------------------------------------ */
 /*  Data                                                               */
@@ -13,10 +14,9 @@ interface Testimonial {
   quote: string;
   name: string;
   role: string;
-  initials: string;
+  avatarSrc: string;
   stars: number;
   tags: string[];
-  gradient: string;
 }
 
 const testimonials: Testimonial[] = [
@@ -25,74 +25,65 @@ const testimonials: Testimonial[] = [
       'הקורס הזה שינה את האופן שבו אני חושב על פיתוח. בניתי מערכת שלמה תוך ימים, עם שרשרת סוכנים שעושה את רוב העבודה.',
     name: 'דניאל ח.',
     role: 'מנהל מוצר, SaaS',
-    initials: 'ד',
+    avatarSrc: '/images/testimonials/daniel.png',
     stars: 5,
     tags: ['Skills', 'Composer'],
-    gradient: 'from-[#69ADFF] to-[#4D8FE0]',
   },
   {
     quote:
       'בתור מישהי בלי רקע טכני, חששתי שזה לא בשבילי. אחרי מודול 1 כבר הרגשתי בנוח עם הטרמינל, ואחרי מודול 2 בניתי אפליקציה עם סוכנים.',
     name: 'מיכל ר.',
     role: 'מעצבת UX',
-    initials: 'מ',
+    avatarSrc: '/images/testimonials/michal.png',
     stars: 5,
     tags: ['מתחילים', 'UX'],
-    gradient: 'from-[#0DBACC] to-[#0A9DAD]',
   },
   {
     quote:
       'החלק של ה-Skills פתח לי את הראש. במקום לכתוב את אותם פרומפטים כל פעם מחדש, עכשיו יש לי צוות סוכנים שעובד בשבילי.',
     name: 'אורי ג.',
     role: 'יזם, סטארטאפ',
-    initials: 'א',
+    avatarSrc: '/images/testimonials/ori.png',
     stars: 5,
     tags: ['סוכנים', 'אוטומציה'],
-    gradient: 'from-[#74ACEF] to-[#5B93D6]',
   },
   {
     quote:
       'הגישה של הקורס, ללמוד דרך בנייה אמיתית ולא דרך שקפים, זה בדיוק מה שהייתי צריך. הפרויקט גמר שלי כבר באוויר.',
     name: 'נועם ש.',
     role: 'ראש צוות פיתוח',
-    initials: 'נ',
+    avatarSrc: '/images/testimonials/noam.png',
     stars: 5,
     tags: ['פרויקט גמר', 'Deploy'],
-    gradient: 'from-[#303150] to-[#464670]',
   },
 ];
 
 const COUNT = testimonials.length;
 
 /* ------------------------------------------------------------------ */
-/*  Helpers: circular index arithmetic                                 */
+/*  Helpers                                                            */
 /* ------------------------------------------------------------------ */
 
-/** Wraps i into [0, COUNT) */
 function mod(i: number): number {
   return ((i % COUNT) + COUNT) % COUNT;
 }
 
 /**
- * Returns the 3 visible indices: [left, center, right].
- * "center" is the active/focused card.
+ * Signed circular offset from `active`.
+ * Positive = "next" direction, negative = "previous".
  */
-function getVisibleIndices(active: number): [number, number, number] {
-  return [mod(active - 1), mod(active), mod(active + 1)];
+function circularOffset(i: number, active: number): number {
+  let diff = i - active;
+  if (diff > COUNT / 2) diff -= COUNT;
+  if (diff <= -COUNT / 2) diff += COUNT;
+  return diff;
 }
 
-/* ------------------------------------------------------------------ */
-/*  Card positions for the 3-card carousel                             */
-/* ------------------------------------------------------------------ */
+const AVATAR_SCALES = [1, 0.78, 0.6];
+const AVATAR_OPACITIES = [1, 0.65, 0.4];
 
-type Slot = 'left' | 'center' | 'right' | 'exit';
-
-const slotVariants: Record<Slot, { x: string; scale: number; opacity: number; zIndex: number }> = {
-  left: { x: '75%', scale: 0.88, opacity: 0.55, zIndex: 1 },
-  center: { x: '0%', scale: 1, opacity: 1, zIndex: 10 },
-  right: { x: '-75%', scale: 0.88, opacity: 0.55, zIndex: 1 },
-  exit: { x: '0%', scale: 0.8, opacity: 0, zIndex: 0 },
-};
+const spring = { type: 'spring' as const, damping: 24, stiffness: 120, mass: 1 };
+const springSoft = { type: 'spring' as const, damping: 26, stiffness: 100, mass: 1 };
 
 /* ------------------------------------------------------------------ */
 /*  Component                                                          */
@@ -100,20 +91,27 @@ const slotVariants: Record<Slot, { x: string; scale: number; opacity: number; zI
 
 export default function TestimonialSection() {
   const [active, setActive] = useState(0);
+  const [metrics, setMetrics] = useState({ avatarStep: 72, cardStep: 384, cardHalf: 180 });
 
-  const goTo = (index: number) => setActive(mod(index));
-  const goNext = () => setActive((p) => mod(p + 1));
-  const goPrev = () => setActive((p) => mod(p - 1));
+  useEffect(() => {
+    const update = () => {
+      const md = window.innerWidth >= 768;
+      setMetrics({
+        avatarStep: md ? 72 : 60,
+        cardStep: md ? 384 : 296,
+        cardHalf: md ? 180 : 140,
+      });
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
 
-  const [leftIdx, centerIdx, rightIdx] = getVisibleIndices(active);
+  const goTo = useCallback((i: number) => setActive(mod(i)), []);
+  const goNext = useCallback(() => setActive((p) => mod(p + 1)), []);
+  const goPrev = useCallback(() => setActive((p) => mod(p - 1)), []);
 
-  /** Determine which slot a given real index occupies */
-  function slotFor(realIndex: number): Slot {
-    if (realIndex === centerIdx) return 'center';
-    if (realIndex === leftIdx) return 'left';
-    if (realIndex === rightIdx) return 'right';
-    return 'exit';
-  }
+  const avatarRowX = (active - (COUNT - 1) / 2) * metrics.avatarStep;
 
   return (
     <section className="py-24 md:py-32 px-6 bg-[#F5F5F7] overflow-hidden">
@@ -141,28 +139,32 @@ export default function TestimonialSection() {
           </p>
         </motion.div>
 
-        {/* ---- Avatar Row ---- */}
-        <motion.div
-          variants={fadeUp}
-          className="flex flex-col items-center mb-16 md:mb-24"
-        >
-          <div className="flex justify-center items-center gap-3 md:gap-4">
+        {/* ---- Avatar Row (slides to center active) ---- */}
+        <motion.div variants={fadeUp} className="flex justify-center mb-16 md:mb-24">
+          <motion.div
+            className="flex items-end gap-3 md:gap-4"
+            animate={{ x: avatarRowX }}
+            transition={springSoft}
+          >
             {testimonials.map((t, i) => {
-              const isActive = i === mod(active);
+              const dist = Math.abs(circularOffset(i, active));
+              const isActive = dist === 0;
+
               return (
                 <button
                   key={t.name}
                   onClick={() => goTo(i)}
-                  className="relative cursor-pointer group"
+                  className="flex flex-col items-center cursor-pointer group shrink-0 w-12 md:w-14"
                   aria-label={`המלצה של ${t.name}`}
+                  style={{ zIndex: isActive ? 5 : 1 }}
                 >
                   <motion.div
                     animate={{
-                      scale: isActive ? 1 : 0.78,
-                      opacity: isActive ? 1 : 0.45,
+                      scale: AVATAR_SCALES[dist] ?? 0.6,
+                      opacity: AVATAR_OPACITIES[dist] ?? 0.4,
                     }}
-                    transition={{ type: 'spring', damping: 22, stiffness: 120, mass: 1 }}
-                    className={`rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center
+                    transition={spring}
+                    className={`relative overflow-hidden rounded-full
                                 w-12 h-12 md:w-14 md:h-14
                                 ring-2 transition-shadow duration-300
                                 ${isActive
@@ -170,120 +172,125 @@ export default function TestimonialSection() {
                                   : 'ring-[#E0E0E5] group-hover:ring-[#69ADFF]/40'
                                 }`}
                   >
-                    <span className="text-white font-bold text-sm md:text-base select-none">
-                      {t.initials}
-                    </span>
+                    <Image
+                      src={t.avatarSrc}
+                      alt=""
+                      fill
+                      sizes="(max-width:768px) 48px, 56px"
+                      className="object-cover"
+                    />
                   </motion.div>
+                  <motion.span
+                    animate={{
+                      opacity: isActive ? 1 : 0.45,
+                      scale: isActive ? 1 : 0.85,
+                    }}
+                    transition={spring}
+                    className={`mt-2 whitespace-nowrap origin-top select-none
+                                ${isActive
+                                  ? 'text-xs md:text-sm font-bold text-[#303150]'
+                                  : 'text-[0.6rem] md:text-[0.65rem] font-medium text-[#9B9CAD]'
+                                }`}
+                  >
+                    {t.name}
+                  </motion.span>
                 </button>
               );
             })}
-          </div>
-          {/* Name label under active avatar — with proper spacing */}
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={testimonials[mod(active)].name}
-              initial={{ opacity: 0, y: -4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -4 }}
-              transition={easeFade}
-              className="mt-3 text-[0.7rem] font-bold text-[#303150] whitespace-nowrap"
-            >
-              {testimonials[mod(active)].name}
-            </motion.span>
-          </AnimatePresence>
+          </motion.div>
         </motion.div>
 
-        {/* ---- Carousel ---- */}
-        <motion.div variants={fadeUp} className="relative h-[380px] md:h-[340px]">
-          <AnimatePresence mode="popLayout">
-            {testimonials.map((t, i) => {
-              const slot = slotFor(i);
-              if (slot === 'exit') return null;
-              const v = slotVariants[slot];
-              const isCenter = slot === 'center';
+        {/* ---- Cards (side-by-side, center highlighted) ---- */}
+        <motion.div variants={fadeUp} className="relative h-[400px] md:h-[360px]">
+          {testimonials.map((t, i) => {
+            const offset = circularOffset(i, active);
+            const dist = Math.abs(offset);
+            const isCenter = dist === 0;
 
-              return (
-                <motion.div
-                  key={t.name}
-                  layout
-                  initial={slotVariants.exit}
-                  animate={{
-                    x: v.x,
-                    scale: v.scale,
-                    opacity: v.opacity,
-                    zIndex: v.zIndex,
-                  }}
-                  exit={slotVariants.exit}
-                  transition={{ type: 'spring', damping: 24, stiffness: 100, mass: 1.2 }}
-                  onClick={() => goTo(i)}
-                  className={`absolute top-0 left-1/2 -translate-x-1/2 w-[320px] md:w-[420px]
-                              rounded-2xl cursor-pointer
-                              border transition-colors duration-300
-                              ${isCenter
-                                ? 'bg-white border-[#69ADFF]/30 shadow-[0_12px_40px_rgba(105,173,255,0.12)]'
-                                : 'bg-white/80 border-[#EDEDF0] hover:border-[#D0D0D8]'
-                              }`}
-                  style={{ zIndex: v.zIndex }}
-                >
-                  <div className="p-6 md:p-8">
-                    {/* ---- Card Header: Avatar + Identity Block (RTL) ---- */}
-                    <div className="flex items-center gap-3 mb-3">
-                      <div
-                        className={`w-10 h-10 shrink-0 rounded-full bg-gradient-to-br ${t.gradient} flex items-center justify-center ring-2
-                                    ${isCenter ? 'ring-[#69ADFF]/20' : 'ring-[#E0E0E5]'}`}
-                      >
-                        <span className="text-white font-bold text-sm">
-                          {t.initials}
-                        </span>
-                      </div>
-                      <div className="min-w-0">
-                        <p className="font-headline font-bold text-[0.9rem] text-[#303150] leading-snug">
-                          {t.name}
-                        </p>
-                        <p className="text-xs text-[#9B9CAD] font-normal leading-snug">
-                          {t.role}
-                        </p>
-                      </div>
+            return (
+              <motion.div
+                key={t.name}
+                animate={{
+                  x: -offset * metrics.cardStep - metrics.cardHalf,
+                  scale: isCenter ? 1 : 0.95,
+                  opacity: dist > 1 ? 0 : isCenter ? 1 : 0.55,
+                }}
+                transition={springSoft}
+                onClick={() => goTo(i)}
+                className={`absolute top-0 left-1/2
+                            w-[280px] md:w-[360px] rounded-2xl cursor-pointer
+                            border transition-colors duration-300
+                            ${isCenter
+                              ? 'bg-white border-[#69ADFF]/30 shadow-[0_12px_40px_rgba(105,173,255,0.12)]'
+                              : 'bg-white/80 border-[#EDEDF0] hover:border-[#D0D0D8]'
+                            }`}
+                style={{
+                  zIndex: isCenter ? 10 : dist > 1 ? 0 : 1,
+                  pointerEvents: dist > 1 ? 'none' : 'auto',
+                }}
+              >
+                <div className="p-6 md:p-8">
+                  {/* ---- Card Header: Avatar + Identity ---- */}
+                  <div className="flex items-center gap-3 mb-3">
+                    <div
+                      className={`relative w-10 h-10 shrink-0 overflow-hidden rounded-full ring-2
+                                  ${isCenter ? 'ring-[#69ADFF]/20' : 'ring-[#E0E0E5]'}`}
+                    >
+                      <Image
+                        src={t.avatarSrc}
+                        alt=""
+                        fill
+                        sizes="40px"
+                        className="object-cover"
+                      />
                     </div>
-
-                    {/* ---- Stars ---- */}
-                    <div className="flex items-center gap-1.5 mb-5">
-                      <div className="flex gap-0.5">
-                        {Array.from({ length: t.stars }).map((_, s) => (
-                          <Star
-                            key={s}
-                            className="w-3.5 h-3.5 text-[#F5A623] fill-[#F5A623]"
-                          />
-                        ))}
-                      </div>
-                      <span className="text-[0.65rem] font-bold text-[#9B9CAD]">
-                        {t.stars}.0
-                      </span>
-                    </div>
-
-                    {/* ---- Quote ---- */}
-                    <blockquote className="text-[#303150] text-sm md:text-[0.95rem] leading-[1.6] pt-1 pb-6 border-t border-[#F0F0F3]">
-                      <span className="block pt-5">
-                        &ldquo;{t.quote}&rdquo;
-                      </span>
-                    </blockquote>
-
-                    {/* ---- Tags ---- */}
-                    <div className="flex flex-wrap gap-2">
-                      {t.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-3 py-1 rounded-full bg-[#E8F0FE] border border-[#D4E4F7] text-[0.7rem] font-semibold text-[#4A6FA5]"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                    <div className="min-w-0">
+                      <p className="font-headline font-bold text-[0.9rem] text-[#303150] leading-snug">
+                        {t.name}
+                      </p>
+                      <p className="text-xs text-[#9B9CAD] font-normal leading-snug">
+                        {t.role}
+                      </p>
                     </div>
                   </div>
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
+
+                  {/* ---- Stars ---- */}
+                  <div className="flex items-center gap-1.5 mb-5">
+                    <div className="flex gap-0.5">
+                      {Array.from({ length: t.stars }).map((_, s) => (
+                        <Star
+                          key={s}
+                          className="w-3.5 h-3.5 text-[#F5A623] fill-[#F5A623]"
+                        />
+                      ))}
+                    </div>
+                    <span className="text-[0.65rem] font-bold text-[#9B9CAD]">
+                      {t.stars}.0
+                    </span>
+                  </div>
+
+                  {/* ---- Quote ---- */}
+                  <blockquote className="text-[#303150] text-sm md:text-[0.95rem] leading-[1.6] pt-1 pb-6 border-t border-[#F0F0F3]">
+                    <span className="block pt-5">
+                      &ldquo;{t.quote}&rdquo;
+                    </span>
+                  </blockquote>
+
+                  {/* ---- Tags ---- */}
+                  <div className="flex flex-wrap gap-2">
+                    {t.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-3 py-1 rounded-full bg-[#E8F0FE] border border-[#D4E4F7] text-[0.7rem] font-semibold text-[#4A6FA5]"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </motion.div>
 
         {/* ---- Navigation Arrows ---- */}
