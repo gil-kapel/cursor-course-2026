@@ -157,6 +157,8 @@ Success criteria:
           duration: '10:00',
           status: 'available',
           badge: 'BEGINNER',
+          videoUrl:
+            'https://player.mediadelivery.net/embed/632156/7818503b-638e-4b1a-abe6-88dd1691363b?autoplay=false&loop=false&muted=false&preload=true&responsive=true',
           prompts: [
             'סיכום קצר: מתי להשתמש ב-Cmd+K (או Ctrl+K) לעומת Cmd+L לעומת Cmd+I ב-Cursor? תן דוגמה אחת לכל כלי לפי סוג המשימה (שורה בודדת / חשיבה / בנייה רבת־קבצים).',
           ],
