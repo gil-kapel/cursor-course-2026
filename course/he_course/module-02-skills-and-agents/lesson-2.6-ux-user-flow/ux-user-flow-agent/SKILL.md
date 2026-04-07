@@ -9,6 +9,8 @@ description: Design user journeys, flows, screen logic, and state handoffs befor
 
 Turn a product idea or PRD into clear user flows and screen-level logic. Focus on what the user is trying to do, what can go wrong, and what the next agent needs to build the experience cleanly.
 
+This skill should feel conversational. Lead the user through the missing UX decisions instead of expecting one perfect standalone prompt.
+
 ## Inputs
 
 This agent builds on outputs from earlier planning agents. Before starting, pull the relevant context:
@@ -31,6 +33,18 @@ This agent produces **logic, screens, and states** — not visual design. Leave 
 
 If you catch yourself specifying how something *looks* rather than how it *behaves*, stop and refocus on flow logic.
 
+## Interaction style
+
+Use an interactive loop:
+
+1. Ask 1-3 high-value UX questions at a time.
+2. Wait for the user's answer before moving on.
+3. Reflect back the current understanding in one short summary.
+4. Ask the next missing questions only if they will materially change the flow.
+5. Only after the flow is clear, write the final UX handoff.
+
+Do not start with a giant questionnaire. Do not behave like a static template. The goal is to interview the user, surface friction, and turn that into a clean flow the UI and dev agents can build from.
+
 ## Gather first
 
 Confirm these before mapping flows:
@@ -42,6 +56,8 @@ Confirm these before mapping flows:
 - Constraints: auth required, permissions, device type, timing pressure, expertise level
 
 If user context is still fuzzy, ask first instead of inventing personas.
+
+Before producing the final handoff, ask the most relevant missing questions. Do not jump straight to a finished `docs/ux-flows.md` if the goal, entry point, blockers, or next action are still vague.
 
 ## Workflow
 
@@ -56,6 +72,14 @@ Summarize in a few lines:
 - **Failure condition** — what goes wrong
 
 This anchors the rest of the flow. Do not skip it.
+
+When you ask questions, prefer rounds like:
+
+- Round 1: user, trigger, goal
+- Round 2: main path, blockers, what can go wrong
+- Round 3: next action clarity, empty states, error recovery
+
+After each round, briefly reflect back what you learned before asking the next question set.
 
 ### 2. Map the main journey
 
@@ -131,6 +155,13 @@ Explicitly identify:
 - Specify **screen-reader announcements** for state transitions (e.g. "Item deleted" toast must be announced as a live region)
 - Mark where **keyboard-only users** might get stuck (modal traps, drag-only interactions)
 
+For conversion or onboarding flows, explicitly ask:
+
+- Does the user need to leave the current context, or can we keep them in place?
+- Would a side panel, sheet, modal, or inline step reduce friction?
+- What should the user see immediately so the next action is obvious?
+- What reassurance or trust cue is needed before the user commits?
+
 ### 6. Write the handoff
 
 Bridge to UI and dev with:
@@ -183,6 +214,9 @@ Produce the UX handoff in this shape:
 - [ ] Screen-reader announcements are specified for state transitions
 - [ ] Routes in the screen inventory match the architecture handoff
 - [ ] Analytics events cover at least the main journey steps
+- [ ] Relevant UX questions were asked before the handoff was written
+- [ ] The next action is clear at every important step
+- [ ] Friction-reduction choices are explicit, not implied
 - [ ] The UI agent can build from this without guessing logic
 - [ ] The dev agent can implement routes and states from this
 
@@ -199,6 +233,16 @@ Produce the UX handoff in this shape:
 - Omitting cancel, back, or undo paths for destructive or multi-step actions
 - Forgetting focus management — where does focus go after a modal closes or a toast appears?
 - Skipping analytics — if you cannot measure a step, you cannot improve it
+- Skipping the interview step and generating a generic flow from thin context
+- Listing steps without explaining why this path has lower friction
+
+## Suggested conversation starter
+
+When the user gives only a rough request, begin with something like:
+
+```text
+I’ll lead this as a short UX interview instead of jumping straight to a finished flow. First, tell me who the user is, what they are trying to accomplish, and where they enter the flow. Then I’ll ask a few focused follow-up questions about friction, edge cases, and the next action before I write the final UX handoff.
+```
 
 ## References
 

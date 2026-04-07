@@ -18,12 +18,14 @@ Cursor פתוח. בטאבים למעלה רואים את `docs/prd.md` ו־`docs
 
 מעבירים את הסוכן ל־Ask mode.
 מצרפים `@docs/prd.md` ו־`@docs/architecture.md`.
-שואלים שאלה בסגנון:
-"Where will the user feel friction in this flow?".
-צפייה בסוכן מחזיר ביקורת:
+שואלים שאלה קלה לפתיחה, ואז נותנים לסקיל להוביל את השיחה.
+צפייה בסוכן מחזיר ביקורת ושאלות המשך:
 - friction points
 - missing clarity
 - places where the next action is unclear
+- questions about entry point
+- questions about blockers
+- questions about what the user should see first
 
 הערת צילום: להדגיש שזה שלב של הבנה וביקורת, לא של יצירת מסמך.
 
@@ -33,6 +35,7 @@ Cursor פתוח. בטאבים למעלה רואים את `docs/prd.md` ו־`docs
 
 מעבירים ל־Plan mode.
 מבקשים מהסוכן לארגן מחדש את הזרימה.
+אם משהו לא ברור, מראים שהוא שואל עוד שאלת הבהרה לפני שהוא מסכם.
 הדגשת טבלה או רשימה עם עמודות כמו:
 - user goal
 - next action
@@ -71,7 +74,7 @@ empty state של רשימת משימות עם CTA ברור כמו "Create first 
 - friction risk
 - friction reduction
 
-הערת צילום: להסביר שהמעבר ל־Agent קורה רק אחרי שהבנו ובנינו את הזרימה.
+הערת צילום: להסביר שהמעבר ל־Agent קורה רק אחרי שהבנו ובנינו את הזרימה דרך שיחה, לא דרך prompt אחד גדול.
 
 ---
 
@@ -80,7 +83,7 @@ empty state של רשימת משימות עם CTA ברור כמו "Create first 
 סיום: שלושת הקבצים ב־Sidebar תחת תיקיית `docs` מודגשים.
 מעבר מהיר בין `prd.md`, `architecture.md`, ו־`ux-flows.md`.
 Overlay מסכם:
-- `Ask: find friction`
+- `Ask: interview the problem`
 - `Plan: structure the better flow`
 - `Agent: save the artifact`
 - `Check: next action is clear at every step`

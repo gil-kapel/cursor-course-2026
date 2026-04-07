@@ -20,6 +20,8 @@ UX טוב הוא כזה שבו המשתמש תמיד מבין מה קורה עכ
 
 למה Ask? כי בשלב הזה אנחנו רוצים ביקורת והבנה, לא מימוש. אנחנו רוצים שהסוכן יסתכל על `@docs/prd.md` ועל `@docs/architecture.md` וישאל: איפה המשתמש עלול להיתקע? איפה הוא לא מבין מה ללחוץ? איפה זרימה אחת מרגישה כבדה או מבלבלת?
 
+אבל חשוב יותר מזה: אני לא רוצה מהסקיל תשובה אחת ארוכה וגמורה. אני רוצה שהוא ינהל איתי שיחה. שישאל כמה שאלות, יחכה לי, יסכם מה הוא הבין, ואז ישאל את השאלות הבאות.
+
 זו דרך מעולה להתחיל, כי Ask עוזר לנו לראות בעיות בלי לקפוץ מהר מדי לפתרונות.
 
 ---
@@ -29,6 +31,8 @@ UX טוב הוא כזה שבו המשתמש תמיד מבין מה קורה עכ
 אחרי שקיבלנו ביקורת ראשונית, עוברים ל־**Plan mode**.
 
 כאן אנחנו כבר לא רק שואלים "מה הבעיה", אלא מסדרים את הזרימה עצמה. מהו הנתיב הראשי? מהו ה־next action בכל שלב? מה צריך להופיע על המסך כדי שלא יהיה בלבול? ואיפה עדיף לקצר דרך במקום להעביר את המשתמש למסך חדש?
+
+גם כאן הסקיל לא אמור לרוץ ישר למסמך סופי. אם משהו עדיין לא ברור - למשל האם נכון לפתוח עמוד חדש, Sheet, או Side Panel - אני רוצה שהוא ישאל. רק אחרי שהמבנה נהיה ברור, ממשיכים.
 
 זו נקודה חשובה מאוד: Plan mode עוזר לנו לחשוב ברמת המבנה. לא לכתוב קובץ עדיין, אלא לבנות הגיון UX שאפשר לעבוד ממנו.
 
@@ -58,6 +62,8 @@ UX טוב הוא כזה שבו המשתמש תמיד מבין מה קורה עכ
 
 ככה, כשנגיע לעיצוב ולמימוש, לא נצטרך לנחש מה נחשב לחוויה חלקה.
 
+והכי חשוב: המסמך הזה טוב יותר דווקא כי לא התחלנו ממנו. התחלנו משיחה, משאלות, ומחידוד. רק אחר כך נתנו לסוכן לכתוב.
+
 ---
 
 ## 06:30 – 07:30
@@ -73,5 +79,5 @@ UX טוב הוא כזה שבו המשתמש תמיד מבין מה קורה עכ
 ## Appendix — English prompt (zero-friction UX)
 
 ```text
-You are a UX flow agent. Goal: design the core user journeys with the lowest possible friction. Context: check `@docs/prd.md` and `@docs/architecture.md`. Output: save `docs/ux-flows.md` with main flows, empty/loading/error states, the user's next best action at each step, and friction-reduction notes. Constraints: highlight moments where a side panel, sheet, or inline step is better than sending the user to a full new page; cover at least one conversion flow such as selecting a package and paying.
+Help me design this UX flow through a short conversation, not one long answer. Start by checking `@docs/prd.md` and `@docs/architecture.md`, then ask me the most important UX questions in small rounds about the user goal, friction points, edge cases, and next action clarity. Only after the flow is clear, save `docs/ux-flows.md` with the main journey, states, risks, and friction-reduction notes.
 ```
