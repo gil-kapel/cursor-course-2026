@@ -88,24 +88,26 @@ function renderStepText(text: string): ReactNode {
 
 export default function LessonChecklist({ lessonId, checklist, platform }: LessonChecklistProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [completed, setCompleted] = useState<Set<number>>(() => {
-    if (typeof window === 'undefined') return new Set<number>();
-    try {
-      const raw = localStorage.getItem(`${STORAGE_PREFIX}${lessonId}`);
-      return raw ? new Set(JSON.parse(raw) as number[]) : new Set<number>();
-    } catch {
-      return new Set<number>();
-    }
-  });
+  const [completed, setCompleted] = useState<Set<number>>(new Set<number>());
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
+    try {
+      const raw = localStorage.getItem(`${STORAGE_PREFIX}${lessonId}`);
+      if (raw) setCompleted(new Set(JSON.parse(raw) as number[]));
+    } catch { /* ignore */ }
+    setHydrated(true);
+  }, [lessonId]);
+
+  useEffect(() => {
+    if (!hydrated) return;
     try {
       localStorage.setItem(
         `${STORAGE_PREFIX}${lessonId}`,
         JSON.stringify([...completed]),
       );
     } catch { /* quota exceeded — ignore */ }
-  }, [completed, lessonId]);
+  }, [completed, lessonId, hydrated]);
 
   const toggle = useCallback((idx: number) => {
     setCompleted((prev) => {
