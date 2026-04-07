@@ -119,13 +119,14 @@ const SETUP: Record<string, LessonSetupContent> = {
     'ui-design-systems-agent',
     'אחרי ש-ASM מוכן, הריצו את פקודות "סקיל הקורס" — ui-design-systems-agent בלבד.',
   ),
-  '2.8': m2Lesson(
-    '2.8',
-    'סוכן אבטחה',
-    'lesson-2.8-security-agent',
-    'security-review-agent',
-    'אחרי ש-ASM מוכן, הריצו את פקודות "סקיל הקורס" — security-review-agent בלבד.',
-  ),
+  '2.8': {
+    lessonId: '2.8',
+    lessonTitle: 'תכנון מימוש ב-Plan mode: תוכנית או חיתוכים',
+    agentSkillsDocPath: '',
+    showCursorInstall: false,
+    showAsmInstall: false,
+    agentPromptBlock: `${'עברו ל-Plan mode. צרפו ב-@ את PRD, ארכיטקטורה, UX ו-UI. בקשו תוכנית מימוש אחת או 2–4 חיתוכים (slices) לפי סדר, עם Slice 1 מוגדר עד רמת קבצים והתנהגות. שמרו ל-docs/implementation-plan.md או docs/slice-01.md וכו\'. אם יש חסמים (אבטחה, תלות) — הם חייבים להופיע לפני שעוברים ל-Composer (שיעור 2.9).'}\n\n${M2_FOLLOWUP_PROMPT}`,
+  },
   '2.9': m2Lesson(
     '2.9',
     'סוכן פיתוח: Composer, דיפ והרצה מקומית',

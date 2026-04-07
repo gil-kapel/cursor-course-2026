@@ -16,7 +16,7 @@ const CARDS = [
     Icon: Users,
     title: 'שרשרת סוכנים מקצה לקצה',
     description:
-      'PRD, ארכיטקטורה, UX, UI, אבטחה, Build, Review ו-QA. כל שלב עם Agent ברור ופלט ברור.',
+      'PRD, ארכיטקטורה, UX, UI, תכנון מימוש ב-Plan mode, Build, Review ו-QA. כל שלב עם Agent ברור ופלט ברור.',
     highlights: ['Product -> Tech Lead -> UI', 'Build / Review / QA / Debug', 'פרומפטים ומשימות מוכנות'],
     offset: true,
   },

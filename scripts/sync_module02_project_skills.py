@@ -34,7 +34,6 @@ SKILL_SOURCES = [
     MODULE2 / "lesson-2.5-tech-lead-architecture" / "tech-lead-architecture-agent",
     MODULE2 / "lesson-2.6-ux-user-flow" / "ux-user-flow-agent",
     MODULE2 / "lesson-2.7-ui-design-systems" / "ui-design-systems-agent",
-    MODULE2 / "lesson-2.8-security-agent" / "security-review-agent",
     MODULE2 / "lesson-2.9-dev-agent-composer" / "dev-composer-agent",
     MODULE2 / "lesson-2.10-code-review-agent" / "code-review-cleanup-agent",
     MODULE2 / "lesson-2.11-qa-tests-agent" / "qa-tests-agent",

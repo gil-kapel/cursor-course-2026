@@ -32,7 +32,7 @@ export default function HeroSection() {
             variants={staggerItem}
             className="inline-flex px-5 py-2 mb-8 border border-[#BDBDCB]/30 bg-white/50 backdrop-blur-sm text-[#303150] font-semibold rounded-full text-sm tracking-wide"
           >
-            קורס מעשי בעברית • 28 שיעורים • 5 מודולים
+            קורס מעשי בעברית • 31 שיעורים • 5 מודולים
           </motion.span>
 
           <motion.h1

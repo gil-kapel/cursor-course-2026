@@ -39,7 +39,8 @@ const moduleMeta: Record<
   },
   'module-2': {
     label: 'פיתוח מבוסס Skills',
-    summary: 'עובדים עם צוות סוכנים שלם: Product, Tech Lead, UX, UI, QA ו-Debug.',
+    summary:
+      'צוות סוכנים: Product, Tech Lead, UX, UI, תכנון מימוש ב-Plan mode, Build, Review, QA, Debug ופרומפטים חדים.',
   },
   'module-3': {
     label: 'כוחות-על עם MCP',
