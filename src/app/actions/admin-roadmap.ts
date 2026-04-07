@@ -8,6 +8,7 @@ import {
   createAdminTaskGroupSchema,
   updateAdminTaskGroupSchema,
   updateAdminTaskGroupOrderSchema,
+  updateAdminTaskOrderSchema,
 } from '@/lib/validations/admin-roadmap';
 import type { RoadmapData, AdminTask, AdminTaskGroupWithTasks, AdminTaskWithChildren } from '@/types/admin-roadmap';
 
@@ -97,6 +98,29 @@ export async function updateTask(
   });
 
   return updatedTask;
+}
+
+export async function updateTaskOrder(
+  input: unknown
+): Promise<{ success: boolean }> {
+  await ensureAdmin();
+  const prisma = getPrisma();
+  const items = updateAdminTaskOrderSchema.parse(input);
+
+  await prisma.$transaction(
+    items.map(({ id, orderIndex, groupId, parentId }) =>
+      prisma.adminTask.update({
+        where: { id },
+        data: {
+          orderIndex,
+          ...(groupId && { groupId }),
+          ...(parentId !== undefined && { parentId }),
+        },
+      })
+    )
+  );
+
+  return { success: true };
 }
 
 export async function updateTaskGroupOrder(

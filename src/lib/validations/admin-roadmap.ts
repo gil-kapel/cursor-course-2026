@@ -43,3 +43,12 @@ export const updateAdminTaskGroupOrderSchema = z.array(
     orderIndex: z.number().int().min(0),
   })
 ).min(1, 'At least one group required');
+
+export const updateAdminTaskOrderSchema = z.array(
+  z.object({
+    id: z.string(),
+    orderIndex: z.number().int().min(0),
+    groupId: z.string().optional(),
+    parentId: z.string().nullable().optional(),
+  })
+).min(1);

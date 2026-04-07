@@ -1,6 +1,6 @@
 import { PrismaClient } from '@/generated/prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
-import { isLocalDevBypassEnabled, LOCAL_DEV_BYPASS_ENV_VAR } from './dev-mode';
+import { isLocalDevDbDisabled, LOCAL_DEV_DISABLE_DB_ENV_VAR } from './dev-mode';
 
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient | undefined };
 
@@ -12,8 +12,8 @@ function createPrismaClient() {
 }
 
 export function getPrisma() {
-  if (isLocalDevBypassEnabled) {
-    throw new Error(`Prisma is disabled while ${LOCAL_DEV_BYPASS_ENV_VAR}=true`);
+  if (isLocalDevDbDisabled) {
+    throw new Error(`Prisma is disabled while ${LOCAL_DEV_DISABLE_DB_ENV_VAR}=true`);
   }
 
   if (globalForPrisma.prisma) return globalForPrisma.prisma;

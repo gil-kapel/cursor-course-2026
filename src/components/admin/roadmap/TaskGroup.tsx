@@ -178,7 +178,7 @@ export default function TaskGroup({ group, adminUsers = [], isMobile = false, on
           )}
 
           {/* Droppable Task List */}
-          <Droppable droppableId={group.id}>
+          <Droppable droppableId={group.id} isCombineEnabled>
             {(provided, snapshot) => (
               <div
                 ref={provided.innerRef}
@@ -207,26 +207,42 @@ export default function TaskGroup({ group, adminUsers = [], isMobile = false, on
                           setExpandedTaskIds((prev) => new Set(prev).add(task.id));
                           setAddingSubtaskFor(task.id);
                         } : undefined}
-                      />
-                      {isTaskExpanded && task.children?.map((child: AdminTask) => (
-                        <TaskRow
-                          key={child.id}
-                          task={child}
-                          index={-1}
-                          depth={1}
-                          adminUsers={adminUsers}
-                          isMobile={isMobile}
-                          onTaskUpdate={onTaskUpdate}
-                          onTaskDelete={onTaskDelete}
-                        />
-                      ))}
-                      {isTaskExpanded && addingSubtaskFor === task.id && (
-                        <SubtaskAddRow
-                          isMobile={isMobile}
-                          onSubmit={(title) => handleSubtaskAdd(task.id, title)}
-                          onCancel={() => setAddingSubtaskFor(null)}
-                        />
-                      )}
+                      >
+                        {isTaskExpanded && (
+                          <Droppable droppableId={task.id} isCombineEnabled>
+                            {(subProvided, subSnapshot) => (
+                              <div
+                                ref={subProvided.innerRef}
+                                {...subProvided.droppableProps}
+                                className={`min-h-px transition-colors duration-200 ${
+                                  subSnapshot.isDraggingOver ? 'bg-[#69ADFF]/5' : ''
+                                }`}
+                              >
+                                {task.children?.map((child: AdminTask, childIndex: number) => (
+                                  <TaskRow
+                                    key={child.id}
+                                    task={child}
+                                    index={childIndex}
+                                    depth={1}
+                                    adminUsers={adminUsers}
+                                    isMobile={isMobile}
+                                    onTaskUpdate={onTaskUpdate}
+                                    onTaskDelete={onTaskDelete}
+                                  />
+                                ))}
+                                {subProvided.placeholder}
+                              </div>
+                            )}
+                          </Droppable>
+                        )}
+                        {isTaskExpanded && addingSubtaskFor === task.id && (
+                          <SubtaskAddRow
+                            isMobile={isMobile}
+                            onSubmit={(title) => handleSubtaskAdd(task.id, title)}
+                            onCancel={() => setAddingSubtaskFor(null)}
+                          />
+                        )}
+                      </TaskRow>
                     </Fragment>
                   );
                 })}

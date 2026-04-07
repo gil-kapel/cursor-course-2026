@@ -27,6 +27,7 @@ interface TaskRowProps {
   onAddSubtask?: () => void;
   onTaskUpdate?: (taskId: string, updates: Record<string, unknown>) => Promise<void>;
   onTaskDelete?: (taskId: string) => Promise<void>;
+  children?: React.ReactNode;
 }
 
 export default function TaskRow({
@@ -41,6 +42,7 @@ export default function TaskRow({
   onAddSubtask,
   onTaskUpdate,
   onTaskDelete,
+  children,
 }: TaskRowProps) {
   const [isEditingTitle, setIsEditingTitle] = useState(false);
   const [editedTitle, setEditedTitle] = useState(task.title);
@@ -100,17 +102,15 @@ export default function TaskRow({
   const isSubtask = depth > 0;
 
   // --- Mobile card layout ---
-  const mobileCardContent = (dragProvided?: ReturnType<typeof Object>, snapshot?: { isDragging: boolean }) => (
+  const mobileCardContent = (dragProvided?: any, snapshot?: any) => (
     <div
-      ref={dragProvided && 'innerRef' in dragProvided ? (dragProvided as Record<string, unknown>).innerRef as React.Ref<HTMLDivElement> : undefined}
-      {...(dragProvided && 'draggableProps' in dragProvided ? (dragProvided as Record<string, unknown>).draggableProps as Record<string, unknown> : {})}
       className={`p-3 border-b border-[#F7F7F8] transition-colors duration-150 ${
         isSubtask ? 'ps-7 bg-[#FAFAFA]' : ''
       } ${snapshot?.isDragging ? 'bg-white shadow-lg rounded-xl z-50' : ''}`}
     >
       {/* Row 1: drag/expand + title + owner */}
       <div
-        {...(dragProvided && 'dragHandleProps' in dragProvided ? (dragProvided as Record<string, unknown>).dragHandleProps as Record<string, unknown> : {})}
+        {...(dragProvided?.dragHandleProps || {})}
         className="flex items-center gap-2 mb-2"
       >
         {!isSubtask && (
@@ -201,10 +201,8 @@ export default function TaskRow({
   );
 
   // --- Desktop grid layout ---
-  const rowContent = (dragProvided?: ReturnType<typeof Object>, snapshot?: { isDragging: boolean }) => (
+  const rowContent = (dragProvided?: any, snapshot?: any) => (
     <div
-      ref={dragProvided && 'innerRef' in dragProvided ? (dragProvided as Record<string, unknown>).innerRef as React.Ref<HTMLDivElement> : undefined}
-      {...(dragProvided && 'draggableProps' in dragProvided ? (dragProvided as Record<string, unknown>).draggableProps as Record<string, unknown> : {})}
       className={`${GRID_COLS} items-center border-b border-[#F7F7F8] transition-colors duration-150 group relative ${
         snapshot?.isDragging
           ? 'bg-white shadow-lg rounded-lg z-50'
@@ -214,8 +212,8 @@ export default function TaskRow({
       }`}
     >
       <div
-        {...(dragProvided && 'dragHandleProps' in dragProvided ? (dragProvided as Record<string, unknown>).dragHandleProps as Record<string, unknown> : {})}
-        className={`h-11 flex items-center justify-center ${isSubtask ? '' : 'cursor-grab active:cursor-grabbing'}`}
+        {...(dragProvided?.dragHandleProps || {})}
+        className={`h-11 flex items-center justify-center cursor-grab active:cursor-grabbing`}
       >
         {isSubtask ? (
           <div className="w-4 h-4" />
@@ -310,13 +308,18 @@ export default function TaskRow({
 
   const renderContent = isMobile ? mobileCardContent : rowContent;
 
-  if (isSubtask) {
-    return renderContent();
-  }
-
   return (
     <Draggable draggableId={task.id} index={index}>
-      {(provided, snapshot) => renderContent(provided, snapshot)}
+      {(provided, snapshot) => (
+        <div
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          style={provided.draggableProps.style}
+        >
+          {renderContent(provided, snapshot)}
+          {children}
+        </div>
+      )}
     </Draggable>
   );
 }

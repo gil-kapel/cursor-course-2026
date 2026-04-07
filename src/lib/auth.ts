@@ -3,7 +3,7 @@ import type { Session } from 'next-auth';
 import Google from 'next-auth/providers/google';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import { getPrisma } from './db';
-import { isLocalDevBypassEnabled, localDevSessionUser } from './dev-mode';
+import { isLocalDevGoogleAuthDisabled, localDevSessionUser } from './dev-mode';
 
 const localDevSession: Session = {
   user: { ...localDevSessionUser },
@@ -17,7 +17,7 @@ const localDevAuth = async () => localDevSession;
 const localDevSignIn = async (..._args: unknown[]) => localDevSession;
 const localDevSignOut = async (..._args: unknown[]) => undefined;
 
-export const { handlers, auth, signIn, signOut } = isLocalDevBypassEnabled
+export const { handlers, auth, signIn, signOut } = isLocalDevGoogleAuthDisabled
   ? {
       handlers: {
         GET: localDevHandler,

@@ -20,6 +20,7 @@ import {
   deleteTask as deleteTaskAction,
   createTaskGroup,
   updateTaskGroup,
+  updateTaskOrder,
   getAdminUsers,
 } from '@/app/actions/admin-roadmap';
 import { useToast } from '@/hooks/useToast';
@@ -171,42 +172,189 @@ export default function RoadmapBoard() {
 
   const handleDragEnd = useCallback(
     async (result: DropResult) => {
-      const { source, destination, draggableId } = result;
-      if (!destination || !data) return;
+      const { source, destination, draggableId, combine } = result;
+      if (!data) return;
+
+      const saveSnapshot = () => {
+        if (prevDataRef.current === null) {
+          prevDataRef.current = JSON.parse(JSON.stringify(data));
+        }
+      };
+
+      const findDroppable = (groups: AdminTaskGroupWithTasks[], id: string) => {
+        const group = groups.find(g => g.id === id);
+        if (group) return { type: 'group', parentGroup: group, parentTask: null, list: group.tasks };
+        for (const g of groups) {
+          const task = g.tasks.find(t => t.id === id);
+          if (task) {
+            if (!task.children) task.children = [];
+            return { type: 'task', parentGroup: g, parentTask: task, list: task.children };
+          }
+        }
+        return null;
+      };
+
+      if (combine) {
+        saveSnapshot();
+        const newGroups: AdminTaskGroupWithTasks[] = JSON.parse(JSON.stringify(data.groups));
+        const srcInfo = findDroppable(newGroups, source.droppableId);
+        if (!srcInfo) return;
+
+        const targetTaskId = combine.draggableId;
+        const sourceTaskId = draggableId;
+
+        if (targetTaskId === sourceTaskId) return;
+
+        let targetTask: AdminTaskWithChildren | null = null;
+        for (const group of newGroups) {
+          const t = group.tasks.find((t: AdminTaskWithChildren) => t.id === targetTaskId);
+          if (t) {
+            targetTask = t;
+            break;
+          }
+        }
+        if (!targetTask) return;
+
+        const srcTasks = srcInfo.list.sort((a, b) => a.orderIndex - b.orderIndex);
+        const [movedTask] = srcTasks.splice(source.index, 1);
+        if (!movedTask) return;
+
+        movedTask.parentId = targetTask.id;
+        movedTask.groupId = targetTask.groupId;
+
+        if (!targetTask.children) {
+          targetTask.children = [];
+        }
+        
+        let maxOrder = Math.max(...targetTask.children.map((c: AdminTask) => c.orderIndex), -1);
+        movedTask.orderIndex = maxOrder + 1;
+        targetTask.children.push(movedTask as AdminTask);
+        maxOrder++;
+
+        const updates: { id: string; orderIndex: number; groupId?: string; parentId?: string | null }[] = [];
+
+        updates.push({
+          id: movedTask.id,
+          orderIndex: movedTask.orderIndex,
+          groupId: targetTask.groupId,
+          parentId: targetTask.id
+        });
+
+        // Flatten children
+        const childrenToMove = (movedTask as AdminTaskWithChildren).children || [];
+        (movedTask as AdminTaskWithChildren).children = [];
+        for (const child of childrenToMove) {
+           maxOrder++;
+           child.parentId = targetTask.id;
+           child.groupId = targetTask.groupId;
+           child.orderIndex = maxOrder;
+           targetTask.children.push(child);
+           updates.push({
+             id: child.id,
+             orderIndex: child.orderIndex,
+             groupId: targetTask.groupId,
+             parentId: targetTask.id
+           });
+        }
+
+        srcTasks.forEach((t, i) => { t.orderIndex = i; });
+        if (srcInfo.type === 'group') {
+          srcInfo.parentGroup.tasks = srcTasks as AdminTaskWithChildren[];
+        } else if (srcInfo.parentTask) {
+          srcInfo.parentTask.children = srcTasks as AdminTask[];
+        }
+        srcTasks.forEach((t) => updates.push({ id: t.id, orderIndex: t.orderIndex }));
+
+        setData({ groups: newGroups });
+
+        try {
+          await updateTask(movedTask.id, { parentId: targetTask.id, groupId: targetTask.groupId, orderIndex: movedTask.orderIndex });
+          if (updates.length > 0) {
+            await updateTaskOrder(updates);
+          }
+        } catch {
+          rollback('שגיאה בהפיכת המשימה לתת-משימה');
+        }
+        return;
+      }
+
+      if (!destination) return;
       if (source.droppableId === destination.droppableId && source.index === destination.index) return;
 
       saveSnapshot();
 
       const newGroups: AdminTaskGroupWithTasks[] = JSON.parse(JSON.stringify(data.groups));
-      const srcGroup = newGroups.find((g: AdminTaskGroupWithTasks) => g.id === source.droppableId);
-      const destGroup = newGroups.find((g: AdminTaskGroupWithTasks) => g.id === destination.droppableId);
-      if (!srcGroup || !destGroup) return;
+      const srcInfo = findDroppable(newGroups, source.droppableId);
+      const destInfo = findDroppable(newGroups, destination.droppableId);
+      if (!srcInfo || !destInfo) return;
 
-      const srcTasks = [...srcGroup.tasks].sort((a: { orderIndex: number }, b: { orderIndex: number }) => a.orderIndex - b.orderIndex);
+      const srcTasks = srcInfo.list.sort((a, b) => a.orderIndex - b.orderIndex);
       const [movedTask] = srcTasks.splice(source.index, 1);
       if (!movedTask) return;
+
+      const isSubtaskBefore = srcInfo.type === 'task';
+      const isSubtaskAfter = destInfo.type === 'task';
 
       if (source.droppableId === destination.droppableId) {
         srcTasks.splice(destination.index, 0, movedTask);
         srcTasks.forEach((t, i) => { t.orderIndex = i; });
-        srcGroup.tasks = srcTasks as AdminTaskWithChildren[];
+        if (srcInfo.type === 'group') {
+          srcInfo.parentGroup.tasks = srcTasks as AdminTaskWithChildren[];
+        } else if (srcInfo.parentTask) {
+          srcInfo.parentTask.children = srcTasks as AdminTask[];
+        }
       } else {
         srcTasks.forEach((t, i) => { t.orderIndex = i; });
-        srcGroup.tasks = srcTasks as AdminTaskWithChildren[];
-        const destTasks = [...destGroup.tasks].sort((a: { orderIndex: number }, b: { orderIndex: number }) => a.orderIndex - b.orderIndex);
-        movedTask.groupId = destination.droppableId;
+        if (srcInfo.type === 'group') {
+          srcInfo.parentGroup.tasks = srcTasks as AdminTaskWithChildren[];
+        } else if (srcInfo.parentTask) {
+          srcInfo.parentTask.children = srcTasks as AdminTask[];
+        }
+        
+        const destTasks = destInfo.list.sort((a, b) => a.orderIndex - b.orderIndex);
+        movedTask.groupId = destInfo.parentGroup.id;
+        movedTask.parentId = isSubtaskAfter && destInfo.parentTask ? destInfo.parentTask.id : null;
+        
         destTasks.splice(destination.index, 0, movedTask);
         destTasks.forEach((t, i) => { t.orderIndex = i; });
-        destGroup.tasks = destTasks as AdminTaskWithChildren[];
+        
+        if (destInfo.type === 'group') {
+          destInfo.parentGroup.tasks = destTasks as AdminTaskWithChildren[];
+        } else if (destInfo.parentTask) {
+          destInfo.parentTask.children = destTasks as AdminTask[];
+        }
       }
 
       setData({ groups: newGroups });
 
       try {
-        await updateTask(draggableId, {
-          groupId: destination.droppableId,
-          orderIndex: destination.index,
-        });
+        const updates: { id: string; orderIndex: number; groupId?: string; parentId?: string | null }[] = [];
+        
+        if (source.droppableId !== destination.droppableId) {
+          // Send explicit parentId null if taking out to top level
+          updates.push({
+            id: movedTask.id,
+            orderIndex: movedTask.orderIndex,
+            groupId: movedTask.groupId,
+            parentId: movedTask.parentId
+          });
+        }
+
+        if (source.droppableId === destination.droppableId) {
+          srcInfo.list.forEach((t) => {
+            updates.push({ id: t.id, orderIndex: t.orderIndex });
+          });
+        } else {
+          srcInfo.list.forEach((t) => {
+            updates.push({ id: t.id, orderIndex: t.orderIndex });
+          });
+          destInfo.list.forEach((t) => {
+            if (t.id !== movedTask.id) {
+              updates.push({ id: t.id, orderIndex: t.orderIndex, groupId: destInfo.parentGroup.id, parentId: destInfo.parentTask?.id ?? null });
+            }
+          });
+        }
+        await updateTaskOrder(updates);
       } catch {
         rollback('שגיאה בעדכון מיקום המשימה');
       }
