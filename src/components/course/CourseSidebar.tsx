@@ -289,7 +289,7 @@ export default function CourseSidebar({
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.2, ease: 'easeInOut' }}
-                        className="overflow-hidden"
+                        className="overflow-hidden bg-[#F7F8FA] border-t border-[#ECEEF2]"
                       >
                         {chapter.lessons.map((lesson) => {
                           const isActive = lesson.id === activeLessonId;
@@ -305,8 +305,8 @@ export default function CourseSidebar({
                               className={`
                                 w-full flex items-center gap-2.5 ps-10 pe-4 py-2.5
                                 transition-colors duration-150 text-start border-s-[3px]
-                                ${isActive ? 'bg-[#69ADFF]/6 border-[#69ADFF]' : 'border-transparent'}
-                                ${isLocked ? 'opacity-40 cursor-not-allowed' : 'hover:bg-[#F7F7F8] cursor-pointer'}
+                                ${isActive ? 'bg-[#69ADFF]/8 border-[#69ADFF]' : 'border-transparent'}
+                                ${isLocked ? 'opacity-40 cursor-not-allowed' : 'hover:bg-white/60 cursor-pointer'}
                               `}
                             >
                               <LessonStatusIcon lessonId={lesson.id} isActive={isActive} watched={watched} />
