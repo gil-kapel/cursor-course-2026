@@ -79,11 +79,10 @@ function circularOffset(i: number, active: number): number {
   return diff;
 }
 
-const AVATAR_SCALES = [1, 0.78, 0.6];
-const AVATAR_OPACITIES = [1, 0.65, 0.4];
-
 const spring = { type: 'spring' as const, damping: 24, stiffness: 120, mass: 1 };
 const springSoft = { type: 'spring' as const, damping: 26, stiffness: 100, mass: 1 };
+
+const AUTO_ROTATE_MS = 5000;
 
 /* ------------------------------------------------------------------ */
 /*  Component                                                          */
@@ -91,13 +90,12 @@ const springSoft = { type: 'spring' as const, damping: 26, stiffness: 100, mass:
 
 export default function TestimonialSection() {
   const [active, setActive] = useState(0);
-  const [metrics, setMetrics] = useState({ avatarStep: 72, cardStep: 384, cardHalf: 180 });
+  const [metrics, setMetrics] = useState({ cardStep: 384, cardHalf: 180 });
 
   useEffect(() => {
     const update = () => {
       const md = window.innerWidth >= 768;
       setMetrics({
-        avatarStep: md ? 72 : 60,
         cardStep: md ? 384 : 296,
         cardHalf: md ? 180 : 140,
       });
@@ -111,7 +109,10 @@ export default function TestimonialSection() {
   const goNext = useCallback(() => setActive((p) => mod(p + 1)), []);
   const goPrev = useCallback(() => setActive((p) => mod(p - 1)), []);
 
-  const avatarRowX = (active - (COUNT - 1) / 2) * metrics.avatarStep;
+  useEffect(() => {
+    const timer = setInterval(goNext, AUTO_ROTATE_MS);
+    return () => clearInterval(timer);
+  }, [goNext]);
 
   return (
     <section className="py-24 md:py-32 px-6 bg-[#F5F5F7] overflow-hidden">
@@ -139,33 +140,26 @@ export default function TestimonialSection() {
           </p>
         </motion.div>
 
-        {/* ---- Avatar Row (slides to center active) ---- */}
+        {/* ---- Avatar Row (fixed positions, active scales up) ---- */}
         <motion.div variants={fadeUp} className="flex justify-center mb-16 md:mb-24">
-          <motion.div
-            className="flex items-end gap-3 md:gap-4"
-            animate={{ x: avatarRowX }}
-            transition={springSoft}
-          >
+          <div className="flex items-end gap-5 md:gap-6">
             {testimonials.map((t, i) => {
-              const dist = Math.abs(circularOffset(i, active));
-              const isActive = dist === 0;
+              const isActive = i === active;
 
               return (
                 <button
                   key={t.name}
                   onClick={() => goTo(i)}
-                  className="flex flex-col items-center cursor-pointer group shrink-0 w-12 md:w-14"
+                  className="flex flex-col items-center cursor-pointer group shrink-0 w-14 md:w-16"
                   aria-label={`המלצה של ${t.name}`}
-                  style={{ zIndex: isActive ? 5 : 1 }}
                 >
                   <motion.div
                     animate={{
-                      scale: AVATAR_SCALES[dist] ?? 0.6,
-                      opacity: AVATAR_OPACITIES[dist] ?? 0.4,
+                      scale: isActive ? 1.25 : 0.85,
                     }}
                     transition={spring}
                     className={`relative overflow-hidden rounded-full
-                                w-12 h-12 md:w-14 md:h-14
+                                w-14 h-14 md:w-16 md:h-16
                                 ring-2 transition-shadow duration-300
                                 ${isActive
                                   ? 'ring-[#69ADFF] shadow-[0_0_20px_rgba(105,173,255,0.3)]'
@@ -176,20 +170,19 @@ export default function TestimonialSection() {
                       src={t.avatarSrc}
                       alt=""
                       fill
-                      sizes="(max-width:768px) 48px, 56px"
+                      sizes="(max-width:768px) 56px, 64px"
                       className="object-cover"
                     />
                   </motion.div>
                   <motion.span
                     animate={{
-                      opacity: isActive ? 1 : 0.45,
-                      scale: isActive ? 1 : 0.85,
+                      opacity: isActive ? 1 : 0.5,
                     }}
                     transition={spring}
-                    className={`mt-2 whitespace-nowrap origin-top select-none
+                    className={`mt-2.5 whitespace-nowrap origin-top select-none
                                 ${isActive
                                   ? 'text-xs md:text-sm font-bold text-[#303150]'
-                                  : 'text-[0.6rem] md:text-[0.65rem] font-medium text-[#9B9CAD]'
+                                  : 'text-[0.65rem] md:text-xs font-medium text-[#9B9CAD]'
                                 }`}
                   >
                     {t.name}
@@ -197,7 +190,7 @@ export default function TestimonialSection() {
                 </button>
               );
             })}
-          </motion.div>
+          </div>
         </motion.div>
 
         {/* ---- Cards (side-by-side, center highlighted) ---- */}
