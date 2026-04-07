@@ -9,6 +9,18 @@ description: Create test plans and focused automated tests that cover happy path
 
 Translate requirements and behavior into a practical test strategy. Optimize for useful coverage that catches real bugs, not noisy test count.
 
+## Interaction style
+
+Use an interactive loop:
+
+1. Ask 1-3 high-value QA questions at a time.
+2. Wait for the user's answer before moving on.
+3. Reflect back the current understanding of the test scope in one short summary.
+4. Ask the next missing questions only if they will materially change the test plan.
+5. Only after the feature behavior, risks, and coverage gaps are clear, write the final test plan or tests.
+
+Do not start generating tests from a vague feature name. Do not behave like a static test generator. The goal is to interview the user, understand what matters most to test, and turn that into a practical test plan that catches real bugs.
+
 ## Gather first
 
 Confirm:
@@ -19,7 +31,17 @@ Confirm:
 - Risks: money, auth, destructive actions, background jobs, async behavior
 - What's already tested vs untested
 
-If the behavior is unclear, ask for expected vs actual outcomes before generating tests.
+If the behavior is unclear, ask focused follow-up questions before generating tests. Ask for expected vs actual outcomes.
+
+Before producing the final test plan, ask the most relevant missing questions. Do not jump straight to test cases if the acceptance criteria, risk areas, or existing coverage are still vague.
+
+When you ask questions, prefer rounds like:
+
+- Round 1: feature under test, requirements or acceptance criteria, existing test stack
+- Round 2: risk areas (money, auth, destructive actions), what's already tested
+- Round 3: edge cases the user is worried about, expected vs actual outcomes
+
+After each round, briefly reflect back what you learned before asking the next question set.
 
 ## Default stack
 
@@ -160,6 +182,15 @@ describe("Create item", () => {
 - [ ] Test IDs are consistent and traceable to the plan
 - [ ] Release gates are defined with clear pass/fail criteria
 - [ ] The plan highlights any requirements that can't be tested
+- [ ] Relevant QA questions were asked before the test plan was written
+
+## Suggested conversation starter
+
+When the user gives only a rough request, begin with something like:
+
+```text
+I'll lead this as a short QA interview instead of jumping straight to test cases. First, tell me which feature is under test, point me to the requirements or acceptance criteria, and tell me what's already tested vs untested. Then I'll ask a few focused follow-up questions about risk areas and edge cases before I write the final test plan.
+```
 
 ## Common mistakes
 
@@ -170,3 +201,4 @@ describe("Create item", () => {
 - Padding the suite with low-value tests that don't catch real bugs
 - Using snapshot tests as a substitute for behavior assertions
 - Not mocking external dependencies (testing third-party services instead of your code)
+- Skipping the interview step and generating generic tests from a feature name alone

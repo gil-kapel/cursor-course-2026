@@ -1,59 +1,42 @@
-# שיעור 2.9 — על המסך (הוראות צילום)
-
-טיימקודים ליעדי עריכה; לכוונן אחרי picture lock.
+# שיעור 2.9 — על המסך
 
 ---
 
 ## 00:00 – 01:00
 
-Cursor פתוח.
-`docs/implementation-plan.md` או `docs/slice-01.md` פתוח על המסך.
-זום על החלק שמגדיר את Slice 1: package list + open payment side panel.
-כיתוב overlay: **Implement only the first slice**.
-
----
+Cursor פתוח. `docs/implementation-plan.md` פתוח.
+זום על Slice 1: רשימת משימות + empty state.
+Overlay: **Implement only Slice 1**.
 
 ## 01:00 – 02:15
 
-העכבר פותח את Composer (`Cmd+I` ב־Mac, `Ctrl+I` ב־Windows) או עובר ל־Agent Mode.
-מצרפים את מסמך ה־slice ואת מסמכי הרקע הרלוונטיים.
-הדבקת הפרומפט מה־Appendix.
-צפייה בסוכן מתחיל לנתח ומציע שינויים בכמה קבצים.
+פתיחת Agent mode (או Composer ב-`Cmd+I`).
+מצרפים את `@docs/implementation-plan.md` ומסמכי רקע.
 
-הערת צילום: הקריין מסביר למה קוראים שוב את ה־slice לפני שמתחילים.
+פרומפט:
 
----
+> אתה Builder Agent. מטרה: לממש רק Slice 1 מהתוכנית. קלט: implementation-plan + prd + architecture + ui-plan. פלט: diff קטן + verification. אל תיגע ב-Slice 2.
 
 ## 02:15 – 03:30
 
-מעבר על ה־diff של אחד הקבצים.
-הדגמה של Accept לקובץ אחד והערת follow-up לקובץ אחר.
-הדגשה ויזואלית: האם השינוי באמת שייך רק לפתיחת חלון הצד ולהצגת החבילות?
-אם יש סטייה, מראים איך עוצרים ומחזירים את הסוכן לגבול של Slice 1.
-
----
+הסוכן מציע diff.
+מעבר על הקבצים: האם הכל שייך ל-Slice 1?
+אם יש סטייה (למשל לוגיקת מחיקה שלא תוכננה) — דוחים.
+Accept רק את מה ששייך.
 
 ## 03:30 – 04:45
 
-הצגת התוצאה במסך או preview.
-מראים את רשימת החבילות.
-אחר כך לחיצה על חבילה, ופתיחה של חלון הצד לתשלום.
-
-הערת צילום: הקריין מסביר למה דווקא זה הקריטריון להצלחה של השלב הזה.
-
----
+הרצה ב-preview / דפדפן.
+בדיקה: רשימה ריקה מוצגת? CTA "Create first task" עובד? EmptyState נראה נכון?
 
 ## 04:45 – 06:00
 
-חזרה קצרה ל־`docs/implementation-plan.md` או `docs/slice-01.md`.
-הדגשה של מה הושלם ומה נשאר ל־Slice הבא.
-Split view:
-- מצד אחד ה־preview
-- מצד שני מסמך התוכנית
+חזרה ל-`docs/implementation-plan.md`.
+בדיקה: מה הושלם, מה נשאר.
 
-Overlay מסכם:
-- `Slice 1 implemented`
-- `Diff stayed inside the planned boundary`
-- `Return to the plan before Slice 2`
+Overlay:
+- Slice 1 ממומש
+- Diff נשאר בגבול התוכנית
+- חוזרים לתוכנית לפני Slice 2
 
 כותרת סיום: **Lesson 2.10 — Code Review Agent**.

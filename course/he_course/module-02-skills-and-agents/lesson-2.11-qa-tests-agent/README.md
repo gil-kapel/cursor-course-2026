@@ -1,29 +1,25 @@
 # Lesson 2.11 — QA agent (tests & edge cases)
 
-Hebrew-first lesson assets; this index is in English to match the course README.
-
-## Files in this folder
+## Files
 
 | File | Purpose |
 |------|---------|
-| [on-screen.md](on-screen.md) | Screen recording beat sheet (timestamps + visual directions) |
-| [narration.md](narration.md) | Hebrew voiceover copy for ElevenLabs (aligned to the same timestamps) |
+| [on-screen.md](on-screen.md) | Screen recording directions |
+| [narration.md](narration.md) | Hebrew voiceover for ElevenLabs |
 
-## Syllabus topic
+## Running example
 
-Creating a comprehensive test plan using the QA agent. Testing beyond the "happy path" by including edge cases, failure modes, and state transitions. Writing targeted automated tests that align with product acceptance criteria.
+Task management app — building a test plan from PRD acceptance criteria.
 
-## Practical outcomes
+## Scope
 
-- Create `docs/test-plan.md` from the PRD and current code.
-- Cover happy paths, edge cases, and failure modes.
-- Turn one critical case into a small automated test and run it.
+Creating `docs/test-plan.md` with happy paths, edge cases, and failure modes. Writing one focused automated test (e.g., `tests/task.test.ts`) and running it.
 
 ## Verify
 
-- `docs/test-plan.md` exists and includes at least one negative or failure scenario.
-- You can point to one passing automated test tied to the plan.
+- `docs/test-plan.md` includes at least one negative/failure scenario.
+- One automated test passes and is tied to a plan item.
 
 ## Next
 
-- [Lesson 2.12 — Debug agent (evidence -> fix)](../lesson-2.12-debug-agent/README.md)
+- [Lesson 2.12 — Debug agent (evidence → fix)](../lesson-2.12-debug-agent/README.md)

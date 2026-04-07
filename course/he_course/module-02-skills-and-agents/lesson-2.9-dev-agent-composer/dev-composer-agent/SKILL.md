@@ -9,6 +9,41 @@ description: Implement a feature in small, testable slices using Composer-style 
 
 Build working software in the smallest vertical slice that proves the feature. Start from the data shape, keep boundaries explicit, and verify after each slice before widening.
 
+## Interaction style
+
+Use an interactive loop:
+
+1. Ask 1-3 high-value implementation questions at a time.
+2. Wait for the user's answer before moving on.
+3. Reflect back the current understanding of the slice in one short summary.
+4. Ask the next missing questions only if they will materially change the implementation approach.
+5. Only after the slice scope, data shape, and contracts are clear, start writing code.
+
+Do not start coding from a vague one-liner. Do not behave like a static code generator. The goal is to interview the user, clarify the slice boundaries, and turn that into the smallest useful code change the user can verify.
+
+## Gather first
+
+Confirm before implementing:
+
+- Which feature or slice is being built
+- Available docs: PRD, architecture, UX flows, UI spec (link or inline)
+- Existing codebase conventions and patterns
+- Current stack and dependencies already installed
+- What the user expects to see working after this slice
+- Known blockers or risks
+
+If the slice scope is unclear, ask focused follow-up questions before writing code. Do not guess requirements.
+
+Before producing code, ask the most relevant missing questions. Do not jump straight to implementation if the data shape, contracts, or expected behavior are still vague.
+
+When you ask questions, prefer rounds like:
+
+- Round 1: which slice, what user-visible behavior, which docs exist
+- Round 2: data shape, contracts, validation rules
+- Round 3: expected edge cases, what verification looks like
+
+After each round, briefly reflect back what you learned before asking the next question set.
+
 ## Default implementation rules
 
 - Start with the data shape — schema before handlers
@@ -124,6 +159,15 @@ When asked to implement, produce:
 - [ ] Verification happened after the change (not "trust me")
 - [ ] No business logic in UI components or route handlers
 - [ ] Functions are ≤25 lines or orchestrate smaller functions
+- [ ] Relevant implementation questions were asked before coding started
+
+## Suggested conversation starter
+
+When the user gives only a rough request, begin with something like:
+
+```text
+I'll lead this as a short implementation interview instead of jumping straight to code. First, tell me which slice or feature we're building, point me to the relevant docs (PRD, architecture, UX flows), and describe what you expect to see working after this slice. Then I'll ask a few focused follow-up questions about data shape and contracts before I start coding.
+```
 
 ## Common mistakes
 
@@ -135,3 +179,4 @@ When asked to implement, produce:
 - Using raw SQL or fetch calls scattered across the app instead of a repository
 - Mixing sync and async in the same service method
 - Writing code without knowing which pattern it follows
+- Skipping the interview step and coding from a vague one-liner without clarifying the slice

@@ -1,48 +1,36 @@
-# שיעור 2.10 — על המסך (הוראות צילום)
-
-טיימקודים ליעדי עריכה; לכוונן אחרי picture lock.
+# שיעור 2.10 — על המסך
 
 ---
 
 ## 00:00 – 01:00
 
-Cursor פתוח. פתיחת לשונית ה־Source Control (Git) בצד שמאל.
-הצגת רשימת הקבצים עם ה־M (Modified).
-העכבר פותח את ה־Agent ומצרף את ה־Diff או את הקבצים ששונו.
-כיתוב overlay: **Step 6: The Code Review Agent**.
-
----
+Cursor פתוח. Source Control (Git) בצד — רשימת קבצים ששונו.
+פתיחת Agent ומצרפים את הקבצים ששונו.
+Overlay: **Step 6: Code Review Agent**.
 
 ## 01:00 – 02:30
 
-פתיחת משימת review חדשה וממוקדת על השינוי הנוכחי.
-הדבקת הפרומפט מה־Appendix.
-צפייה בסוכן מנתח את השינויים ומחזיר רשימת הערות.
-הדגשת סעיף "Potential bug" או "Maintenance risk" בתשובה.
+פרומפט:
 
----
+> אתה Review Agent. עבור על ה-diff האחרון. חלק findings לפי High / Medium / Low. התמקד בבאגים, רגרסיות ותחזוקתיות. אל תציע לשכתב חלקים שלא השתנו.
+
+הסוכן מחזיר הערות. זום על "Potential bug" או "Missing error handling".
 
 ## 02:30 – 03:45
 
-בחירת הערה אחת (למשל: "Remove console.log" או "Add error handling").
-ביצוע התיקון בקובץ המתאים ב־Editor.
-שמירת הקובץ וצפייה ב־Diff מתעדכן.
-
----
+בחירת הערה אחת — למשל: console.log שנשאר, או חוסר ולידציה.
+תיקון בקובץ. שמירה.
 
 ## 03:45 – 05:00
 
-שאילת שאלת המשך: "Is it safe to merge now?".
-צפייה בסוכן מאשר או נותן הערה אחרונה.
-זום על המילה "Merge Readiness" או "Safe to proceed".
-
----
+שאלת follow-up: "מה הכי דחוף לפני merge?"
+הסוכן מאשר או נותן הערה אחרונה.
 
 ## 05:00 – 06:00
 
-סיום: ה־Source Control מציג diff קטן יותר או מסומן כ־ready to merge.
-Overlay מסכם:
-- `Artifact: reviewed diff`
-- `Check: one real finding fixed or consciously resolved`
+Overlay:
+- Diff נבדק
+- תיקון אחד ממשי
+- מוכן להמשיך
 
-כותרת סיום: **Lesson 2.11 — QA / Test Agent**.
+כותרת סיום: **Lesson 2.11 — QA Agent**.

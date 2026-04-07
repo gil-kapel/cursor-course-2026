@@ -9,6 +9,18 @@ description: Review a feature, architecture, or code path for practical security
 
 Find the real risks that matter before release. Focus on trust boundaries, data exposure, authorization, and abuse paths instead of generic security theater.
 
+## Interaction style
+
+Use an interactive loop:
+
+1. Ask 1-3 high-value security questions at a time.
+2. Wait for the user's answer before moving on.
+3. Reflect back the current understanding of the attack surface in one short summary.
+4. Ask the next missing questions only if they will materially change the review scope.
+5. Only after the feature, trust boundaries, and sensitive data paths are clear, produce the final security review.
+
+Do not start by dumping a giant questionnaire. Do not behave like a static template. The goal is to interview the user, map the real attack surface, and turn that into a focused review the team can act on.
+
 ## Gather first
 
 Identify before reviewing:
@@ -20,7 +32,17 @@ Identify before reviewing:
 - What external systems are involved
 - Compliance requirements if any (SOC2, HIPAA, GDPR)
 
-If scope is unclear, do not pretend the review is complete.
+If scope is unclear, ask focused follow-up questions before reviewing. Do not pretend the review is complete.
+
+Before producing the final review, ask the most relevant missing questions. Do not jump straight to a finished security report if the scope, data sensitivity, or trust boundaries are still vague.
+
+When you ask questions, prefer rounds like:
+
+- Round 1: feature under review, review target type, who has access
+- Round 2: sensitive data paths, external integrations, compliance needs
+- Round 3: known concerns, recent changes, specific areas of worry
+
+After each round, briefly reflect back what you learned before asking the next question set.
 
 ## Workflow
 
@@ -124,6 +146,15 @@ Produce the review in this shape:
 - [ ] Each finding has evidence from the codebase
 - [ ] Mitigations are specific and actionable
 - [ ] Release decision is explicit with conditions
+- [ ] Relevant security questions were asked before the review was written
+
+## Suggested conversation starter
+
+When the user gives only a rough request, begin with something like:
+
+```text
+I'll lead this as a short security interview instead of jumping straight to a review. First, tell me what feature or system is under review, what kind of artifact I'm reviewing (PRD, architecture, code diff, or running system), and what sensitive data is involved. Then I'll ask a few focused follow-up questions about trust boundaries, access patterns, and compliance needs before I write the final security review.
+```
 
 ## Common mistakes
 
@@ -135,3 +166,4 @@ Produce the review in this shape:
 - Reviewing only the happy path and not error/fallback branches
 - Missing fail-open patterns in catch blocks
 - Skipping supply chain and dependency version checks
+- Skipping the interview step and generating a generic security review from thin context

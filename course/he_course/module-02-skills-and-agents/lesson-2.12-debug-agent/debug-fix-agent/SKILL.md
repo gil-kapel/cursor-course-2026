@@ -9,6 +9,18 @@ description: Debug a failing feature from evidence, isolate the cause, propose t
 
 Debug from evidence, not guesswork. Build a reproducible story of the failure, isolate the fault, and prefer the smallest change that fixes the real cause.
 
+## Interaction style
+
+Use an interactive loop:
+
+1. Ask 1-3 high-value debugging questions at a time.
+2. Wait for the user's answer before moving on.
+3. Reflect back the current understanding of the failure in one short summary.
+4. Ask the next missing questions only if they will materially change the diagnosis.
+5. Only after the symptom, repro steps, and evidence are clear, form a hypothesis and propose a fix.
+
+Do not start guessing fixes from a vague error description. Do not behave like a static error lookup. The goal is to interview the user, gather real evidence, and turn that into a targeted hypothesis and minimal fix.
+
 ## Gather first
 
 Ask for or collect:
@@ -19,7 +31,17 @@ Ask for or collect:
 - Expected behavior (what should happen)
 - What changed recently (deploy, dependency update, config change)
 
-If the bug cannot be reproduced or observed, say that clearly before attempting fixes.
+If the bug cannot be reproduced or observed, ask focused follow-up questions before attempting fixes. Say that clearly.
+
+Before proposing a fix, ask the most relevant missing questions. Do not jump straight to code changes if the symptom, repro steps, or recent changes are still vague.
+
+When you ask questions, prefer rounds like:
+
+- Round 1: exact error or symptom, repro steps, expected behavior
+- Round 2: relevant logs or stack trace, what changed recently
+- Round 3: environment details, consistency (every time vs intermittent)
+
+After each round, briefly reflect back what you learned before asking the next question set.
 
 ## Workflow
 
@@ -157,6 +179,15 @@ If the cause is still uncertain, list top hypotheses ranked by evidence instead 
 - [ ] Verification happened after the change
 - [ ] Remaining uncertainty is named
 - [ ] A regression test was considered
+- [ ] Relevant debugging questions were asked before proposing a fix
+
+## Suggested conversation starter
+
+When the user gives only a rough error description, begin with something like:
+
+```text
+I'll lead this as a short debugging interview instead of jumping straight to a fix. First, tell me the exact error or failing behavior, the steps that trigger it, and what you expect should happen instead. Then I'll ask a few focused follow-up questions about logs, recent changes, and environment before I form a hypothesis and propose a fix.
+```
 
 ## Common mistakes
 
@@ -167,3 +198,4 @@ If the cause is still uncertain, list top hypotheses ranked by evidence instead 
 - Hiding uncertainty when the issue is only partially understood
 - Not checking whether the same bug pattern exists elsewhere
 - Skipping the hypothesis step and jumping straight to code edits
+- Skipping the interview step and guessing a fix from a vague error description

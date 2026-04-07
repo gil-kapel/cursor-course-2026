@@ -1,91 +1,55 @@
-# שיעור 2.6 — על המסך (הוראות צילום)
-
-טיימקודים ליעדי עריכה; לכוונן אחרי picture lock.
+# שיעור 2.6 — על המסך
 
 ---
 
 ## 00:00 – 01:00
 
-Cursor פתוח. בטאבים למעלה רואים את `docs/prd.md` ו־`docs/architecture.md`.
-העכבר פותח את משטח ה־Agent.
-כיתוב overlay: **Step 3: The UX Agent**.
-כותרת משנה: **Zero friction + next action clarity**.
-הערת צילום: להסביר בקול שכאן נשתמש בכמה modes שונים, כי כל mode עוזר לשלב אחר של העבודה.
+Cursor פתוח. בטאבים: `docs/prd.md` ו-`docs/architecture.md`.
+מעבר ל-**Ask mode**.
+מצרפים `@docs/prd.md` ו-`@docs/architecture.md`.
+Overlay: **Step 3: UX — zero friction**.
 
----
+פרומפט:
+
+> בדוק את ה-PRD והארכיטקטורה. איפה המשתמש עלול להיתקע? איפה לא ברור מה הפעולה הבאה? שאל אותי בסבבים קצרים, לא תשובה אחת ארוכה.
 
 ## 01:00 – 02:15
 
-מעבירים את הסוכן ל־Ask mode.
-מצרפים `@docs/prd.md` ו־`@docs/architecture.md`.
-שואלים שאלה קלה לפתיחה, ואז נותנים לסקיל להוביל את השיחה.
-צפייה בסוכן מחזיר ביקורת ושאלות המשך:
-- friction points
-- missing clarity
-- places where the next action is unclear
-- questions about entry point
-- questions about blockers
-- questions about what the user should see first
+הסוכן מחזיר שאלות:
+- מה קורה כשהרשימה ריקה?
+- מי יכול לראות את המשימות של אחרים בצוות?
+- מה ה-next action אחרי הוספת משימה?
 
-הערת צילום: להדגיש שזה שלב של הבנה וביקורת, לא של יצירת מסמך.
-
----
+עונים בקצרה. הסוכן ממשיך עם סבב נוסף.
 
 ## 02:15 – 03:45
 
-מעבירים ל־Plan mode.
-מבקשים מהסוכן לארגן מחדש את הזרימה.
-אם משהו לא ברור, מראים שהוא שואל עוד שאלת הבהרה לפני שהוא מסכם.
-הדגשת טבלה או רשימה עם עמודות כמו:
-- user goal
-- next action
-- friction risk
-- recommended interaction
+מעבר ל-**Plan mode**.
+מבקשים מהסוכן לסדר את הזרימה הראשית.
 
-הערת צילום: להסביר למה עברנו ל־Plan mode - עכשיו אנחנו בונים structure, לא רק מעלים בעיות.
-
----
-
-## 03:45 – 05:15
-
-הדגמה של דוגמה אמיתית:
-"Package selection -> payment".
-הסוכן מציע Side Panel / Sheet במקום עמוד חדש.
-זום על הנימוק:
-- keep context visible
-- show next action clearly
-- avoid unnecessary page jumps
-
-אחר כך מציגים דוגמה שנייה:
-empty state של רשימת משימות עם CTA ברור כמו "Create first task".
-
-הערת צילום: כאן חשוב להגיד בקול למה זו דוגמה טובה ל־UX, לא רק להראות את הטבלה.
-
----
-
-## 05:15 – 06:30
-
-מעבירים ל־Agent mode.
-מבקשים מהסוכן לשמור את התוצאה ל־`docs/ux-flows.md`.
-פתיחת הקובץ החדש.
-זום על מבנה שחוזר על עצמו:
+הסוכן מציג טבלה:
 - user goal
 - next action
 - friction risk
 - friction reduction
 
-הערת צילום: להסביר שהמעבר ל־Agent קורה רק אחרי שהבנו ובנינו את הזרימה דרך שיחה, לא דרך prompt אחד גדול.
+דוגמה: empty state → CTA "Create your first task" במקום טקסט ריק.
 
----
+## 03:45 – 05:15
 
-## 06:30 – 07:30
+מעבר ל-**Agent mode**.
+פרומפט:
 
-סיום: שלושת הקבצים ב־Sidebar תחת תיקיית `docs` מודגשים.
-מעבר מהיר בין `prd.md`, `architecture.md`, ו־`ux-flows.md`.
-Overlay מסכם:
-- `Ask: interview the problem`
-- `Plan: structure the better flow`
-- `Agent: save the artifact`
-- `Check: next action is clear at every step`
+> שמור את הזרימה שבנינו ל-`docs/ux-flows.md`. כל שלב כולל: מה המשתמש רואה, מה הפעולה, ומה קורה ב-loading, empty, error.
 
-כותרת סיום: **Lesson 2.7 — UI + Stitch Workflow**.
+פתיחת `docs/ux-flows.md`. זום על מבנה: כניסה → רשימה ריקה → הוספה → עדכון סטטוס → מחיקה.
+
+## 05:15 – 06:30
+
+Sidebar: שלושת הקבצים — `prd.md`, `architecture.md`, `ux-flows.md`.
+Overlay:
+- Ask: זיהוי חיכוך
+- Plan: בניית זרימה
+- Agent: שמירת `docs/ux-flows.md`
+
+כותרת סיום: **Lesson 2.7 — UI Design Systems**.

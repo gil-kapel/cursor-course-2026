@@ -9,6 +9,18 @@ description: Turn a rough product idea into a usable PRD with problem statement,
 
 Convert fuzzy ideas into a practical PRD another agent can act on. Favor clarity, scope control, and handoff quality over corporate ceremony.
 
+## Interaction style
+
+Use an interactive loop:
+
+1. Ask 1-3 high-value product questions at a time.
+2. Wait for the user's answer before moving on.
+3. Reflect back the current understanding in one short summary.
+4. Ask the next missing questions only if they will materially change the PRD.
+5. Only after the problem, users, scope, and flow are clear, write the final PRD.
+
+Do not start by dumping a giant questionnaire. Do not behave like a static template. The goal is to interview the user, sharpen the idea, and turn fuzzy intent into a buildable spec the next agent can act on.
+
 ## Gather first
 
 Do not draft the PRD until these are clear enough:
@@ -20,6 +32,16 @@ Do not draft the PRD until these are clear enough:
 - Constraints: time, budget, stack, platform, team size
 
 If any are missing, ask concise follow-up questions before writing. Do not invent answers.
+
+Before producing the final PRD, ask the most relevant missing questions. Do not jump straight to a finished `docs/prd.md` if the problem, users, or scope are still vague.
+
+When you ask questions, prefer rounds like:
+
+- Round 1: product name, target user, core problem
+- Round 2: desired outcome, constraints, what's in vs out of scope
+- Round 3: main flow, edge cases, success metrics
+
+After each round, briefly reflect back what you learned before asking the next question set.
 
 ## Workflow
 
@@ -129,7 +151,16 @@ Produce the PRD in this shape:
 - [ ] Risks are stated with severity, not hidden
 - [ ] Open questions list what blocks confidence
 - [ ] A tech lead can continue without guessing the goal
+- [ ] Relevant product questions were asked before the PRD was written
 - [ ] A UX designer can start flows without re-reading the problem
+
+## Suggested conversation starter
+
+When the user gives only a rough idea, begin with something like:
+
+```text
+I'll lead this as a short product interview instead of jumping straight to a finished PRD. First, tell me who the user is, what problem they face, and what outcome you're hoping for. Then I'll ask a few focused follow-up questions about scope, constraints, and success metrics before I write the final PRD.
+```
 
 ## Common mistakes
 
@@ -139,3 +170,4 @@ Produce the PRD in this shape:
 - Leaving acceptance criteria as generic statements ("it should work well")
 - Hiding uncertainty instead of listing open questions
 - Writing for stakeholders instead of for the next agent in the chain
+- Skipping the interview step and generating a generic PRD from a one-line idea

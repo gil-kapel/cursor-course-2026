@@ -1,6 +1,8 @@
-# Lesson 2.5 — Tech lead agent (architecture handoff)
+# Lesson 2.5 — Tech lead agent: PRD to architecture
 
 Hebrew-first lesson assets; this index is in English to match the course README.
+
+**Running example:** The same task management app from 2.4. In this lesson we feed `docs/prd.md` to the architecture agent and get `docs/architecture.md` — stack, folder structure, data model, API boundaries, and implementation slices.
 
 ## Files in this folder
 
@@ -9,20 +11,11 @@ Hebrew-first lesson assets; this index is in English to match the course README.
 | [on-screen.md](on-screen.md) | Screen recording beat sheet (timestamps + visual directions) |
 | [narration.md](narration.md) | Hebrew voiceover copy for ElevenLabs (aligned to the same timestamps) |
 
-## Syllabus topic
-
-Translating product requirements into technical architecture. Deciding on the tech stack, folder structure, API boundaries, and implementation slices. Creating a technical handoff document that guides the development team.
-
-## Practical outcomes
-
-- Turn `docs/prd.md` into a saved `docs/architecture.md`.
-- Define stack, folder structure, boundaries, and implementation slices.
-- Ask what is missing for slice 1 before starting development.
-
 ## Verify
 
-- `docs/architecture.md` includes stack, folder structure, API boundaries, and slices.
-- The document is specific enough for the UX and development lessons to use directly.
+- `docs/architecture.md` exists with: stack, folder structure, data model, API boundaries, implementation slices.
+- The agent chose a specific stack (not a list of options).
+- "What's missing for Slice 1?" returned concrete file names and install order.
 
 ## Next
 

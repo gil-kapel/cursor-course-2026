@@ -1,50 +1,38 @@
-# שיעור 2.11 — על המסך (הוראות צילום)
-
-טיימקודים ליעדי עריכה; לכוונן אחרי picture lock.
+# שיעור 2.11 — על המסך
 
 ---
 
 ## 00:00 – 01:00
 
-Cursor פתוח. פתיחת `docs/prd.md` ומשטח ה־Agent.
-צירוף ה־PRD (`@docs/prd.md`) והסבר קצר על חשיבות ה־Acceptance Criteria.
-כיתוב overlay: **Step 7: The QA Agent**.
-
----
+Cursor פתוח. `docs/prd.md` פתוח — זום על Acceptance Criteria.
+Overlay: **Step 7: QA Agent**.
 
 ## 01:00 – 02:30
 
-פתיחת משימת QA חדשה עם `@docs/prd.md` והקוד הרלוונטי.
-הדבקת הפרומפט מה־Appendix.
-צפייה בסוכן מייצר תוכנית בדיקות.
-הדגשת סעיפים בטקסט: "Empty state check", "Invalid date format", "Network timeout handling".
+פתיחת Agent עם `@docs/prd.md` והקוד הנוכחי.
 
----
+פרומפט:
+
+> אתה QA Agent. מטרה: תוכנית בדיקות + טסט אוטומטי אחד. קלט: acceptance criteria מ-prd + הקוד. פלט: happy path, edge cases, failure modes. שמור ל-`docs/test-plan.md`, ואז כתוב טסט אחד שמכסה מקרה קריטי.
+
+הסוכן מייצר תוכנית. זום על: "Empty state check", "Missing title validation", "Delete last task behavior".
 
 ## 02:30 – 03:45
 
-הסוכן יוצר את הקובץ `docs/test-plan.md`.
-פתיחת הקובץ וגלילה על רשימת ה־Test Cases.
-זום על המילה "Negative testing" או "Edge cases".
-אנימציה של צ'ק־ליסט שמתמלא (אם אפשר בעריכה).
-
----
+פתיחת `docs/test-plan.md`.
+גלילה על Test Cases.
+זום על "Edge cases" ו-"Failure modes".
 
 ## 03:45 – 05:00
 
-פתיחת קובץ בדיקה אוטומטית אחד (למשל `tests/task.test.ts`).
-הצגת ריצה של פקודת test בטרמינל.
-זום על השורה הירוקה: "All tests passed".
-(אופציונלי: הדגמת כשל מכוון ותיקונו).
-
----
+הסוכן כותב טסט (למשל `tests/task.test.ts`).
+הרצה בטרמינל. ירוק — מצוין.
+(אופציונלי: הדגמת כשל מכוון ותיקונו.)
 
 ## 05:00 – 06:00
 
-סיום: תיקיית `docs` כוללת את כל מסמכי השרשרת עד כה.
-מעבר מהיר על כולם: PRD -> Arch -> UX -> UI -> Security -> Test Plan.
-Overlay מסכם:
-- `Artifact 1: docs/test-plan.md`
-- `Artifact 2: one passing automated test`
+Overlay:
+- `docs/test-plan.md` נשמר
+- טסט אוטומטי אחד עובר
 
-כותרת סיום: **Lesson 2.12 — Debug / Troubleshooting**.
+כותרת סיום: **Lesson 2.12 — Debug Agent**.

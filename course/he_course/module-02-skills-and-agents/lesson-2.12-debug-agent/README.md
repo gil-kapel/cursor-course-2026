@@ -1,23 +1,19 @@
 # Lesson 2.12 — Debug agent (evidence → fix)
 
-Hebrew-first lesson assets; this index is in English to match the course README.
-
-## Files in this folder
+## Files
 
 | File | Purpose |
 |------|---------|
-| [on-screen.md](on-screen.md) | Screen recording beat sheet (timestamps + visual directions) |
-| [narration.md](narration.md) | Hebrew voiceover copy for ElevenLabs (aligned to the same timestamps) |
+| [on-screen.md](on-screen.md) | Screen recording directions |
+| [narration.md](narration.md) | Hebrew voiceover for ElevenLabs |
 
-## Syllabus topic
+## Running example
 
-Systematic troubleshooting using the Debug agent. Moving from evidence (logs, stack traces, errors) to a minimal reproduction and a targeted fix. Learning how to avoid "debugging by guessing" and instead using a evidence-based approach.
+Task management app — debugging a real error from the terminal.
 
-## Practical outcomes
+## Scope
 
-- Start from terminal evidence instead of guessing.
-- Ask for verification steps before applying a fix.
-- Land one minimal fix and rerun the failing command.
+Pasting terminal evidence into the Debug agent. Getting verification steps before a fix. Applying a minimal fix and rerunning.
 
 ## Verify
 

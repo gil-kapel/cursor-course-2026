@@ -1,31 +1,26 @@
 # Lesson 2.9 — Dev agent (slice-by-slice implementation)
 
-Hebrew-first lesson assets; this index is in English to match the course README.
-
-## Files in this folder
+## Files
 
 | File | Purpose |
 |------|---------|
-| [on-screen.md](on-screen.md) | Screen recording beat sheet (timestamps + visual directions) |
-| [narration.md](narration.md) | Hebrew voiceover copy for ElevenLabs (aligned to the same timestamps) |
+| [on-screen.md](on-screen.md) | Screen recording directions |
+| [narration.md](narration.md) | Hebrew voiceover for ElevenLabs |
 
-## Syllabus topic
+## Running example
 
-Implementing the product one slice at a time from the plan created in lesson `2.8`. Instead of asking Composer to build the whole project at once, the student implements `Slice 1`, verifies it, then returns to the plan for the next slice.
+Task management app — implementing Slice 1 from `docs/implementation-plan.md`.
 
-## Practical outcomes
+## Scope
 
-- Implement one narrow slice with Agent/Composer using the slice plan as context.
-- Review the proposed diff before applying changes.
-- Run the app and verify that Slice 1 works before moving on.
-- Learn the habit of returning to the plan after each slice instead of improvising the next step.
+Implementing one narrow slice with Agent/Composer. Review the diff before applying. Run the app and verify. Return to the plan before starting Slice 2.
 
 ## Verify
 
-- You can point to a reviewable multi-file diff and a working slice.
-- The implementation clearly follows `docs/implementation-plan.md` or `docs/slice-01.md`.
-- You know what the next slice is before you leave the lesson.
+- Slice 1 is implemented: task list, empty state, CTA work correctly.
+- The diff stayed within the planned boundary — no Slice 2 code leaked in.
+- You returned to the plan after completing the slice.
 
 ## Next
 
-- [Lesson 2.10 — Code review agent (cleanup & merge readiness)](../lesson-2.10-code-review-agent/README.md)
+- [Lesson 2.10 — Code review agent](../lesson-2.10-code-review-agent/README.md)

@@ -1,28 +1,25 @@
 # Lesson 2.10 — Code review agent (cleanup & merge readiness)
 
-Hebrew-first lesson assets; this index is in English to match the course README.
-
-## Files in this folder
+## Files
 
 | File | Purpose |
 |------|---------|
-| [on-screen.md](on-screen.md) | Screen recording beat sheet (timestamps + visual directions) |
-| [narration.md](narration.md) | Hebrew voiceover copy for ElevenLabs (aligned to the same timestamps) |
+| [on-screen.md](on-screen.md) | Screen recording directions |
+| [narration.md](narration.md) | Hebrew voiceover for ElevenLabs |
 
-## Syllabus topic
+## Running example
 
-Performing a structured code review using AI. Identifying bugs, potential regressions, security risks, and maintainability issues. Learning how to use the "Code Review" agent as a quality gate before merging changes.
+Task management app — reviewing the Slice 1 diff before continuing.
 
-## Practical outcomes
+## Scope
 
-- Review only the current diff instead of asking for a vague full-app opinion.
-- Categorize findings by severity and identify the must-fix issue.
-- Apply at least one concrete improvement before merge.
+Reviewing only the current diff with the Code Review agent. Findings grouped by severity. Fix at least one meaningful issue. Ask "what's most urgent before merge?" to filter noise.
 
 ## Verify
 
-- You have a review result with clear findings and severity levels.
-- At least one meaningful issue is fixed or intentionally resolved.
+- Review result has findings with severity levels.
+- At least one issue is fixed or intentionally resolved.
+- You can explain what changed between the first diff and the final one.
 
 ## Next
 

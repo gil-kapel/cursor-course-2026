@@ -17,6 +17,18 @@ Turn a product spec into a buildable technical plan. Start from the data shape, 
 - Define async boundaries explicitly — never mix sync + async in one logical path
 - Treat cache as a contract with TTL or invalidation, not hidden state
 
+## Interaction style
+
+Use an interactive loop:
+
+1. Ask 1-3 high-value architecture questions at a time.
+2. Wait for the user's answer before moving on.
+3. Reflect back the current understanding in one short summary.
+4. Ask the next missing questions only if they will materially change the design.
+5. Only after the data shape, boundaries, and constraints are clear, write the final architecture handoff.
+
+Do not start by dumping a giant questionnaire. Do not behave like a static template. The goal is to interview the user, surface the real constraints, and turn that into a technical plan the dev agent can build from.
+
 ## Gather first
 
 Confirm before designing:
@@ -26,6 +38,18 @@ Confirm before designing:
 - Existing codebase conventions (if extending, not greenfield)
 - Scale expectations (users, data volume, request rate)
 - Hard constraints (compliance, latency, offline, multi-tenant)
+
+If any are unclear, ask focused follow-up questions before designing. Do not guess constraints.
+
+Before producing the final architecture, ask the most relevant missing questions. Do not jump straight to a finished `docs/architecture.md` if the stack, scale, or data shape are still vague.
+
+When you ask questions, prefer rounds like:
+
+- Round 1: PRD context, stack constraints, greenfield vs extending
+- Round 2: data entities, relationships, state lifecycles
+- Round 3: scale expectations, async boundaries, hard constraints
+
+After each round, briefly reflect back what you learned before asking the next question set.
 
 ## Workflow
 
@@ -142,6 +166,15 @@ Produce the architecture handoff in this shape:
 - [ ] Contracts use executable validation (Zod/Pydantic), not prose
 - [ ] The first implementation slice is obvious and small
 - [ ] Framework choices are justified with trade-offs
+- [ ] Relevant architecture questions were asked before the plan was written
+
+## Suggested conversation starter
+
+When the user gives only a rough request, begin with something like:
+
+```text
+I'll lead this as a short architecture interview instead of jumping straight to a tech plan. First, point me to the PRD or describe the feature, tell me your stack constraints, and whether this is greenfield or extending an existing codebase. Then I'll ask a few focused follow-up questions about data shape, scale, and boundaries before I write the final architecture handoff.
+```
 
 ## Common mistakes
 
@@ -152,3 +185,4 @@ Produce the architecture handoff in this shape:
 - Treating architecture as a list of technologies instead of a decision record
 - Leaving validation as "we'll add it later"
 - Not naming the pattern each module follows
+- Skipping the interview step and generating a generic architecture from thin context

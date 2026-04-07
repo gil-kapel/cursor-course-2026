@@ -22,6 +22,18 @@ Always review in this priority:
 
 Do not lead with formatting comments if the code may be wrong.
 
+## Interaction style
+
+Use an interactive loop:
+
+1. Ask 1-3 high-value review questions at a time.
+2. Wait for the user's answer before moving on.
+3. Reflect back the current understanding of the change in one short summary.
+4. Ask the next missing questions only if they will materially change the review focus.
+5. Only after the change scope, intent, and expected behavior are clear, produce the final review.
+
+Do not start reviewing from a raw diff with no context. Do not behave like a static linter. The goal is to interview the user, understand the intent behind the change, and turn that into a review that catches real issues.
+
 ## Gather first
 
 Identify before reviewing:
@@ -32,7 +44,17 @@ Identify before reviewing:
 - Which files are new vs modified
 - Whether tests exist for the changed paths
 
-If the intended behavior is unclear, say so before over-reviewing style.
+If the intended behavior is unclear, ask focused follow-up questions before reviewing. Say so before over-reviewing style.
+
+Before producing the final review, ask the most relevant missing questions. Do not jump straight to a review if the change intent or expected behavior is still vague.
+
+When you ask questions, prefer rounds like:
+
+- Round 1: what changed, why, and what the expected behavior is
+- Round 2: which files are new vs modified, test coverage status
+- Round 3: specific areas of concern, known risks
+
+After each round, briefly reflect back what you learned before asking the next question set.
 
 ## Workflow
 
@@ -150,6 +172,15 @@ If there are no findings, say that explicitly and mention residual risk or testi
 - [ ] Cleanup suggestions preserve existing behavior
 - [ ] Cross-file impact was checked for shared code changes
 - [ ] Open questions are listed, not hidden as assumptions
+- [ ] Relevant review questions were asked before the review was written
+
+## Suggested conversation starter
+
+When the user gives only a raw diff or vague request, begin with something like:
+
+```text
+I'll lead this as a short review interview instead of jumping straight to comments. First, tell me what changed and why, what the expected behavior should be, and whether tests exist for the changed paths. Then I'll ask a few focused follow-up questions about risk areas before I write the final review.
+```
 
 ## Common mistakes
 
@@ -160,3 +191,4 @@ If there are no findings, say that explicitly and mention residual risk or testi
 - Hiding uncertainty instead of writing an open question
 - Not checking all callers of modified shared functions
 - Approving because the code "looks good" without checking behavior
+- Skipping the interview step and reviewing a diff without understanding intent
