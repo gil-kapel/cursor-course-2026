@@ -143,8 +143,7 @@ export default function MobileDrawer({ chapters, activeLessonId, onSelectLesson,
                                   ) : (
                                     <div className={`w-2 h-2 rounded-full shrink-0 ${isActive ? 'bg-[#69ADFF]' : 'bg-[#E8E8ED]'}`} />
                                   )}
-                                  <p className={`text-[0.8125rem] truncate flex-1 min-w-0 ${isActive ? 'font-bold text-[#303150]' : 'font-medium text-[#303150]'}`}>
-                                    <span className="text-[#BDBDCB] font-semibold tabular-nums">{lesson.id} · </span>
+                                  <p className={`text-[0.8125rem] truncate flex-1 ${isActive ? 'font-bold text-[#303150]' : 'font-medium text-[#303150]'}`}>
                                     {lesson.title}
                                   </p>
                                   {isLocked && <Lock className="w-3.5 h-3.5 text-[#BDBDCB] shrink-0" strokeWidth={1.75} />}

@@ -312,8 +312,6 @@ export default function CourseSidebar({
                               <LessonStatusIcon lessonId={lesson.id} isActive={isActive} watched={watched} />
                               <div className="flex-1 min-w-0">
                                 <p className={`text-[0.8125rem] leading-snug ${isActive ? 'font-bold text-[#303150]' : 'font-medium text-[#303150]'}`}>
-                                  <span className="text-[#BDBDCB] font-semibold tabular-nums">{lesson.id}</span>
-                                  <span className="text-[#BDBDCB] mx-1">·</span>
                                   {lesson.title}
                                 </p>
                                 <p className="text-[0.625rem] text-[#BDBDCB] mt-px">
