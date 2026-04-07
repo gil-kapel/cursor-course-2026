@@ -117,7 +117,7 @@ export default function MobileDrawer({ chapters, activeLessonId, onSelectLesson,
                             animate={{ height: 'auto', opacity: 1 }}
                             exit={{ height: 0, opacity: 0 }}
                             transition={{ duration: 0.2 }}
-                            className="overflow-hidden bg-[#F7F8FA] border-t border-[#ECEEF2]"
+                            className="overflow-hidden bg-[#ECEEF4] border-t border-[#E0E2EA]"
                           >
                             {chapter.lessons.map((lesson) => {
                               const isActive = lesson.id === activeLessonId;
@@ -133,7 +133,7 @@ export default function MobileDrawer({ chapters, activeLessonId, onSelectLesson,
                                   className={`
                                     w-full flex items-center gap-2.5 ps-10 pe-4 py-2.5 text-start border-s-[3px]
                                     ${isActive ? 'bg-[#69ADFF]/8 border-[#69ADFF]' : 'border-transparent'}
-                                    ${isLocked ? 'opacity-40 cursor-not-allowed' : 'hover:bg-white/60 cursor-pointer'}
+                                    ${isLocked ? 'opacity-40 cursor-not-allowed' : 'hover:bg-white/70 cursor-pointer'}
                                   `}
                                 >
                                   {watched ? (
